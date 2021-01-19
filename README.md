@@ -35,12 +35,6 @@
 
 ## 기능
 
-그냥 적어두는,, 홈피 관련
-
-[https://github.com/2ujin/miniroom-php](https://github.com/2ujin/miniroom-php)
-
-[https://osej.tistory.com/1034](https://osej.tistory.com/1034) (캐릭터 꾸미기 참고....)
-
 - 미니홈피 ( 마이페이지 )
 
 ⇒ 미니룸 : 챌린지나 미션으로 주어진 아이템으로 꾸미기
@@ -134,96 +128,53 @@
 
 # Gantt Chart - Sub PJT 2 (01/18 - 01/29)
 
-[주제 선정](https://www.notion.so/382dea1f958740208094d24066e26122)
+```mermaid
+gantt
+    dateFormat  MM-DD
+    title       리코타 보드 진행상황
+    %% excludes    weekends
+    %% (`excludes` accepts specific dates in YYYY-MM-DD format, days of the week ("sunday") or "weekends", but not the word "weekdays".)
 
-[기능 목록 및 상세 도출](https://www.notion.so/94355161fb9d492a9b024a9bcec9e969)
+    section 프로젝트 준비
+    주제 선정				  :done, 01-18, 1d
+    기능 목록 및 상세 도출			:done, 01-18, 1d
+    개발 환경 구성             			:done, 01-18, 1d
+    화면 기획				  :active, 01-18, 2d
+    팀 명 및 서비스 명 정하기			  :active, 01-18, 5d
+	
+	section Frontend
+    [로그인 / 회원가입] 페이지 레이아웃 구성 및 제작	:done, 01-18, 1d
+    [API] redux-middleware 요청 기능 구현	      	 :crit, 01-18, 3d
+    [마이페이지] 레이아웃 구성 및 제작 	 	 :active, 01-18, 5d
+    [미션/작품] 레이아웃 구성 및 제작		 	 :todo, 01-23, 3d
+    [공지사항] 레이아웃 구성 및 제작   	  		:todo, 01-25, 2d
+    [챌린지] 레이아웃 구성 및 제작   	  		:todo, 01-26, 3d
+    [디자인] 일러스트 제작	   	  		:todo, 01-28, 3d
+    
+    section Blockly
+    [Blockly]save				  :todo,  01-18, 2d
+    [Blockly]load 부분 구현			:todo, 01-20 , 3d
+    [Blockly]custom blockly 구현				  :todo, 01-22, 3d
+    [Blockly Store]필요 block 구현             :todo, 01-25, 1d
+	[Blockly Stire]전체 구현             :crit, 01-26, 4d
 
-[개발 환경 구성](https://www.notion.so/ac51a6c64fe9489a85a54854f19df04e)
-
-[화면 기획](https://www.notion.so/81c66d06ebf444b48071478e6812988f)
-
-[팀 명 및 서비스 명 정하기](https://www.notion.so/8bd2f97e55ac4172a50b2bbd37b0031c)
-
-[[로그인 / 회원가입] 페이지 레이아웃 구성 및 제작](https://www.notion.so/0473cb4d8a654ab9b922c4d416236d3d)
-
-[[API] redux-middleware 요청 기능 구현](https://www.notion.so/API-redux-middleware-48c6efe688d349a9b271bda49bcfccbb)
-
-[[마이페이지] 레이아웃 구성 및 제작](https://www.notion.so/4e520c53dde84ad69cac93e1e8e93ac7)
-
-[[Blockly] save 부분 구현](https://www.notion.so/Blockly-save-da3dcb1fe5de42608aaebd34a0d2f674)
-
-[[Blockly] load 부분 구현](https://www.notion.so/Blockly-load-dfe3464ccb194398af97e624edd8b9ac)
-
-[[Blockly] custom blockly 구현](https://www.notion.so/Blockly-custom-blockly-4bc3857e1e9d4096a2c14fb80178c9c5)
-
-[DB 및 ERD](https://www.notion.so/DB-ERD-105e3dc520f4428aba6e857d4baa2a85)
-
-[RESTful 한 URI 및 Response 데이터](https://www.notion.so/RESTful-URI-Response-58c82180d5b341febf7ed8c8d3d6e3c9)
-
-[백 기능 명세서](https://www.notion.so/93c21815091d4e12a39e6510e8639c8e)
-
-[회원관리 기본 CRUD](https://www.notion.so/CRUD-2b0d7c28eb00449bbf12cf37833b0c63)
-
-[이메일 인증 회원가입](https://www.notion.so/6196e323ce014d92b57f2a6635a85242)
-
-[비밀번호 암호화](https://www.notion.so/99c4bbd194b54d5a82031dc36afc9f9a)
-
-[소셜로그인](https://www.notion.so/6033d9990b2c41ae902399d273d8ec7c)
-
-[JPA 양방향 매핑](https://www.notion.so/JPA-5a0f9011209b4e0db929a221e1031d62)
-
-[Blockly 컨텐츠 명세](https://www.notion.so/Blockly-99230e4a41894ca5941a78cce7e980ef)
-
-[미니홈피 아이템 및 기능 명세](https://www.notion.so/33812edde04a4176b496196c72fc2be6)
+    section BackEnd
+    [DB]DB 및 ERD				  :crit,  01-18, 12d
+    BackEnd 기능 명세서			:crit, 01-18 , 12d
+    [회원관리]CRUD				  :todo, 01-18, 4d
+    [회원관리]이메일 인증             :todo, 01-19, 2d
+	[회원관리]비밀번호 암호화            :todo, 01-19, 2d
+    [회원관리]소셜 로그인           :todo, 01-19, 2d
+    [DB]JPA 양방향 매핑           :crit, 01-19, 3d
+    [REST]REST URI 및 Response 데이터           :todo, 01-22, 8d
+    Blockly 기능 명세           :crit, 01-25, 3d
+    미니홈피 기능 명세           :crit, 01-26, 4d
+    
+```
 
 ## Code Style ( Google Convention )
 
-### Java
-
-- 다윤 작성
-
-### Javascript
-
-- 진옥이 작성
-
-### React
-
-- 진옥이 작성
-
-### Git
-
-- **Commit Message Convention** : [type] subject
-
-    ```
-    **< type 종류 >**
-    feat : 새로운 기능 추가
-    fix : 버그 수정
-    docs : 문서 수정
-    style : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
-    refactor : 코드 리팩토링
-    test : 테스트 코드, 리팩토링 테스트 코드 추가
-    chore : 빌드 업무 수정, 패키지 매니저 수정
-    ```
-
-    ```
-    **< subject >**
-    영어로 작성
-    현재 커밋을 한 이유에 대해 설명
-    ```
-
-- **Branch**
-
-    : master
-
-    : develop
-
-    : feature/fe/componentName
-
-    : feature/be/**??? ——————  이거 어케할까** 
-
-### JIRA
-
-- Issue Name : [Frontend] / [Backend] 로 구분 후 작성
+https://www.notion.so/Code-Style-Google-Convention-55fd2ffa3da04e29bd18fc9852fa8d25
 
 ## 디자인 컨셉
 
