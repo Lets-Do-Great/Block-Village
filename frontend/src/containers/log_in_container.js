@@ -19,7 +19,7 @@ const LogInContainer = () => {
     const closeLogIn = () => setLogInModal(false);
 
     // api 요청을 보낼 함수
-    const logIn = async () => {
+    const logIn = async () => { 
         try {
             await UserAction.checkLogIn(logInInput); 
         } catch(e){
