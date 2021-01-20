@@ -17,7 +17,10 @@ const LogInContainer = () => {
     const dispatch = useDispatch();
     
     // 로그인 모달창 열었다가 닫았다가 할 아이 => 나중에 삭제할 예정
-    const openLogIn = () => setLogInModal(true);
+    const openLogIn = () => {
+        setLogInModal(true);
+        initialLogInInput();
+    }
     const closeLogIn = () => setLogInModal(false);
 
     // 로그인폼 데이터 초기화
@@ -41,15 +44,18 @@ const LogInContainer = () => {
     // api 요청을 보낼 함수
     const logIn = async () => { 
         console.log(logInInput);
-        try {
-            await UserAction.checkLogIn(logInInput); 
-        } catch(e){
-            console.log(e);
-        }
+        // try {
+            dispatch(UserAction.checkLogIn(logInInput)); 
+        // } catch(e){
+            // console.log(e);
+        // }
     };
 
     // store에 있는 state값을 수정할 함수
-    const logOut = () => dispatch(UserAction.checkLogOut());
+    const logOut = () => { 
+        console.log("로그아웃");
+        dispatch(UserAction.checkLogOut());
+    };
 
     return (
         <> 

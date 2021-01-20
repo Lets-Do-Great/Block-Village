@@ -7,11 +7,11 @@
 import client from './client';
 
 // 로그인 정보 확인
-export const logIn = ({ email, password }) => {
-    client({
-        url: ``,
+export const logIn = ({ email:name, password }) => {
+    return client({
+        url: `member/pwcheck`,
         method: 'post',
-        data: { email, password },
+        data: { id:2, name, password },
     });
 }
 
@@ -19,7 +19,7 @@ export const logIn = ({ email, password }) => {
 export const setUserInfo = (
     { emailId, emailSite, nickName, password, passwordConfirm }) => {
         client({
-            url: ``,
+            url: `member`,
             method: 'post',
             data: { emailId, emailSite, nickName, password, passwordConfirm },
         }

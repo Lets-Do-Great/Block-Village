@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const client = axios.create();
 
-client.defaults.baseURL = 'https://~.com';
+client.defaults.baseURL = '';
 
 client.defaults.headers.common['Authorization'] = '';
 

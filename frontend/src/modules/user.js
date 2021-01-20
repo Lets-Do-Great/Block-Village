@@ -18,10 +18,8 @@ export const checkLogIn = createAction(
     UserAPI.logIn
 );
 
-export const checkLogOut = () => ({
-        type: CHECK_LOG_OUT,
-        userInfo: initialState.userInfo,
-    }
+export const checkLogOut = createAction(
+    CHECK_LOG_OUT
 );
 
 // 초기 상태
@@ -29,6 +27,7 @@ const initialState = {
     userInfo: {
         logIn: false,
         userId: '',
+        nickname: '',
     },
     setInput: {
         emailId: '',
@@ -40,14 +39,34 @@ const initialState = {
 };
 
 // reducer 함수
-const userReducer = handleActions({}, initialState);
+const userReducer = handleActions({
+    [CHECK_LOG_OUT]: (state, action) => ({
+        ...state,
+        userInfo:{
+            logIn: false,
+            userId: '',
+            nickname: '',
+        }
+    }),
+
+}, initialState);
 
 // reducer 함수로 요청된 액션들을 처리하기 위한 함수
 export default applyPenders(userReducer, [
     {
         type: CHECK_LOG_IN,
         onSuccess: (state, action) => {
-            return updateObject(state, { });
+            console.log(action);
+            return updateObject(state, {
+                ...state,
+                userInfo:{
+                    logIn: true,
+                    userId: "ssafy@ssafy.com",
+                    nickname: '싸피',
+                    // userId: action.payload.data.userId,
+                    // nickname: action.payload.data.nickname,
+                }
+             });
         },
         onFailure: (state, action) => {
             return updateObject(state, { });
@@ -56,7 +75,15 @@ export default applyPenders(userReducer, [
     {
         type: CHECK_LOG_OUT,
         onSuccess: (state, action) => {
-            return updateObject(state, { });
+            console.log(action);
+            return updateObject(state, { 
+                ...state,
+                userInfo:{
+                    logIn: false,
+                    userId: '',
+                    nickname: '',
+                }
+            });
         },
         onFailure: (state, action) => {
             return updateObject(state, { });
