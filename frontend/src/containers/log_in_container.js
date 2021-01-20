@@ -6,20 +6,41 @@ import * as UserAction from '../modules/user';
 const LogInContainer = () => {
     // 로그인창 모달이 열려있는지 여부 파악하는 변수 => 나중에 삭제할 예정
     const [logInModal, setLogInModal] = useState(false);
+    // 현재 로그인폼 데이터 저장하는 변수
+    const [logInInput, setLogInInput] = useState({
+        email: '',
+        password: '',
+    });
 
     // store에 있는 state와 dispatch 가져오는 작업
-    const logInInput = useSelector(state => state.user.logInInput);
     const userInfo = useSelector(state => state.user.userInfo);
     const dispatch = useDispatch();
-
-    console.log(logInInput);
-
+    
     // 로그인 모달창 열었다가 닫았다가 할 아이 => 나중에 삭제할 예정
     const openLogIn = () => setLogInModal(true);
     const closeLogIn = () => setLogInModal(false);
 
+    // 로그인폼 데이터 초기화
+    const initialLogInInput = () => {
+        setLogInInput({
+            email: '',
+            password: '',
+        })
+    }
+
+    // 현재 로그인폼 데이터 변경 처리 함수
+    const onChange = (e) => {
+        const {name, value} = e.target;
+        
+        setLogInInput({
+            ...logInInput,
+            [name]: value,
+        })
+    };
+
     // api 요청을 보낼 함수
     const logIn = async () => { 
+        console.log(logInInput);
         try {
             await UserAction.checkLogIn(logInInput); 
         } catch(e){
@@ -29,19 +50,6 @@ const LogInContainer = () => {
 
     // store에 있는 state값을 수정할 함수
     const logOut = () => dispatch(UserAction.checkLogOut());
-    const onChange = (e) => {
-        const {name, value} = e.target;
-
-        console.log(UserAction.changeLogInInput({
-            ...logInInput,
-            [name] : value,
-        }));
-
-        UserAction.changeLogInInput({
-            ...logInInput,
-            [name] : value,
-        });
-    };
 
     return (
         <> 
