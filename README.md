@@ -129,7 +129,7 @@
 ```mermaid
 gantt
     dateFormat  MM-DD
-    title       리코타 보드 진행상황
+    title       Sub PJT 2 진행상황
     %% excludes    weekends
     %% (`excludes` accepts specific dates in YYYY-MM-DD format, days of the week ("sunday") or "weekends", but not the word "weekdays".)
 
