@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import LogIn from '../components/log_in/log_in';
 import * as UserAction from '../modules/user';
 
-const LogInContainer = () => {
+const UserContainer = () => {
     // 현재 로그인폼 데이터 저장하는 변수
     const [logInInput, setLogInInput] = useState({
         email: '',
@@ -59,4 +59,4 @@ const LogInContainer = () => {
     );
 };
 
-export default LogInContainer;
+export default UserContainer;

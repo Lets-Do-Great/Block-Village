@@ -1,8 +1,8 @@
-import LogInContainer from './containers/log_in_container';
+import UserContainer from './containers/user_container';
 
 function App() {
   return (
-    <LogInContainer/>
+    <UserContainer/>
   );
 }
 
