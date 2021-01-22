@@ -6,7 +6,7 @@ import { updateObject } from '../service/common';
 // user 관련 요청 액션 타입
 const CHECK_LOG_IN = 'user/CHECK_LOG_IN';
 const CHECK_LOG_OUT = 'user/CHECK_LOG_OUT';
-const SET_INFO = 'user/SET_INFO';
+const JOIN_INFO = 'user/JOIN_INFO';
 const GET_INFO = 'user/GET_INFO';
 const MODIFY_INFO = 'user/MODIFY_INFO';
 const DELETE_INFO = 'user/DELETE_INFO';
@@ -22,20 +22,33 @@ export const checkLogOut = createAction(
     CHECK_LOG_OUT
 );
 
+export const getInfo = createAction(
+    GET_INFO,
+    UserAPI.getUserInfo
+);
+
+export const modifyInfo = createAction(
+    MODIFY_INFO,
+    UserAPI.modifyUserInfo
+)
+
 // 초기 상태
 const initialState = {
     userInfo: {
         logIn: false,
         userId: '',
         nickname: '',
+        email: '',
+        // 머 더있나
     },
-    setInput: {
-        emailId: '',
-        emailSite: '',
+    joinInput: {
+        email: '',
         nickName: '',
         password: '',
-        passwordConfirm: '',
     },
+    findPWInput: {
+        email: '',
+    }
 };
 
 // reducer 함수
@@ -90,7 +103,7 @@ export default applyPenders(userReducer, [
         }
     },
     {
-        type: SET_INFO,
+        type: JOIN_INFO,
         onSuccess: (state, action) => {
             return updateObject(state, { });
         },

@@ -16,12 +16,12 @@ export const logIn = ({ email:name, password }) => {
 }
 
 // 회원 가입 하기
-export const setUserInfo = (
-    { emailId, emailSite, nickName, password, passwordConfirm }) => {
+export const joinUserInfo = (
+    { emailId, emailSite, nickName:name, password }) => {
         client({
             url: `member`,
             method: 'post',
-            data: { emailId, emailSite, nickName, password, passwordConfirm },
+            data: { emailId, emailSite, name, password },
         }
     );
 }
@@ -29,21 +29,19 @@ export const setUserInfo = (
 // 회원 정보 조회
 export const getUserInfo = ( email ) => {
     client({
-       url: `${email}`,
+       url: `member/${email}`,
        method: 'get', 
     });
 }
 
 // 회원 정보 수정
 export const modifyUserInfo = (
-    { email, nickName, introduction, prevPassword, 
-        newPassword, passwordConfirm, profileImage }) => {
-            client({
-                url: ``,
-                method: 'put',
-                data: { email, nickName, introduction, prevPassword,
-                    newPassword, passwordConfirm, profileImage },
-            }
+    { email, nickname, prevPassword, newPassword }) => {
+        client({
+            url: ``,
+            method: 'put',
+            data: { email, nickname, prevPassword, newPassword },
+        }
     )
 }
 
