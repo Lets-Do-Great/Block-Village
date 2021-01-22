@@ -12,8 +12,7 @@ const LogInForm = ({logIn, logInInput, onChangeLogIn}) => {
   }
 
   // 이메일 형식 맞는지 확인하는 함수
-  const validateEmail = (email) =>
-  {
+  const validateEmail = (email) => {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)){
       return (true);
     }
