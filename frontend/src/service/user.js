@@ -7,19 +7,19 @@
 import client from './client';
 
 // 로그인 정보 확인
-export const logIn = ({ email:name, password }) => {
+export const logIn = ({ email, password }) => {
     return client({
-        url: `member/pwcheck`,
+        url: `users/login`,
         method: 'post',
-        data: { id:2, name, password },
+        data: { email, password },
     });
 }
 
 // 회원 가입 하기
-export const joinUserInfo = (
+export const setUserInfo = (
     { emailId, emailSite, nickName:name, password }) => {
         client({
-            url: `member`,
+            url: `users`,
             method: 'post',
             data: { emailId, emailSite, name, password },
         }
@@ -29,7 +29,7 @@ export const joinUserInfo = (
 // 회원 정보 조회
 export const getUserInfo = ( email ) => {
     client({
-       url: `member/${email}`,
+       url: `users/${email}`,
        method: 'get', 
     });
 }
@@ -38,9 +38,9 @@ export const getUserInfo = ( email ) => {
 export const modifyUserInfo = (
     { email, nickname, prevPassword, newPassword }) => {
         client({
-            url: ``,
+            url: `users/${email}`,
             method: 'put',
-            data: { email, nickname, prevPassword, newPassword },
+            data: { nickname, prevPassword, newPassword },
         }
     )
 }
@@ -48,7 +48,7 @@ export const modifyUserInfo = (
 // 회원 탈퇴 하기
 export const deleteUserInfo = ( email ) => {
     client({
-       url: `${email}`,
+       url: `users/${email}`,
        method: 'delete', 
     });
 }
@@ -56,7 +56,7 @@ export const deleteUserInfo = ( email ) => {
 // 비밀번호 찾기
 export const findPW = ( email ) => {
     client({
-        url: `${email}`,
+        url: `users/${email}`,
         method: 'get',
     })
 }
