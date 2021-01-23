@@ -15,10 +15,10 @@ import javax.validation.constraints.NotNull;
 public class UpdateRequest {
 
     @ApiModelProperty(required = true)
-    String currentPassword;
+    String prevPassword;
 
     @ApiModelProperty(required = false)
-    String updatePassword;
+    String newPassword;
 
     @ApiModelProperty(required = true)
     @NotNull

@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService {
         UserResponse result = new UserResponse();
 
         Optional<User> userOptional = userJpaRepository.findByEmail(email);
-        boolean match = encryptService.isMatch(updateRequest.getCurrentPassword(), userOptional.get().getPassword());
+        boolean match = encryptService.isMatch(updateRequest.getPrevPassword(), userOptional.get().getPassword());
 
         if(!userOptional.isPresent() || !match){
             result.status = false;
@@ -128,8 +128,8 @@ public class UserServiceImpl implements UserService {
         user.setNickname(updateRequest.getNickname());
         user.setIntroduction(updateRequest.getIntroduction());
 
-        if(updateRequest.getUpdatePassword() != null){
-            user.setPassword(encryptService.encrypt(updateRequest.getUpdatePassword()));
+        if(updateRequest.getNewPassword() != null){
+            user.setPassword(encryptService.encrypt(updateRequest.getNewPassword()));
         }
 
         User save = userJpaRepository.save(user);
