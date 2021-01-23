@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
-            response = new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+            response = new ResponseEntity<>(result, HttpStatus.OK);
         }
 
         return response;
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
-            response = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            response = new ResponseEntity<>(result, HttpStatus.OK);
         }
 
         return response;
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
         String email = signUpRequest.getEmailId() + "@" + signUpRequest.getEmailSite();
         if(userJpaRepository.findByEmail(email).isPresent()){
             result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST); // 처리 의논해야합니다.
         }
 
         String key = userMailSendService.getKey(false, 20);
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
-            response = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            response = new ResponseEntity<>(result, HttpStatus.OK);
         }
         return response;
 
@@ -116,9 +116,8 @@ public class UserServiceImpl implements UserService {
         UserResponse result = new UserResponse();
 
         Optional<User> userOptional = userJpaRepository.findByEmail(email);
-        boolean match = encryptService.isMatch(updateRequest.getPrevPassword(), userOptional.get().getPassword());
 
-        if(!userOptional.isPresent() || !match){
+        if(!userOptional.isPresent()){
             result.status = false;
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
@@ -127,8 +126,14 @@ public class UserServiceImpl implements UserService {
         user.setNickname(updateRequest.getNickname());
         user.setIntroduction(updateRequest.getIntroduction());
 
-        if(updateRequest.getNewPassword() != null){
-            user.setPassword(encryptService.encrypt(updateRequest.getNewPassword()));
+        if(updateRequest.getPrevPassword() != null){
+            boolean match = encryptService.isMatch(updateRequest.getPrevPassword(), userOptional.get().getPassword());
+            if(match){
+                user.setPassword(encryptService.encrypt(updateRequest.getNewPassword()));
+            }else {
+                result.status = false;
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }
         }
 
         User save = userJpaRepository.save(user);
@@ -139,7 +144,7 @@ public class UserServiceImpl implements UserService {
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
-            response = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            response = new ResponseEntity<>(result, HttpStatus.OK);
         }
         return response;
 
@@ -183,7 +188,7 @@ public class UserServiceImpl implements UserService {
             response = new ResponseEntity(result, HttpStatus.OK);
         } else {
             result.status = false;
-            response = new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+            response = new ResponseEntity(result, HttpStatus.OK);
         }
 
         return response;
