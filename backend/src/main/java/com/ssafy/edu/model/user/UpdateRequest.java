@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Builder // Setter 대신
 public class UpdateRequest {
 
-    @ApiModelProperty(required = true)
+    @ApiModelProperty(required = false)
     String prevPassword;
 
     @ApiModelProperty(required = false)
