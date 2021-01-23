@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
         User user = new User().builder()
                 .email(email)
                 .password(hashedPw)
-                .name(signUpRequest.getName())
+                .nickname(signUpRequest.getNickname())
                 .mileage(0)
                 .introduction("")
                 .emailAuth(key)
@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = userOptional.get();
-        user.setName(updateRequest.getName());
+        user.setNickname(updateRequest.getNickname());
         user.setIntroduction(updateRequest.getIntroduction());
 
         if(updateRequest.getUpdatePassword() != null){

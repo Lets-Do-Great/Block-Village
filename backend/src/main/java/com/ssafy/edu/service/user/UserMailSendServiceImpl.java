@@ -31,7 +31,7 @@ public class UserMailSendServiceImpl implements UserMailSendService {
     public void mailSendWithUserKey(SignUpRequest signUpRequest, String key){
 
         String email = signUpRequest.getEmailId() + "@" + signUpRequest.getEmailSite();
-        String nickname = signUpRequest.getName();
+        String nickname = signUpRequest.getNickname();
 
         MimeMessage mail = javaMailSender.createMimeMessage();
         String htmlStr = "<h2>안녕하세요 대전 B205팀입니다!</h2><br><br>"

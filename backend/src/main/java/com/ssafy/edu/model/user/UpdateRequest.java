@@ -22,7 +22,7 @@ public class UpdateRequest {
 
     @ApiModelProperty(required = true)
     @NotNull
-    String name;
+    String nickname;
 
     //    private File?String profileImage;
     String introduction;

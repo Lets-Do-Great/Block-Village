@@ -40,7 +40,7 @@ public class User {
     @JsonIgnore
     private String password;
 
-    private String name;
+    private String nickname;
 
     @Column(name = "email_auth")
     private String emailAuth;

@@ -30,6 +30,6 @@ public class SignUpRequest {
 
     @ApiModelProperty(required = true)
     @NotNull
-    String name;
+    String nickname;
 
 }
