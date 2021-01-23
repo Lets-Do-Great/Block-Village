@@ -37,6 +37,11 @@ export const modifyInfo = createAction(
     UserAPI.modifyUserInfo
 )
 
+export const findPW = createAction(
+    FIND_PW,
+    UserAPI.findPW
+)
+
 // 초기 상태
 const initialState = {
     userInfo: {
@@ -64,15 +69,26 @@ export default applyPenders(userReducer, [
     {
         type: LOG_IN,
         onSuccess: (state, action) => {
+            console.log("로그인 요청");
             console.log(action.payload);
-            return updateObject(state, {
-                ...state,
-                userInfo:{
-                    logIn: true,
-                    email: action.payload.data.data.email,
-                    nickname: action.payload.data.data.nickname,
+            if(action.payload.status === 200){
+                if(action.payload.data.status) { // 로그인 성공
+                    return updateObject(state, {
+                        ...state,
+                        userInfo:{
+                            logIn: true,
+                            email: action.payload.data.data.email,
+                            nickname: action.payload.data.data.nickname,
+                        }
+                    });
                 }
-             });
+                else {
+                    alert("로그인에 실패하였습니다.");
+                }
+            } else {
+                // 에러 처리 코드
+                console.log(action.payload.status);
+            }
         },
         onFailure: (state, action) => {
             return updateObject(state, { });
@@ -138,7 +154,13 @@ export default applyPenders(userReducer, [
     {
         type: FIND_PW,
         onSuccess: (state, action) => {
-            return updateObject(state, { });
+            console.log(action.payload);
+            if(action.payload.status === 200){
+                console.log("비번 찾기 성공");
+                alert("임시 비밀번호가 발급되었습니다.");
+            }else{
+                // 에러 처리 코드
+            }
         },
         onFailure: (state, action) => {
             return updateObject(state, { });

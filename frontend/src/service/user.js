@@ -57,6 +57,6 @@ export const deleteUserInfo = ( email ) => {
 export const findPW = ( email ) => {
     client({
         url: `users/${email}`,
-        method: 'get',
+        method: 'post',
     })
 }

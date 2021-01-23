@@ -13,7 +13,6 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
     
     // 비밀번호를 입력할 때마다 비교하는 함수
     useEffect(() => {
-        console.log("why");
         validatePWConfirm();
     }, [ PWConfirm.PW, password ]);
 
