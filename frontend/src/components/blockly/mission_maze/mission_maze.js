@@ -1,9 +1,9 @@
-import styles from "./mission_maze.module.css";
-import '../all_blocks/start_blocks';
+import styles from "./mission_maze.module.css"
+import '../all_blocks/start_blocks'
 import '../all_blocks/movement_blocks'
-import React, { useState } from 'react';
-import ReactBlockly from 'react-blockly';
-import Blockly from 'blockly';
+import React, {useState} from 'react'
+import ReactBlockly from 'react-blockly'
+import Blockly from 'blockly'
 
 import PlayGround from '../play_ground/play_ground';
 import BlocklyNavbar from '../blockly_navbar/blockly_navbar';
@@ -19,7 +19,10 @@ export default function MissionMaze() {
       colour: '#5C81A6',
       blocks: [
         {
-          type: 'lists_create_empty'
+          type: 'start_button'
+        },
+        {
+          type: 'end_button'
         },
       ]
     },

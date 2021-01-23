@@ -16,7 +16,7 @@ Blockly.Blocks['start_button'] = {
 
 Blockly.JavaScript['start_button'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = 'var x = 0;\nvar y = 0;\nvar move = [];\nvar dir = 0;\nconst dir_info = [[0, 1], [0, -1], [-1, 0], [1, 0]];\n';
+  var code = 'var x = 0;\nvar y = 0;\nvar move = [];\nvar dir = 0;\nvar dir_info = [[0, 1], [0, -1], [-1, 0], [1, 0]];\n';
   return code;
 };
 
