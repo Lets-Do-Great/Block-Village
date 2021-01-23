@@ -4,6 +4,8 @@ import com.ssafy.edu.service.user.UserMailSendService;
 import com.ssafy.edu.model.user.SignUpRequest;
 import com.ssafy.edu.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,7 @@ public class UserMailSendServiceImpl implements UserMailSendService {
     private UserJpaRepository userJpaRepository;
 
     @Override
-    public void mailSendWithUserKey(SignUpRequest signUpRequest, String key){
+    public void mailSendWithUserKey(SignUpRequest signUpRequest, String key) throws MailException, MessagingException{
 
         String email = signUpRequest.getEmailId() + "@" + signUpRequest.getEmailSite();
         String nickname = signUpRequest.getNickname();
@@ -52,7 +54,7 @@ public class UserMailSendServiceImpl implements UserMailSendService {
     }
 
     @Override
-    public void sendTempPassword(String email, String key) {
+    public void sendTempPassword(String email, String key) throws MessagingException, MailException{
 
         MimeMessage mail = javaMailSender.createMimeMessage();
         String htmlStr = "<h2>안녕하세요 대전 B205팀입니다!</h2><br><br>"
@@ -64,7 +66,25 @@ public class UserMailSendServiceImpl implements UserMailSendService {
             mail.setText(htmlStr, "utf-8", "html");
             mail.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(email));
             javaMailSender.send(mail);
-        } catch (MessagingException e) {
+        } catch (MessagingException | MailSendException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void mailSendExistUser(String email, String nickname) throws MessagingException, MailException{
+
+        MimeMessage mail = javaMailSender.createMimeMessage();
+        String htmlStr = "<h2>안녕하세요 대전 B205팀입니다!</h2><br><br>"
+                + "<h3>" + nickname + "님</h3>" + "이미 가입된 이메일 주소입니다. "
+                + "로그인 하러가기"; // 우리의 홈페이지 주소 넣기
+        try {
+            mail.setSubject("[본인인증] : 대전 B205팀에서 도착한 메일입니다.", "utf-8");
+            mail.setText(htmlStr, "utf-8", "html");
+            mail.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(email));
+            javaMailSender.send(mail);
+        } catch (MessagingException | MailSendException e) {
             e.printStackTrace();
         }
 

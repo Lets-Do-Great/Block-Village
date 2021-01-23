@@ -8,8 +8,10 @@ import com.ssafy.edu.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -66,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
         return response;
     }
-    
+
     /* 사용자 회원가입 */
     @Override
     public ResponseEntity<UserResponse> signUp(SignUpRequest signUpRequest){
@@ -74,36 +76,42 @@ public class UserServiceImpl implements UserService {
         ResponseEntity response;
         UserResponse result = new UserResponse();
 
-        String email = signUpRequest.getEmailId() + "@" + signUpRequest.getEmailSite();
-        if(userJpaRepository.findByEmail(email).isPresent()){
-            result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST); // 처리 의논해야합니다.
-        }
-
         String key = userMailSendService.getKey(false, 20);
-        userMailSendService.mailSendWithUserKey(signUpRequest, key);
+        String email = signUpRequest.getEmailId() + "@" + signUpRequest.getEmailSite();
 
-        String hashedPw = encryptService.encrypt(signUpRequest.getPassword());
+        try{
+            // 이미 가입된 이메일인 경우, 다른 메일을 전송한다.
+            Optional<User> userOptional = userJpaRepository.findByEmail(email);
+            if(userOptional.isPresent()){
+                userMailSendService.mailSendExistUser(email, userOptional.get().getNickname());
+                result.status = true;
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }
 
-        User user = new User().builder()
-                .email(email)
-                .password(hashedPw)
-                .nickname(signUpRequest.getNickname())
-                .mileage(0)
-                .introduction("")
-                .emailAuth(key)
-                .joinDate(LocalDate.now())
-                .build();
+            // 데이터베이스에 저장
+            String hashedPw = encryptService.encrypt(signUpRequest.getPassword());
+            User user = new User().builder()
+                    .email(email)
+                    .password(hashedPw)
+                    .nickname(signUpRequest.getNickname())
+                    .mileage(0)
+                    .introduction("")
+                    .emailAuth(key)
+                    .joinDate(LocalDate.now())
+                    .build();
 
-        User save = userJpaRepository.save(user);
+            User save = userJpaRepository.save(user);
 
-        if(save != null){
+            userMailSendService.mailSendWithUserKey(signUpRequest, key);
             result.status = true;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
+
+        }catch (MessagingException | MailException e){
+            e.printStackTrace();
             result.status = false;
-            response = new ResponseEntity<>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
+
         return response;
 
     }
