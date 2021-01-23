@@ -99,7 +99,6 @@ public class UserServiceImpl implements UserService {
 
         if(save != null){
             result.status = true;
-            result.data = save;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
