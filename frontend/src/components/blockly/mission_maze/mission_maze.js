@@ -5,14 +5,19 @@ import React, {useState} from 'react'
 import ReactBlockly from 'react-blockly'
 import Blockly from 'blockly'
 
+import Draggable from 'react-draggable';
+
 import PlayGround from '../play_ground/play_ground';
 import BlocklyNavbar from '../blockly_navbar/blockly_navbar';
 
 export default function MissionMaze() {
-  const [javascript, setJavascript] = useState()
+  const [activeDrags, setActiveDrags] = useState(0);
+
+  const [modal, setModal] = useState(true);
+  const [javascript, setJavascript] = useState();
   const [initialXml, setInitialXml] = useState(
     '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>'
-  )
+  );
   const [toolboxCategories, setToolboxCategories] = useState([
     {
       name: '시작',
@@ -53,14 +58,36 @@ export default function MissionMaze() {
     // document.getElementById('code').value = code;
   }
 
+  const onStart = () => {
+    setActiveDrags(activeDrags + 1);
+  };
+
+  const onStop = () => {
+    setActiveDrags(activeDrags - 1);
+  };
+
+  const statusModal = () => {
+    setModal(!modal)
+  };
+
   return (
     <section className={styles.page_style}>
+      <button onClick={statusModal}>dfs</button>
       <BlocklyNavbar />
       <div className={styles.container}>
-        <div className={styles.playground}>
-          <PlayGround 
-            javascript_code={javascript} />
-        </div>
+        {modal && 
+          <Draggable
+            onStart={onStart}
+            onStop={onStop}
+            bounds="parent"
+            >
+            <div className={styles.playground}>
+              <div className={styles.headerPlayGround}></div>
+              <PlayGround 
+                javascript_code={javascript} />
+            </div>
+          </Draggable>
+        }
         <div className={styles.workspace_cata}>
           <div className={styles.workspace}>
             <ReactBlockly
