@@ -5,7 +5,7 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
     const { emailId, emailSite, nickName, password } = signUpInput;
 
     // 비밀번호 일치하는지 확인하는 데이터
-    const[ PWConfirm, setPWConfirm ] = useState({
+    const [ PWConfirm, setPWConfirm ] = useState({
             PW: '',
             check: false,
         }

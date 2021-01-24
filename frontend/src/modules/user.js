@@ -7,7 +7,6 @@ import { updateObject } from '../service/common';
 const LOG_IN = 'user/LOG_IN';
 const LOG_OUT = 'user/LOG_OUT';
 const SIGN_UP = 'user/SIGN_UP';
-const GET_INFO = 'user/GET_INFO';
 const MODIFY_INFO = 'user/MODIFY_INFO';
 const DELETE_INFO = 'user/DELETE_INFO';
 const FIND_PW = 'user/FIND_PW';
@@ -27,11 +26,6 @@ export const signUp = createAction(
     UserAPI.setUserInfo
 );
 
-export const getInfo = createAction(
-    GET_INFO,
-    UserAPI.getUserInfo
-);
-
 export const modifyInfo = createAction(
     MODIFY_INFO,
     UserAPI.modifyUserInfo
@@ -46,21 +40,20 @@ export const findPW = createAction(
 const initialState = {
     userInfo: {
         logIn: false,
-        email: '',
+        profile: '',
         nickname: '',
-        // 머 더있나
+        email: '',
+        mileage: '',
+        follower: '',
+        following: '',
+        introduction: '',
     },
 };
 
 // reducer 함수
 const userReducer = handleActions({
     [LOG_OUT]: (state, action) => ({
-        ...state,
-        userInfo:{
-            logIn: false,
-            email: '',
-            nickname: '',
-        }
+        ...initialState,
     }),
 }, initialState);
 
@@ -69,24 +62,60 @@ export default applyPenders(userReducer, [
     {
         type: LOG_IN,
         onSuccess: (state, action) => {
-            console.log("로그인 요청");
             console.log(action.payload);
-            if(action.payload.status === 200){
-                if(action.payload.data.status) { // 로그인 성공
+            const response = action.payload;
+
+            if(response.status === 200){
+                if(response.data.status) { // 로그인 성공
                     return updateObject(state, {
                         ...state,
                         userInfo:{
+                            ...response.data.data,
                             logIn: true,
-                            email: action.payload.data.data.email,
-                            nickname: action.payload.data.data.nickname,
                         }
                     });
-                }
-                else {
+                } else { // 로그인 실패
                     alert("로그인에 실패하였습니다.");
                 }
-            } else {
-                // 에러 처리 코드
+            } else { // 에러 발생
+                console.log(action.payload.status);
+            }
+        },
+        onFailure: (state, action) => {
+            return updateObject(state, { });
+        }
+    },
+    // {
+    //     type: LOG_OUT,
+    //     onSuccess: (state, action) => {
+    //         console.log(action.payload);
+    //         const response = action.payload;
+
+    //         if(response.status === 200){
+    //             return updateObject(state, { 
+    //                 ...initialState,
+    //             });
+    //         }else{
+    //             // 에러 처리 코드
+    //         }
+    //     },
+    //     onFailure: (state, action) => {
+    //         return updateObject(state, { });
+    //     }
+    // },
+    {
+        type: SIGN_UP,
+        onSuccess: (state, action) => {
+            console.log(action.payload);
+            const response = action.payload;
+
+            if(response.status === 200){
+                if(response.data.status){
+                    alert("인증 메일을 발송하였습니다.");
+                } else {
+                    alert("인증 메일 발송에 실패하였습니다.");
+                }
+            } else { // 에러 발생
                 console.log(action.payload.status);
             }
         },
@@ -95,48 +124,26 @@ export default applyPenders(userReducer, [
         }
     },
     {
-        type: LOG_OUT,
-        onSuccess: (state, action) => {
-            console.log(action.payload);
-            if(action.payload.status === 200){
-                return updateObject(state, { 
-                    ...state,
-                    userInfo:{
-                        logIn: false,
-                        email: '',
-                        nickname: '',
-                    }
-                });
-            }else{
-                // 에러 처리 코드
-            }
-        },
-        onFailure: (state, action) => {
-            return updateObject(state, { });
-        }
-    },
-    {
-        type: SIGN_UP,
-        onSuccess: (state, action) => {
-            return updateObject(state, { });
-        },
-        onFailure: (state, action) => {
-            return updateObject(state, { });
-        }
-    },
-    {
-        type: GET_INFO,
-        onSuccess: (state, action) => {
-            return updateObject(state, { });
-        },
-        onFailure: (state, action) => {
-            return updateObject(state, { });
-        }
-    },
-    {
         type: MODIFY_INFO,
         onSuccess: (state, action) => {
-            return updateObject(state, { });
+            console.log(action.payload);
+            const response = action.payload;
+
+            if(response.status === 200){
+                if(response.data.status){
+                    return updateObject(state, {
+                        ...state,
+                        userInfo: {
+                            ...state.userInfo,
+                            ...response.data.data,
+                        },
+                    });
+                } else {
+                    alert("현재 비밀번호를 확인해주세요.");
+                }
+            } else { // 에러 발생
+                console.log(action.payload.status);
+            }
         },
         onFailure: (state, action) => {
             return updateObject(state, { });
@@ -155,11 +162,16 @@ export default applyPenders(userReducer, [
         type: FIND_PW,
         onSuccess: (state, action) => {
             console.log(action.payload);
-            if(action.payload.status === 200){
-                console.log("비번 찾기 성공");
-                alert("임시 비밀번호가 발급되었습니다.");
-            }else{
-                // 에러 처리 코드
+            const response = action.payload;
+
+            if(response.status === 200){
+                if(response.data.status){
+                    alert("임시 비밀번호가 발급되었습니다.");
+                } else {
+                    alert("임시 비밀번호 발급에 문제가 생겼습니다.");
+                }
+            }else{ // 에러 처리 코드
+                
             }
         },
         onFailure: (state, action) => {

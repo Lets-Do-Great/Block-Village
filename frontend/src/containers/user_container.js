@@ -16,12 +16,12 @@ const UserContainer = () => {
     const [signUpInput, setSignUpInput] = useState({
         emailId: '',
         emailSite: '',
-        nickName: '',
+        nickname: '',
         password: '',
     });
 
     // 비밀번호 찾기폼 데이터 저장하는 변수
-    const [findPWForm, setEmail] = useState({ email: ''});
+    const [findPWInput, setFindPWInput] = useState({ email: ''});
 
     // store에 있는 state와 dispatch 가져오는 작업
     const userInfo = useSelector(state => state.user.userInfo);
@@ -40,19 +40,19 @@ const UserContainer = () => {
         setSignUpInput({
             emailId: '',
             emailSite: '',
-            nickName: '',
+            nickname: '',
             password: '',
         });
     }
 
     // 비밀번호 찾기폼 데이터 초기화
     const initialFindPW = () => {
-        setEmail({
+        setFindPWInput({
             email: ''
         });
     }
 
-    // 현재 로그인폼 데이터 변경 처리 함수
+    // 로그인폼 데이터 변경 처리 함수
     const onChangeLogIn = (e) => {
         const {name, value} = e.target;
         
@@ -62,7 +62,7 @@ const UserContainer = () => {
         })
     };
 
-    // 현재 회원가입폼 데이터 변경 처리 함수
+    // 회원가입폼 데이터 변경 처리 함수
     const onChangeSignUp = (e) => {
         const {name, value} = e.target;
 
@@ -76,7 +76,7 @@ const UserContainer = () => {
     const onChangeFindFW = (e) => {
         const {value} = e.target;
 
-        setEmail({
+        setFindPWInput({
             email: value,
         });
     }
@@ -99,7 +99,7 @@ const UserContainer = () => {
 
     // 비밀번호찾기 요청
     const findPW = () => {
-        dispatch(UserAction.findPW(findPWForm.email));
+        dispatch(UserAction.findPW(findPWInput.email));
     }
 
     return (
@@ -117,7 +117,7 @@ const UserContainer = () => {
             /><br/><br/>
             <FindPW
                 findPW={findPW}
-                findPWForm={findPWForm}
+                findPWInput={findPWInput}
                 onChangeFindFW={onChangeFindFW}
             />
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import FindPWForm from './find_pw_form';
 
-const FindPW = ({ onChangeFindFW, findPW, findPWForm }) => {
+const FindPW = ({ onChangeFindFW, findPW, findPWInput }) => {
 
     return (
     <>
@@ -9,7 +9,7 @@ const FindPW = ({ onChangeFindFW, findPW, findPWForm }) => {
         <FindPWForm
             onChangeFindFW={onChangeFindFW}
             findPW={findPW}
-            findPWForm={findPWForm}
+            findPWInput={findPWInput}
         />
     </>
     );

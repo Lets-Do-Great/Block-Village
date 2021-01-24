@@ -1,8 +1,8 @@
 import React from 'react';
 
-const FindPWForm = ({ onChangeFindFW, findPW, findPWForm }) => {
+const FindPWForm = ({ onChangeFindFW, findPW, findPWInput }) => {
 
-    const { email } = findPWForm;
+    const { email } = findPWInput;
 
     const onSubmitFindPW = () => {
         if(validateEmail(email)) findPW();
