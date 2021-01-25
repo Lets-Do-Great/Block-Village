@@ -5,17 +5,17 @@ const MyInfoModifyLeft = ({ modifyInput, onChangeModify }) => {
 
     return (
     <>
-        <img src={ profile } alt="프로필 이미지"/>
+        <image src={ profile } alt="프로필 이미지"/>
         <div>프로필 이미지 편집</div>
     </>
     );
 };
 
 const MyInfoModifyRight = ({ modifyInput, onChangeModify, setPWConfirm }) => {
-    const { nickname, email, introduction, prevPassword, newPassword } = modifyInput;
+    const { nickname, introduction, prevPassword, newPassword } = modifyInput;
     const [ PWConfirmInput, setPWConfirmInput ] = useState({
             PW: '',
-            check: null,
+            check: true,
         }
     );
 
@@ -42,7 +42,12 @@ const MyInfoModifyRight = ({ modifyInput, onChangeModify, setPWConfirm }) => {
 
     // 비밀번호 확인이 동일한지 확인하는 함수
     const validatePWConfirm = () => {
-        if(newPassword.length === 0 || PWConfirmInput.PW.length === 0) {
+        if(newPassword.length + PWConfirmInput.PW.length + prevPassword.length === 0) {
+            setPWConfirmInput({
+                ...PWConfirmInput,
+                check: true,
+            });
+        }else if(newPassword.length === 0 || PWConfirmInput.PW.length === 0) {
             setPWConfirmInput({
                 ...PWConfirmInput,
                 check: false,

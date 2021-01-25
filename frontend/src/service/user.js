@@ -17,11 +17,11 @@ export const logIn = ({ email, password }) => {
 
 // 회원 가입 하기
 export const setUserInfo = (
-    { emailId, emailSite, nickName:name, password }) => {
+    { emailId, emailSite, nickname, password }) => {
         client({
             url: `users`,
             method: 'post',
-            data: { emailId, emailSite, name, password },
+            data: { emailId, emailSite, nickname, password },
         }
     );
 }

@@ -30,8 +30,8 @@ const MyPageContainer = () => {
     // 정보 수정폼 데이터 초기화
     const initialModifyForm = () => {
         setModifyInput({
-            profile: '',
-            nickname: '',
+            profile: userInfo.profile,
+            nickname: userInfo.nickname,
             email: userInfo.email,
             introduction: userInfo.introduction,
             prevPassword: '',
@@ -52,7 +52,20 @@ const MyPageContainer = () => {
     /* api 요청을 보낼 함수 */
     // 정보수정 요청
     const modifyInfo = async () => {
-        dispatch(UserAction.modifyInfo(modifyInput));
+        try{
+            await dispatch(UserAction.modifyInfo(modifyInput));
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    // 탈퇴 요청
+    const deleteInfo = async () => {
+        try {
+            await dispatch(UserAction.deleteInfo(userInfo.email));
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     return (
@@ -60,7 +73,8 @@ const MyPageContainer = () => {
             { componentType
                 ? <MyInfoRead 
                     userInfo={userInfo}
-                    setComponentType={setComponentType}/>
+                    setComponentType={setComponentType}
+                    deleteInfo={deleteInfo}/>
                 : <MyInfoModify
                     modifyInfo={modifyInfo}
                     modifyInput={modifyInput}

@@ -36,6 +36,11 @@ export const findPW = createAction(
     UserAPI.findPW
 )
 
+export const deleteInfo = createAction(
+    DELETE_INFO,
+    UserAPI.deleteUserInfo
+)
+
 // 초기 상태
 const initialState = {
     userInfo: {
@@ -53,6 +58,9 @@ const initialState = {
 // reducer 함수
 const userReducer = handleActions({
     [LOG_OUT]: (state, action) => ({
+        ...initialState,
+    }),
+    [DELETE_INFO]: (state, action) => ({
         ...initialState,
     }),
 }, initialState);
@@ -131,6 +139,7 @@ export default applyPenders(userReducer, [
 
             if(response.status === 200){
                 if(response.data.status){
+                    console.log("정보수정 되나요");
                     return updateObject(state, {
                         ...state,
                         userInfo: {
@@ -149,15 +158,15 @@ export default applyPenders(userReducer, [
             return updateObject(state, { });
         }
     },
-    {
-        type: DELETE_INFO,
-        onSuccess: (state, action) => {
-            return updateObject(state, { });
-        },
-        onFailure: (state, action) => {
-            return updateObject(state, { });
-        }
-    },
+    // {
+    //     type: DELETE_INFO,
+    //     onSuccess: (state, action) => {
+    //         return updateObject(state, { ...initialState });
+    //     },
+    //     onFailure: (state, action) => {
+    //         return updateObject(state, { });
+    //     }
+    // },
     {
         type: FIND_PW,
         onSuccess: (state, action) => {

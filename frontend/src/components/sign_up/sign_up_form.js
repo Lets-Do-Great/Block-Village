@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
     // 회원가입폼 구성하는 속성들 비구조화 할당
-    const { emailId, emailSite, nickName, password } = signUpInput;
+    const { emailId, emailSite, nickname, password } = signUpInput;
 
     // 비밀번호 일치하는지 확인하는 데이터
     const [ PWConfirm, setPWConfirm ] = useState({
@@ -18,7 +18,7 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
 
     // 회원가입 할 조건이 맞는지 확인하는 함수
     const onSubmitSignUp = () => {
-        if(validateNickName(nickName)   
+        if(validateNickName(nickname)   
             && validatePW(password) 
             && PWConfirm.check ){
                 signUp();
@@ -90,8 +90,8 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
             placeholder="직접입력"/><br/>
         <input 
             type="text"
-            name="nickName" 
-            value={nickName} 
+            name="nickname" 
+            value={nickname} 
             onChange={onChangeSignUp} 
             placeholder="닉네임"/><br/>
         <input 

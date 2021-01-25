@@ -85,22 +85,38 @@ const UserContainer = () => {
     /* api 요청을 보낼 함수 */
     // 로그인 요청
     const logIn = async () => { 
-        dispatch(UserAction.logIn(logInInput)); 
+        try{
+            await dispatch(UserAction.logIn(logInInput)); 
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     // 로그아웃 요청
-    const logOut = () => { 
-        dispatch(UserAction.logOut());
+    const logOut = async () => { 
+        try{
+            await dispatch(UserAction.logOut());
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     // 회원가입 요청
-    const signUp = () => {
-        dispatch(UserAction.signUp(signUpInput));
+    const signUp = async () => {
+        try{
+            await dispatch(UserAction.signUp(signUpInput));
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     // 비밀번호찾기 요청
-    const findPW = () => {
-        dispatch(UserAction.findPW(findPWInput.email));
+    const findPW = async () => {
+        try{
+            await dispatch(UserAction.findPW(findPWInput.email));
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return (
@@ -108,6 +124,7 @@ const UserContainer = () => {
         <div>  
             <Link to="/user/login">[ 로그인하러 가기 ] </Link>
             <Link to="/user/signUp">[ 회원가입하러 가기 ] </Link>
+            <Link to="/user/findPW">[ 비밀번호 찾기 ] </Link>
             
             <Switch>
                 <Route path="/user/login">
