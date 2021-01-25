@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+
 @ApiResponses(value = {@ApiResponse(code = 401, message = "Unauthorized", response = UserResponse.class),
         @ApiResponse(code = 403, message = "Forbidden", response = UserResponse.class),
         @ApiResponse(code = 404, message = "Not Found", response = UserResponse.class),
@@ -39,7 +41,7 @@ public class UserController {
 
     @ApiOperation(value="비밀번호 찾기")
     @PostMapping("/{email}")
-    public ResponseEntity<UserResponse> findByPasswordAndEmail(@PathVariable("email") String email){
+    public ResponseEntity<UserResponse> findByPasswordAndEmail(@PathVariable("email") String email) throws MessagingException {
         return userService.tempPassword(email);
     }
 

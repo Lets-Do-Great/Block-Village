@@ -178,7 +178,7 @@ public class UserServiceImpl implements UserService {
     
     /* 임시 비밀번호 발급 */
     @Override
-    public ResponseEntity<UserResponse> tempPassword(String email) {
+    public ResponseEntity<UserResponse> tempPassword(String email) throws MessagingException {
 
         ResponseEntity response;
         UserResponse result = new UserResponse();
