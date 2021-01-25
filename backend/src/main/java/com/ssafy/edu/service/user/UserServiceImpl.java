@@ -134,7 +134,7 @@ public class UserServiceImpl implements UserService {
         user.setNickname(updateRequest.getNickname());
         user.setIntroduction(updateRequest.getIntroduction());
 
-        if(updateRequest.getPrevPassword() != null){
+        if(!"".equals(updateRequest.getPrevPassword())){
             boolean match = encryptService.isMatch(updateRequest.getPrevPassword(), userOptional.get().getPassword());
             if(match){
                 user.setPassword(encryptService.encrypt(updateRequest.getNewPassword()));
