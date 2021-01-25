@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Route, Link, Switch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import FindPW from '../components/find_pw/find_pw';
 import LogIn from '../components/log_in/log_in';
@@ -105,21 +106,33 @@ const UserContainer = () => {
     return (
         <> 
         <div>  
-            <LogIn
-                logIn={logIn} // 로그인 요청 보낼 함수
-                logInInput={logInInput} // 로그인폼 값 상태
-                onChangeLogIn={onChangeLogIn} // 로그인폼 값 변경 함수 
-            /><br/><br/>
-            <SignUp
-                signUp={signUp}
-                signUpInput={signUpInput}
-                onChangeSignUp={onChangeSignUp}
-            /><br/><br/>
-            <FindPW
-                findPW={findPW}
-                findPWInput={findPWInput}
-                onChangeFindFW={onChangeFindFW}
-            />
+            <Link to="/user/login">[ 로그인하러 가기 ] </Link>
+            <Link to="/user/signUp">[ 회원가입하러 가기 ] </Link>
+            
+            <Switch>
+                <Route path="/user/login">
+                    <LogIn
+                        logIn={logIn} // 로그인 요청 보낼 함수
+                        logInInput={logInInput} // 로그인폼 값 상태
+                        onChangeLogIn={onChangeLogIn} // 로그인폼 값 변경 함수 
+                    />
+                </Route>
+                <Route path="/user/signUp">
+                    <SignUp
+                        signUp={signUp}
+                        signUpInput={signUpInput}
+                        onChangeSignUp={onChangeSignUp}
+                    />
+                </Route>
+                <Route path="/user/findPW">
+                    <FindPW
+                        findPW={findPW}
+                        findPWInput={findPWInput}
+                        onChangeFindFW={onChangeFindFW}
+                    />
+                </Route>
+
+            </Switch>
         </div>
         </>
     );

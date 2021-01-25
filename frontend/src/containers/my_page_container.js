@@ -15,6 +15,9 @@ const MyPageContainer = () => {
         newPassword: '',
     });
     
+    // 정보 조회 / 수정 바꾸는 변수 : true(조회), false(수정)
+    const [ componentType, setComponentType ] = useState(true);
+
     // store에 있는 state와 dispatch 가져오는 작업
     const userInfo = useSelector(state => state.user.userInfo);
     const dispatch = useDispatch();
@@ -54,12 +57,16 @@ const MyPageContainer = () => {
 
     return (
         <>
-            <MyInfoRead 
-                userInfo={userInfo}/>
-            <MyInfoModify
-                modifyInfo={modifyInfo}
-                modifyInput={modifyInput}
-                onChangeModify={onChangeModify}/>
+            { componentType
+                ? <MyInfoRead 
+                    userInfo={userInfo}
+                    setComponentType={setComponentType}/>
+                : <MyInfoModify
+                    modifyInfo={modifyInfo}
+                    modifyInput={modifyInput}
+                    onChangeModify={onChangeModify}
+                    setComponentType={setComponentType}/>
+            }
         </>
     );
 };

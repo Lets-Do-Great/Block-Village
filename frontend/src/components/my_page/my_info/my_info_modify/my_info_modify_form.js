@@ -62,7 +62,6 @@ const MyInfoModifyRight = ({ modifyInput, onChangeModify, setPWConfirm }) => {
 
     return (
     <>
-        <input type="text" value={email} placeholder="이메일"/>
         <input 
             type="text"
             name="nickname"
