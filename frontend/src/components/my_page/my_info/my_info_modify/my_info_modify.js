@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import MyInfoModifyForm from './my_info_modify_form';
 
-const MyInfoModify = ({ modifyInfo, modifyInput, onChangeModify, setComponentType }) => {
+const MyInfoModify = ({ modifyInfo, modifyInput, onChangeModify, setType }) => {
   // 비밀번호 일치하는지 확인하는 데이터
   const [ PWConfirm, setPWConfirm ] = useState(true);
 
   const onClickCancle = () => {
-    setComponentType(true);
+    setType('read');
   }
 
   // 비밀번호 일치하면 정보 수정 제출하기

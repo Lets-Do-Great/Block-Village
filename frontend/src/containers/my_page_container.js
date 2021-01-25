@@ -5,6 +5,9 @@ import MyInfoModify from '../components/my_page/my_info/my_info_modify/my_info_m
 import * as UserAction from '../modules/user';
 
 const MyPageContainer = () => {
+    // 정보 조회 / 수정 바꾸는 변수
+    const [type, setType] = useState('read');
+
     // 정보 수정폼 데이터 저장하는 변수
     const [ modifyInput, setModifyInput ] = useState({
         profile: '',
@@ -14,9 +17,6 @@ const MyPageContainer = () => {
         prevPassword: '',
         newPassword: '',
     });
-    
-    // 정보 조회 / 수정 바꾸는 변수 : true(조회), false(수정)
-    const [ componentType, setComponentType ] = useState(true);
 
     // store에 있는 state와 dispatch 가져오는 작업
     const userInfo = useSelector(state => state.user.userInfo);
@@ -54,6 +54,7 @@ const MyPageContainer = () => {
     const modifyInfo = async () => {
         try{
             await dispatch(UserAction.modifyInfo(modifyInput));
+            setType('read');
         } catch(e) {
             console.log(e);
         }
@@ -70,17 +71,17 @@ const MyPageContainer = () => {
 
     return (
         <>
-            { componentType
-                ? <MyInfoRead 
+            { type === 'read' && 
+                <MyInfoRead 
                     userInfo={userInfo}
-                    setComponentType={setComponentType}
-                    deleteInfo={deleteInfo}/>
-                : <MyInfoModify
+                    setType={setType}
+                    deleteInfo={deleteInfo}/> }
+            { type === 'modify' &&
+                <MyInfoModify
                     modifyInfo={modifyInfo}
                     modifyInput={modifyInput}
                     onChangeModify={onChangeModify}
-                    setComponentType={setComponentType}/>
-            }
+                    setType={setType}/> }
         </>
     );
 };

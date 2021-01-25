@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import FindPW from '../components/find_pw/find_pw';
 import LogIn from '../components/log_in/log_in';
 import SignUp from '../components/sign_up/sign_up';
 import * as UserAction from '../modules/user';
 
-const UserContainer = () => {
+const UserContainer = ({ setSkip }) => {
+    const [type, setType] = useState('logIn');
+
     // 로그인폼 데이터 저장하는 변수
     const [logInInput, setLogInInput] = useState({
         email: '',
@@ -25,7 +26,6 @@ const UserContainer = () => {
     const [findPWInput, setFindPWInput] = useState({ email: ''});
 
     // store에 있는 state와 dispatch 가져오는 작업
-    const userInfo = useSelector(state => state.user.userInfo);
     const dispatch = useDispatch();
 
     // 로그인폼 데이터 초기화
@@ -87,15 +87,7 @@ const UserContainer = () => {
     const logIn = async () => { 
         try{
             await dispatch(UserAction.logIn(logInInput)); 
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    // 로그아웃 요청
-    const logOut = async () => { 
-        try{
-            await dispatch(UserAction.logOut());
+            initialLogInInput();
         } catch (e) {
             console.log(e);
         }
@@ -105,6 +97,9 @@ const UserContainer = () => {
     const signUp = async () => {
         try{
             await dispatch(UserAction.signUp(signUpInput));
+            alert("메일을 확인해주세요.");
+            initialSignUpInput();
+            setType('logIn');
         } catch (e) {
             console.log(e);
         }
@@ -114,6 +109,8 @@ const UserContainer = () => {
     const findPW = async () => {
         try{
             await dispatch(UserAction.findPW(findPWInput.email));
+            initialFindPW();
+            setType('logIn');
         } catch (e) {
             console.log(e);
         }
@@ -122,34 +119,32 @@ const UserContainer = () => {
     return (
         <> 
         <div>  
-            <Link to="/user/login">[ 로그인하러 가기 ] </Link>
-            <Link to="/user/signUp">[ 회원가입하러 가기 ] </Link>
-            <Link to="/user/findPW">[ 비밀번호 찾기 ] </Link>
-            
-            <Switch>
-                <Route path="/user/login">
-                    <LogIn
-                        logIn={logIn} // 로그인 요청 보낼 함수
-                        logInInput={logInInput} // 로그인폼 값 상태
-                        onChangeLogIn={onChangeLogIn} // 로그인폼 값 변경 함수 
-                    />
-                </Route>
-                <Route path="/user/signUp">
-                    <SignUp
-                        signUp={signUp}
-                        signUpInput={signUpInput}
-                        onChangeSignUp={onChangeSignUp}
-                    />
-                </Route>
-                <Route path="/user/findPW">
-                    <FindPW
-                        findPW={findPW}
-                        findPWInput={findPWInput}
-                        onChangeFindFW={onChangeFindFW}
-                    />
-                </Route>
-
-            </Switch>
+            { type === 'logIn' && 
+                <LogIn
+                    setSkip={setSkip}
+                    setType={setType}
+                    logIn={logIn} // 로그인 요청 보낼 함수
+                    logInInput={logInInput} // 로그인폼 값 상태
+                    onChangeLogIn={onChangeLogIn} // 로그인폼 값 변경 함수 
+                />
+            }
+            { type === 'signUp' &&
+                <SignUp
+                    setSkip={setSkip}
+                    setType={setType}
+                    signUp={signUp}
+                    signUpInput={signUpInput}
+                    onChangeSignUp={onChangeSignUp}
+                />
+            }
+            { type === 'findPW' && 
+                <FindPW
+                    setType={setType}
+                    findPW={findPW}
+                    findPWInput={findPWInput}
+                    onChangeFindFW={onChangeFindFW}
+                />
+            }
         </div>
         </>
     );

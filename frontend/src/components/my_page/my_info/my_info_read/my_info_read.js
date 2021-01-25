@@ -1,10 +1,10 @@
 import React from 'react';
 import MyInfoForm from '../my_info_read/my_info_form';
 
-const MyPageRead = ({ userInfo, setComponentType, deleteInfo }) => {
+const MyPageRead = ({ userInfo, setType, deleteInfo }) => {
 
   const onClickModify = () => {
-    setComponentType(false);
+    setType('modify');
   }
 
   return (

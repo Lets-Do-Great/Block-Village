@@ -1,11 +1,12 @@
 import React from 'react';
 import FindPWForm from './find_pw_form';
 
-const FindPW = ({ onChangeFindFW, findPW, findPWInput }) => {
+const FindPW = ({ onChangeFindFW, findPW, findPWInput, setType }) => {
+    const back = () =>{ setType('logIn') };
 
     return (
     <>
-        <button>뒤로가기</button><br/>
+        <button onClick={back}>뒤로가기</button><br/>
         <FindPWForm
             onChangeFindFW={onChangeFindFW}
             findPW={findPW}
