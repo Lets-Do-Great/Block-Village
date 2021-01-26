@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, useHistory } from 'react-router-dom';
 import MyPageContainer from './containers/my_page_container';
 import UserContainer from './containers/user_container';
 import SubMain from './components/main/sub_main';
 import * as UserAction from './modules/user';
 
 function App() {
+  const history = useHistory();
   const [ skip, setSkip ] = useState(false);
 
   const userInfo = useSelector(state => state.user.userInfo);
@@ -15,9 +16,10 @@ function App() {
   const clickSkip = () => setSkip(true);
 
   const logout = async () => {
-      setSkip(false);
-      try{
-        await dispatch(UserAction.logOut());
+    setSkip(false);
+    try{
+      await dispatch(UserAction.logOut());
+      history.push('/');
     } catch (e) {
         console.log(e);
     }

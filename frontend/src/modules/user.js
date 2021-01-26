@@ -58,12 +58,7 @@ const initialState = {
 
 // reducer 함수
 const userReducer = handleActions({
-    [LOG_OUT]: (state, action) => ({
-        ...initialState,
-    }),
-    [DELETE_INFO]: (state, action) => ({
-        ...initialState,
-    }),
+    [LOG_OUT]: (state, action) => updateObject(state, { ...initialState,}),
 }, initialState);
 
 // reducer 함수로 요청된 액션들을 처리하기 위한 함수
@@ -71,7 +66,6 @@ export default applyPenders(userReducer, [
     {
         type: LOG_IN,
         onSuccess: (state, action) => {
-            console.log(action.payload);
             const response = action.payload;
 
             if(response.status === 200){
@@ -90,15 +84,37 @@ export default applyPenders(userReducer, [
                 alert("없는 회원 정보 입니다.");
                 console.log(action.payload.status);
             }
+            return updateObject(state, state);
         },
         onFailure: (state, action) => {
             return updateObject(state, { });
         }
     },
+    // {
+    //     type: LOG_OUT,
+    //     onSuccess: (state, action) => {
+    //         const response = action.payload;
+
+    //         if(response.status === 200){
+    //             if(response.data.status){
+    //                 return updateObject(state, {
+    //                     ...initialState,
+    //                 });
+    //             } else {
+    //                 alert("현재 로그아웃 요청에 문제가 발생하였습니다.");
+    //             }
+    //         } else { // 에러 발생
+    //             console.log(action.payload.status);
+    //         }
+    //         return updateObject(state, state);
+    //     },
+    //     onFailure: (state, action) => {
+    //         return updateObject(state, state);
+    //     }
+    // },
     {
         type: SIGN_UP,
         onSuccess: (state, action) => {
-            console.log(action.payload);
             const response = action.payload;
 
             if(response.status === 200){
@@ -113,19 +129,16 @@ export default applyPenders(userReducer, [
             return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            console.log("실패햇니?");
             return updateObject(state, { });
         }
     },
     {
         type: MODIFY_INFO,
         onSuccess: (state, action) => {
-            console.log(action.payload);
             const response = action.payload;
 
             if(response.status === 200){
                 if(response.data.status){
-                    console.log("정보수정 되나요");
                     return updateObject(state, {
                         ...state,
                         userInfo: {
@@ -139,15 +152,37 @@ export default applyPenders(userReducer, [
             } else { // 에러 발생
                 console.log(action.payload.status);
             }
+            return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            return updateObject(state, { });
+            return updateObject(state, state);
+        }
+    },
+    {
+        type: DELETE_INFO,
+        onSuccess: (state, action) => {
+            const response = action.payload;
+
+            if(response.status === 200){
+                if(response.data.status){
+                    return updateObject(state, {
+                        ...initialState,
+                    });
+                } else {
+                    alert("현재 탈퇴 요청에 문제가 발생하였습니다.");
+                }
+            } else { // 에러 발생
+                console.log(action.payload.status);
+            }
+            return updateObject(state, state);
+        },
+        onFailure: (state, action) => {
+            return updateObject(state, state);
         }
     },
     {
         type: FIND_PW,
         onSuccess: (state, action) => {
-            console.log(action.payload);
             const response = action.payload;
 
             if(response.status === 200){
@@ -157,12 +192,11 @@ export default applyPenders(userReducer, [
                     alert("임시 비밀번호 발급에 문제가 생겼습니다.");
                 }
             }else{ // 에러 처리 코드
-                
             }
             return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            return updateObject(state, { });
+            return updateObject(state, state);
         }
     },
 ]);
