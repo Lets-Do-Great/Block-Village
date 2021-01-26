@@ -52,8 +52,20 @@ const initialState = {
   ],
 }
 
+const userReducer = handleActions({
+  [GET_MY_BLOCKS]: (state, action) => ({
+  }),
 
-export default applyPenders('', [
+  [GET_ALL_BLOCKS]: (state, action) => ({
+  }),
+
+  [BUY_BLOCKS]: (state, action) => ({
+  }),
+
+}, initialState);
+
+
+export default applyPenders(userReducer, [
   {
     type: GET_MY_BLOCKS,
     onSuccess: (state, action) => {

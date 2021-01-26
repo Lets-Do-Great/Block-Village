@@ -6,26 +6,11 @@
 
 import client from './client';
 
-// 모든 블럭 조회
-export const getAllBlocks = () => {
+// 모든 챌린지 조회
+export const getAllChallenge = () => {
   return client({
     url: ``,
     method: 'get',
   });
 };
 
-// 내 블럭 불러오기
-export const getMyBlocks = () => {
-  return client({
-    url: ``,
-    method: 'get',
-  });
-};
-
-// 내 블럭 추가하기
-export const buyBlocks = () => {
-  return client({
-    url: ``,
-    method: 'post',
-  });
-};
