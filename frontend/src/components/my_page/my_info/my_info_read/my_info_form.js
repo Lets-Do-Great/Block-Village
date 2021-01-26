@@ -3,7 +3,7 @@ import React from 'react';
 const MyInfoLeft = ({ profile, mileage }) => {
     return (
     <>
-        <image src={profile} alt="프로필 이미지"/>
+        <img src={profile} alt="프로필 이미지"/>
         <p>{mileage}</p>
     </>
     );

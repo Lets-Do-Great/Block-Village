@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      { userInfo.login 
+      { userInfo.logIn 
       ? ( <>
           <button onClick={logout}>로그아웃</button><br/>
           <Link to="/myPage">[ 마이페이지 ] </Link>

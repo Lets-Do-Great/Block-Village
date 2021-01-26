@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FindPW from '../components/find_pw/find_pw';
 import LogIn from '../components/log_in/log_in';
@@ -97,7 +97,6 @@ const UserContainer = ({ setSkip }) => {
     const signUp = async () => {
         try{
             await dispatch(UserAction.signUp(signUpInput));
-            alert("메일을 확인해주세요.");
             initialSignUpInput();
             setType('logIn');
         } catch (e) {

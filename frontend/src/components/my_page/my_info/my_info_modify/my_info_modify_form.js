@@ -5,7 +5,7 @@ const MyInfoModifyLeft = ({ modifyInput, onChangeModify }) => {
 
     return (
     <>
-        <image src={ profile } alt="프로필 이미지"/>
+        <img src={ profile } alt="프로필 이미지"/>
         <div>프로필 이미지 편집</div>
     </>
     );

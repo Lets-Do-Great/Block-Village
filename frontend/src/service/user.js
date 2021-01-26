@@ -17,8 +17,8 @@ export const logIn = ({ email, password }) => {
 
 // 회원 가입 하기
 export const setUserInfo = (
-    { emailId, emailSite, nickname, password }) => {
-        client({
+    { emailId, emailSite, nickname, password }) => {    
+        return client({
             url: `users`,
             method: 'post',
             data: { emailId, emailSite, nickname, password },
@@ -28,7 +28,7 @@ export const setUserInfo = (
 
 // 회원 정보 조회
 export const getUserInfo = ( email ) => {
-    client({
+    return client({
        url: `users/${email}`,
        method: 'get', 
     });
@@ -36,18 +36,18 @@ export const getUserInfo = ( email ) => {
 
 // 회원 정보 수정
 export const modifyUserInfo = (
-    { email, nickname, prevPassword, newPassword }) => {
-        client({
+    { email, nickname, prevPassword, newPassword, introduction }) => {
+        return client({
             url: `users/${email}`,
             method: 'put',
-            data: { nickname, prevPassword, newPassword },
+            data: { nickname, prevPassword, newPassword, introduction },
         }
     )
 }
 
 // 회원 탈퇴 하기
 export const deleteUserInfo = ( email ) => {
-    client({
+    return client({
        url: `users/${email}`,
        method: 'delete', 
     });
@@ -55,7 +55,7 @@ export const deleteUserInfo = ( email ) => {
 
 // 비밀번호 찾기
 export const findPW = ( email ) => {
-    client({
+    return client({
         url: `users/${email}`,
         method: 'post',
     })

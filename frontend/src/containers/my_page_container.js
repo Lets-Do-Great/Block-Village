@@ -64,6 +64,7 @@ const MyPageContainer = () => {
     const deleteInfo = async () => {
         try {
             await dispatch(UserAction.deleteInfo(userInfo.email));
+            setType('');
         } catch(e) {
             console.log(e);
         }

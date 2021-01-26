@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import * as UserAPI from '../service/user';
 import { applyPenders } from 'redux-pender';
 import { updateObject } from '../service/common';
+import { actionTypes } from 'redux-pender/lib/utils';
 
 // user 관련 요청 액션 타입
 const LOG_IN = 'user/LOG_IN';
@@ -86,6 +87,7 @@ export default applyPenders(userReducer, [
                     alert("로그인에 실패하였습니다.");
                 }
             } else { // 에러 발생
+                alert("없는 회원 정보 입니다.");
                 console.log(action.payload.status);
             }
         },
@@ -93,24 +95,6 @@ export default applyPenders(userReducer, [
             return updateObject(state, { });
         }
     },
-    // {
-    //     type: LOG_OUT,
-    //     onSuccess: (state, action) => {
-    //         console.log(action.payload);
-    //         const response = action.payload;
-
-    //         if(response.status === 200){
-    //             return updateObject(state, { 
-    //                 ...initialState,
-    //             });
-    //         }else{
-    //             // 에러 처리 코드
-    //         }
-    //     },
-    //     onFailure: (state, action) => {
-    //         return updateObject(state, { });
-    //     }
-    // },
     {
         type: SIGN_UP,
         onSuccess: (state, action) => {
@@ -126,8 +110,10 @@ export default applyPenders(userReducer, [
             } else { // 에러 발생
                 console.log(action.payload.status);
             }
+            return updateObject(state, state);
         },
         onFailure: (state, action) => {
+            console.log("실패햇니?");
             return updateObject(state, { });
         }
     },
@@ -158,15 +144,6 @@ export default applyPenders(userReducer, [
             return updateObject(state, { });
         }
     },
-    // {
-    //     type: DELETE_INFO,
-    //     onSuccess: (state, action) => {
-    //         return updateObject(state, { ...initialState });
-    //     },
-    //     onFailure: (state, action) => {
-    //         return updateObject(state, { });
-    //     }
-    // },
     {
         type: FIND_PW,
         onSuccess: (state, action) => {
@@ -182,6 +159,7 @@ export default applyPenders(userReducer, [
             }else{ // 에러 처리 코드
                 
             }
+            return updateObject(state, state);
         },
         onFailure: (state, action) => {
             return updateObject(state, { });
