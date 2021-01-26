@@ -1,6 +1,7 @@
 import styles from './mission_maze.module.css';
 import '../all_blocks/start_blocks';
 import '../all_blocks/judgment_blocks';
+import '../all_blocks/movement_block';
 import '../all_blocks/flow_block';
 import '../all_blocks/calculation_block';
 import React, { useState } from 'react';
@@ -60,6 +61,27 @@ export default function MissionMaze() {
       blocks: [
         {
           type: 'move_x',
+        },
+        {
+          type: 'move_y'
+        },
+        {
+          type: 'point_x'
+        },
+        {
+          type: 'point_y'
+        },
+        {
+          type: 'point_x_y'
+        },
+        {
+          type: 'turn_angle'
+        },
+        {
+          type: 'set_angle'
+        },
+        {
+          type: 'set_angle_move'
         },
       ],
     },

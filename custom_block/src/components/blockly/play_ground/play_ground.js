@@ -10,6 +10,38 @@ const PlayGround = ({ javascript_code }) => {
     eval(javascript_code);
   };
 
+  // 움직임 
+/////////////////////////////////////////////////////////////////
+  var x = 0;
+  var y = 0;
+  const move = [];
+
+  const move_x = (x_distance) => {
+    x += x_distance;
+    move.push([x, y]);
+  }
+
+  const move_y = (y_distance) => {
+    y += y_distance;
+    move.push([x, y]);
+  }
+
+  const point_x = (x_point) => {
+    x = x_point;
+    move.push([x, y]);
+  }
+
+  const point_y = (y_point) => {
+    y = y_point;
+    move.push([x,y]);
+  }
+
+  const point_x_y = (x_point, y_point) => {
+    x = x_point;
+    y = y_point;
+    move.push([x, y]);
+  }
+
   // 판단
 /////////////////////////////////////////////////////////////////
   const block_judgment_equals = (e1, e2) => {
@@ -110,14 +142,6 @@ const PlayGround = ({ javascript_code }) => {
       console.log('반환값은 true입니다.');
       return true;
     }
-  };
-
-  var x = 0;
-  var y = 0;
-  const move = [];
-  const moveX = (x_distance) => {
-    x += x_distance;
-    move.push([x, y]);
   };
   
   // 흐름
