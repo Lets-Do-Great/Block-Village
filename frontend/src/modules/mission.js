@@ -44,14 +44,14 @@ export const deleteMission = createAction(
     MissionAPI.deleteMission
 )
 
-export const likeMission = createAction(
+export const setLikeMission = createAction(
     LIKE_MISSION,
-    MissionAPI.likeMission
+    MissionAPI.setLikeMission
 )
 
-export const difficultyMission = createAction(
+export const setDifficultyMission = createAction(
     DIFFICULTY_MISSION,
-    MissionAPI.difficultyMission
+    MissionAPI.setDifficultyMission
 )
 
 // 초기상태
@@ -59,7 +59,7 @@ const initialState = {
     missionList: [],
     selectedMission: {
         missionId: '',
-        userId: '',
+        email: '',
         title: '',
         created_at: '',
         updated_at: '',
@@ -69,6 +69,7 @@ const initialState = {
         difficulty: '',
         likeCnt: '',
         peopleCnt: '',
+        like: false,
     },
 };
 
@@ -234,10 +235,10 @@ export default applyPenders(missionReducer, [
                         ...state,
                     });
                 } else{
-                    alert("리스트를 불러오는데 문제가 발생했습니다.");
+                    alert("좋아요 설정 기능에 문제가 발생했습니다.");
                 }
             } else { // 에러 발생
-                alert("리스트를 불러오는데 문제가 발생했습니다.");
+                alert("좋아요 설정 기능에 문제가 발생했습니다.");
                 console.log(action.payload.status);
             }
             return updateObject(state, state);
@@ -257,10 +258,10 @@ export default applyPenders(missionReducer, [
                         ...state,
                     });
                 } else{
-                    alert("리스트를 불러오는데 문제가 발생했습니다.");
+                    alert("난이도를 설정하는데 문제가 발생했습니다.");
                 }
             } else { // 에러 발생
-                alert("리스트를 불러오는데 문제가 발생했습니다.");
+                alert("난이도를 설정하는데 문제가 발생했습니다.");
                 console.log(action.payload.status);
             }
             return updateObject(state, state);

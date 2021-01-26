@@ -19,59 +19,59 @@ export const getMission = ({ missionId }) => {
 }
 
 // 특정 유저의 미션 목록 조회
-export const getMyMissionList = ({ userId }) => {
+export const getMyMissionList = ({ email }) => {
     return client({
         url: '',
         method: '',
-        data : userId,
+        data : email,
     });
 }
 
 // 미션 제작
 export const setMission = (
-    { userId, missionId, title, content, code, image }) => {
+    { email, missionId, title, content, code, image }) => {
         return client({
             url: '',
             method: '',
-            data : { userId, missionId, title, content, code, image },        
+            data : { email, missionId, title, content, code, image },        
         }
     );
 }
 
 // 미션 수정
 export const modifyMission = (
-    { userId, missionId, title, content, code, image }) => {
+    { email, missionId, title, content, code, image }) => {
         return client({
             url: '',
             method: '',
-            data : { userId, missionId, title, content, code, image },        
+            data : { email, missionId, title, content, code, image },        
         }
     );
 }
 
 // 미션 삭제
-export const deleteMission = ({ userId, missionId }) => {
+export const deleteMission = ({ email, missionId }) => {
     return client({
         url: '',
         method: '',
-        data : { userId, missionId },        
+        data : { email, missionId },        
     });
 }
 
-// 미션 졸아요
-export const likeMission = ({ userId, missionId, like }) => {
+// 미션 좋아요
+export const setLikeMission = ({ email, missionId, like }) => {
     return client({
         url: '',
         method: '',
-        data : { userId, missionId, like },        
+        data : { email, missionId, like },        
     });
 }
 
 // 미션 난이도 설정
-export const difficultyMission = ({ userId, missionId, difficulty }) => {
+export const setDifficultyMission = ({ email, missionId, difficulty }) => {
     return client({
         url: '',
         method: '',
-        data : { userId, missionId, difficulty },        
+        data : { email, missionId, difficulty },        
     });
 }

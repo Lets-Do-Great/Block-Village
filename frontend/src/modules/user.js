@@ -45,7 +45,6 @@ export const deleteInfo = createAction(
 const initialState = {
     userInfo: {
         logIn: false,
-        ird: '',
         profile: '',
         nickname: '',
         email: '',
