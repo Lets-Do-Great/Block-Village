@@ -1,17 +1,16 @@
 package com.ssafy.edu.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.edu.model.board.Board;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
 
 /*
 * id : users 테이블의 pk
@@ -49,5 +48,17 @@ public class User {
 //    @Column(name = "profile_image")
 //    private File?String profileImage;
     private String introduction;
+
+    @OneToMany(mappedBy = "user")
+    private List<Board> boardList = new ArrayList<>();
+
+    // 편의 메소드
+    public void addUser(Board board){
+        this.boardList.add(board);
+    }
+
+    public void removeUser(Board board){
+        this.boardList.remove(board);
+    }
 
 }
