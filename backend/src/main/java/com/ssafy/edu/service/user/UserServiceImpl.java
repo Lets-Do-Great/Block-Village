@@ -97,7 +97,6 @@ public class UserServiceImpl implements UserService {
                     .mileage(0)
                     .introduction("")
                     .emailAuth(key)
-                    .joinDate(LocalDate.now())
                     .build();
 
             User save = userJpaRepository.save(user);

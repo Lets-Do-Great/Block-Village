@@ -25,6 +25,8 @@ public class UpdateRequest {
     String nickname;
 
     //    private File?String profileImage;
+    @ApiModelProperty(required = true)
+    @NotNull
     String introduction;
 
 }

@@ -50,9 +50,4 @@ public class User {
 //    private File?String profileImage;
     private String introduction;
 
-
-    @Column(name="join_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate joinDate;
-
 }
