@@ -2,15 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import penderMiddleware from 'redux-pender';
+import rootReducer from './modules/index';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 import { BrowserRouter } from 'react-router-dom';
 
+const middlewares = [penderMiddleware()];
+
+const store = createStore(
+  rootReducer, 
+  composeWithDevTools(applyMiddleware(...middlewares)),
+)
+
+console.log(store.getState());
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

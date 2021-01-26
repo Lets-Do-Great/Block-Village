@@ -4,9 +4,10 @@ import styles from './App.module.css';
 import ChallengeMain from './components/blockly/challenge_main/challenge_main';
 import MissionMain from './components/blockly/mission_main/mission_main';
 import TutorialMain from './components/blockly/tutorial_main/tutorial_main';
-import BlockStore from './components/blockly/block_store/block_store';
+import BlockStore from './components/blockly/store/block_store/block_store';
 import Main from './components/main/main';
 import MissionMaze from './components/blockly/mission_maze/mission_maze';
+import BlockStoreContainer from './containers/block_store_container';
 
 function App() {
   const history = useHistory();
@@ -31,7 +32,7 @@ function App() {
           <ChallengeMain />
         </Route>
         <Route exact path="/main/block_store">
-          <BlockStore />
+          <BlockStoreContainer />
         </Route>
 
         <Route exact path="/main/mission_main/maze_1">
