@@ -1,23 +1,24 @@
 package com.ssafy.edu.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.ssafy.edu.model.mission.Mission;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 * id : users 테이블의 pk
 * email : users의 이메일
 * password : users의 비밀번호
-* name : users의 실명
+* nickname : users의 별명
 * emailAuth : 이메일 인증 여부 ("true"이면 인증 완료)
 * mileage : users의 마일리지
 * introduction : 자기소개
@@ -32,7 +33,8 @@ import java.time.LocalDate;
 @Entity
 public class User {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     private String email;
@@ -50,9 +52,13 @@ public class User {
 //    private File?String profileImage;
     private String introduction;
 
-
     @Column(name="join_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private List<Mission> missionList = new ArrayList<>();
+
 
 }
