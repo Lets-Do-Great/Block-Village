@@ -1,6 +1,7 @@
 package com.ssafy.edu.controller.mission;
 
 import com.ssafy.edu.model.mission.MissionResponse;
+import com.ssafy.edu.model.mission.MissionSearchTypeRequest;
 import com.ssafy.edu.model.mission.MissionSignUpRequest;
 import com.ssafy.edu.model.mission.MissionUpdateRequest;
 import com.ssafy.edu.model.user.LoginRequest;
@@ -29,9 +30,9 @@ public class MissionController {
     MissionService missionService;
 
     @ApiOperation(value = "전체 미션 목록 조회", notes = "미션 불러오기")
-    @GetMapping("/")
-    public ResponseEntity<MissionResponse> GetMissions(@RequestParam("searchType") String searchType, @RequestParam("sortType") String sortType){
-        return missionService.findAll(searchType,sortType);
+    @PostMapping("/")
+    public ResponseEntity<MissionResponse> GetMissions(@RequestBody MissionSearchTypeRequest missionSearchTypeRequest){
+        return missionService.findAll(missionSearchTypeRequest);
     }
     @ApiOperation(value = "현재 조회중인 미션 정보 조회", notes = "미션 불러오기")
     @GetMapping("/{missionId}")
@@ -44,7 +45,7 @@ public class MissionController {
         return missionService.findByUserId(userId);
     }
     @ApiOperation(value = "미션 저장하기", notes = "미션 저장하기")
-    @PostMapping("/")
+    @PostMapping("/{userEmail}")
     public ResponseEntity<MissionResponse> signUpMission(@RequestBody MissionSignUpRequest missionSignUpRequest){
         return missionService.signUpMission(missionSignUpRequest);
     }
@@ -58,5 +59,9 @@ public class MissionController {
     public ResponseEntity<MissionResponse> deleteMission(@PathVariable("missionId") Long missionId){
         return missionService.deleteMission(missionId);
     }
-
+//    @ApiOperation(value = "미션 좋아요", notes = "미션 삭제")
+//    @GetMapping("/{missionId}")
+//    public ResponseEntity<MissionResponse> missionLike(@PathVariable("missionId") Long missionId){
+//        return missionService.deleteMission(missionId);
+//    }
 }

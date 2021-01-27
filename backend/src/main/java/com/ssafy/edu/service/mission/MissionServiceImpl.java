@@ -1,18 +1,18 @@
 package com.ssafy.edu.service.mission;
 
-import com.ssafy.edu.model.mission.Mission;
-import com.ssafy.edu.model.mission.MissionResponse;
-import com.ssafy.edu.model.mission.MissionSignUpRequest;
-import com.ssafy.edu.model.mission.MissionUpdateRequest;
+import com.ssafy.edu.model.mission.*;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.model.user.UserResponse;
 import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.repository.mission.MissionJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,11 +26,25 @@ public class MissionServiceImpl implements MissionService {
     UserJpaRepository userJpaRepository;
 
     @Override
-    public ResponseEntity<MissionResponse> findAll(String searchType, String sortType) {
+    public ResponseEntity<MissionResponse> findAll(MissionSearchTypeRequest missionSearchTypeRequest) {
         ResponseEntity response;
         MissionResponse result = new MissionResponse();
 
-        List<Mission> missionList = missionJpaRepository.findAll();
+        List<Mission> missionList = new ArrayList<>();
+
+        if(missionSearchTypeRequest.getKeywordType().equals("title")){
+            if(missionSearchTypeRequest.getSortType().equals("increase")) {
+                missionList = missionJpaRepository.findByTitleContaining(missionSearchTypeRequest.getKeyword(),Sort.by(missionSearchTypeRequest.getSearchType()));
+            }else if(missionSearchTypeRequest.getSortType().equals("decrease")){
+                missionList = missionJpaRepository.findByTitleContaining(missionSearchTypeRequest.getKeyword(),Sort.by(missionSearchTypeRequest.getSearchType()).descending());
+            }
+        }else if(missionSearchTypeRequest.getKeywordType().equals("user")){
+            if(missionSearchTypeRequest.getSortType().equals("increase")) {
+                missionList = missionJpaRepository.findByUserNickname(missionSearchTypeRequest.getKeyword(),Sort.by(missionSearchTypeRequest.getSearchType()));
+            }else if(missionSearchTypeRequest.getSortType().equals("decrease")){
+                missionList = missionJpaRepository.findByUserNickname(missionSearchTypeRequest.getKeyword(),Sort.by(missionSearchTypeRequest.getSearchType()).descending());
+            }
+        }
 
         if (missionList.size() > 0) {
             result.status = true;
@@ -82,8 +96,8 @@ public class MissionServiceImpl implements MissionService {
         ResponseEntity response;
         MissionResponse result = new MissionResponse();
         Optional<User> userOptional = userJpaRepository.findByEmail(missionSignUpRequest.getEmail());
-        System.out.println("userOptional.get().getNickname() = " + userOptional.get().getNickname());
-        Mission mission = new Mission().builder().title(missionSignUpRequest.getTitle()).content(missionSignUpRequest.getContent()).code(missionSignUpRequest.getCode()).user(userOptional.get()).build();
+
+        Mission mission = new Mission().builder().title(missionSignUpRequest.getTitle()).content(missionSignUpRequest.getContent()).code(missionSignUpRequest.getCode()).created_at(LocalDate.now()).updated_at(LocalDate.now()).user(userOptional.get()).build();
         if (userOptional.isPresent()) {
             System.out.println(" 등록 잘됐나요?= "+mission.getUser().getNickname());
             result.status = true;
@@ -103,7 +117,7 @@ public class MissionServiceImpl implements MissionService {
         MissionResponse result = new MissionResponse();
         Optional<User> userOptional = userJpaRepository.findByEmail(missionUpdateRequest.getEmail());
 
-        Mission mission = new Mission().builder().title(missionUpdateRequest.getTitle()).content(missionUpdateRequest.getContent()).code(missionUpdateRequest.getCode()).user(userOptional.get()).build();
+        Mission mission = new Mission().builder().title(missionUpdateRequest.getTitle()).content(missionUpdateRequest.getContent()).code(missionUpdateRequest.getCode()).updated_at(LocalDate.now()).user(userOptional.get()).build();
         Mission missionResult = missionJpaRepository.save(mission);
         if (userOptional.isPresent() && missionResult != null) {
             result.status = true;
