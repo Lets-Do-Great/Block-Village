@@ -1,4 +1,4 @@
- import React, { useEffect } from 'react';
+ import React, { useState, useEffect } from 'react';
  import { useSelector, useDispatch } from 'react-redux';
  import ListForm from '../../components/list/list_form/list_form';
  import * as MissionAction from '../../modules/mission';
@@ -12,9 +12,14 @@
         keywordType: 'title',
     });
 
+    // 검색 조건에 따라 미션 리스트 가져오기
     useEffect(() => {
         getMissionList(search);
-    }, [search]);
+    }, [ search.searchType, search.sortType ]);
+
+    const onClickEnter = () => {
+        getMissionList(search);
+    };
 
     // store에 있는 state와 dispatch 가져오는 작업
     const userInfo = useSelector(state => state.user.userInfo);
@@ -32,13 +37,16 @@
         });
     };
 
-    const changeSearchType = (e) => {
+    const onChangeSearchType = (e) => {
         setSearch({
             ...search,
             searchType: e.target.value,
         })
     }
 
+    /*
+    api 요청 보내는 함수
+    */
     // 미션 전체 리스트 조회
     const getMissionList = async () => {
         try{
@@ -79,11 +87,16 @@
 
     return (
         <>  
+            <select onChange={onChangeSearch}>
+                <option name="keywordType" value="title">제목</option>
+                <option name="keywordType" value="user">만든 이</option>
+            </select>
             <input
                 type="text"
                 name="keyword"
                 value={search.keyword}
                 onChange={onChangeSearch}
+                onKeyDown={onClickEnter}
                 placeholder="검색어를 입력하세요."
             />
             <ListForm
@@ -97,16 +110,16 @@
             />
             
             <button 
-                onClick={changeSearchType}
+                onClick={onChangeSearchType}
                 value="new">NEW</button>
             <button
-                onClick={changeSearchType}
+                onClick={onChangeSearchType}
                 value="like">좋아요 순</button>
             <button 
-                onClick={changeSearchType}
+                onClick={onChangeSearchType}
                 value="people">참여 많은 순</button>
             <button 
-                onClick={changeSearchType}
+                onClick={onChangeSearchType}
                 value="difficulty">난이도 순</button>
         </>
     );
