@@ -20,7 +20,7 @@ public class MissionDifficulty {
     @Column(name = "mission_like_user_id")
     private Long id;
 
-    private int difficulty;
+    private double difficulty;
 
     @JsonBackReference
     @ManyToOne

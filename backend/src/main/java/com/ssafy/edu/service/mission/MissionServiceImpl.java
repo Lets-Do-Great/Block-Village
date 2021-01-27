@@ -41,6 +41,7 @@ public class MissionServiceImpl implements MissionService {
 
         List<Mission> missionList = new ArrayList<>();
 
+
         if (missionSearchTypeRequest.getKeywordType().equals("title")) {
             if (missionSearchTypeRequest.getSortType().equals("increase")) {
                 missionList = missionJpaRepository.findByTitleContaining(missionSearchTypeRequest.getKeyword(), Sort.by(missionSearchTypeRequest.getSearchType()));
@@ -108,7 +109,6 @@ public class MissionServiceImpl implements MissionService {
         Date now = new Date(System.currentTimeMillis());
         Mission mission = new Mission().builder().title(missionSignUpRequest.getTitle()).content(missionSignUpRequest.getContent()).code(missionSignUpRequest.getCode()).created_at(now).updated_at(now).user(userOptional.get()).build();
         if (userOptional.isPresent()) {
-            System.out.println(" 등록 잘됐나요?= " + mission.getUser().getNickname());
             result.status = true;
             Mission missionResult = missionJpaRepository.save(mission);
             result.data = missionResult;
@@ -126,7 +126,7 @@ public class MissionServiceImpl implements MissionService {
         MissionResponse result = new MissionResponse();
         Optional<User> userOptional = userJpaRepository.findByEmail(missionUpdateRequest.getEmail());
         Date now = new Date(System.currentTimeMillis());
-        Mission mission = new Mission().builder().title(missionUpdateRequest.getTitle()).content(missionUpdateRequest.getContent()).code(missionUpdateRequest.getCode()).updated_at(now).user(userOptional.get()).build();
+        Mission mission = new Mission().builder().title(missionUpdateRequest.getTitle()).content(missionUpdateRequest.getContent()).code(missionUpdateRequest.getCode()).updated_at(now).user(userOptional.get()).difficulty(0).build();
         Mission missionResult = missionJpaRepository.save(mission);
         if (userOptional.isPresent() && missionResult != null) {
             result.status = true;
@@ -147,7 +147,6 @@ public class MissionServiceImpl implements MissionService {
         Optional<Mission> missionOptional = missionJpaRepository.findById(missionId);
 
         if (missionOptional.isPresent()) {
-            System.out.println("missionOptional.get() = " + missionOptional.get());
             missionJpaRepository.delete(missionOptional.get());
             result.status = true;
             response = new ResponseEntity<>(result, HttpStatus.OK);
@@ -165,35 +164,35 @@ public class MissionServiceImpl implements MissionService {
 
         Optional<Mission> missionOptional = missionJpaRepository.findById(missionLikeRequest.getMissionId());
         Optional<User> userOptional = userJpaRepository.findByEmail(missionLikeRequest.getEmail());
-        List<MissionLikeUsers> missionLikeUsersOptional = missionLikeUsersJpaRepository.findByUserEmailAndMissionId(userOptional.get().getEmail(),missionOptional.get().getId());
-        if(missionLikeUsersOptional.size()==0) {
+        List<MissionLikeUsers> missionLikeUsersOptional = missionLikeUsersJpaRepository.findByUserEmailAndMissionId(userOptional.get().getEmail(), missionOptional.get().getId());
+        if (missionLikeUsersOptional.size() == 0) {
             MissionLikeUsers missionLikeUsers = new MissionLikeUsers();
             missionLikeUsers.setMission(missionOptional.get());
             missionLikeUsers.setUser(userOptional.get());
-            if(missionLikeRequest.isLike()){
+            if (missionLikeRequest.isLike()) {
                 missionLikeUsers.setMissionlike(true);
-            }else {
+            } else {
                 missionLikeUsers.setMissionlike(false);
             }
             MissionLikeUsers missionLikeUsersResult = missionLikeUsersJpaRepository.save(missionLikeUsers);
             result.status = true;
             result.data = missionLikeUsersResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else if(missionLikeUsersOptional.size()==1){
+        } else if (missionLikeUsersOptional.size() == 1) {
             MissionLikeUsers missionLikeUsers = new MissionLikeUsers();
             missionLikeUsers.setId(missionLikeUsersOptional.get(0).getId());
             missionLikeUsers.setMission(missionOptional.get());
             missionLikeUsers.setUser(userOptional.get());
-            if(missionLikeRequest.isLike()){
+            if (missionLikeRequest.isLike()) {
                 missionLikeUsers.setMissionlike(true);
-            }else {
+            } else {
                 missionLikeUsers.setMissionlike(false);
             }
             MissionLikeUsers missionLikeUsersResult = missionLikeUsersJpaRepository.save(missionLikeUsers);
             result.status = true;
             result.data = missionLikeUsersResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
+        } else {
             result.status = false;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
@@ -208,8 +207,10 @@ public class MissionServiceImpl implements MissionService {
 
         Optional<Mission> missionOptional = missionJpaRepository.findById(missionDifficultRequest.getMissionId());
         Optional<User> userOptional = userJpaRepository.findByEmail(missionDifficultRequest.getEmail());
-        List<MissionDifficulty> missionDifficultyList = missionDifficultyJpaRepository.findByUserEmailAndMissionId(userOptional.get().getEmail(),missionOptional.get().getId());
-        if(missionDifficultyList.size()==0) {
+        List<MissionDifficulty> missionDifficultyList = missionDifficultyJpaRepository.findByUserEmailAndMissionId(userOptional.get().getEmail(), missionOptional.get().getId());
+        List<MissionDifficulty> missionDifficultyCalculation = missionDifficultyJpaRepository.findByMissionId(missionOptional.get().getId());
+
+        if (missionDifficultyList.size() == 0) {
             MissionDifficulty missionDifficulty = new MissionDifficulty();
             missionDifficulty.setMission(missionOptional.get());
             missionDifficulty.setUser(userOptional.get());
@@ -219,7 +220,7 @@ public class MissionServiceImpl implements MissionService {
             result.status = true;
             result.data = missionDifficultyResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else if(missionDifficultyList.size()==1){
+        } else if (missionDifficultyList.size() == 1) {
             MissionDifficulty missionDifficulty = new MissionDifficulty();
             missionDifficulty.setId(missionDifficultyList.get(0).getId());
             missionDifficulty.setMission(missionOptional.get());
@@ -230,10 +231,28 @@ public class MissionServiceImpl implements MissionService {
             result.status = true;
             result.data = missionDifficultyResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
+        } else {
             result.status = false;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
+
+        if (result.status&&missionDifficultyCalculation.size() > 0) {
+            if (missionOptional.isPresent()) {
+                double temp = missionDifficultRequest.getDifficulty();
+                for (MissionDifficulty m : missionDifficultyCalculation) {
+                    temp = temp + m.getDifficulty();
+                }
+                double difficulty = temp / (missionDifficultyCalculation.size() + 1);
+                missionOptional.get().setDifficulty(Math.round(difficulty*10)/10.0);
+                missionJpaRepository.save(missionOptional.get());
+            }
+        } else if(result.status&&missionDifficultyCalculation.size()==0) {
+            if (missionOptional.isPresent()) {
+                missionOptional.get().setDifficulty(missionDifficultRequest.getDifficulty());
+                missionJpaRepository.save(missionOptional.get());
+            }
+        }
+
         return response;
     }
 }

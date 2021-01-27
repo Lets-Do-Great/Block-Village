@@ -45,6 +45,7 @@ public class Mission {
     private String content;
     private String category;
     private String code;
+    private double difficulty;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date created_at;
@@ -60,5 +61,5 @@ public class Mission {
     @OneToMany(mappedBy = "mission")
     private List<MissionLikeUsers> missionLikeUsersList = new ArrayList<>();
 
-    
+
 }

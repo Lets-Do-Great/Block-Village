@@ -23,5 +23,5 @@ public class MissionDifficultRequest {
 
     @ApiModelProperty(required = true)
     @NotNull
-    int difficulty;
+    double difficulty;
 }

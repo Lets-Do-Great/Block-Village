@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface MissionDifficultyJpaRepository  extends JpaRepository<MissionDifficulty,Long> {
     public List<MissionDifficulty> findByUserEmailAndMissionId(String userEmail, Long missionId);
+    public List<MissionDifficulty> findByMissionId(Long missionId);
 }
