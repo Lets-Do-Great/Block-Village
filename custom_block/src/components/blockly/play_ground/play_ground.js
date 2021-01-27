@@ -6,7 +6,6 @@ const PlayGround = ({ javascript_code }) => {
   const fieldsize = useRef();
   const fieldchar = useRef();
   console.log(javascript_code);
-  //repeat_js("  move_x((num_js(10)))condition_js((block_judgment_equals(10,10)),\"break_js()\" )")
 
   const playGame = () => {
     eval(javascript_code);
@@ -147,46 +146,52 @@ const PlayGround = ({ javascript_code }) => {
     }
   };
   
+  // repeat_js("move_x((num_js(2))) condition_js((block_judgment_equals(10,10)),  \"break_js()\" )")
+  // repeat_js(
+  //   "move_x((num_js(2))) condition_js((block_judgment_equals(10,10)), 
+  //   " condition_js((block_judgment_equals(10,10)), "condition_js(   (block_judgment_equals(10,10)),"break_js()"  )"   )"   )"
+  // )
+
   // 흐름
   //////////////////////////////////////////////////////////////////////////////////////////////
-  const repeat_times_js = (text_times, statements_repeat) => {
-    for(var i=0;i<text_times;i++){
-      eval(statements_repeat);
-    }
-  };  
-  const repeat_js = (statements_repeat) => {
-    while(true){
-      eval(statements_repeat);
-    }
-  };
-  const repeat_condition_js = (value_repeat_condition, dropdown_opts, statements_action) => {
-    if (dropdown_opts === 1){
-      while(!value_repeat_condition){
-        eval(statements_action);
-      }
-    }
-    if (dropdown_opts === 2){
-      while(value_repeat_condition){
-        eval(statements_action);
-      }
-    }
-  };
-  const break_js = () => {
-    return;
-  };
-  const condition_js = (value_condition, statements_action) => {
-    if(value_condition){
-      eval(statements_action);
-    }
-  };
-  const if_else_js = (value_if,statements_action1,statements_action2) => {
-    if (value_if){
-      eval(statements_action1);
-    }
-    else{
-      eval(statements_action2);
-    }
-  };
+  // const repeat_times_js = (text_times, statements_repeat) => {
+  //   for(var i=0;i<text_times;i++){
+  //     eval(statements_repeat);
+  //   }
+  // };  
+  // const repeat_js = (statements_repeat) => {
+  //   while(true){
+  //     eval(statements_repeat);
+  //   }
+  // };
+  // const repeat_condition_js = (value_repeat_condition, dropdown_opts, statements_action) => {
+  //   if (dropdown_opts === 1){
+  //     while(!value_repeat_condition){
+  //       eval(statements_action);
+  //     }
+  //   }
+  //   if (dropdown_opts === 2){
+  //     while(value_repeat_condition){
+  //       eval(statements_action);
+  //     }
+  //   }
+  // };
+  // const break_js = () => {
+  //   return;
+  // };
+  // const condition_js = (value_condition, statements_action) => {
+  //   if(value_condition){
+  //     eval(statements_action);
+  //   }
+  // };
+  // const if_else_js = (value_if,statements_action1,statements_action2) => {
+  //   if (value_if){
+  //     eval(statements_action1);
+  //   }
+  //   else{
+  //     eval(statements_action2);
+  //   }
+  // };
 
 
   // 계산

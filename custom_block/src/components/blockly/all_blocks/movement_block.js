@@ -23,7 +23,7 @@ Blockly.Blocks['move_x'] = {
 Blockly.JavaScript['move_x'] = function(block) {
   var value_x_distance = Blockly.JavaScript.valueToCode(block, 'x_distance', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `move_x(${value_x_distance})`;
+  var code = `move_x(${value_x_distance});`;
   return code;
 };
 Blockly.Python['move_x'] = function(block) {
@@ -53,7 +53,7 @@ Blockly.Blocks['move_y'] = {
 Blockly.JavaScript['move_y'] = function(block) {
   var value_y_distance = Blockly.JavaScript.valueToCode(block, 'y_distance', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `move_y(${value_y_distance})`;
+  var code = `move_y(${value_y_distance});`;
   return code;
 };
 Blockly.Python['move_y'] = function(block) {
@@ -82,7 +82,7 @@ Blockly.Blocks['point_x'] = {
 Blockly.JavaScript['point_x'] = function(block) {
   var value_x_point = Blockly.JavaScript.valueToCode(block, 'x_point', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `point_x(${value_x_point})`;
+  var code = `point_x(${value_x_point});`;
   return code;
 };
 Blockly.Python['point_x'] = function(block) {
@@ -111,7 +111,7 @@ Blockly.Blocks['point_y'] = {
 Blockly.JavaScript['point_y'] = function(block) {
   var value_y_point = Blockly.JavaScript.valueToCode(block, 'y_point', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `point_y(${value_y_point})`;
+  var code = `point_y(${value_y_point});`;
   return code;
 };
   
@@ -145,7 +145,7 @@ Blockly.JavaScript['point_x_y'] = function(block) {
   var value_x_point = Blockly.JavaScript.valueToCode(block, 'x_point', Blockly.JavaScript.ORDER_ATOMIC);
   var value_y_point = Blockly.JavaScript.valueToCode(block, 'y_point', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `point_x_y(${value_x_point},${value_y_point})`;
+  var code = `point_x_y(${value_x_point},${value_y_point});`;
   return code;
 };  
 Blockly.Python['point_x_y'] = function(block) {
@@ -173,7 +173,7 @@ Blockly.Python['point_x_y'] = function(block) {
   
   Blockly.JavaScript['turn_angle'] = function(block) {
     var angle = block.getFieldValue('angle');
-    var code = `turn_angle(${angle})`;
+    var code = `turn_angle(${angle});`;
     return code;
   };
   
@@ -198,7 +198,7 @@ Blockly.Python['point_x_y'] = function(block) {
   
   Blockly.JavaScript['set_angle'] = function(block) {
     var angle = block.getFieldValue('angle');
-    var code = `set_angle(${angle})`;
+    var code = `set_angle(${angle});`;
     return code;
   };
   

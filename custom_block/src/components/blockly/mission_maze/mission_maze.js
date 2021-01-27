@@ -96,7 +96,10 @@ export default function MissionMaze() {
           type: 'repeat'
         },
         {
-          type: 'repeat_condition'
+          type: 'do_while'
+        },
+        {
+          type: 'while_not'
         },
         {
           type: 'break'
