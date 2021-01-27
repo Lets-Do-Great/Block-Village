@@ -32,13 +32,15 @@ public class MissionLikeUsers {
     @Column(name = "mission_like_user_id")
     private Long id;
 
+    private boolean missionlike;
+
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="user_id", insertable = false, updatable = false)
+    @JoinColumn(name="user_id")
     private User user;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="mission_id", insertable = false, updatable = false)
+    @JoinColumn(name="mission_id")
     private Mission mission;
 }

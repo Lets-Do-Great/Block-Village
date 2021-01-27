@@ -11,4 +11,6 @@ public interface MissionService {
     public ResponseEntity<MissionResponse> signUpMission(MissionSignUpRequest missionSignUpRequest);
     public ResponseEntity<MissionResponse> updateMission(MissionUpdateRequest missionUpdateRequest);
     public ResponseEntity<MissionResponse> deleteMission(Long missionId);
+    public ResponseEntity<MissionLikeUsersResponse> likeMission(MissionLikeRequest missionLikeRequest);
+    public ResponseEntity<MissionDifficultyResponse> difficultyMission(MissionDifficultRequest missionDifficultRequest);
 }

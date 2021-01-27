@@ -14,12 +14,13 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="mission_do_users")
-public class MissionDoUsers {
+public class MissionDifficulty {
     @Id //ID 어노테이션으로 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 생성
-    @Column(name = "mission_do_users_id")
+    @Column(name = "mission_like_user_id")
     private Long id;
+
+    private int difficulty;
 
     @JsonBackReference
     @ManyToOne

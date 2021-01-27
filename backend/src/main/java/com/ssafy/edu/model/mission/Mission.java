@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -43,13 +44,12 @@ public class Mission {
     private String title;
     private String content;
     private String category;
-    private String difficulty;
     private String code;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate created_at;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate updated_at;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date created_at;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updated_at;
 
     @JsonBackReference
     @ManyToOne
@@ -58,10 +58,7 @@ public class Mission {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "mission")
-    private List<MissionComments> missionCommentsList = new ArrayList<>();
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "mission")
     private List<MissionLikeUsers> missionLikeUsersList = new ArrayList<>();
 
+    
 }

@@ -1,9 +1,6 @@
 package com.ssafy.edu.controller.mission;
 
-import com.ssafy.edu.model.mission.MissionResponse;
-import com.ssafy.edu.model.mission.MissionSearchTypeRequest;
-import com.ssafy.edu.model.mission.MissionSignUpRequest;
-import com.ssafy.edu.model.mission.MissionUpdateRequest;
+import com.ssafy.edu.model.mission.*;
 import com.ssafy.edu.model.user.LoginRequest;
 import com.ssafy.edu.model.user.SignUpRequest;
 import com.ssafy.edu.model.user.UpdateRequest;
@@ -59,9 +56,14 @@ public class MissionController {
     public ResponseEntity<MissionResponse> deleteMission(@PathVariable("missionId") Long missionId){
         return missionService.deleteMission(missionId);
     }
-//    @ApiOperation(value = "미션 좋아요", notes = "미션 삭제")
-//    @GetMapping("/{missionId}")
-//    public ResponseEntity<MissionResponse> missionLike(@PathVariable("missionId") Long missionId){
-//        return missionService.deleteMission(missionId);
-//    }
+    @ApiOperation(value = "미션 좋아요", notes = "미션 좋아요")
+    @PostMapping("/like/{missionId}")
+    public ResponseEntity<MissionLikeUsersResponse> missionLike(@RequestBody MissionLikeRequest missionLikeRequest){
+        return missionService.likeMission(missionLikeRequest);
+    }
+    @ApiOperation(value = "난이도 채점", notes = "난이도 채점")
+    @PostMapping("/difficult/{missionId}")
+    public ResponseEntity<MissionDifficultyResponse> missionDifficult(@RequestBody MissionDifficultRequest missionDifficultRequest){
+        return missionService.difficultyMission(missionDifficultRequest);
+    }
 }
