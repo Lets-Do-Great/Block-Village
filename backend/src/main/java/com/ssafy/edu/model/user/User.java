@@ -1,11 +1,12 @@
 package com.ssafy.edu.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ssafy.edu.model.board.Board;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.ssafy.edu.model.board.BoardComment;
+import com.ssafy.edu.model.board.BoardLikeUsers;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -24,10 +25,11 @@ import java.util.ArrayList;
 * joinDate : 회원가입 날짜
 * */
 
-@Data
+@Getter @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Entity
 public class User {
 
@@ -56,9 +58,15 @@ public class User {
     public void addUser(Board board){
         this.boardList.add(board);
     }
-
     public void removeUser(Board board){
         this.boardList.remove(board);
     }
+
+    @OneToMany(mappedBy = "user")
+    List<BoardComment> boardCommentList = new ArrayList<>();
+
+    // 읽기 전용
+    @OneToOne(mappedBy = "user")
+    private BoardLikeUsers boardLikeUsers;
 
 }
