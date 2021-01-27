@@ -16,7 +16,8 @@ const Main = (props) => {
     {
       id: 1,
       title: '튜토리얼',
-      img_url: 'https://cdn.pixabay.com/photo/2015/05/12/09/13/freelancer-763730__340.jpg',
+      // img_url: 'https://cdn.pixabay.com/photo/2015/05/12/09/13/freelancer-763730__340.jpg',
+      img_url: "/images/maze.png",
       url: '/main/tutorial_main',
       content: '여러분들만의 블록으로 다양한 미션에 도전해 보세요!!',
     },

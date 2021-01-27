@@ -11,7 +11,7 @@
   -moz-border-radius: 7px;
   -khtml-border-radius: 7px;
   -webkit-border-radius: 7px; */
-  background: url(../../../image/tiles_pegman.png) center/cover;
+  /* background: url(/images/tiles_pegman.png) center/cover; */
 }
 
 .game__bug {
