@@ -1,9 +1,9 @@
 import styles from './mission_maze.module.css';
 import '../all_blocks/start_blocks';
 import '../all_blocks/judgment_blocks';
-import '../all_blocks/movement_block';
 import '../all_blocks/flow_block';
 import '../all_blocks/calculation_block';
+import '../all_blocks/movement_block';
 import React, { useState } from 'react';
 import ReactBlockly from 'react-blockly';
 import Blockly from 'blockly';
@@ -109,6 +109,54 @@ export default function MissionMaze() {
         }
       ]
     },
+    {
+      name: '계산',
+      colour: '4',
+      blocks: [
+        {
+          type: 'addition'
+        },
+        {
+          type: 'subtraction'
+        },
+        {
+          type: 'multiplication'
+        },
+        {
+          type: 'division'
+        },
+        {
+          type: 'random_num'
+        },
+        {
+          type: 'quotient'
+        },
+        {
+          type: 'remainder'
+        },
+        {
+          type: 'square'
+        },
+        {
+          type: 'sqrt'
+        },
+        {
+          type: 'integer'
+        },
+        {
+          type: 'roundup'
+        },
+        {
+          type: 'round'
+        },
+        {
+          type: 'abs_val'
+        },
+        {
+          type: 'number'
+        },
+      ]
+    }
   ]);
   function workspaceDidChange(workspace) {
     // save 형태

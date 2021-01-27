@@ -161,7 +161,7 @@ Blockly.JavaScript['block_judgment_equals'] = function (block) {
   var text_e1 = block.getFieldValue('e1');
   var text_e2 = block.getFieldValue('e2');
   // TODO: 두 수를 비교합니다. 조건식에 만족하는 경우 true를 반환합니다.
-  var code = 'block_judgment_equals(' + text_e1 + ',' + text_e2 + ')';
+  var code = `block_judgment_equals(${text_e1},${text_e2})`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.JavaScript['block_judgment_strictinequality_left'] = function (block) {
@@ -169,7 +169,7 @@ Blockly.JavaScript['block_judgment_strictinequality_left'] = function (block) {
   var text_e2 = block.getFieldValue('e2');
   // TODO: 두 수를 비교합니다. 왼쪽 수 'e1'이 클 경우 true를 반환힙니다.
   var code =
-    'block_judgment_strictinequality_left(' + text_e1 + ',' + text_e2 + ')';
+    `block_judgment_strictinequality_left(${text_e1},${text_e2})`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.JavaScript['block_judgment_strictinequality_right'] = function (block) {
@@ -177,14 +177,14 @@ Blockly.JavaScript['block_judgment_strictinequality_right'] = function (block) {
   var text_e2 = block.getFieldValue('e2');
   // TODO: 두 수를 비교합니다. 두 값이 다를경우 true를 반환합니다.
   var code =
-    'block_judgment_strictinequality_right(' + text_e1 + ',' + text_e2 + ')';
+    `block_judgment_strictinequality_right(${text_e1},${text_e2})`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.JavaScript['block_judgment_notequal'] = function (block) {
   var text_e1 = block.getFieldValue('e1');
   var text_e2 = block.getFieldValue('e2');
   // TODO: 두 수를 비교합니다. 왼쪽의 값 'e1'이 클 경우 true를 반환힙니다.
-  var code = 'block_judgment_notequal(' + text_e1 + ',' + text_e2 + ')';
+  var code = `block_judgment_notequal(${text_e1},${text_e2})`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.JavaScript['block_judgment_strictinequality_leftequal'] = function (
@@ -194,11 +194,7 @@ Blockly.JavaScript['block_judgment_strictinequality_leftequal'] = function (
   var text_e2 = block.getFieldValue('e2');
   // TODO: 두 수를 비교합니다. 왼쪽의 수가 오른쪽의 수와 같거나 클 경우 true를 반환합니다.
   var code =
-    'block_judgment_strictinequality_leftequal(' +
-    text_e1 +
-    ',' +
-    text_e2 +
-    ')';
+    `block_judgment_strictinequality_leftequal(${text_e1},${text_e2})`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.JavaScript['block_judgment_strictinequality_rightequal'] = function (
@@ -207,7 +203,7 @@ Blockly.JavaScript['block_judgment_strictinequality_rightequal'] = function (
   var text_e1 = block.getFieldValue('e1');
   var text_e2 = block.getFieldValue('e2');
   // TODO: 두 수를 비교합니다. 오른쪽의 수가 왼쪽의 수와 같거나 클 경우 true를 반환합니다.
-  var code = 'block_judgment_equals(' + text_e1 + ',' + text_e2 + ')';
+  var code = `block_judgment_equals(${text_e1},${text_e2})`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.JavaScript['block_judgment_compare_and'] = function (block) {
@@ -225,13 +221,7 @@ Blockly.JavaScript['block_judgment_compare_and'] = function (block) {
   console.log(dropdown_name);
   // TODO: 두 관계가 모두 참 일경우 참 을 반환합니다.
   var code =
-    'block_judgment_compare_and(' +
-    value_b1 +
-    ',' +
-    dropdown_name +
-    ',' +
-    value_b2 +
-    ')';
+    `block_judgment_compare_and(${value_b1},${dropdown_name},${value_b2})`;
   console.log('make_code : ' + code);
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
@@ -250,13 +240,7 @@ Blockly.JavaScript['block_judgment_compare_or'] = function (block) {
   );
   // TODO: 두 관계 중 하나라도 참 일경우 참 을 반환합니다.
   var code =
-    'block_judgment_compare_or(' +
-    value_b1 +
-    ',' +
-    dropdown_name +
-    ',' +
-    value_b2 +
-    ')';
+    `block_judgment_compare_or(${value_b1},${dropdown_name},${value_b2})`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -269,26 +253,7 @@ Blockly.JavaScript['block_judgment_compare_not'] = function (block) {
   );
   // TODO: 두 관계가 아닐 경우 참을 반환합니다.
   // TODO: value_boolean가 true,false로 옵니다.
-  var code = 'block_judgment_compare_not(' + value_boolean + ')';
+  var code = `block_judgment_compare_not(${value_boolean})`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-
-
-Blockly.Blocks['move_x'] = {
-  init: function () {
-    this.appendDummyInput()
-      .appendField('x좌표')
-      .appendField(new Blockly.FieldTextInput('10'), 'x_distance')
-      .appendField('만큼 이동');
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(290);
-  },
-};
-Blockly.JavaScript['move_x'] = function (block) {
-  var x_distance = block.getFieldValue('x_distance');
-  var code = 'moveX(' + x_distance + ')';
-  return code;
 };

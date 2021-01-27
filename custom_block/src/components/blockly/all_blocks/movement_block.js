@@ -6,97 +6,114 @@ import 'blockly/javascript';
 
 // x 좌표 [ ] 만큼 이동
 Blockly.Blocks['move_x'] = {
-    init: function() {
-      this.appendDummyInput()
-          .appendField("x좌표")
-          .appendField(new Blockly.FieldTextInput("10"), "x_distance")
-          .appendField("만큼 이동");
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(290);
-    }
-  };
+  init: function() {
+    this.appendDummyInput()
+        .appendField("x좌표");
+    this.appendValueInput("x_distance")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("만큼 이동");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['move_x'] = function(block) {
+  var value_x_distance = Blockly.JavaScript.valueToCode(block, 'x_distance', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = `move_x(${value_x_distance})`;
+  return code;
+};
+Blockly.Python['move_x'] = function(block) {
+  var value_x_distance = Blockly.Python.valueToCode(block, 'x_distance', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = '...\n';
+  return code;
+};
   
-  Blockly.JavaScript['move_x'] = function(block) {
-    var x_distance = block.getFieldValue('x_distance');
-    var code = 'move_x('+x_distance+'); ';
-    return code;
-  };
+// y 좌표 [ ] 만큼 이동
+Blockly.Blocks['move_y'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("y좌표");
+    this.appendValueInput("y_distance")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("만큼 이동");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.JavaScript['move_y'] = function(block) {
+  var value_y_distance = Blockly.JavaScript.valueToCode(block, 'y_distance', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = `move_y(${value_y_distance})`;
+  return code;
+};
+Blockly.Python['move_y'] = function(block) {
+  var value_y_distance = Blockly.Python.valueToCode(block, 'y_distance', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = '...\n';
+  return code;
+};
   
-  Blockly.Python['move_x'] = function(block) {
-    var x_distance = block.getFieldValue('x_distance');
-    var code = '...\n';
-    return code;
-  };
+// x 좌표를 [ ] 위치로 이동
+Blockly.Blocks['point_x'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("x좌표를");
+    this.appendValueInput("x_point")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("으로 이동");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['point_x'] = function(block) {
+  var value_x_point = Blockly.JavaScript.valueToCode(block, 'x_point', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = `point_x(${value_x_point})`;
+  return code;
+};
+Blockly.Python['point_x'] = function(block) {
+  var value_x_point = Blockly.Python.valueToCode(block, 'x_point', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = '...\n';
+  return code;
+};
   
-  // y 좌표 [ ] 만큼 이동
-  Blockly.Blocks['move_y'] = {
-    init: function() {
-      this.appendDummyInput()
-          .appendField("y좌표")
-          .appendField(new Blockly.FieldTextInput("10"), "y_distance")
-          .appendField("만큼 이동");
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(290);
-    }
-  };
-  
-  Blockly.JavaScript['move_y'] = function(block) {
-    var y_distance = block.getFieldValue('y_distance');
-    var code = 'move_y('+y_distance+'); ';
-    return code;
-  };
-  
-  Blockly.Python['move_y'] = function(block) {
-    var y_distance = block.getFieldValue('y_distance');
-    var code = '...\n';
-    return code;
-  };
-  
-  // x 좌표를 [ ] 위치로 이동
-  Blockly.Blocks['point_x'] = {
-    init: function() {
-      this.appendDummyInput()
-          .appendField("x좌표를")
-          .appendField(new Blockly.FieldTextInput("10"), "x_point")
-          .appendField("으로 이동");
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(290);
-    }
-  };
-  
-  Blockly.JavaScript['point_x'] = function(block) {
-    var x_point = block.getFieldValue('x_point');
-    var code = 'point_x('+x_point+'); ';
-    return code;
-  };
-  
-  Blockly.Python['point_x'] = function(block) {
-    var x_point = block.getFieldValue('x_point');
-    var code = '...\n';
-    return code;
-  };
-  
-  // y 좌표를 [ ]  위치로 이동
-  Blockly.Blocks['point_y'] = {
-    init: function() {
-      this.appendDummyInput()
-          .appendField("y좌표를")
-          .appendField(new Blockly.FieldTextInput("10"), "y_point")
-          .appendField("으로 이동");
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(290);
-    }
-  };
-  
-  Blockly.JavaScript['point_y'] = function(block) {
-    var y_point = block.getFieldValue('y_point');
-    var code = 'point_y('+y_point+'); ';
-    return code;
-  };
+// y 좌표를 [ ]  위치로 이동
+Blockly.Blocks['point_y'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("y좌표를");
+    this.appendValueInput("y_point")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("으로 이동");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['point_y'] = function(block) {
+  var value_y_point = Blockly.JavaScript.valueToCode(block, 'y_point', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = `point_y(${value_y_point})`;
+  return code;
+};
   
   Blockly.Python['point_y'] = function(block) {
     var y_point = block.getFieldValue('y_point');
@@ -104,34 +121,40 @@ Blockly.Blocks['move_x'] = {
     return code;
   };
   
-  // x 좌표를 [ ] 위치, y 좌표를 [] 위치로 이동
-  Blockly.Blocks['point_x_y'] = {
-    init: function() {
-      this.appendDummyInput()
-          .appendField("x좌표를")
-          .appendField(new Blockly.FieldTextInput("10"), "x_point")
-          .appendField("y좌표를")
-          .appendField(new Blockly.FieldTextInput("10"), "y_point")
-          .appendField("(으)로 이동");
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(290);
-    }
-  };
-  
-  Blockly.JavaScript['point_x_y'] = function(block) {
-    var x_point = block.getFieldValue('x_point');
-    var y_point = block.getFieldValue('y_point');
-    var code = 'point_x_y('+x_point+','+y_point+');';
-    return code;
-  };
-  
-  Blockly.Python['point_x_y'] = function(block) {
-    var x_point = block.getFieldValue('x_point');
-    var y_point = block.getFieldValue('y_point');
-    var code = '...\n';
-    return code;
-  };
+// x 좌표를 [ ] 위치, y 좌표를 [] 위치로 이동
+Blockly.Blocks['point_x_y'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("x좌표를");
+    this.appendValueInput("x_point")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("y좌표를");
+    this.appendValueInput("y_point")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("으로 이동");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['point_x_y'] = function(block) {
+  var value_x_point = Blockly.JavaScript.valueToCode(block, 'x_point', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_y_point = Blockly.JavaScript.valueToCode(block, 'y_point', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = `point_x_y(${value_x_point},${value_y_point})`;
+  return code;
+};  
+Blockly.Python['point_x_y'] = function(block) {
+  var value_x_point = Blockly.Python.valueToCode(block, 'x_point', Blockly.Python.ORDER_ATOMIC);
+  var value_y_point = Blockly.Python.valueToCode(block, 'y_point', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = '...\n';
+  return code;
+};
   
 /* 방향(각도) 블록 */
 
@@ -150,7 +173,7 @@ Blockly.Blocks['move_x'] = {
   
   Blockly.JavaScript['turn_angle'] = function(block) {
     var angle = block.getFieldValue('angle');
-    var code = 'turn_angle('+angle+');';
+    var code = `turn_angle(${angle})`;
     return code;
   };
   
@@ -175,7 +198,7 @@ Blockly.Blocks['move_x'] = {
   
   Blockly.JavaScript['set_angle'] = function(block) {
     var angle = block.getFieldValue('angle');
-    var code = 'set_angle('+angle+');';
+    var code = `set_angle(${angle})`;
     return code;
   };
   

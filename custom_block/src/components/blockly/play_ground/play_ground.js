@@ -5,6 +5,8 @@ import styles from './play_ground.module.css';
 const PlayGround = ({ javascript_code }) => {
   const fieldsize = useRef();
   const fieldchar = useRef();
+  console.log(javascript_code);
+  //repeat_js("  move_x((num_js(10)))condition_js((block_judgment_equals(10,10)),\"break_js()\" )")
 
   const playGame = () => {
     eval(javascript_code);
@@ -19,6 +21,7 @@ const PlayGround = ({ javascript_code }) => {
   const move_x = (x_distance) => {
     x += x_distance;
     move.push([x, y]);
+    console.log(move);
   }
 
   const move_y = (y_distance) => {
@@ -145,54 +148,91 @@ const PlayGround = ({ javascript_code }) => {
   };
   
   // 흐름
-  ////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////
   const repeat_times_js = (text_times, statements_repeat) => {
-    console.log('흐름 : '+ statements_repeat);
-    console.log('times: '+ text_times);
     for(var i=0;i<text_times;i++){
-      // statements_repeat;
-      console.log(text_times)
+      eval(statements_repeat);
     }
-  };
+  };  
   const repeat_js = (statements_repeat) => {
     while(true){
-      // statements_repeat;
-      console.log(statements_repeat);
+      eval(statements_repeat);
     }
   };
   const repeat_condition_js = (value_repeat_condition, dropdown_opts, statements_action) => {
     if (dropdown_opts === 1){
       while(!value_repeat_condition){
-        // statements_action;
+        eval(statements_action);
       }
     }
     if (dropdown_opts === 2){
       while(value_repeat_condition){
-        // statements_action;
-
+        eval(statements_action);
       }
     }
   };
   const break_js = () => {
-    // break;
+    return;
   };
   const condition_js = (value_condition, statements_action) => {
     if(value_condition){
-      // statements_action;
+      eval(statements_action);
     }
   };
   const if_else_js = (value_if,statements_action1,statements_action2) => {
     if (value_if){
-      // statements_action1;
+      eval(statements_action1);
     }
     else{
-      // statements_action2;
+      eval(statements_action2);
     }
   };
 
 
   // 계산
   //////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const num_js = (text_num) => {
+    return text_num;
+  }
+  const addition_js = (value_num1, value_num2) => {
+    return value_num1 + value_num2;
+  };
+  const subtraction_js = (value_num1, value_num2) => {
+    return value_num1 - value_num2;
+  };
+  const multiplication_js = (value_num1, value_num2) => {
+    return value_num1 * value_num2;
+  };
+  const division_js = (value_num1, value_num2) => {
+    return value_num1 / value_num2;
+  };
+  const random_num_js = (value_num1, value_num2) => {
+    return Math.floor(Math.random() * (value_num2 - value_num1 + 1)) + value_num1;
+  };
+  const quotient_js = (value_num1, value_num2) => {
+    return parseInt(value_num1 / value_num2);
+  };
+  const remainder_js = (value_num1, value_num2) => {
+    return value_num1 % value_num2;
+  };
+  const square_js = (value_num) => {
+    return value_num * value_num;
+  };
+  const sqrt_js = (value_num) => {
+    return Math.sqrt(value_num);
+  };
+  const integer_js = (value_num) => {
+    return parseInt(value_num);
+  };
+  const roundup_js = (value_num) => {
+    return Math.ceil(value_num);
+  };
+  const round_js = (value_num) => {
+    return Math.round(value_num);
+  };
+  const abs_val_js = (value_num) => {
+    return Math.abs(value_num);
+  };
 
   useEffect(() => {
     // const field = fieldsize.current;
