@@ -6,10 +6,6 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Navbar from '../navbar/navbar';
 import MainMenu from '../main_menu/main_menu';
-import TutorialMain from '../../blockly/tutorial_main/tutorial_main';
-import MissionMain from '../../blockly/mission_main/mission_main';
-import ChallengeContainer from '../../../containers/challenge_container';
-import BlockStoreContainer from '../../../containers/block_store_container';
 
 const Main = (props) => {
   const card_infos = [
