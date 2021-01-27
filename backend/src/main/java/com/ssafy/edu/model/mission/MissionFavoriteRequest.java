@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MissionUpdateRequest {
+public class MissionFavoriteRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String email;
@@ -19,15 +19,8 @@ public class MissionUpdateRequest {
     @ApiModelProperty(required = true)
     @NotNull
     Long missionId;
-    @ApiModelProperty(required = true)
-    @NotNull
-    String title;
 
     @ApiModelProperty(required = true)
     @NotNull
-    String content;
-
-    @ApiModelProperty(required = true)
-    @NotNull
-    String code;
+    boolean favorite;
 }

@@ -5,13 +5,14 @@ import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
 @Valid
 @ToString
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MissionUpdateRequest {
+public class MissionOneRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String email;
@@ -19,15 +20,4 @@ public class MissionUpdateRequest {
     @ApiModelProperty(required = true)
     @NotNull
     Long missionId;
-    @ApiModelProperty(required = true)
-    @NotNull
-    String title;
-
-    @ApiModelProperty(required = true)
-    @NotNull
-    String content;
-
-    @ApiModelProperty(required = true)
-    @NotNull
-    String code;
 }

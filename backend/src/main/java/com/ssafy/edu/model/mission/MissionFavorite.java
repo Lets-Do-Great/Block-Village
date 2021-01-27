@@ -1,6 +1,7 @@
 package com.ssafy.edu.model.mission;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ssafy.edu.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,36 +11,36 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
- * id : 미션 상태 id
- * updated_at : 미션 풀기 시작한날.
- * completed : 완성 단게
- * user : 1:1 매칭 유저
- * mission : 1:1 매칭 미션
+ * 미션 좋아요 유저
+ * id : 미션 좋아요 pk
+ * user : 미션 좋아요 유저
+ * mission : 미션
  */
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="mission_state")
-public class MissionState {
+public class MissionFavorite {
     @Id //ID 어노테이션으로 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 생성
-    @Column(name = "mission_state_id")
+    @Column(name = "mission_like_user_id")
     private Long id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate updated_at;
-    private boolean completed;
+
+    private boolean favorite;
+
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="user_id", insertable = false, updatable = false)
+    @JoinColumn(name="user_id")
     private User user;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="mission_id", insertable = false, updatable = false)
+    @JoinColumn(name="mission_id")
     private Mission mission;
 }

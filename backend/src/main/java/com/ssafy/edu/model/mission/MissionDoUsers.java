@@ -20,6 +20,7 @@ public class MissionDoUsers {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 생성
     @Column(name = "mission_do_users_id")
     private Long id;
+    private String todo;
 
     @JsonBackReference
     @ManyToOne

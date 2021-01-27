@@ -3,7 +3,7 @@ package com.ssafy.edu.model.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ssafy.edu.model.mission.Mission;
-import com.ssafy.edu.model.mission.MissionLikeUsers;
+import com.ssafy.edu.model.mission.MissionFavorite;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -63,6 +63,6 @@ public class User {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
-    private List<MissionLikeUsers> missionLikeUsersList = new ArrayList<>();
+    private List<MissionFavorite> missionLikeUsersList = new ArrayList<>();
 
 }

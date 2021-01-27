@@ -5,13 +5,14 @@ import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
 @Valid
 @ToString
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MissionLikeRequest {
+public class MissionTodoRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String email;
@@ -22,5 +23,5 @@ public class MissionLikeRequest {
 
     @ApiModelProperty(required = true)
     @NotNull
-    boolean like;
+    String todo;
 }

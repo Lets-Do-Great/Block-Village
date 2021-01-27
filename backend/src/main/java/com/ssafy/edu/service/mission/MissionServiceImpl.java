@@ -2,18 +2,17 @@ package com.ssafy.edu.service.mission;
 
 import com.ssafy.edu.model.mission.*;
 import com.ssafy.edu.model.user.User;
-import com.ssafy.edu.model.user.UserResponse;
 import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.repository.mission.MissionDifficultyJpaRepository;
 import com.ssafy.edu.repository.mission.MissionJpaRepository;
-import com.ssafy.edu.repository.mission.MissionLikeUsersJpaRepository;
+import com.ssafy.edu.repository.mission.MissionFavoriteJpaRepository;
+import com.ssafy.edu.repository.mission.MissionTodoJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,10 +25,13 @@ public class MissionServiceImpl implements MissionService {
     MissionJpaRepository missionJpaRepository;
 
     @Autowired
-    MissionLikeUsersJpaRepository missionLikeUsersJpaRepository;
+    MissionFavoriteJpaRepository missionFavoriteJpaRepository;
 
     @Autowired
     MissionDifficultyJpaRepository missionDifficultyJpaRepository;
+
+    @Autowired
+    MissionTodoJpaRepository missionTodoJpaRepository;
 
     @Autowired
     UserJpaRepository userJpaRepository;
@@ -68,14 +70,24 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public ResponseEntity<MissionResponse> findById(Long missionId) {
+    public ResponseEntity<MissionOneResponse> findGetOne(MissionOneRequest missionOneRequest) {
         ResponseEntity response;
-        MissionResponse result = new MissionResponse();
+        MissionOneResponse result = new MissionOneResponse();
 
-        Optional<Mission> missionOptional = missionJpaRepository.findById(missionId);
+        Optional<Mission> missionOptional = missionJpaRepository.findById(missionOneRequest.getMissionId());
+
         if (missionOptional.isPresent()) {
+            List<MissionFavorite> missionFavoriteList = missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionOneRequest.getEmail(),missionOneRequest.getMissionId());
+            List<Object> object = new ArrayList<>();
+            object.add(missionOptional.get());
+            if(missionFavoriteList.size()>0){
+                object.add(missionFavoriteList.get(0));
+            }else {
+                MissionFavorite missionFavorite = new MissionFavorite();
+                object.add(missionFavorite);
+            }
             result.status = true;
-            result.data = missionOptional.get();
+            result.data = object;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -85,11 +97,12 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public ResponseEntity<MissionResponse> findByUserId(Long userId) {
+    public ResponseEntity<MissionResponse> findGetOneByUserId(String userEmail) {
         ResponseEntity response;
         MissionResponse result = new MissionResponse();
 
-        Optional<User> userOptional = userJpaRepository.findByEmail("ssafy2@ssafy2.com");
+        Optional<User> userOptional = userJpaRepository.findByEmail(userEmail);
+
         if (userOptional.isPresent()) {
             result.status = true;
             result.data = userOptional.get().getMissionList();
@@ -102,16 +115,29 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public ResponseEntity<MissionResponse> signUpMission(MissionSignUpRequest missionSignUpRequest) {
+    public ResponseEntity<MissionOneResponse> signUpMission(MissionSignUpRequest missionSignUpRequest) {
         ResponseEntity response;
-        MissionResponse result = new MissionResponse();
+        MissionOneResponse result = new MissionOneResponse();
         Optional<User> userOptional = userJpaRepository.findByEmail(missionSignUpRequest.getEmail());
-        Date now = new Date(System.currentTimeMillis());
-        Mission mission = new Mission().builder().title(missionSignUpRequest.getTitle()).content(missionSignUpRequest.getContent()).code(missionSignUpRequest.getCode()).created_at(now).updated_at(now).user(userOptional.get()).build();
         if (userOptional.isPresent()) {
+            Date now = new Date(System.currentTimeMillis());
+            Mission mission = new Mission().builder()
+                    .title(missionSignUpRequest.getTitle())
+                    .content(missionSignUpRequest.getContent())
+                    .code(missionSignUpRequest.getCode())
+                    .createdAt(now)
+                    .updatedAt(now)
+                    .user(userOptional.get())
+                    .favorite(0)
+                    .people(0)
+                    .build();
             result.status = true;
             Mission missionResult = missionJpaRepository.save(mission);
-            result.data = missionResult;
+            MissionFavorite missionFavorite = new MissionFavorite();
+            List<Object> object = new ArrayList<>();
+            object.add(missionResult);
+            object.add(missionFavorite);
+            result.data = object;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -121,16 +147,30 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public ResponseEntity<MissionResponse> updateMission(MissionUpdateRequest missionUpdateRequest) {
+    public ResponseEntity<MissionOneResponse> updateMission(MissionUpdateRequest missionUpdateRequest) {
         ResponseEntity response;
-        MissionResponse result = new MissionResponse();
+        MissionOneResponse result = new MissionOneResponse();
         Optional<User> userOptional = userJpaRepository.findByEmail(missionUpdateRequest.getEmail());
-        Date now = new Date(System.currentTimeMillis());
-        Mission mission = new Mission().builder().title(missionUpdateRequest.getTitle()).content(missionUpdateRequest.getContent()).code(missionUpdateRequest.getCode()).updated_at(now).user(userOptional.get()).difficulty(0).build();
-        Mission missionResult = missionJpaRepository.save(mission);
-        if (userOptional.isPresent() && missionResult != null) {
+        Optional<Mission> missionOptional = missionJpaRepository.findById(missionUpdateRequest.getMissionId());
+        if (userOptional.isPresent()&&missionOptional.isPresent()) {
+            Date now = new Date(System.currentTimeMillis());
+            Mission mission = missionOptional.get();
+            mission.setTitle(missionUpdateRequest.getTitle());
+            mission.setContent(missionUpdateRequest.getContent());
+            mission.setCode(missionUpdateRequest.getCode());
+            mission.setUpdatedAt(now);
+            Mission missionResult = missionJpaRepository.save(mission);
+            List<MissionFavorite> missionFavoriteList = missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionUpdateRequest.getEmail(),missionUpdateRequest.getMissionId());
+            List<Object> object = new ArrayList<>();
+            object.add(missionResult);
+            if(missionFavoriteList.size()>0){
+                object.add(missionFavoriteList.get(0));
+            }else {
+                MissionFavorite missionFavorite = new MissionFavorite();
+                object.add(missionFavorite);
+            }
             result.status = true;
-            result.data = missionResult;
+            result.data = object;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -158,43 +198,54 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public ResponseEntity<MissionLikeUsersResponse> likeMission(MissionLikeRequest missionLikeRequest) {
+    public ResponseEntity<MissionFavoriteResponse> MissionFavorite(MissionFavoriteRequest missionLikeRequest) {
         ResponseEntity response;
-        MissionLikeUsersResponse result = new MissionLikeUsersResponse();
+        MissionFavoriteResponse result = new MissionFavoriteResponse();
 
         Optional<Mission> missionOptional = missionJpaRepository.findById(missionLikeRequest.getMissionId());
         Optional<User> userOptional = userJpaRepository.findByEmail(missionLikeRequest.getEmail());
-        List<MissionLikeUsers> missionLikeUsersOptional = missionLikeUsersJpaRepository.findByUserEmailAndMissionId(userOptional.get().getEmail(), missionOptional.get().getId());
+        List<MissionFavorite> missionLikeUsersOptional = missionFavoriteJpaRepository.findByUserEmailAndMissionId(userOptional.get().getEmail(), missionOptional.get().getId());
         if (missionLikeUsersOptional.size() == 0) {
-            MissionLikeUsers missionLikeUsers = new MissionLikeUsers();
+            MissionFavorite missionLikeUsers = new MissionFavorite();
             missionLikeUsers.setMission(missionOptional.get());
             missionLikeUsers.setUser(userOptional.get());
-            if (missionLikeRequest.isLike()) {
-                missionLikeUsers.setMissionlike(true);
+            if (missionLikeRequest.isFavorite()) {
+                missionLikeUsers.setFavorite(true);
             } else {
-                missionLikeUsers.setMissionlike(false);
+                missionLikeUsers.setFavorite(false);
             }
-            MissionLikeUsers missionLikeUsersResult = missionLikeUsersJpaRepository.save(missionLikeUsers);
+            MissionFavorite missionLikeUsersResult = missionFavoriteJpaRepository.save(missionLikeUsers);
             result.status = true;
             result.data = missionLikeUsersResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else if (missionLikeUsersOptional.size() == 1) {
-            MissionLikeUsers missionLikeUsers = new MissionLikeUsers();
+            MissionFavorite missionLikeUsers = new MissionFavorite();
             missionLikeUsers.setId(missionLikeUsersOptional.get(0).getId());
             missionLikeUsers.setMission(missionOptional.get());
             missionLikeUsers.setUser(userOptional.get());
-            if (missionLikeRequest.isLike()) {
-                missionLikeUsers.setMissionlike(true);
+            if (missionLikeRequest.isFavorite()) {
+                missionLikeUsers.setFavorite(true);
             } else {
-                missionLikeUsers.setMissionlike(false);
+                missionLikeUsers.setFavorite(false);
             }
-            MissionLikeUsers missionLikeUsersResult = missionLikeUsersJpaRepository.save(missionLikeUsers);
+            MissionFavorite missionLikeUsersResult = missionFavoriteJpaRepository.save(missionLikeUsers);
             result.status = true;
             result.data = missionLikeUsersResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
             response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        if(missionOptional.isPresent()){
+            List<MissionFavorite> missionFavoriteList = missionFavoriteJpaRepository.findByMissionId(missionLikeRequest.getMissionId());
+            int favor=0;
+            for(MissionFavorite m : missionFavoriteList){
+                if(m.isFavorite()){
+                    favor++;
+                }
+            }
+            missionOptional.get().setFavorite(favor);
+            missionJpaRepository.save(missionOptional.get());
         }
         return response;
     }
@@ -253,6 +304,49 @@ public class MissionServiceImpl implements MissionService {
             }
         }
 
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<MissionResponse> MissionTodo(MissionTodoRequest missionTodoRequest) {
+        ResponseEntity response;
+        MissionTodoResponse result = new MissionTodoResponse();
+
+        Optional<Mission> missionOptional = missionJpaRepository.findById(missionTodoRequest.getMissionId());
+        Optional<User> userOptional = userJpaRepository.findByEmail(missionTodoRequest.getEmail());
+        List<MissionDoUsers> missionDoUsersList = missionTodoJpaRepository.findByUserEmailAndMissionId(userOptional.get().getEmail(), missionOptional.get().getId());
+        if (missionDoUsersList.size() == 0) {
+            MissionDoUsers missionDoUsers = new MissionDoUsers();
+            missionDoUsers.setMission(missionOptional.get());
+            missionDoUsers.setUser(userOptional.get());
+            missionDoUsers.setTodo(missionTodoRequest.getTodo());
+            MissionDoUsers missionDoUserResult = missionTodoJpaRepository.save(missionDoUsers);
+            result.status = true;
+            result.data = missionDoUserResult;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else if (missionDoUsersList.size() == 1) {
+
+            MissionDoUsers missionDoUsers = new MissionDoUsers();
+            missionDoUsers.setId(missionDoUsersList.get(0).getId());
+            missionDoUsers.setMission(missionOptional.get());
+            missionDoUsers.setUser(userOptional.get());
+            missionDoUsers.setTodo(missionTodoRequest.getTodo());
+            MissionDoUsers missionDoUserResult = missionTodoJpaRepository.save(missionDoUsers);
+
+            result.status = true;
+            result.data = missionDoUserResult;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        List<MissionDoUsers> missionDoUsersCalculation = missionTodoJpaRepository.findByMissionId(missionOptional.get().getId());
+        if (result.status&&missionDoUsersCalculation.size() >= 0) {
+            if (missionOptional.isPresent()) {
+                missionOptional.get().setPeople(missionDoUsersCalculation.size());
+                missionJpaRepository.save(missionOptional.get());
+            }
+        }
         return response;
     }
 }

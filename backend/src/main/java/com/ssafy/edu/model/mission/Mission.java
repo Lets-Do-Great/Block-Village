@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,11 +45,12 @@ public class Mission {
     private String category;
     private String code;
     private double difficulty;
-
+    private int favorite;
+    private int people;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date created_at;
+    private Date createdAt;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date updated_at;
+    private Date updatedAt;
 
     @JsonBackReference
     @ManyToOne
@@ -59,7 +59,7 @@ public class Mission {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "mission")
-    private List<MissionLikeUsers> missionLikeUsersList = new ArrayList<>();
+    private List<MissionFavorite> missionLikeUsersList = new ArrayList<>();
 
 
 }

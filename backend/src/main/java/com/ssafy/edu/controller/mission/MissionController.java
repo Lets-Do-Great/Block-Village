@@ -1,10 +1,6 @@
 package com.ssafy.edu.controller.mission;
 
 import com.ssafy.edu.model.mission.*;
-import com.ssafy.edu.model.user.LoginRequest;
-import com.ssafy.edu.model.user.SignUpRequest;
-import com.ssafy.edu.model.user.UpdateRequest;
-import com.ssafy.edu.model.user.UserResponse;
 import com.ssafy.edu.service.mission.MissionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -27,28 +23,28 @@ public class MissionController {
     MissionService missionService;
 
     @ApiOperation(value = "전체 미션 목록 조회", notes = "미션 불러오기")
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity<MissionResponse> GetMissions(@RequestBody MissionSearchTypeRequest missionSearchTypeRequest){
         return missionService.findAll(missionSearchTypeRequest);
     }
-    @ApiOperation(value = "현재 조회중인 미션 정보 조회", notes = "미션 불러오기")
-    @GetMapping("/{missionId}")
-    public ResponseEntity<MissionResponse> GetOneMissions(@PathVariable("missionId") Long missionId){
-        return missionService.findById(missionId);
+    @ApiOperation(value = "현재 조회중인 미션 정보 조회", notes = "현재 조회중인 미션 정보 조회")
+    @PostMapping("/")
+    public ResponseEntity<MissionOneResponse> GetOneMissions(@RequestBody MissionOneRequest missionOneRequest){
+        return missionService.findGetOne(missionOneRequest);
     }
-    @ApiOperation(value = "현재 조회중인 미션 정보 조회", notes = "미션 불러오기")
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<MissionResponse> GetUserMissions(@PathVariable("userId") Long userId){
-        return missionService.findByUserId(userId);
+    @ApiOperation(value = "특정 유저의 미션목록 조회", notes = "특정 유저의 미션목록 조회")
+    @GetMapping("/user/{userEmail}")
+    public ResponseEntity<MissionResponse> GetUserMissions(@PathVariable("userEmail") String userEmail){
+        return missionService.findGetOneByUserId(userEmail);
     }
     @ApiOperation(value = "미션 저장하기", notes = "미션 저장하기")
     @PostMapping("/{userEmail}")
-    public ResponseEntity<MissionResponse> signUpMission(@RequestBody MissionSignUpRequest missionSignUpRequest){
+    public ResponseEntity<MissionOneResponse> signUpMission(@RequestBody MissionSignUpRequest missionSignUpRequest){
         return missionService.signUpMission(missionSignUpRequest);
     }
     @ApiOperation(value = "미션 정보 수정", notes = "미션 정보 수정")
     @PutMapping("/{missionId}")
-    public ResponseEntity<MissionResponse> updateMission(@PathVariable("missionId") String missionId, @RequestBody MissionUpdateRequest missionUpdateRequest){
+    public ResponseEntity<MissionOneResponse> updateMission(@RequestBody MissionUpdateRequest missionUpdateRequest){
         return missionService.updateMission(missionUpdateRequest);
     }
     @ApiOperation(value = "미션 삭제", notes = "미션 삭제")
@@ -56,13 +52,18 @@ public class MissionController {
     public ResponseEntity<MissionResponse> deleteMission(@PathVariable("missionId") Long missionId){
         return missionService.deleteMission(missionId);
     }
+    @ApiOperation(value = "미션 진행도", notes = "미션 진행도")
+    @PostMapping("/todo")
+    public ResponseEntity<MissionResponse> MissionTodo(@RequestBody MissionTodoRequest missionTodoReqquest){
+        return missionService.MissionTodo(missionTodoReqquest);
+    }
     @ApiOperation(value = "미션 좋아요", notes = "미션 좋아요")
-    @PostMapping("/like/{missionId}")
-    public ResponseEntity<MissionLikeUsersResponse> missionLike(@RequestBody MissionLikeRequest missionLikeRequest){
-        return missionService.likeMission(missionLikeRequest);
+    @PostMapping("/like")
+    public ResponseEntity<MissionFavoriteResponse> missionFavorite(@RequestBody MissionFavoriteRequest missionLikeRequest){
+        return missionService.MissionFavorite(missionLikeRequest);
     }
     @ApiOperation(value = "난이도 채점", notes = "난이도 채점")
-    @PostMapping("/difficult/{missionId}")
+    @PostMapping("/difficult")
     public ResponseEntity<MissionDifficultyResponse> missionDifficult(@RequestBody MissionDifficultRequest missionDifficultRequest){
         return missionService.difficultyMission(missionDifficultRequest);
     }
