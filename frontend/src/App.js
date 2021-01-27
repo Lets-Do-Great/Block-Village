@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
 import styles from './App.module.css';
@@ -18,6 +18,12 @@ import SubMain from './components/main/sub_main/sub_main';
 
 
 function App() {
+  // const history = useHistory();
+
+  // useEffect(() => {
+  //   history.push('/main')
+  // })
+
   return (
     <div className={styles.app}>
 

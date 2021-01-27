@@ -27,9 +27,7 @@ const MainMenu = ({ info }) => {
         </div>
 
         <div className={styles.button}>
-          <button onClick={goNextPage}>
-            <a>바로가기</a>
-          </button>
+          <button onClick={goNextPage}>바로가기</button>
         </div>
 
       </div>

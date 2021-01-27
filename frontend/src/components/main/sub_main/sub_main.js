@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import styles from './sub_main.module.css'
+import styles from './sub_main.module.css';
 
 import { useSelector } from 'react-redux';
 
@@ -18,18 +18,15 @@ const SubMain = () => {
 
   return (
     <>
-      { 
+      {
         !userInfo.logIn &&
         (<>
             <div>간략한 영상이나 이미지 </div><br/>
-            skip ? 
-              <UserContainer setSkip={setSkip}/>: 
-              (
-                <>
-                  <SubMain/>
-                  <button onClick={clickSkip}>건너뛰기</button>
-                </>
-              )
+            {
+              skip 
+              ? <UserContainer setSkip={setSkip}/> 
+              : <button onClick={clickSkip}>건너뛰기</button>
+            }
         </>)
       }
     </>    
