@@ -23,7 +23,7 @@ import java.util.ArrayList;
 * title : 게시글 제목
 * content : 게시글 내용
 * views : 조회수
-* -- [상속 ] Database에 자동 생성되는 컬럼 --
+* -- [상속] Database에 자동 생성되는 컬럼 --
 * created_date : 작성일
 * updated_date : 수정일
 * */

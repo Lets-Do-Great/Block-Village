@@ -15,12 +15,12 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 /*
-*  id : board_comment 테이블 pk
-*  content : 댓글 내용
-*  -- [상속 ] Database에 자동 생성되는 컬럼 --
-*  created_date : 작성일
-*  updated_date : 수정일
-* */
+ *  id : board_comment 테이블 pk
+ *  content : 댓글 내용
+ *  -- [상속 ] Database에 자동 생성되는 컬럼 --
+ *  created_date : 작성일
+ *  updated_date : 수정일
+ * */
 
 @Getter @Setter
 @AllArgsConstructor
@@ -40,6 +40,7 @@ public class BoardComment extends BaseTimeEntity {
     private String content;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "board_id")
     private Board board;
 
