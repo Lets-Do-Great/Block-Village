@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import styles from './main.module.css'
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -8,6 +8,9 @@ import Navbar from '../navbar/navbar';
 import MainMenu from '../main_menu/main_menu';
 
 const Main = (props) => {
+  const history = useHistory();
+  const scroll_main = useRef();
+
   const card_infos = [
     {
       id: 1,
@@ -40,19 +43,42 @@ const Main = (props) => {
     },
   ];
 
+  const goMission = () => {
+    history.push('/main/mission_main')
+  }
+  const goStore = () => {
+    history.push('/main/block_store')
+  }
+  const goChallenge = () => {
+    history.push('/main/challenge_main')
+  }
+
   return (
     <div className={styles.body}>
+      
       <Navbar />
-      <div className={styles.container}>
-        <div className={styles.left_btn}>
+
+
+      <div 
+        className={styles.container} 
+        ref={scroll_main} 
+        id="main_container">
+
+        <div className={styles.goMission} onClick={goMission}></div>
+        <div className={styles.goStore} onClick={goStore}></div>
+        <div className={styles.goChallenge} onClick={goChallenge}></div>
+        {/* <div className={styles.left_btn}>
           <FaChevronLeft size="50" />
-        </div>
-        {card_infos.map((info) => (
+        </div> */}
+
+        {/* {card_infos.map((info) => (
           <MainMenu info={info} key={info.id} />
-        ))}
-        <div className={styles.right_btn}>
+        ))} */}
+
+        {/* <div className={styles.right_btn}>
           <FaChevronRight size="50" />
-        </div>
+        </div> */}
+
       </div>
     </div>
   )

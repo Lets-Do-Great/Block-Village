@@ -1,52 +1,151 @@
-import styles from "./mission_maze.module.css"
-import '../all_blocks/start_blocks'
-import '../all_blocks/movement_blocks'
-import React, {useState} from 'react'
-import ReactBlockly from 'react-blockly'
-import Blockly from 'blockly'
-
+import styles from "./mission_maze.module.css";
 import Draggable from 'react-draggable';
+
+import '../all_blocks/start_blocks';
+import '../all_blocks/judgement_blocks';
+import '../all_blocks/flow_blocks';
+import '../all_blocks/calculation_blocks';
+import '../all_blocks/movement_blocks';
+
+import React, {useState} from 'react';
+import ReactBlockly from 'react-blockly';
+import Blockly from 'blockly';
 
 import PlayGround from '../play_ground/play_ground';
 import BlocklyNavbar from '../blockly_navbar/blockly_navbar';
+
 
 export default function MissionMaze() {
   const [activeDrags, setActiveDrags] = useState(0);
 
   const [modal, setModal] = useState(true);
   const [javascript, setJavascript] = useState();
+
+  const theme = {
+    'blockStyles' : {
+
+      "start-blocks": {
+        "colourPrimary": "#C30D23",
+        "colourSecondary":"#AD7BE9",
+        "colourTertiary":"#141414"
+      },
+
+      "judgement-blocks": {
+        "colourPrimary": "#FFA31D",
+         "colourSecondary":"#AD7BE9",
+        "colourTertiary":"#141414"
+      },
+
+      "movement-blocks": {
+        "colourPrimary": "#8FC31F",
+        "colourSecondary":"#AD7BE9",
+        "colourTertiary":"#141414"
+      },
+
+      "flow-blocks": {
+        "colourPrimary": "#55CFFF",
+        "colourSecondary":"#AD7BE9",
+        "colourTertiary":"#141414"
+      },
+
+      "calculation-blocks": {
+        "colourPrimary": "#1060FF",
+        "colourSecondary":"#AD7BE9",
+        "colourTertiary":"#141414"
+      }
+    },
+    'componentStyles' : {
+      // 'workspaceBackgroundColour': '#1e1e1e',
+      'toolboxBackgroundColour': '#F7C469',
+      'toolboxForegroundColour': '#FFFFFF',
+      'flyoutBackgroundColour': '#FFDEA4',
+      'flyoutForegroundColour': '#1e1e1e',
+      'flyoutOpacity': '#1e1e1e',
+      'scrollbarColour': '#EFA420',
+      // 'scrollbarOpacity': '#1e1e1e',
+      // 'insertionMarkerColour': '#1e1e1e',
+      // 'insertionMarkerOpacity': '#1e1e1e',
+    }
+  };
+
   const [initialXml, setInitialXml] = useState(
     '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>'
   );
   const [toolboxCategories, setToolboxCategories] = useState([
     {
       name: '시작',
-      colour: '#5C81A6',
+      colour: '#C30D23',
       blocks: [
-        {
-          type: 'start_button'
-        },
-        {
-          type: 'end_button'
-        },
-      ]
+        {type: 'start_button',},
+        {type: 'end_button',},
+      ],
+    },
+    {
+      name: '판단',
+      colour: '#FFA31D',
+      blocks: [
+        {type: 'block_judgment_equals',},
+        {type: 'block_judgment_strictinequality_left',},
+        {type: 'block_judgment_strictinequality_right',},
+        {type: 'block_judgment_notequal',},
+        {type: 'block_judgment_strictinequality_leftequal',},
+        {type: 'block_judgment_strictinequality_rightequal',},
+        {type: 'block_judgment_compare_and',},
+        {type: 'block_judgment_compare_or',},
+        {type: 'block_judgment_compare_not',},
+      ],
     },
     {
       name: '움직임',
-      colour: '#5CA699',
+      colour: '#8FC31F',
       blocks: [
-        {
-          type: 'move_forward'
-        },
-        {
-          type: 'move_turnleft'
-        },
-        {
-          type: 'move_turnright'
-        },
+        {type: 'move_x',},
+        {type: 'move_y'},
+        {type: 'point_x'},
+        {type: 'point_y'},
+        {type: 'point_x_y'},
+        {type: 'turn_angle'},
+        {type: 'set_angle'},
+        {type: 'set_angle_move'},
+      ],
+    },
+    {
+      name: '흐름',
+      colour: '#55CFFF',
+      blocks: [
+        {type: 'repeat_times'},
+        {type: 'repeat'},
+        {type: 'do_while'},
+        {type: 'while_not'},
+        {type: 'break'},
+        {type: 'condition'},
+        {type: 'if_else'}
+      ]
+    },
+    {
+      name: '계산',
+      colour: '#1060FF',
+      blocks: [
+        {type: 'number'},
+        {type: 'addition'},
+        {type: 'subtraction'},
+        {type: 'multiplication'},
+        {type: 'division'},
+        {type: 'random_num'},
+        {type: 'quotient'},
+        {type: 'remainder'},
+        {type: 'square'},
+        {type: 'sqrt'},
+        {type: 'integer'},
+        {type: 'roundup'},
+        {type: 'round'},
+        {type: 'abs_val'},
       ]
     }
-  ])
+  ]
+  )
+
+
   function workspaceDidChange(workspace) {
     // save 형태
     setInitialXml(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)))
@@ -72,8 +171,7 @@ export default function MissionMaze() {
 
   return (
     <section className={styles.page_style}>
-      <button onClick={statusModal}>dfs</button>
-      <BlocklyNavbar />
+      <BlocklyNavbar modal={modal} statusModal={statusModal} />
       <div className={styles.container}>
         {modal && 
           <Draggable
@@ -101,6 +199,22 @@ export default function MissionMaze() {
                   colour: '#',
                   snap: true,
                 },
+                move:{
+                  scrollbars: true,
+                  drag: true,
+                  wheel: false,
+                },
+                zoom:{
+                  controls: true,
+                  wheel: true,
+                  startScale: 1.0,
+                  maxScale: 3,
+                  minScale: 0.3,
+                  scaleSpeed: 1.2,
+                  pinch: true},
+                trashcan: true,
+                renderer : "Zelos",
+                theme: theme,
               }}
               workspaceDidChange={workspaceDidChange}
             />
