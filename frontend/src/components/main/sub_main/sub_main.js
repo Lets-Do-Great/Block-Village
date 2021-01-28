@@ -14,18 +14,23 @@ const SubMain = () => {
 
   const clickSkip = () => setSkip(true);
 
-
-
   return (
     <>
       {
         !userInfo.logIn &&
         (<>
-            <div>간략한 영상이나 이미지 </div><br/>
+            <img 
+            className={styles.background_img}
+            src= "/images/subMain_img.png"
+            />
             {
               skip 
-              ? <UserContainer setSkip={setSkip}/> 
-              : <button onClick={clickSkip}>건너뛰기</button>
+              ? <div className={styles.user_container} >
+                <UserContainer setSkip={setSkip}/> 
+                </div>
+              : <button 
+                className={styles.skip_button}
+                onClick={clickSkip}>건너뛰기</button>
             }
         </>)
       }
