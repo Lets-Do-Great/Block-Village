@@ -17,6 +17,10 @@ public class BoardInsertRequest {
 
     @ApiModelProperty(required = true)
     @NotEmpty
+    String email;
+
+    @ApiModelProperty(required = true)
+    @NotEmpty
     String title;
 
     @ApiModelProperty(required = true)
