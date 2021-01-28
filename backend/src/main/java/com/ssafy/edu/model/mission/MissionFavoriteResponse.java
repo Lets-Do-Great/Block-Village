@@ -1,7 +1,11 @@
 package com.ssafy.edu.model.mission;
 
 import io.swagger.annotations.ApiModelProperty;
-
+/**
+ * 미션 좋아요 응답
+ * status : 응답 상태
+ * data : 요청 Object 데이터
+ */
 public class MissionFavoriteResponse {
     @ApiModelProperty(value = "status", position = 1)
     public boolean status;

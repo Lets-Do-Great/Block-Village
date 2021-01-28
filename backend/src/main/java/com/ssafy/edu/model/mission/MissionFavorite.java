@@ -16,10 +16,11 @@ import java.util.List;
 
 
 /**
- * 미션 좋아요 유저
+ * 미션 좋아요
  * id : 미션 좋아요 pk
- * user : 미션 좋아요 유저
- * mission : 미션
+ * favorite : 미션 좋아요 boolean 값
+ * user : 유저 연관
+ * mission : 미션 연관
  */
 @Entity
 @Data

@@ -24,6 +24,8 @@ import java.util.List;
  * created_at : 미션 제작일
  * updated_at : 미션 수정일
  * difficulty : 난이도
+ * favorite : 좋아요 누른 유저의 수
+ * people : 참여한 유저의 수
  * code : 코드
  * user : 미션 제작 유저
  * missionCommentsList : 미션 댓글

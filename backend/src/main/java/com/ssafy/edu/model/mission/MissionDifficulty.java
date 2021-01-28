@@ -9,6 +9,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
+/**
+ * 미션 난이도
+ * id : 미션 난이도 pk 값
+ * difficulty : 1~5점 사이의 난이도
+ * user : 유저 연관
+ * mission : 미션 연관
+ */
 @Entity
 @Data
 @Builder

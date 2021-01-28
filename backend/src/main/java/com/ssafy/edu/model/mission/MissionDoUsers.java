@@ -8,7 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+/**
+ * 미션 진행중인 유저
+ * id : 미션 참여한 유저 pk
+ * todo : 미션 참여한 유저의 상태
+ * user : 유저 연관
+ * mission : 미션 연관
+ */
 @Entity
 @Data
 @Builder
