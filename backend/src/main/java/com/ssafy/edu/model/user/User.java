@@ -54,19 +54,10 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Board> boardList = new ArrayList<>();
 
-    // 편의 메소드
-    public void addUser(Board board){
-        this.boardList.add(board);
-    }
-    public void removeUser(Board board){
-        this.boardList.remove(board);
-    }
-
     @OneToMany(mappedBy = "user")
     List<BoardComment> boardCommentList = new ArrayList<>();
 
-    // 읽기 전용
-    @OneToOne(mappedBy = "user")
-    private BoardLikeUsers boardLikeUsers;
+    @OneToMany(mappedBy = "user")
+    List<BoardLikeUsers> boardLikeUsers = new ArrayList<>();
 
 }

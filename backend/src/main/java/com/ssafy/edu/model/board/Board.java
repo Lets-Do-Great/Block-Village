@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ssafy.edu.model.BaseTimeEntity;
 import lombok.*;
 import com.ssafy.edu.model.user.User;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -21,8 +23,9 @@ import java.util.ArrayList;
 * title : 게시글 제목
 * content : 게시글 내용
 * views : 조회수
-* createdAt : 작성일
-* updatedAt : 수정일
+* -- [상속 ] Database에 자동 생성되는 컬럼 --
+* created_date : 작성일
+* updated_date : 수정일
 * */
 
 @Getter @Setter
@@ -31,7 +34,7 @@ import java.util.ArrayList;
 @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Entity
-public class Board {
+public class Board extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,16 +49,6 @@ public class Board {
 
     @Lob
     private Long views;
-
-    @Column(name="created_at")
-    @CreatedDate
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate createdAt;
-
-    @Column(name="updated_at")
-    @LastModifiedDate
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate updatedAt;
 
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "user_id")
