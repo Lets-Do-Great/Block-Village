@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import FindPW from '../components/find_pw/find_pw';
-import LogIn from '../components/log_in/log_in';
-import SignUp from '../components/sign_up/sign_up';
+import FindPW from '../components/user/find_pw/find_pw/find_pw';
+import LogIn from '../components/user/log_in/log_in/log_in';
+import SignUp from '../components/user/sign_up/sign_up/sign_up';
 import * as UserAction from '../modules/user';
 
 const UserContainer = ({ setSkip }) => {
