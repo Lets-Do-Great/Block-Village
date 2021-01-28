@@ -14,6 +14,7 @@ import ChallengeContainer from './containers/challenge_container';
 import MyPageContainer from './containers/my_page_container';
 
 import SubMain from './components/main/sub_main/sub_main';
+import TestMypage from './components/my_page/test_mypage';
 
 
 
@@ -33,7 +34,8 @@ function App() {
         </Route>
         
         <Route exact path="/my_page">
-          <MyPageContainer />
+          <TestMypage />
+          {/* <MyPageContainer /> */}
         </Route>
 
         <Route exact path="/main">

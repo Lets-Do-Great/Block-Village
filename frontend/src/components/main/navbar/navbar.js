@@ -21,6 +21,10 @@ const Navbar = (props) => {
     }
   }
 
+  const goMyPage = () => {
+    history.push('/my_page')
+  }
+
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
@@ -29,7 +33,7 @@ const Navbar = (props) => {
 
       {/* <button onClick={logout}>로그아웃</button> */}
 
-      <div className={styles.user_icon}>
+      <div className={styles.user_icon} onClick={goMyPage}>
         <FaUserCircle size="50" color="#FFFFFF" />
       </div>
     </div>
