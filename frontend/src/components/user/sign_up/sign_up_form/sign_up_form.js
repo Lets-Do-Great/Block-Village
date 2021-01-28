@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from './sign_up_form.module.css';
 
 const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
     // 회원가입폼 구성하는 속성들 비구조화 할당
@@ -77,43 +78,52 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
     <>
         <h2>회 원 가 입</h2>
         <input 
+            className={styles.input_small}
             type="text"
             name="emailId" 
             value={emailId} 
             onChange={onChangeSignUp} 
             placeholder="이메일"/>@
         <input 
+            className={styles.input_small}
             type="text"
             name="emailSite" 
             value={emailSite} 
             onChange={onChangeSignUp} 
             placeholder="직접입력"/><br/>
-        <input 
+        <input
+            className={styles.input} 
             type="text"
             name="nickname" 
             value={nickname} 
             onChange={onChangeSignUp} 
             placeholder="닉네임"/><br/>
-        <input 
+        <input
+            className={styles.input} 
             type="password"
             name="password" 
             value={password} 
             onChange={onChangeSignUp} 
             placeholder="비밀번호"/><br/>
         <input 
+            className={styles.input}
             type="password"
             name="PWConfirm" 
             value={PWConfirm.PW}
             onChange={onChange} 
-            placeholder="비밀번호 확인"/><br/>
+            placeholder="비밀번호 확인"/>
 
         {
             PWConfirm.check
-            ? <p>비밀번호가 일치합니다.</p>
-            : <p>비밀번호가 일치하지 않습니다.</p>
-        }<br/>
+            ? <p className={styles.comment_confirm_PW}>
+                비밀번호가 일치합니다.</p>
+            : <p className={styles.comment_confirm_PW}>
+                비밀번호가 일치하지 않습니다.</p>
+        }
         
-        <button onClick={onSubmitSignUp}>가입하기</button>
+        <button 
+            className={styles.button_sign_up}
+            onClick={onSubmitSignUp}>가입하기</button>
     </>
     );
 }

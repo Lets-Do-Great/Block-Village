@@ -1,6 +1,7 @@
 import React from 'react';
+import styles from './log_in_form.module.css';
 
-const LogInForm = ({logIn, logInInput, onChangeLogIn}) => {
+const LogInForm = ({logIn, logInInput, onChangeLogIn, setType}) => {
   // 로그인폼 구성하는 속성들 비구조화 할당
   const { email, password } = logInInput;
 
@@ -29,21 +30,30 @@ const LogInForm = ({logIn, logInInput, onChangeLogIn}) => {
     return (true);
   }
 
+  const goToFindPW = () => setType('findPW');
+
   return (
       <>
         <input 
-            type="text" 
-            name="email"
-            value={email}
-            onChange={onChangeLogIn}  
-            placeholder="EMAIL"/><br/>
+          className={styles.input}
+          type="text" 
+          name="email"
+          value={email}
+          onChange={onChangeLogIn}  
+          placeholder="이메일"/><br/>
         <input 
-            type="password" 
-            name="password"
-            value={password}
-            onChange={onChangeLogIn} 
-            placeholder="PW"/><br/>
-        <button onClick={onSubmitLogIn}>LOGIN</button>
+          className={styles.input}
+          type="password" 
+          name="password"
+          value={password}
+          onChange={onChangeLogIn} 
+          placeholder="비밀번호"/><br/>
+        <button 
+          className={styles.button_find_PW}
+          onClick={goToFindPW}>비밀번호를 잊으셨나요?</button><br/>
+        <button 
+          className={styles.button_login}
+          onClick={onSubmitLogIn}>로그인</button>
     </>
   );
 };
