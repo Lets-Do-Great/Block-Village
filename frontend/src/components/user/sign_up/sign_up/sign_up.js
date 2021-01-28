@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SignUpForm from './sign_up_form';
-import AgreeForm from './agree_form';
+import SignUpForm from '../sign_up_form/sign_up_form';
+import AgreeForm from '../agree_form/agree_form';
 
 const SignUp = ({ signUp, signUpInput, onChangeSignUp, setType, setSkip }) => {
     const [agreeInput, setAgreeInput] = useState(false);

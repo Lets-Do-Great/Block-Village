@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import styles from './log_in.module.css';
-import LogInForm from './log_in_form';
-import SnsLogInForm from './sns_log_in_form';
+import LogInForm from '../log_in_form/log_in_form';
+import SnsLogInForm from '../sns_log_in_form/sns_log_in_form';
 
 const LogIn = ({logIn, logInInput, onChangeLogIn, setType, setSkip}) => {
   const back = () => setSkip(false);

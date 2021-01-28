@@ -1,5 +1,5 @@
 import React from 'react';
-import FindPWForm from './find_pw_form';
+import FindPWForm from '../find_pw_form/find_pw_form';
 
 const FindPW = ({ onChangeFindFW, findPW, findPWInput, setType }) => {
     const back = () =>{ setType('logIn') };
