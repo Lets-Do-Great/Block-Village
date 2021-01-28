@@ -70,14 +70,14 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public ResponseEntity<MissionOneResponse> findGetOne(MissionOneRequest missionOneRequest) {
+    public ResponseEntity<MissionOneResponse> findGetOne(Long missionId, String userEmail) {
         ResponseEntity response;
         MissionOneResponse result = new MissionOneResponse();
 
-        Optional<Mission> missionOptional = missionJpaRepository.findById(missionOneRequest.getMissionId());
+        Optional<Mission> missionOptional = missionJpaRepository.findById(missionId);
 
         if (missionOptional.isPresent()) {
-            List<MissionFavorite> missionFavoriteList = missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionOneRequest.getEmail(),missionOneRequest.getMissionId());
+            List<MissionFavorite> missionFavoriteList = missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail,missionId);
             List<Object> object = new ArrayList<>();
             object.add(missionOptional.get());
             if(missionFavoriteList.size()>0){

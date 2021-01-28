@@ -28,9 +28,9 @@ public class MissionController {
         return missionService.findAll(missionSearchTypeRequest);
     }
     @ApiOperation(value = "현재 조회중인 미션 정보 조회", notes = "현재 조회중인 미션 정보 조회")
-    @PostMapping("/")
-    public ResponseEntity<MissionOneResponse> GetOneMissions(@RequestBody MissionOneRequest missionOneRequest){
-        return missionService.findGetOne(missionOneRequest);
+    @GetMapping("/{userEmail}/{missionId}")
+    public ResponseEntity<MissionOneResponse> GetOneMissions(@PathVariable("userEmail")String userEmail,@PathVariable("missionId") Long missionId){
+        return missionService.findGetOne(missionId,userEmail);
     }
     @ApiOperation(value = "특정 유저의 미션목록 조회", notes = "특정 유저의 미션목록 조회")
     @GetMapping("/user/{userEmail}")
