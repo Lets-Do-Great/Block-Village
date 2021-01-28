@@ -1,5 +1,5 @@
 import React from 'react';
-import MyInfoForm from '../my_info_read/my_info_form';
+import MyInfoForm from '../my_info_form/my_info_form';
 
 const MyPageRead = ({ userInfo, setType, deleteInfo }) => {
 

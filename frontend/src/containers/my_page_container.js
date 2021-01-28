@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import MyInfoRead from '../components/my_page/my_info/my_info_read/my_info_read';
-import MyInfoModify from '../components/my_page/my_info/my_info_modify/my_info_modify';
+import MyInfoRead from '../components/my_page/my_info/my_info_read/my_info_read/my_info_read';
+import MyInfoModify from '../components/my_page/my_info/my_info_modify/my_info_modify/my_info_modify';
 import * as UserAction from '../modules/user';
 
 const MyPageContainer = () => {
