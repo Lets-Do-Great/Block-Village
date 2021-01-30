@@ -11,16 +11,31 @@ const PlayGround = ({ javascript_code }) => {
     eval(javascript_code);
   };
 
+
+  // 함수
+/////////////////////////////////////////////////////////////////
+  var my_var = 0;
+  var cur_colour = 0;
+  const set_var = (text_variable) => {
+    my_var = text_variable;
+  }
+  const change_var = (text_variable) => {
+    my_var += text_variable;
+  }
+  const change_colour = (colour_colour) => {
+    cur_colour = colour_colour;
+  }
+
   // 움직임 
 /////////////////////////////////////////////////////////////////
   var x = 0;
   var y = 0;
   const move = [];
+  var cur_angle = 0;
 
   const move_x = (x_distance) => {
     x += x_distance;
     move.push([x, y]);
-    console.log(move);
   }
 
   const move_y = (y_distance) => {
@@ -41,6 +56,25 @@ const PlayGround = ({ javascript_code }) => {
   const point_x_y = (x_point, y_point) => {
     x = x_point;
     y = y_point;
+    move.push([x, y]);
+  }
+
+  const set_angle = (angle) => {
+    cur_angle = angle * Math.PI / 180;
+  }
+
+  const set_angle_move = (angle, distance) => {
+    var new_angle = angle * Math.PI / 180;
+    x += distance * Math.cos(new_angle);
+    y += distance * Math.sin(new_angle);
+    move.push([x, y]);
+    console.log(move);
+  }
+
+  const move_forward = (text_distance) => {
+    var new_angle = cur_angle * Math.PI / 180;
+    x += text_distance * Math.cos(new_angle);
+    y += text_distance * Math.sin(new_angle);
     move.push([x, y]);
   }
 
@@ -190,6 +224,31 @@ const PlayGround = ({ javascript_code }) => {
   const abs_val_js = (value_num) => {
     return Math.abs(value_num);
   };
+
+  // 그리기
+  var pen_pos = true; // true이면 내려가 있는 상태, false이면 올라가 있는 상태
+  var pen_angle = 0;
+  var pen_x = 0;
+  var pen_y = 0;
+  const lines = [];
+  const pen_down = () => {
+    pen_pos = true;
+  };
+  const pen_up = () => {
+    pen_pos = false;
+  };
+  const draw_line = (text_length) => {
+    var tmp_x = pen_x;
+    var tmp_y = pen_y;
+    pen_x += Math.cos(pen_angle) * text_length;
+    pen_y += Math.sin(pen_angle) * text_length;
+    if(pen_pos){
+      lines.push([[tmp_x, tmp_y], [pen_x, pen_y]]); // 펜이 내려와 있는 상태라면 선분의 양 끝점을 저장
+    }
+  };
+  const rotate_pen = (angle_angle) => {
+    pen_angle += angle_angle * Math.PI / 180;
+  }
 
   useEffect(() => {
     // const field = fieldsize.current;
