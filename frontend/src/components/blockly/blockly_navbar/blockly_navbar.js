@@ -18,6 +18,10 @@ const BlocklyNavbar = ({ modal, statusModal }) => {
 
   return (
     <header className={styles.navbar}>
+
+      <img className={styles.logo_img} src="/images/logo1.png" />
+
+
       <h1 className={styles.title}>미션 : 미로 1</h1>
       <div className={styles.save_button}>
         <FaRegSave size="50" color="#FFFFFF" />

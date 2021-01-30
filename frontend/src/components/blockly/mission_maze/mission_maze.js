@@ -62,9 +62,14 @@ export default function MissionMaze() {
       'flyoutForegroundColour': '#1e1e1e',
       'flyoutOpacity': '#1e1e1e',
       'scrollbarColour': '#EFA420',
-      // 'scrollbarOpacity': '#1e1e1e',
+      'scrollbarOpacity': 0.5,
       // 'insertionMarkerColour': '#1e1e1e',
       // 'insertionMarkerOpacity': '#1e1e1e',
+    },
+    'fontStyle': {
+      // "family": "Georgia, serif",
+      "weight": "bold",
+      "size": 15,
     }
   };
 
@@ -180,7 +185,6 @@ export default function MissionMaze() {
             bounds="parent"
             >
             <div className={styles.playground}>
-              <div className={styles.headerPlayGround}></div>
               <PlayGround 
                 javascript_code={javascript} />
             </div>
@@ -195,8 +199,8 @@ export default function MissionMaze() {
               workspaceConfiguration={{
                 grid: {
                   spacing: 20,
-                  length: 3,
-                  colour: '#',
+                  length: 2,
+                  colour: '#FFDEA4',
                   snap: true,
                 },
                 move:{

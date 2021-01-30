@@ -192,32 +192,31 @@ const PlayGround = ({ javascript_code }) => {
   
   useEffect(() => {
     
-    // const field = fieldsize.current;
-    // const fieldRect = field.getBoundingClientRect();
-    // const item = fieldchar.current;
-    // item.setAttribute('className', `image`)
-    // item.setAttribute('src', `../../../image/carrot.png`)
-    // item.style.position = 'absolute';
-    // const x = (fieldRect.width - 0) / 2;
-    // const y = (fieldRect.height - 0) / 2;
-    // item.style.left = `${x}px`;
-    // item.style.top = `${y}px`;
+    const field = fieldsize.current;
+    const fieldRect = field.getBoundingClientRect();
+    const item = fieldchar.current;
+    item.setAttribute('className', `image`)
+    item.setAttribute('src', `/images/bug.png`)
+    item.style.position = 'absolute';
+    const x = (fieldRect.width - 0 - 50) / 2;
+    const y = (fieldRect.height - 0 - 50) / 2;
+    item.style.left = `${x}px`;
+    item.style.top = `${y}px`;
   })
 
   return (
     
     <div className={styles.body}>
-      {/* <section className={styles.game} ref={fieldsize}>
+      <section className={styles.game} ref={fieldsize}>
         <img ref={fieldchar}></img>
       </section>
-      <footer className={styles.footer}> */}
+      <footer className={styles.footer}>
         <button 
           onClick={playGame}
           className={styles.game__button}
-        >start
+        >시작하기
         </button>
-      {/* </footer>
-      <Faplay /> */}
+      </footer>
     </div>
   )
 }
