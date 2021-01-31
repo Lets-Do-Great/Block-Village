@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import ListCardForm from '../list_card_form/list_card_form';
 import DetailCardForm from '../detail_card_form/detail_card_form';
+import styles from './list_form.module.css';
 
 const ListForm = ({ list, detail, getDetail, 
                     setLike, setDislike, onChangeSearch }) => {
@@ -11,6 +12,11 @@ const ListForm = ({ list, detail, getDetail,
 
     return (
     <>
+        <select className={styles.select} onChange={onChangeSearch}>
+            <option name="sortType" value="decrease">높은 순</option>
+            <option name="sortType" value="increase">낮은 순</option>
+        </select>
+
         <DetailCardForm
             detail={detail}
             setLike={setLike}
@@ -28,11 +34,6 @@ const ListForm = ({ list, detail, getDetail,
                 clickCard={clickCard}
             />
         ))}
-        
-        <select onChange={onChangeSearch}>
-            <option name="sortType" value="decrease">높은 순</option>
-            <option name="sortType" value="increase">낮은 순</option>
-        </select>
     </>
     );
 };

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
+import styles from './detail_card_form.module.css';
 import * as Icon from 'react-icons/md';
 
 const DetailCardForm = ({ detail, setLike, setDislike }) => {
-    const {writer:email, title, created_at, updated_at, like,
-        content, code, imageUrl, difficulty, likeCnt, peopleCnt } = detail;
+    const {nickName, title, created_at, updated_at, like,
+        content, difficulty, likeCnt, peopleCnt } = detail;
 
     const changeLike = () => {
         if(like){
@@ -11,27 +12,39 @@ const DetailCardForm = ({ detail, setLike, setDislike }) => {
         } else {
             setLike();
         }
+        console.log(detail);
     };
 
     return (
-    <>
-        <p>{ title }</p>
-        <Icon.MdAccountCircle/>{ email }
-        <Icon.MdEdit/>{ created_at } / { updated_at }
-        <Icon.MdAssistantPhoto/>{ difficulty }
-        <Icon.MdFace/>{ peopleCnt }
-        <Icon.MdFavorite/>{ likeCnt }
+    <div className={styles.detail_form}>
+        <div className={styles.title}>{ title }</div>
+        <div 
+            className={styles.heart}
+            onClick={changeLike}>
+            { like
+                ? <Icon.MdFavorite/>
+                : <Icon.MdFavoriteBorder/> }
+        </div>
 
-        { like
-         ? <button onClick={changeLike}><Icon.MdFavorite/></button>
-         : <button onClick={changeLike}><Icon.MdFavoriteBorder/></button>
-        }
+        <div>
+            <Icon.MdAccountCircle/>{ nickName }
+        </div>
+        <div>
+            <Icon.MdEdit/>{ created_at } / { updated_at }
+        </div>
+        <div className={styles.icon}>
+            <Icon.MdAssistantPhoto/>{ difficulty }
+        </div>
+        <div className={styles.icon}>
+            <Icon.MdFace/>{ peopleCnt }
+        </div>
+        <div className={styles.icon}>
+            <Icon.MdFavorite/>{ likeCnt }
+        </div>
 
-        <p>{ code }</p>
-        <p>{ imageUrl }</p>
-        <p>{ content }</p>
-        <button>미션 시작하기</button>
-    </>
+        <div>{ content }</div>
+        <button className={styles.button}>미션 시작하기</button>
+    </div>
     );
 };
 

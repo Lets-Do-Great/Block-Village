@@ -56,19 +56,36 @@ export const setDifficultyMission = createAction(
 
 // 초기상태
 const initialState = {
-    missionList: [],
+    missionList: [
+        {
+            missionId: 1,
+            email: 'wlsdhr0831@naver.com',
+            title: '미션1 제목',
+            difficulty: 3,
+            likeCnt: 10,
+            peopleCnt: 20,
+        },
+        {
+            missionId: 2,
+            email: 'wlsdhr0831@naver.com',
+            title: '미션2 제목',
+            difficulty: 3,
+            likeCnt: 10,
+            peopleCnt: 20,
+        }
+    ],
     selectedMission: {
-        missionId: '',
-        email: '',
-        title: '',
-        created_at: '',
-        updated_at: '',
-        content: '',
-        code: '',
-        imageUrl: '',
-        difficulty: '',
-        likeCnt: '',
-        peopleCnt: '',
+        missionId: '2',
+        nickName: '싸피',
+        title: '미션2 제목',
+        created_at: '2020/01/31',
+        updated_at: '2020/02/01',
+        content: '미션2 내용',
+        code: '미션2 코드',
+        imageUrl: '이미지',
+        difficulty: '3',
+        likeCnt: '10',
+        peopleCnt: '20',
         like: false,
     },
 };

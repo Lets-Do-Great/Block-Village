@@ -1,0 +1,38 @@
+.detail_form {
+    width: 500px;
+    height: 400px;
+    border: 1px solid black;
+    border-radius: 10px;
+    align-items: center;
+    align-content: center;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    display: inline;
+}
+
+.icon {
+    display: inline-block;
+    width: 60px;
+    font-size: 20px;
+}
+
+.heart {
+    color: red;
+    font-size: 30px;
+    display: inline;
+}
+
+.button {
+    margin: 15px;
+    width: 300px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #ff8896;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}

@@ -4,7 +4,7 @@ import { Route, Link, useHistory } from 'react-router-dom';
 import MyPageContainer from './containers/my_page_container';
 import UserContainer from './containers/user_container';
 import SubMain from './components/main/sub_main';
-import MissionContainer from './containers/mission_container/mission_container'
+import MissionContainer from './containers/mission_container'
 import * as UserAction from './modules/user';
 
 function App() {
@@ -40,6 +40,7 @@ function App() {
           : (<>
             <SubMain/>
             <button onClick={clickSkip}>건너뛰기</button>
+            <MissionContainer/>
             </>)
         )
       }

@@ -93,6 +93,10 @@ return (
             onChangeSearch={onChangeSearch}
             onClickEnter={onClickEnter}
             search={search}
+        /> 
+
+        <SearchType
+            onChangeSearch={onChangeSearch}
         />
 
         <ListForm
@@ -102,10 +106,6 @@ return (
             getDetail={getMission}
             setLike={likeMission}
             setDislike={dislikeMission}
-            onChangeSearch={onChangeSearch}
-        />
-        
-        <SearchType
             onChangeSearch={onChangeSearch}
         />
     </>
