@@ -14,17 +14,13 @@ const PlayGround = ({ javascript_code }) => {
 
   // 함수
 /////////////////////////////////////////////////////////////////
-  var my_var = 0;
-  var cur_colour = 0;
+  var my_var = 0;  
   const set_var = (text_variable) => {
     my_var = text_variable;
   }
   const change_var = (text_variable) => {
     my_var += text_variable;
-  }
-  const change_colour = (colour_colour) => {
-    cur_colour = colour_colour;
-  }
+  }  
 
   // 움직임 
 /////////////////////////////////////////////////////////////////
@@ -231,6 +227,10 @@ const PlayGround = ({ javascript_code }) => {
   var pen_x = 0;
   var pen_y = 0;
   const lines = [];
+  var cur_colour = 0;
+  const change_colour = (colour_colour) => {
+    cur_colour = colour_colour;
+  }
   const pen_down = () => {
     pen_pos = true;
   };

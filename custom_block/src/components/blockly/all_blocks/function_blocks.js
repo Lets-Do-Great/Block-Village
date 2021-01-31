@@ -64,25 +64,3 @@ Blockly.JavaScript['change_variable'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
-
-
-//change_colour
-Blockly.Blocks['change_colour'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("색을")
-        .appendField(new Blockly.FieldColour("#ff0000"), "colour")
-        .appendField("로 바꾸기");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(100);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  }
-};
-Blockly.JavaScript['change_colour'] = function(block) {
-  var colour_colour = block.getFieldValue('colour');
-  // TODO: Assemble JavaScript into code variable.
-  var code = `change_colour(${colour_colour})`;
-  return code;
-};

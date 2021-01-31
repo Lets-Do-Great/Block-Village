@@ -156,8 +156,7 @@ export default function MissionMaze() {
       blocks: [
         {type: 'variable'},
         {type: 'set_variable'},
-        {type: 'change_variable'},
-        {type: 'change_colour'},
+        {type: 'change_variable'},        
       ]
     },
     {
@@ -168,6 +167,7 @@ export default function MissionMaze() {
         {type: 'pen_up'},
         {type: 'draw_line'},
         {type: 'rotate_pen'},
+        {type: 'change_colour'},
       ]
     },
   ]

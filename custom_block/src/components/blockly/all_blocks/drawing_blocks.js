@@ -80,3 +80,24 @@ Blockly.JavaScript['rotate_pen'] = function(block) {
   var code = `rotate_pen(${angle_angle})`;
   return code;
 };
+
+//change_colour
+Blockly.Blocks['change_colour'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("색을")
+        .appendField(new Blockly.FieldColour("#ff0000"), "colour")
+        .appendField("로 바꾸기");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(100);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['change_colour'] = function(block) {
+  var colour_colour = block.getFieldValue('colour');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `change_colour(${colour_colour})`;
+  return code;
+};
