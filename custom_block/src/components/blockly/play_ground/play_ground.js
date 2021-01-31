@@ -15,11 +15,11 @@ const PlayGround = ({ javascript_code }) => {
   // 함수
 /////////////////////////////////////////////////////////////////
   var my_var = 0;  
-  const set_var = (text_variable) => {
-    my_var = text_variable;
+  const set_var = (value_variable) => {
+    my_var = value_variable;
   }
-  const change_var = (text_variable) => {
-    my_var += text_variable;
+  const change_var = (value_variable) => {
+    my_var += value_variable;
   }  
 
   // 움직임 

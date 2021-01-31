@@ -24,22 +24,24 @@ Blockly.JavaScript['variable'] = function(block) {
 Blockly.Blocks['set_variable'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("나의 변수를")
-        .appendField(new Blockly.FieldTextInput("0"), "variable")
+        .appendField("나의 변수를");
+    this.appendValueInput("variable")
+        .setCheck("Number");
+    this.appendDummyInput()
         .appendField("으로 정하기");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(100);
-    this.setTooltip("");
-    this.setHelpUrl("");
+ this.setTooltip("");
+ this.setHelpUrl("");
   }
 };
 Blockly.JavaScript['set_variable'] = function(block) {
-  var text_variable = block.getFieldValue('variable');
+  var value_variable = Blockly.JavaScript.valueToCode(block, 'variable', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `set_var(${text_variable})`;
+  var code = `set_var(${value_variable})`;
   // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  return code;
 };
 
 
@@ -47,20 +49,22 @@ Blockly.JavaScript['set_variable'] = function(block) {
 Blockly.Blocks['change_variable'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("나의 변수를")
-        .appendField(new Blockly.FieldTextInput("0"), "variable")
+        .appendField("나의 변수를");
+    this.appendValueInput("variable")
+        .setCheck("Number");
+    this.appendDummyInput()
         .appendField("만큼 바꾸기");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(100);
-    this.setTooltip("");
-    this.setHelpUrl("");
+ this.setTooltip("");
+ this.setHelpUrl("");
   }
 };
 Blockly.JavaScript['change_variable'] = function(block) {
-  var text_variable = block.getFieldValue('variable');
+  var value_variable = Blockly.JavaScript.valueToCode(block, 'variable', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `change_var(${text_variable})`;
+  var code = `change_var(${value_variable})`;
   // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  return code;
 };
