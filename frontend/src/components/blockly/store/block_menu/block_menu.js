@@ -1,10 +1,20 @@
 import React from 'react';
 import BlockDetail from '../block_detail/block_detail';
+import styles from './block_menu.module.css'
 
 const BlockMenu = (props) => {
   return (
-    <div>
-      <h1>블럭들 카테고리별</h1>
+    <div className={styles.body}>
+      <BlockDetail />
+      <BlockDetail />
+      <BlockDetail />
+      <BlockDetail />
+      <BlockDetail />
+      <BlockDetail />
+      <BlockDetail />
+      <BlockDetail />
+      <BlockDetail />
+      <BlockDetail />
       <BlockDetail />
     </div>
   )
