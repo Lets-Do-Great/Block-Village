@@ -1,13 +1,13 @@
 import React from 'react';
 import * as Icon from 'react-icons/md';
 
-const ListCardForm = ({ title, difficulty, likeCnt, peopleCnt}) => {
+const ListCardForm = ({ id, title, difficulty, likeCnt, peopleCnt, clickCard }) => {
     return (
     <>
-        <p>{ title }</p>
-        <Icon.MdAssistantPhoto/><p>{ difficulty }</p>
-        <Icon.MdFace/><p>{ peopleCnt }</p>
-        <Icon.MdFavorite/><p>{ likeCnt }</p>
+        <button id={id} onClick={clickCard}>{ title }</button> <p/>
+        <Icon.MdAssistantPhoto/>{ difficulty }
+        <Icon.MdFace/>{ peopleCnt }
+        <Icon.MdFavorite/>{ likeCnt } <p/>
     </>
     );
 };

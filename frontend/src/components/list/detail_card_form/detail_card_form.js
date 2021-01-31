@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as Icon from 'react-icons/md';
 
 const DetailCardForm = ({ detail, setLike, setDislike }) => {
@@ -16,11 +16,11 @@ const DetailCardForm = ({ detail, setLike, setDislike }) => {
     return (
     <>
         <p>{ title }</p>
-        <Icon.MdAccountCircle/><p>{ email }</p>
-        <Icon.MdEdit/><p>{ created_at } / { updated_at }</p>
-        <Icon.MdAssistantPhoto/><p>{ difficulty }</p>
-        <Icon.MdFace/><p>{ peopleCnt }</p>
-        <Icon.MdFavorite/><p>{ likeCnt }</p>
+        <Icon.MdAccountCircle/>{ email }
+        <Icon.MdEdit/>{ created_at } / { updated_at }
+        <Icon.MdAssistantPhoto/>{ difficulty }
+        <Icon.MdFace/>{ peopleCnt }
+        <Icon.MdFavorite/>{ likeCnt }
 
         { like
          ? <button onClick={changeLike}><Icon.MdFavorite/></button>
@@ -30,7 +30,7 @@ const DetailCardForm = ({ detail, setLike, setDislike }) => {
         <p>{ code }</p>
         <p>{ imageUrl }</p>
         <p>{ content }</p>
-        <buttom>미션 시작하기</buttom>
+        <button>미션 시작하기</button>
     </>
     );
 };
