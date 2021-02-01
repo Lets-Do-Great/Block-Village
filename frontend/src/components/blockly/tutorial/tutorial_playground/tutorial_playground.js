@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-// import { Faplay } from 'react-icons/fa';
-import styles from './play_ground.module.css';
+import styles from './tutorial_playground.module.css'
 
-const PlayGround = ({ javascript_code }) => {
-  const fieldsize = useRef();
+const TutorialPlayground = ({ javascript_code }) => {
+    const fieldsize = useRef();
     const fieldchar = useRef();
     console.log(javascript_code);
   
@@ -33,7 +32,6 @@ const PlayGround = ({ javascript_code }) => {
     const move_x = (x_distance) => {
       x += x_distance;
       move.push([x, y]);
-      
     }
   
     const move_y = (y_distance) => {
@@ -55,7 +53,6 @@ const PlayGround = ({ javascript_code }) => {
       x = x_point;
       y = y_point;
       move.push([x, y]);
-      
     }
   
     const turn_angle = (angle) => {
@@ -254,9 +251,8 @@ const PlayGround = ({ javascript_code }) => {
     const rotate_pen = (angle_angle) => {
       pen_angle += angle_angle * Math.PI / 180;
     }
-  
+
   useEffect(() => {
-    
     const field = fieldsize.current;
     const fieldRect = field.getBoundingClientRect();
     const item = fieldchar.current;
@@ -270,7 +266,6 @@ const PlayGround = ({ javascript_code }) => {
   })
 
   return (
-    
     <div className={styles.body}>
       <section className={styles.game} ref={fieldsize}>
         <img ref={fieldchar}></img>
@@ -286,4 +281,4 @@ const PlayGround = ({ javascript_code }) => {
   )
 }
 
-export default PlayGround;
+export default TutorialPlayground;

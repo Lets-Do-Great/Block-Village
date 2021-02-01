@@ -223,11 +223,154 @@ Blockly.JavaScript['if_else'] = function(block) {
   var code = `if(${value_if}){\n${statements_action1};}\n else{\n${statements_action2}}\n`
   return code;
 };
-Blockly.Python['break'] = function(block) {
-  var value_condition = Blockly.Python.valueToCode(block, 'condition', Blockly.Python.ORDER_ATOMIC);
-  var statements_action1 = Blockly.Python.statementToCode(block, 'action1');
-  var statements_action2 = Blockly.Python.statementToCode(block, 'action2');
-  // TODO: Assemble Python into code variable.
-  var code = '...\n';
+
+
+// if_else_double
+Blockly.Blocks['if_else_double'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("만일");
+    this.appendValueInput("if1")
+        .setCheck("Boolean");
+    this.appendDummyInput()
+        .appendField("이라면");
+    this.appendStatementInput("act1")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("아니고");
+    this.appendValueInput("if2")
+        .setCheck("Boolean");
+    this.appendDummyInput()
+        .appendField("이라면");
+    this.appendStatementInput("act2")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("아니면");
+    this.appendStatementInput("act3")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setStyle('flow-blocks');
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['if_else_double'] = function(block) {
+  var value_if1 = Blockly.JavaScript.valueToCode(block, 'if1', Blockly.JavaScript.ORDER_ATOMIC);
+  var statements_act1 = Blockly.JavaScript.statementToCode(block, 'act1');
+  var value_if2 = Blockly.JavaScript.valueToCode(block, 'if2', Blockly.JavaScript.ORDER_ATOMIC);
+  var statements_act2 = Blockly.JavaScript.statementToCode(block, 'act2');
+  var statements_act3 = Blockly.JavaScript.statementToCode(block, 'act3');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `if(${value_if1}){\n${statements_act1};}\n else if(${value_if2}){\n${statements_act2}}\n else{\n${statements_act3}}\n`
+  return code;
+};
+
+
+// if_else_triple
+Blockly.Blocks['if_else_triple'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("만일");
+    this.appendValueInput("if1")
+        .setCheck("Boolean");
+    this.appendDummyInput()
+        .appendField("이라면");
+    this.appendStatementInput("act1")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("아니고");
+    this.appendValueInput("if2")
+        .setCheck("Boolean");
+    this.appendDummyInput()
+        .appendField("이라면");
+    this.appendStatementInput("act2")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("아니고");
+    this.appendValueInput("if3")
+        .setCheck("Boolean");
+    this.appendDummyInput()
+        .appendField("이라면");
+    this.appendStatementInput("act3")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("아니면");
+    this.appendStatementInput("act4")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setStyle('flow-blocks');
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['if_else_triple'] = function(block) {
+  var value_if1 = Blockly.JavaScript.valueToCode(block, 'if1', Blockly.JavaScript.ORDER_ATOMIC);
+  var statements_act1 = Blockly.JavaScript.statementToCode(block, 'act1');
+  var value_if2 = Blockly.JavaScript.valueToCode(block, 'if2', Blockly.JavaScript.ORDER_ATOMIC);
+  var statements_act2 = Blockly.JavaScript.statementToCode(block, 'act2');
+  var value_if3 = Blockly.JavaScript.valueToCode(block, 'if3', Blockly.JavaScript.ORDER_ATOMIC);
+  var statements_act3 = Blockly.JavaScript.statementToCode(block, 'act3');
+  var statements_act4 = Blockly.JavaScript.statementToCode(block, 'act4');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `if(${value_if1}){\n${statements_act1};}\n else if(${value_if2}){\n${statements_act2}}\n else if(${value_if3}){\n${statements_act3}}\n else{\n${statements_act4}}\n`
+  return code;
+};
+
+
+// switch_input
+Blockly.Blocks['switch_input'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("입력값");
+    this.appendValueInput("input")
+        .setCheck(null);
+    this.appendDummyInput();
+    this.appendStatementInput("actions")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setStyle('flow-blocks');
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['switch_input'] = function(block) {
+  var value_input = Blockly.JavaScript.valueToCode(block, 'input', Blockly.JavaScript.ORDER_ATOMIC);
+  var statements_actions = Blockly.JavaScript.statementToCode(block, 'actions');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `switch(${value_input}){\n ${statements_actions}}\n`;
+  return code;
+};
+
+
+// input_value
+Blockly.Blocks['input_value'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("입력값이");
+    this.appendValueInput("input")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("라면");
+    this.appendStatementInput("actions")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setStyle('flow-blocks');
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['input_value'] = function(block) {
+  var value_input = Blockly.JavaScript.valueToCode(block, 'input', Blockly.JavaScript.ORDER_ATOMIC);
+  var statements_actions = Blockly.JavaScript.statementToCode(block, 'actions');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `case ${value_input}:${statements_actions}`;
   return code;
 };
