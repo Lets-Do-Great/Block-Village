@@ -12,7 +12,8 @@ import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -26,10 +27,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private EncryptService encryptService;
+
+    @Autowired
+    private JwtServiceImpl jwtServiceImpl;
     
-    /* 로그인 */
+    /* 로그인 - JWT 토큰 발급 */
     @Override
-    public ResponseEntity<UserResponse> findByEmailAndPassword(String email, String password){
+    public ResponseEntity<UserResponse> login(String email, String password){
 
         ResponseEntity response;
         UserResponse result = new UserResponse();
@@ -38,8 +42,14 @@ public class UserServiceImpl implements UserService {
         boolean match = encryptService.isMatch(password, userOptional.get().getPassword());
 
         if(match && userOptional.isPresent() && userOptional.get().getEmailAuth().equals("true")){
+
+            Map<String, Object> resultMap = new HashMap<>();
+            String token = jwtServiceImpl.createToken(email);
+            resultMap.put("token", token);
+            resultMap.put("user", userOptional.get());
+
             result.status = true;
-            result.data = userOptional.get();
+            result.data = resultMap;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;

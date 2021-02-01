@@ -1,6 +1,5 @@
 package com.ssafy.edu.service.user;
 
-import com.ssafy.edu.service.user.UserMailSendService;
 import com.ssafy.edu.model.user.SignUpRequest;
 import com.ssafy.edu.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
