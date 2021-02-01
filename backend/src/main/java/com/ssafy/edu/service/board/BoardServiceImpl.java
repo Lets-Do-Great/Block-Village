@@ -37,16 +37,41 @@ public class BoardServiceImpl implements BoardService{
         BoardResponse result = new BoardResponse();
 
         List<Board> boardList = boardJpaRepository.findAll();
+        
+        if(boardList.get(0)!=null){
+            System.out.println("boardList는 널아님");
+        }
+        
+//        List<BoardResult> resultList = boardList.stream().map(boardEntity -> {
+//            BoardResult boardResult = new BoardResult();
+//            boardResult.setId(boardEntity.getId());
+//            boardResult.setTitle(boardEntity.getTitle());
+//            boardResult.setContent(boardEntity.getContent());
+////            boardResult.setWriter(boardEntity.getUser().getNickname());
+//            if(boardEntity.getUser()!=null){
+//                System.out.println("이새기 널아님");
+//                System.out.println(boardEntity.getUser().getNickname());
+//            }else{
+//                System.out.println("이새기 널임");
+//            }
+//            return boardResult;
+//        }).collect(Collectors.toList());
 
-        List<BoardResult> resultList = boardList.stream().map(boardEntity -> {
+        List<BoardResult> resultList = new ArrayList<>();
+        for(Board br : boardList){
             BoardResult boardResult = new BoardResult();
-            boardResult.setId(boardEntity.getId());
-            boardResult.setTitle(boardEntity.getTitle());
-            boardResult.setContent(boardEntity.getContent());
-            boardResult.setWriter(boardEntity.getUser().getNickname());
-            return boardResult;
-        }).collect(Collectors.toList());
-
+            boardResult.setId(br.getId());
+            boardResult.setTitle(br.getTitle());
+            boardResult.setContent(br.getContent());
+            boardResult.setWriter(br.getUser().getNickname());
+            System.out.println("br.getUser().toString() = " + br.getUser().toString());
+        resultList.add(boardResult);
+        }
+        
+//        if(resultList.get(0)!=null){
+//            System.out.println("resultList 널아님");
+//        }
+        
         result.status = true;
         result.data = resultList;
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -67,13 +92,13 @@ public class BoardServiceImpl implements BoardService{
                 boardResult.setId(boardEntity.getId());
                 boardResult.setTitle(boardEntity.getTitle());
                 boardResult.setContent(boardEntity.getContent());
-                // BaseTimeEntity가 먹히지 않기때문에 나는 이슈
-//                boardResult.setWriter(boardEntity.getUser().getNickname());
-//                if(boardEntity.getCreatedDate()!=null){
-//                    boardResult.setCreatedDate(boardEntity.getCreatedDate());
-//                }else{
-//                    boardResult.setUpdatedDate(boardEntity.getModifiedDate());
-//                }
+                boardResult.setWriter(boardEntity.getUser().getNickname());
+                if(boardEntity.getCreatedDate()!=null) {
+                    boardResult.setCreatedDate(boardEntity.getCreatedDate());
+                }
+                if(boardEntity.getModifiedDate()!=null){
+                    boardResult.setUpdatedDate(boardEntity.getModifiedDate());
+                }
                 return boardResult;
             }).get();
 
@@ -130,11 +155,10 @@ public class BoardServiceImpl implements BoardService{
         Optional<Board> boardOptional = boardJpaRepository.findById(id);
 
         if(boardOptional.isPresent()){
-            Board board = Board.builder()
-                    .id(id)
-                    .title(boardUpdateRequest.getTitle())
-                    .content(boardUpdateRequest.getContent())
-                    .build();
+            Board board = boardOptional.get();
+            board.setId(id);
+            board.setTitle(boardUpdateRequest.getTitle());
+            board.setContent(boardUpdateRequest.getContent());
             boardJpaRepository.save(board);
 
             result.status = true;
