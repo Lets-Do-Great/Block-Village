@@ -111,6 +111,7 @@ export default function MissionMaze() {
         {type: 'set_angle'},
         {type: 'set_angle_move'},
         {type: 'move_forward'},
+        {type: 'move_forward_1'},
       ],
     },
     {
