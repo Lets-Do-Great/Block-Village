@@ -26,7 +26,7 @@ public class MissionController {
     @Autowired
     MissionService missionService;
 
-    @ApiOperation(value = "전체 미션 조회", notes = "**sortType**\n" + "\n" + "- 오름차순 = 'increase'\n" + "- 내림차순 = 'decrease'\n" + "\n" + "**searchType**\n" + "\n" + "- 좋아요 순 = 'missionLike'\n" + "- new 순 = 'updatedAt'\n" + "- 난이도 순 = 'difficulty'\n" + "- 참여한 사람 순 =  'people'\n" + "\n" + "**keyword**\n" + "\n" + "- 검색어\n" + "\n" + "**keywordType**\n" + "\n" + "- 유저 = 'user'\n" + "- 제목 = 'title'")
+    @ApiOperation(value = "전체 미션 조회", notes = "**sortType**\n" + "\n" + "- 오름차순 = 'increase'\n" + "- 내림차순 = 'decrease'\n" + "\n" + "**searchType**\n" + "\n" + "- 좋아요 순 = 'favorite'\n" + "- new 순 = 'updatedAt'\n" + "- 난이도 순 = 'difficulty'\n" + "- 참여한 사람 순 =  'people'\n" + "\n" + "**keyword**\n" + "\n" + "- 검색어\n" + "\n" + "**keywordType**\n" + "\n" + "- 유저 = 'user'\n" + "- 제목 = 'title'")
     @PostMapping()
     public ResponseEntity<MissionResponse> GetMissions(@RequestBody MissionSearchTypeRequest missionSearchTypeRequest) {
         return missionService.findAll(missionSearchTypeRequest);

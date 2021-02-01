@@ -3,6 +3,7 @@ package com.ssafy.edu.service.mission;
 import com.ssafy.edu.model.mission.*;
 import com.ssafy.edu.model.mission.responseModel.findAllModel;
 import com.ssafy.edu.model.mission.responseModel.findOneModel;
+import com.ssafy.edu.model.mission.responseModel.pageModel;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.repository.mission.MissionDifficultyJpaRepository;
@@ -10,6 +11,9 @@ import com.ssafy.edu.repository.mission.MissionJpaRepository;
 import com.ssafy.edu.repository.mission.MissionFavoriteJpaRepository;
 import com.ssafy.edu.repository.mission.MissionTodoJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,23 +45,23 @@ public class MissionServiceImpl implements MissionService {
         ResponseEntity response;
         MissionResponse result = new MissionResponse();
 
-        List<Mission> missionList = new ArrayList<>();
+        Page<Mission> missionList = null;
 
 
         if (missionSearchTypeRequest.getKeywordType().equals("title")) {
             if (missionSearchTypeRequest.getSortType().equals("increase")) {
-                missionList = missionJpaRepository.findByTitleContaining(missionSearchTypeRequest.getKeyword(), Sort.by(missionSearchTypeRequest.getSearchType()));
+                missionList = missionJpaRepository.findByTitleContaining(missionSearchTypeRequest.getKeyword(), PageRequest.of(missionSearchTypeRequest.getPageNum(), 20, Sort.by(missionSearchTypeRequest.getSearchType())));
             } else if (missionSearchTypeRequest.getSortType().equals("decrease")) {
-                missionList = missionJpaRepository.findByTitleContaining(missionSearchTypeRequest.getKeyword(), Sort.by(missionSearchTypeRequest.getSearchType()).descending());
+                missionList = missionJpaRepository.findByTitleContaining(missionSearchTypeRequest.getKeyword(), PageRequest.of(missionSearchTypeRequest.getPageNum(), 20, Sort.by(missionSearchTypeRequest.getSearchType()).descending()));
             }
         } else if (missionSearchTypeRequest.getKeywordType().equals("user")) {
             if (missionSearchTypeRequest.getSortType().equals("increase")) {
-                missionList = missionJpaRepository.findByUserNickname(missionSearchTypeRequest.getKeyword(), Sort.by(missionSearchTypeRequest.getSearchType()));
+                missionList = missionJpaRepository.findByUserNicknameContaining(missionSearchTypeRequest.getKeyword(), PageRequest.of(missionSearchTypeRequest.getPageNum(), 20, Sort.by(missionSearchTypeRequest.getSearchType())));
             } else if (missionSearchTypeRequest.getSortType().equals("decrease")) {
-                missionList = missionJpaRepository.findByUserNickname(missionSearchTypeRequest.getKeyword(), Sort.by(missionSearchTypeRequest.getSearchType()).descending());
+                missionList = missionJpaRepository.findByUserNicknameContaining(missionSearchTypeRequest.getKeyword(), PageRequest.of(missionSearchTypeRequest.getPageNum(), 20, Sort.by(missionSearchTypeRequest.getSearchType()).descending()));
             }
         }
-        List<findAllModel> findAllModelList = new ArrayList<>();
+        List<Object> findAllModelList = new ArrayList<>();
         for (Mission mission : missionList) {
             findAllModel findAllModel = new findAllModel().builder()
                     .missionId(mission.getId())
@@ -69,6 +73,14 @@ public class MissionServiceImpl implements MissionService {
                     .build();
             findAllModelList.add(findAllModel);
         }
+        pageModel pageModel = new pageModel().builder()
+                .pageisFirst(missionList.isFirst())
+                .pageSize(missionList.getNumberOfElements())
+                .pageNumber(missionList.getNumber())
+                .pageTotalPages(missionList.getTotalPages())
+                .pageTotalElements((int)missionList.getTotalElements())
+                .build();
+        findAllModelList.add(pageModel);
         result.status = true;
         result.data = findAllModelList;
         response = new ResponseEntity<>(result, HttpStatus.OK);
@@ -120,7 +132,7 @@ public class MissionServiceImpl implements MissionService {
 
         if (userOptional.isPresent()) {
             List<findOneModel> findOneModelList = new ArrayList<>();
-            for(Mission  mission : userOptional.get().getMissionList()){
+            for (Mission mission : userOptional.get().getMissionList()) {
                 Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, mission.getId()));
                 Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmail(userEmail));
                 findOneModel findOneModel = new findOneModel().builder()
@@ -241,7 +253,7 @@ public class MissionServiceImpl implements MissionService {
         ResponseEntity response;
         MissionResponse result = new MissionResponse();
 
-        Optional<Mission> missionOptional = missionJpaRepository.findByIdAndUserEmail(missionDeleteRequest.getMissionId(),missionDeleteRequest.getEmail());
+        Optional<Mission> missionOptional = missionJpaRepository.findByIdAndUserEmail(missionDeleteRequest.getMissionId(), missionDeleteRequest.getEmail());
 
         if (missionOptional.isPresent()) {
             missionJpaRepository.delete(missionOptional.get());
@@ -262,7 +274,7 @@ public class MissionServiceImpl implements MissionService {
         Optional<User> userOptional = userJpaRepository.findByEmail(missionLikeRequest.getEmail());
         Optional<MissionFavorite> missionLikeUsersOptional = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userOptional.get().getEmail(), missionOptional.get().getId()));
 
-        if(missionLikeUsersOptional.isEmpty()){
+        if (missionLikeUsersOptional.isEmpty()) {
             MissionFavorite missionLikeUsers = new MissionFavorite().builder()
                     .mission(missionOptional.get())
                     .user(userOptional.get())
@@ -291,7 +303,7 @@ public class MissionServiceImpl implements MissionService {
             result.status = true;
             result.data = findOneModel;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        } else if(missionLikeUsersOptional.isPresent()){
+        } else if (missionLikeUsersOptional.isPresent()) {
             MissionFavorite missionLikeUsers = new MissionFavorite().builder()
                     .id(missionLikeUsersOptional.get().getId())
                     .mission(missionOptional.get())
@@ -322,11 +334,11 @@ public class MissionServiceImpl implements MissionService {
             result.status = true;
             result.data = findOneModel;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
+        } else {
             result.status = false;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
-        if(missionOptional.isPresent()){
+        if (missionOptional.isPresent()) {
             List<MissionFavorite> missionFavoriteList = missionFavoriteJpaRepository.findByMissionId(missionLikeRequest.getMissionId());
             missionOptional.get().setFavorite((int) missionFavoriteList.stream().filter(m -> m.isFavorite()).count());
             missionJpaRepository.save(missionOptional.get());
@@ -408,7 +420,7 @@ public class MissionServiceImpl implements MissionService {
 
             result.status = true;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else if (missionDoUsersList.isPresent()) {
+        } else if (missionDoUsersList.isPresent()) {
             MissionDoUsers missionDoUsers = new MissionDoUsers();
             missionDoUsers.setId(missionDoUsersList.get().getId());
             missionDoUsers.setMission(missionOptional.get());
@@ -424,7 +436,7 @@ public class MissionServiceImpl implements MissionService {
         }
 
         List<MissionDoUsers> missionDoUsersCalculation = missionTodoJpaRepository.findByMissionId(missionOptional.get().getId());
-        if (result.status&&missionDoUsersCalculation.size() >= 0) {
+        if (result.status && missionDoUsersCalculation.size() >= 0) {
             if (missionOptional.isPresent()) {
                 missionOptional.get().setPeople(missionDoUsersCalculation.size());
                 missionJpaRepository.save(missionOptional.get());

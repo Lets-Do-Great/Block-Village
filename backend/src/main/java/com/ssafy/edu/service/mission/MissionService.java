@@ -7,6 +7,8 @@ import com.ssafy.edu.model.mission.MissionOneResponse;
 import com.ssafy.edu.model.mission.MissionResponse;
 import org.springframework.http.ResponseEntity;
 
+import java.awt.print.Pageable;
+
 public interface MissionService {
     public ResponseEntity<MissionResponse> findAll(MissionSearchTypeRequest missionSearchTypeRequest);
     public ResponseEntity<MissionOneResponse> findGetOne(Long missionId , String userEmail);

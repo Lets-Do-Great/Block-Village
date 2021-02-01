@@ -36,4 +36,8 @@ public class MissionSearchTypeRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String keywordType;
+
+    @ApiModelProperty(required = true)
+    @NotNull
+    int pageNum;
 }
