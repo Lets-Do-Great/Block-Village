@@ -1,0 +1,40 @@
+.title {
+    margin: 3px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.agree_form {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.comment_agree {
+    width: 300px;
+    font-size: 12px;
+    display: inline;
+}
+
+.check_both {
+    float: right;
+}
+
+
+.agree_content {
+    width: 350px;
+    height: 80px;
+    border: 1px solid black;
+    font-size: 10px;
+}
+
+.button_agree{
+    margin-top: 10px;
+    width: 300px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #ff8896;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}

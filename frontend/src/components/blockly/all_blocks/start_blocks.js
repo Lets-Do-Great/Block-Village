@@ -1,5 +1,4 @@
 import Blockly from 'blockly';
-import 'blockly/python';
 import 'blockly/javascript';
 
 // 리스트 만드는 시작 버튼
@@ -8,21 +7,16 @@ Blockly.Blocks['start_button'] = {
     this.appendDummyInput()
         .appendField("시작하기 버튼을 클릭했을 때");
     this.setNextStatement(true, null);
-    this.setColour(330);
- this.setTooltip("");
- this.setHelpUrl("");
+    this.setColour(200);
+    this.setStyle('start-blocks');
+  this.setTooltip("");
+  this.setHelpUrl("");
   }
 };
 
 Blockly.JavaScript['start_button'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = 'var x = 0;\nvar y = 0;\nvar move = [];\nvar dir = 0;\nvar dir_info = [[0, 1], [0, -1], [-1, 0], [1, 0]];\n';
-  return code;
-};
-
-Blockly.Python['start_button'] = function(block) {
-  // TODO: Assemble Python into code variable.
-  var code = 'move = []\n';
   return code;
 };
 
@@ -33,20 +27,16 @@ Blockly.Blocks['end_button'] = {
     this.appendDummyInput()
         .appendField("종료");
     this.setPreviousStatement(true, null);
-    this.setColour(330);
- this.setTooltip("");
- this.setHelpUrl("");
+    this.setColour(0);
+    this.setStyle('start-blocks');
+    this.setTooltip("");
+    this.setHelpUrl("");
   }
 };
 
 Blockly.JavaScript['end_button'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = 'console.log(move)\n';
+  var code = 'console.log(move);\n';
   return code;
 };
 
-Blockly.Python['end_button'] = function(block) {
-  // TODO: Assemble Python into code variable.
-  var code = '...\n';
-  return code;
-};
