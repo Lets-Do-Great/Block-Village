@@ -1,8 +1,9 @@
 import React from 'react';
-import BlocklyNavbar from '../../blockly_navbar/blockly_navbar';
+
 import BlockBill from '../block_bill/block_bill';
 import BlockCart from '../block_cart/block_cart';
 import BlockMenu from '../block_menu/block_menu';
+import StoreNavbar from '../store_navbar/store_navbar';
 import styles from './block_store.module.css'
 
 // 블럭을 카테고리로 구분해야함.
@@ -12,7 +13,7 @@ import styles from './block_store.module.css'
 const BlockStore = (props) => {
   return (
     <div className={styles.body}>
-      <BlocklyNavbar />
+      <StoreNavbar />
       <div className={styles.container}>
 
         {/* 왼쪽 */}
@@ -25,9 +26,11 @@ const BlockStore = (props) => {
           </div>
         </div>
 
+        {/* 오른쪽 */}
         <div className={styles.blocks}>
-          {/* 여기는 컴포넌트로 관리할 것. */}
-          <BlockMenu />
+          <div className={styles.store_body}>
+            <BlockMenu />
+          </div>
         </div>
 
       </div>

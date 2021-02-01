@@ -3,7 +3,7 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 
 import styles from './App.module.css';
 
-import MissionMain from './components/blockly/mission_main/mission_main';
+import MissionMain from './components/blockly/mission/mission_main/mission_main';
 import TutorialMain from './components/blockly/tutorial_main/tutorial_main';
 import Main from './components/main/main/main';
 import MissionMaze from './components/blockly/mission_maze/mission_maze';
@@ -14,6 +14,7 @@ import ChallengeContainer from './containers/challenge_container';
 import MyPageContainer from './containers/my_page_container';
 
 import SubMain from './components/main/sub_main/sub_main';
+import TestMypage from './components/my_page/test_mypage';
 
 
 
@@ -33,7 +34,8 @@ function App() {
         </Route>
         
         <Route exact path="/my_page">
-          <MyPageContainer />
+          <TestMypage />
+          {/* <MyPageContainer /> */}
         </Route>
 
         <Route exact path="/main">
