@@ -8,7 +8,7 @@ import * as MissionAction from '../modules/mission';
 const MissionContainer = () => {
 // 현재 검색 조건 데이터
 const [search, setSearch] = useState({
-    searchType: 'new',
+    searchType: 'updatedAt',
     sortType: 'increase',
     keyword: '',
     keywordType: 'title',
@@ -60,8 +60,10 @@ const getMissionList = async () => {
 
 // 현재 선택한 미션 조회
 const getMission = async (id) => {
+    console.log(id);
     try{
-        await dispatch(MissionAction.getMissionList(id));
+        // await dispatch(MissionAction.getMission({ missionId: id, email: userInfo.email }));
+        await dispatch(MissionAction.getMission({ missionId: id, email: 'wlsdhr0831@naver.com' }));
     } catch(e) {
         console.log(e);
     }
@@ -96,7 +98,7 @@ return (
         /> 
 
         <SearchType
-            onChangeSearch={onChangeSearch}
+            onChangeSearchType={onChangeSearchType}
         />
 
         <ListForm

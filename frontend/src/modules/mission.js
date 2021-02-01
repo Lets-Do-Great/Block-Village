@@ -56,36 +56,19 @@ export const setDifficultyMission = createAction(
 
 // 초기상태
 const initialState = {
-    missionList: [
-        {
-            missionId: 1,
-            email: 'wlsdhr0831@naver.com',
-            title: '미션1 제목',
-            difficulty: 3,
-            likeCnt: 10,
-            peopleCnt: 20,
-        },
-        {
-            missionId: 2,
-            email: 'wlsdhr0831@naver.com',
-            title: '미션2 제목',
-            difficulty: 3,
-            likeCnt: 10,
-            peopleCnt: 20,
-        }
-    ],
+    missionList: [],
     selectedMission: {
-        missionId: '2',
-        nickName: '싸피',
-        title: '미션2 제목',
-        created_at: '2020/01/31',
-        updated_at: '2020/02/01',
-        content: '미션2 내용',
-        code: '미션2 코드',
-        imageUrl: '이미지',
-        difficulty: '3',
-        likeCnt: '10',
-        peopleCnt: '20',
+        missionId: '',
+        nickName: '',
+        title: '',
+        created_at: '',
+        updated_at: '',
+        content: '',
+        code: '',
+        imageUrl: '',
+        difficulty: '',
+        likeCnt: '',
+        peopleCnt: '',
         like: false,
     },
 };
@@ -118,14 +101,14 @@ export default applyPenders(missionReducer, [
             return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            return updateObject(state, {});
+            return updateObject(state, state);
         }
     },
     {
         type: GET_MISSION,
         onSuccess: (state, action) => {
             const response = action.payload;
-
+            console.log(action.payload);
             if(response.status === 200){
                 if(response.data.status){
                     return updateObject(state, {
@@ -142,7 +125,7 @@ export default applyPenders(missionReducer, [
             return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            return updateObject(state, {});
+            return updateObject(state, state);
         }
     },
     {
@@ -166,7 +149,7 @@ export default applyPenders(missionReducer, [
             return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            return updateObject(state, {});
+            return updateObject(state, state);
         }
     },
     {
@@ -190,7 +173,7 @@ export default applyPenders(missionReducer, [
             return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            return updateObject(state, {});
+            return updateObject(state, state);
         }
     },
     {
@@ -214,7 +197,7 @@ export default applyPenders(missionReducer, [
             return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            return updateObject(state, {});
+            return updateObject(state, state);
         }
     },
     {
@@ -238,7 +221,7 @@ export default applyPenders(missionReducer, [
             return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            return updateObject(state, {});
+            return updateObject(state, state);
         }
     },
     {
@@ -250,6 +233,7 @@ export default applyPenders(missionReducer, [
                 if(response.data.status){
                     return updateObject(state, {
                         ...state,
+                        selectedMission: response.data.data,
                     });
                 } else{
                     alert("좋아요 설정 기능에 문제가 발생했습니다.");
@@ -261,7 +245,7 @@ export default applyPenders(missionReducer, [
             return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            return updateObject(state, {});
+            return updateObject(state, state);
         }
     },
     {
@@ -284,7 +268,7 @@ export default applyPenders(missionReducer, [
             return updateObject(state, state);
         },
         onFailure: (state, action) => {
-            return updateObject(state, {});
+            return updateObject(state, state);
         }
     },
 ]);

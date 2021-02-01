@@ -1,18 +1,18 @@
 import client from './client';
 
 // 전체 미션 목록 조회 ( 검색 조건에 따라 )
-export const getMissionList = ({ searchType, sortType, keyword, keywordType }) => {
+export const getMissionList = ({ searchType, sortType, keyword, keywordType, pageNum }) => {
     return client({
         url: 'mission',
         method: 'post',
-        data : { searchType, sortType, keyword, keywordType },
+        data : { searchType, sortType, keyword, keywordType, pageNum },
     });
 }
 
 // 현재 조회중인 미션 정보 조회
-export const getMission = ({ missionId }) => {
+export const getMission = ({ email, missionId }) => {
     return client({
-        url: `mission/${missionId}`,
+        url: `mission/${email}/${missionId}`,
         method: 'get',
     });
 }
@@ -31,7 +31,7 @@ export const setMission = (
         return client({
             url: `mission/${email}`,
             method: 'post',
-            data : { missionId, title, content, code, image },        
+            data : { email, missionId, title, content, code, image },        
         }
     );
 }
@@ -41,8 +41,8 @@ export const modifyMission = (
     { email, missionId, title, content, code, image }) => {
         return client({
             url: `mission/${missionId}`,
-            method: 'post',
-            data : { email, title, content, code, image },        
+            method: 'put',
+            data : { email, missionId, title, content, code, image },        
         }
     );
 }
@@ -56,19 +56,28 @@ export const deleteMission = ({ missionId }) => {
 }
 
 // 미션 좋아요
-export const setLikeMission = ({ email, missionId, like }) => {
+export const setLikeMission = ({ email, missionId, favorite }) => {
     return client({
-        url: `mission/like/${missionId}`,
+        url: `mission/like`,
         method: 'post',
-        data : { email, like },        
+        data : { email, missionId, favorite },        
     });
 }
 
 // 미션 난이도 설정
 export const setDifficultyMission = ({ email, missionId, difficulty }) => {
     return client({
-        url: `mission/difficult/${missionId}`,
+        url: `mission/difficult`,
         method: 'post',
-        data : { email, difficulty },        
+        data: { email, missionId, difficulty },        
     });
+}
+
+// 미션 참가/완료 설정
+export const setTodoMission = ({ email, missionId, todo }) => {
+    return client({
+        url: 'mission/todo',
+        method: 'post',
+        data: { email, missionId, todo },
+    })
 }

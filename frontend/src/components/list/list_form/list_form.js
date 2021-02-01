@@ -7,6 +7,8 @@ const ListForm = ({ list, detail, getDetail,
                     setLike, setDislike, onChangeSearch }) => {
 
     const clickCard = (e) => {
+        console.log(list);
+        console.log(e);
         getDetail(e.target.id);
     }
 

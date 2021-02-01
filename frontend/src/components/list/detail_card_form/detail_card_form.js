@@ -3,16 +3,15 @@ import styles from './detail_card_form.module.css';
 import * as Icon from 'react-icons/md';
 
 const DetailCardForm = ({ detail, setLike, setDislike }) => {
-    const {nickName, title, created_at, updated_at, like,
+    const {nickName, title, created_at, updated_at, favorite,
         content, difficulty, likeCnt, peopleCnt } = detail;
 
     const changeLike = () => {
-        if(like){
+        if(favorite){
             setDislike();
         } else {
             setLike();
         }
-        console.log(detail);
     };
 
     return (
@@ -21,7 +20,7 @@ const DetailCardForm = ({ detail, setLike, setDislike }) => {
         <div 
             className={styles.heart}
             onClick={changeLike}>
-            { like
+            { favorite
                 ? <Icon.MdFavorite/>
                 : <Icon.MdFavoriteBorder/> }
         </div>
