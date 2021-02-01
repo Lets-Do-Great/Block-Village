@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './tutorial_navbar.module.css'
 import { BsDisplayFill, BsDisplay } from 'react-icons/bs';
+import { FaRegCircle, FaRegCheckCircle } from 'react-icons/fa';
 
 import { useHistory } from 'react-router-dom';
 
-const TutorialNavbar = ({ modal, statusModal }) => {
+const TutorialNavbar = ({ title, modal, statusModal, icon_status }) => {
   const history = useHistory();
 
   const onoffModal = () => {
@@ -13,10 +14,31 @@ const TutorialNavbar = ({ modal, statusModal }) => {
 
   return (
     <header className={styles.navbar}>
-      
+
+      <div className={styles.step_button1}>
+        {icon_status[0]
+          ? <FaRegCheckCircle size="45" color="#FFFFFF" /> 
+          : <FaRegCircle size="45" color="#FFFFFF" />
+        }
+      </div>
+
+      <div className={styles.step_button2}>
+        {icon_status[1]
+          ? <FaRegCheckCircle size="45" color="#FFFFFF" /> 
+          : <FaRegCircle size="45" color="#FFFFFF" />
+        }
+      </div>
+
+      <div className={styles.step_button3}>
+        {icon_status[2]
+          ? <FaRegCheckCircle size="45" color="#FFFFFF" /> 
+          : <FaRegCircle size="45" color="#FFFFFF" />
+        }
+      </div>
+   
       <img className={styles.logo_img} src="/images/logo1.png" />
 
-      <h1 className={styles.title}>튜토리얼 1</h1>
+      <h1 className={styles.title}>{ title }</h1>
 
       <div className={styles.modal_button} onClick={onoffModal}>
         {modal
