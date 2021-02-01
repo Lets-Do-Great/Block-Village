@@ -1,6 +1,10 @@
 package com.ssafy.edu.controller.mission;
 
 import com.ssafy.edu.model.mission.*;
+import com.ssafy.edu.model.mission.MissionDifficultyResponse;
+import com.ssafy.edu.model.mission.MissionFavoriteResponse;
+import com.ssafy.edu.model.mission.MissionOneResponse;
+import com.ssafy.edu.model.mission.MissionResponse;
 import com.ssafy.edu.service.mission.MissionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -54,8 +58,8 @@ public class MissionController {
 
     @ApiOperation(value = "미션 삭제", notes = "미션 삭제 {\n" + "\temail,\n" + "\tmissionId, \n" + "}")
     @DeleteMapping("/{missionId}")
-    public ResponseEntity<MissionResponse> deleteMission(@PathVariable("missionId") Long missionId) {
-        return missionService.deleteMission(missionId);
+    public ResponseEntity<MissionResponse> deleteMission(@RequestBody MissionDeleteRequest missionDeleteRequest) {
+        return missionService.deleteMission(missionDeleteRequest);
     }
 
     @ApiOperation(value = "미션 진행도", notes = "미션 진행도 {\n" + "\temail,\n" + "\tmissionId, \n" +  "\ttodo\n"+"}")

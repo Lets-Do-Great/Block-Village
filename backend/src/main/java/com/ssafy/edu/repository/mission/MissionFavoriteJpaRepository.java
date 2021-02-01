@@ -5,10 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MissionFavoriteJpaRepository extends JpaRepository<MissionFavorite,Long> {
-    public List<MissionFavorite> findByUserEmailAndMissionId(String userEmail, Long missionId);
+    public MissionFavorite findByUserEmailAndMissionId(String userEmail, Long missionId);
     public List<MissionFavorite> findByMissionId(Long missionId);
-    public List<MissionFavorite> findByUserEmail(String userEmail);
+    public MissionFavorite findByUserEmail(String userEmail);
 }

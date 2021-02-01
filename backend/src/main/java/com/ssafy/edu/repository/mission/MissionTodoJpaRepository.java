@@ -5,11 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MissionTodoJpaRepository extends JpaRepository<MissionDoUsers,Long> {
-    public List<MissionDoUsers> findByUserEmailAndMissionId(String userEmail, Long missionId);
+    public MissionDoUsers findByUserEmailAndMissionId(String userEmail, Long missionId);
     public List<MissionDoUsers> findByMissionId(Long missionId);
-    public List<MissionDoUsers> findByUserEmail(String userEmail);
+    public MissionDoUsers findByUserEmail(String userEmail);
 
 }

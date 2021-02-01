@@ -13,5 +13,5 @@ public class MissionOneResponse {
     public boolean status;
 
     @ApiModelProperty(value = "data", position = 2)
-    public List<Object> data;
+    public Object data;
 }
