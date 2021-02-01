@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
  * missionId : 좋아요 누른 미션의 id
  * favorite : 좋아요 boolean
  */
-@Entity
 @Valid
 @ToString
 @Getter
