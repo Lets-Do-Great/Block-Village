@@ -37,13 +37,9 @@
 
 ⇒ 미니룸 : 챌린지나 미션으로 주어진 아이템으로 꾸미기
 
-⇒ 일촌, 방문자수, 랜덤방문, 방명록(일촌평)
-
 ⇒ 내가 구입한 블록 목록, 내가 가진 아이템 목록, 보유한 마일리지
 
 ⇒ 내가 작성한 미션, 답, 작품 목록 및 조회, 수정, 삭제
-
-⇒ 일별 검색 / 제목 검색
 
 ⇒ 내 정보 조회, 수정, 탈퇴
 
@@ -124,51 +120,45 @@
 - React.js
 - Redux, Redux-middleware
 
-# Gantt Chart - Sub PJT 2 (01/18 - 01/29)
-
+# Gantt Chart - Sub PJT 3 (02/01 - 02/19)
+    
 ```mermaid
 gantt
     dateFormat  MM-DD
-    title       Sub PJT 2 진행상황
+    title       Sub PJT 3 진행상황
     %% excludes    weekends
     %% (`excludes` accepts specific dates in YYYY-MM-DD format, days of the week ("sunday") or "weekends", but not the word "weekdays".)
-
-    section 프로젝트 준비
-    주제 선정				  :done, 01-18, 1d
-    기능 목록 및 상세 도출			:done, 01-18, 1d
-    개발 환경 구성             			:done, 01-18, 1d
-    화면 기획				  :active, 01-18, 2d
-    팀 명 및 서비스 명 정하기			  :active, 01-18, 5d
-	
+    	
 	section Frontend
-    [로그인 / 회원가입] 페이지 레이아웃 구성 및 제작	:done, 01-18, 1d
-    [API] redux-middleware 요청 기능 구현	      	 :crit, 01-18, 3d
-    [마이페이지] 레이아웃 구성 및 제작 	 	 :active, 01-18, 5d
-    [미션/작품] 레이아웃 구성 및 제작		 	 :todo, 01-23, 3d
-    [공지사항] 레이아웃 구성 및 제작   	  		:todo, 01-25, 2d
-    [챌린지] 레이아웃 구성 및 제작   	  		:todo, 01-26, 3d
-    [디자인] 일러스트 제작	   	  		:todo, 01-28, 3d
-    
-    section Blockly
-    [Blockly]save				  :todo,  01-18, 2d
-    [Blockly]load 부분 구현			:todo, 01-20 , 3d
-    [Blockly]custom blockly 구현				  :todo, 01-22, 3d
-    [Blockly Store]필요 block 구현             :todo, 01-25, 1d
-	[Blockly Stire]전체 구현             :crit, 01-26, 4d
+    [마이페이지] 화면 제작 및 구현	:crit, 02-01, 2d
+    [메인] 이미지 제작	      	 :todo, 02-01, 2d
+    [미션] API 통신 	 	 :crit, 02-01, 3d
+    [상점] 이미지 제작		 	 :todo, 02-03, 1d
+    [작품] API 통신   	  		:crit, 02-03, 3d
+    [작품] 화면 제작 및 구현   	  		:todo, 02-03, 3d
+    [마이페이지] 이미지 제작	   	  		:todo, 02-04, 2d
+			[튜토리얼] 화면 제작 및 test       :todo, 02-01, 2d
+			[블록 상점] api test 및 레이아웃 재작업     :todo, 02-03, 1d
+		  [챌린지] api test 및 화면 재작업      :todo, 02-04, 2d
 
-    section BackEnd
-    [DB]DB 및 ERD				  :crit,  01-18, 12d
-    BackEnd 기능 명세서			:crit, 01-18 , 12d
-    [회원관리]CRUD				  :todo, 01-18, 4d
-    [회원관리]이메일 인증             :todo, 01-19, 2d
-	[회원관리]비밀번호 암호화            :todo, 01-19, 2d
-    [회원관리]소셜 로그인           :todo, 01-19, 2d
-    [DB]JPA 양방향 매핑           :crit, 01-19, 3d
-    [REST]REST URI 및 Response 데이터           :todo, 01-22, 8d
-    Blockly 기능 명세           :crit, 01-25, 3d
-    미니홈피 기능 명세           :crit, 01-26, 4d
-    
+  section BackEnd
+		  [사용자 정보] jwt 적용                  :crit,  02-01, 1d
+      [게시글] 기능 명세 및 API            :crit, 02-02 , 2d
+      [AWS] S3 이미지 파일 저장            :todo, 02-03 , 1d
+      [배포 및 테스트] Nginx 및 Docker            :todo, 02-04 , 2d
+    [미션]기능 및 API				  :crit,  02-01, 1d
+	    [작품]기능 및 API			:crit, 02-02 , 2d
+	    [작품]정보,관리,목록			:todo, 02-02 , 1d
+	    [작품]기능 명세			:todo, 02-03 , 1d
+	    [챌린지]기능 및 API				  :crit, 02-04, 2d
+	    [챌린지]정보,관리,목록			:todo, 02-04 , 1d
+	    [챌린지]기능 명세				:todo, 02-05 , 1d
+			[블럭]기능 및 API            :crit,  02-01, 1d
+			[상점]기능 및 API            :crit, 02-02 , 1d
+			[상점]정보,관리,목록      :todo, 02-03 , 3d
+			[상점]기능 명세               :todo, 02-03 , 3d
 ```
+
 
 ## Code Style ( Google Convention )
 
