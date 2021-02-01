@@ -46,8 +46,11 @@ public class User {
     private String emailAuth;
 
     private int mileage;
-//    @Column(name = "profile_image")
-//    private File?String profileImage;
+    private String profile;
     private String introduction;
+
+    private boolean admin;
+
+    // follower & following
 
 }
