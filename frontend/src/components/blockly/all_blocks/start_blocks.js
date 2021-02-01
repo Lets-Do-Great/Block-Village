@@ -36,7 +36,7 @@ Blockly.Blocks['end_button'] = {
 
 Blockly.JavaScript['end_button'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = 'console.log(move)\n';
+  var code = 'console.log(move);\n';
   return code;
 };
 

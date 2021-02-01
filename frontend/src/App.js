@@ -4,7 +4,7 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 import styles from './App.module.css';
 
 import MissionMain from './components/blockly/mission/mission_main/mission_main';
-import TutorialMain from './components/blockly/tutorial_main/tutorial_main';
+import TutorialMain from './components/blockly/tutorial/tutorial_main/tutorial_main';
 import Main from './components/main/main/main';
 import MissionMaze from './components/blockly/mission_maze/mission_maze';
 import BlockStoreContainer from './containers/block_store_container';
