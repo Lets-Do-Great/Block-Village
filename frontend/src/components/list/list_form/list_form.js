@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import ListCardForm from '../list_card_form/list_card_form';
 import DetailCardForm from '../detail_card_form/detail_card_form';
 import styles from './list_form.module.css';
@@ -6,10 +6,15 @@ import styles from './list_form.module.css';
 const ListForm = ({ list, detail, getDetail, 
                     setLike, setDislike, onChangeSearch }) => {
 
+    const [ modal, setModal ] = useState(false);
+
     const clickCard = (e) => {
-        console.log(list);
-        console.log(e);
         getDetail(e.target.id);
+        setModal(true);
+    }
+
+    const closeModal = () => {
+        setModal(false);
     }
 
     return (
@@ -19,12 +24,16 @@ const ListForm = ({ list, detail, getDetail,
             <option name="sortType" value="increase">낮은 순</option>
         </select>
 
-        <DetailCardForm
-            detail={detail}
-            setLike={setLike}
-            setDislike={setDislike}
-        />
-        
+        { modal && 
+        <div className={styles.modal_wrapper}>
+            <DetailCardForm
+                detail={detail}
+                setLike={setLike}
+                setDislike={setDislike}
+                closeModal={closeModal}
+            />
+        </div> }
+
         { list.map(card => (
             <ListCardForm
                 key={card.missionId}

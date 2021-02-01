@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './detail_card_form.module.css';
 import * as Icon from 'react-icons/md';
 
-const DetailCardForm = ({ detail, setLike, setDislike }) => {
+const DetailCardForm = ({ detail, setLike, setDislike, closeModal }) => {
     const {nickName, title, created_at, updated_at, favorite,
         content, difficulty, likeCnt, peopleCnt } = detail;
 
@@ -43,6 +43,7 @@ const DetailCardForm = ({ detail, setLike, setDislike }) => {
 
         <div>{ content }</div>
         <button className={styles.button}>미션 시작하기</button>
+        <button onClick={closeModal} className={styles.close}>닫기</button>
     </div>
     );
 };
