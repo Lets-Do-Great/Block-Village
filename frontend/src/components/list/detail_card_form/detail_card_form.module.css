@@ -37,3 +37,16 @@
     font-weight: bold;
     text-align: center;
 }
+
+.close {
+    display: inline;
+    top: 29%;
+    right: 37%;
+    position: absolute;
+    font-size: 40px;
+    color: darkgray;
+}
+
+.close:hover{
+    color: red;
+}

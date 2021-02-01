@@ -16,6 +16,11 @@ const DetailCardForm = ({ detail, setLike, setDislike, closeModal }) => {
 
     return (
     <div className={styles.detail_form}>
+        <div 
+            onClick={closeModal} 
+            className={styles.close}>
+                <Icon.MdHighlightOff/></div>
+
         <div className={styles.title}>{ title }</div>
         <div 
             className={styles.heart}
@@ -43,7 +48,6 @@ const DetailCardForm = ({ detail, setLike, setDislike, closeModal }) => {
 
         <div>{ content }</div>
         <button className={styles.button}>미션 시작하기</button>
-        <button onClick={closeModal} className={styles.close}>닫기</button>
     </div>
     );
 };

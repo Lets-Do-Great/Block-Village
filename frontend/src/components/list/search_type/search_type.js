@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './search_type.module.css';
 
 const SearchType = ({ onChangeSearchType }) => {
-    return (<>
+    return (<div className={styles.typeForm}>
         <button 
             className={styles.button}
             onClick={onChangeSearchType}
@@ -19,7 +19,7 @@ const SearchType = ({ onChangeSearchType }) => {
             className={styles.button}
             onClick={onChangeSearchType}
             value="difficulty">난이도 순</button>
-    </>);
+    </div>);
 }
 
 export default SearchType;

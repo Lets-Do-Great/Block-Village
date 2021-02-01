@@ -40,7 +40,6 @@ function App() {
           : (<>
             <SubMain/>
             <button onClick={clickSkip}>건너뛰기</button>
-            <MissionContainer/>
             </>)
         )
       }

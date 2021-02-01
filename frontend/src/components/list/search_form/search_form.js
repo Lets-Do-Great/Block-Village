@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './search_form.module.css';
 
 const SearchForm = ({ onChangeSearch, onClickEnter, search }) => {
-    return (<>
+    return (<div>
         <select className={styles.select} onChange={onChangeSearch}>
             <option 
                 className={styles.option}
@@ -22,7 +22,7 @@ const SearchForm = ({ onChangeSearch, onClickEnter, search }) => {
             onKeyDown={onClickEnter}
             placeholder="검색어를 입력하세요."
         />
-    </>);
+    </div>);
 }
 
 export default SearchForm;

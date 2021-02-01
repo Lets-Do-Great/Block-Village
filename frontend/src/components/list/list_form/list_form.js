@@ -34,6 +34,7 @@ const ListForm = ({ list, detail, getDetail,
             />
         </div> }
 
+        <div className={styles.listForm}>
         { list.map(card => (
             <ListCardForm
                 key={card.missionId}
@@ -45,6 +46,7 @@ const ListForm = ({ list, detail, getDetail,
                 clickCard={clickCard}
             />
         ))}
+        </div>
     </>
     );
 };

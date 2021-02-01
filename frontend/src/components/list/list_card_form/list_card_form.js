@@ -11,9 +11,17 @@ const ListCardForm = ({ missionId, title, difficulty, likeCnt, peopleCnt, clickC
                 onClick={clickCard}>
                     { title }</p>
             <div className={styles.img}></div>
-            <Icon.MdAssistantPhoto/>{ difficulty }
-            <Icon.MdFace/>{ peopleCnt }
-            <Icon.MdFavorite/>{ likeCnt } <p/>
+            <div className={styles.icon_box}>
+                <div className={styles.icon}>
+                    <Icon.MdAssistantPhoto/> { difficulty }
+                </div>
+                <div className={styles.icon}>
+                    <Icon.MdFace/> { peopleCnt }
+                </div>
+                <div className={styles.icon}>
+                    <Icon.MdFavorite/> { likeCnt } <p/>
+                </div>
+            </div>
         </div>
     </>
     );
