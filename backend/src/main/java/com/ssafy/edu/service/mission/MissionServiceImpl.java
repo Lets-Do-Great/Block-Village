@@ -41,10 +41,10 @@ public class MissionServiceImpl implements MissionService {
     UserJpaRepository userJpaRepository;
 
     @Override
-    public ResponseEntity<MissionResponse> findAll(MissionSearchTypeRequest missionSearchTypeRequest) {
+    public ResponseEntity<MissionPageResponse> findAll(MissionSearchTypeRequest missionSearchTypeRequest) {
         ResponseEntity response;
-        MissionResponse result = new MissionResponse();
-
+        MissionPageResponse result = new MissionPageResponse();
+        List<Object> resultObject = new ArrayList<>();
         Page<Mission> missionList = null;
 
 
@@ -73,6 +73,7 @@ public class MissionServiceImpl implements MissionService {
                     .build();
             findAllModelList.add(findAllModel);
         }
+        resultObject.add(findAllModelList);
         pageModel pageModel = new pageModel().builder()
                 .pageisFirst(missionList.isFirst())
                 .pageSize(missionList.getNumberOfElements())
@@ -80,9 +81,9 @@ public class MissionServiceImpl implements MissionService {
                 .pageTotalPages(missionList.getTotalPages())
                 .pageTotalElements((int)missionList.getTotalElements())
                 .build();
-        findAllModelList.add(pageModel);
+        resultObject.add(pageModel);
         result.status = true;
-        result.data = findAllModelList;
+        result.data = resultObject;
         response = new ResponseEntity<>(result, HttpStatus.OK);
         return response;
     }

@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import java.awt.print.Pageable;
 
 public interface MissionService {
-    public ResponseEntity<MissionResponse> findAll(MissionSearchTypeRequest missionSearchTypeRequest);
+    public ResponseEntity<MissionPageResponse> findAll(MissionSearchTypeRequest missionSearchTypeRequest);
     public ResponseEntity<MissionOneResponse> findGetOne(Long missionId , String userEmail);
     public ResponseEntity<MissionResponse> findGetOneByUserId(String userEmail);
     public ResponseEntity<MissionOneResponse> signUpMission(MissionSignUpRequest missionSignUpRequest);
