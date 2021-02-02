@@ -1,7 +1,7 @@
 import React from 'react';
 import MyInfoForm from '../my_info_form/my_info_form';
 
-const MyPageRead = ({ userInfo, setType, deleteInfo }) => {
+const MyPageRead = ({ userInfo, setType, deleteInfo, closeModal }) => {
 
   const onClickModify = () => {
     setType('modify');
@@ -9,7 +9,7 @@ const MyPageRead = ({ userInfo, setType, deleteInfo }) => {
 
   return (
   <>
-    <button>닫기</button>
+    <button onClick={closeModal}>닫기</button>
     <MyInfoForm
       userInfo={userInfo}
     />

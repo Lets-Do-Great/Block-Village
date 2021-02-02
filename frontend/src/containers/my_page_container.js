@@ -4,7 +4,7 @@ import MyInfoRead from '../components/my_page/my_info/my_info_read/my_info_read/
 import MyInfoModify from '../components/my_page/my_info/my_info_modify/my_info_modify/my_info_modify';
 import * as UserAction from '../modules/user';
 
-const MyPageContainer = () => {
+const MyPageContainer = ({ closeModal }) => {
     // 정보 조회 / 수정 바꾸는 변수
     const [type, setType] = useState('read');
 
@@ -76,7 +76,8 @@ const MyPageContainer = () => {
                 <MyInfoRead 
                     userInfo={userInfo}
                     setType={setType}
-                    deleteInfo={deleteInfo}/> }
+                    deleteInfo={deleteInfo}
+                    closeModal={closeModal}/> }
             { type === 'modify' &&
                 <MyInfoModify
                     modifyInfo={modifyInfo}

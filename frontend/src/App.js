@@ -10,6 +10,7 @@ import BlockStoreContainer from './containers/block_store_container';
 import ChallengeContainer from './containers/challenge_container';
 import SubMain from './components/main/sub_main/sub_main';
 import MissionContainer from './containers/mission_container';
+import MyPageMain from './components/my_page/my_page_main/my_page_main';
 
 import TestMypage from './components/my_page/test_mypage';
 
@@ -24,8 +25,8 @@ function App() {
         </Route>
         
         <Route exact path="/my_page">
-          <TestMypage />
-          {/* <MyPageContainer /> */}
+          {/* <TestMypage /> */}
+          <MyPageMain />
         </Route>
 
         <Route exact path="/main">
