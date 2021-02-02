@@ -97,7 +97,7 @@ public class MissionServiceImpl implements MissionService {
 
         if (missionOptional.isPresent()) {
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, missionId));
-            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmail(userEmail));
+            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(userEmail,missionId));
             findOneModel findOneModel = new findOneModel().builder()
                     .missionId(missionOptional.get().getId())
                     .email(missionOptional.get().getUser().getEmail())
@@ -135,7 +135,7 @@ public class MissionServiceImpl implements MissionService {
             List<findOneModel> findOneModelList = new ArrayList<>();
             for (Mission mission : userOptional.get().getMissionList()) {
                 Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, mission.getId()));
-                Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmail(userEmail));
+                Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(userEmail,mission.getId()));
                 findOneModel findOneModel = new findOneModel().builder()
                         .missionId(mission.getId())
                         .email(userOptional.get().getEmail())
@@ -223,7 +223,7 @@ public class MissionServiceImpl implements MissionService {
             mission.setUpdatedAt(now);
             Mission missionResult = missionJpaRepository.save(mission);
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionUpdateRequest.getEmail(), missionResult.getId()));
-            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmail(missionUpdateRequest.getEmail()));
+            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionUpdateRequest.getEmail(),missionResult.getId()));
             findOneModel findOneModel = new findOneModel().builder()
                     .missionId(missionResult.getId())
                     .email(missionResult.getUser().getEmail())
@@ -290,7 +290,7 @@ public class MissionServiceImpl implements MissionService {
             }
             Optional<Mission> mission = missionJpaRepository.findById(missionLikeUsersResult.getMission().getId());
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(), missionLikeUsersResult.getMission().getId()));
-            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmail(missionLikeUsersResult.getUser().getEmail()));
+            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(),missionLikeUsersResult.getMission().getId()));
             findOneModel findOneModel = new findOneModel().builder()
                     .missionId(mission.get().getId())
                     .email(mission.get().getUser().getEmail())
@@ -325,7 +325,7 @@ public class MissionServiceImpl implements MissionService {
             }
             Optional<Mission> mission = missionJpaRepository.findById(missionLikeUsersResult.getMission().getId());
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(), missionLikeUsersResult.getMission().getId()));
-            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmail(missionLikeUsersResult.getUser().getEmail()));
+            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(),missionLikeUsersResult.getMission().getId()));
             findOneModel findOneModel = new findOneModel().builder()
                     .missionId(mission.get().getId())
                     .email(mission.get().getUser().getEmail())

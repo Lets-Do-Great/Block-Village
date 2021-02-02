@@ -64,8 +64,8 @@ public class MissionController {
 
     @ApiOperation(value = "미션 진행도", notes = "미션 진행도 {\n" + "\temail,\n" + "\tmissionId, \n" +  "\ttodo\n"+"}")
     @PostMapping("/todo")
-    public ResponseEntity<MissionResponse> MissionTodo(@RequestBody MissionTodoRequest missionTodoReqquest) {
-        return missionService.MissionTodo(missionTodoReqquest);
+    public ResponseEntity<MissionResponse> MissionTodo(@RequestBody MissionTodoRequest missionTodoRequest) {
+        return missionService.MissionTodo(missionTodoRequest);
     }
 
     @ApiOperation(value = "미션 좋아요", notes = "미션 좋아요 1) 좋아요 등록\n" + "{\n" + "\temail,\n" + "\tmissionId,\n" + "\tfavorite: true,\n" + "}\n" + "\n" + "2) 좋아요 취소\n" + "{\n" + "\temail,\n" + "\tmissionId,\n" + "\tfavorite: false,\n" + "}")
