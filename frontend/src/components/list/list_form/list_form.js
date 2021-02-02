@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ListCardForm from '../list_card_form/list_card_form';
 import DetailCardForm from '../detail_card_form/detail_card_form';
 import styles from './list_form.module.css';
 
-const ListForm = ({ list, detail, getDetail, 
-                    setLike, setDislike, onChangeSearch }) => {
+const ListForm = ({ list, detail, getDetail, getList,
+                    setLike, setDislike, onChangeSearchType, userInfo }) => {
 
     const [ modal, setModal ] = useState(false);
 
@@ -15,13 +15,14 @@ const ListForm = ({ list, detail, getDetail,
 
     const closeModal = () => {
         setModal(false);
+        getList();
     }
 
     return (
     <>
-        <select className={styles.select} onChange={onChangeSearch}>
-            <option name="sortType" value="decrease">높은 순</option>
-            <option name="sortType" value="increase">낮은 순</option>
+        <select name="sortType" className={styles.select} onChange={onChangeSearchType}>
+            <option value="decrease">높은 순</option>
+            <option value="increase">낮은 순</option>
         </select>
 
         { modal && 
@@ -31,6 +32,7 @@ const ListForm = ({ list, detail, getDetail,
                 setLike={setLike}
                 setDislike={setDislike}
                 closeModal={closeModal}
+                userInfo={userInfo}
             />
         </div> }
 

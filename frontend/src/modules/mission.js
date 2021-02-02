@@ -71,6 +71,13 @@ const initialState = {
         peopleCnt: '',
         like: false,
     },
+    pageInfo: {
+        pageisFirst: null,
+        pageSize: 0,
+        pageNumber: 0,
+        pageTotalPages: 0,
+        pageTotalElements: 0,
+    }
 };
 
 // reducer 함수
@@ -89,7 +96,8 @@ export default applyPenders(missionReducer, [
                 if(response.data.status){
                     return updateObject(state, {
                         ...state,
-                        missionList: response.data.data,
+                        missionList: response.data.data[0],
+                        pageInfo: response.data.data[1],
                     });
                 } else{
                     alert("리스트를 불러오는데 문제가 발생했습니다.");
@@ -108,7 +116,7 @@ export default applyPenders(missionReducer, [
         type: GET_MISSION,
         onSuccess: (state, action) => {
             const response = action.payload;
-            console.log(action.payload);
+            
             if(response.status === 200){
                 if(response.data.status){
                     return updateObject(state, {
@@ -228,6 +236,7 @@ export default applyPenders(missionReducer, [
         type: LIKE_MISSION,
         onSuccess: (state, action) => {
             const response = action.payload;
+            console.log(response);
 
             if(response.status === 200){
                 if(response.data.status){

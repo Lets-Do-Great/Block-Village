@@ -1,18 +1,17 @@
 import React from 'react';
 import styles from './search_form.module.css';
 
-const SearchForm = ({ onChangeSearch, onClickEnter, search }) => {
+const SearchForm = ({ onChangeSearch, onChangeSearchType, onClickEnter, search }) => {
     return (<div>
-        <select className={styles.select} onChange={onChangeSearch}>
+        <select name="keywordType" className={styles.select} onChange={onChangeSearchType}>
             <option 
                 className={styles.option}
-                name="keywordType" 
                 value="title">제목</option>
             <option 
                 className={styles.option}
-                name="keywordType" 
                 value="user">만든 이</option>
         </select>
+        
         <input
             className={styles.input}
             type="text"

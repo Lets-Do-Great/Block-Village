@@ -6,18 +6,22 @@ const SearchType = ({ onChangeSearchType }) => {
         <button 
             className={styles.button}
             onClick={onChangeSearchType}
+            name="searchType"
             value="updatedAt">NEW</button>
         <button
             className={styles.button}
             onClick={onChangeSearchType}
-            value="missionLike">좋아요 순</button>
+            name="searchType"
+            value="favorite">좋아요 순</button>
         <button 
             className={styles.button}
             onClick={onChangeSearchType}
+            name="searchType"
             value="people">참여 많은 순</button>
         <button 
             className={styles.button}
             onClick={onChangeSearchType}
+            name="searchType"
             value="difficulty">난이도 순</button>
     </div>);
 }
