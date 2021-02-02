@@ -1,0 +1,15 @@
+.typeForm {
+    display:inline;
+    float: left;
+}
+
+.button {
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    border: 0px;
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    float: left;
+}
