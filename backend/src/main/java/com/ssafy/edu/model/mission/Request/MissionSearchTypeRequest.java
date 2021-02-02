@@ -1,4 +1,4 @@
-package com.ssafy.edu.model.mission;
+package com.ssafy.edu.model.mission.Request;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;

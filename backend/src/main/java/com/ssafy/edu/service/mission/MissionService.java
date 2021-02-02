@@ -1,13 +1,8 @@
 package com.ssafy.edu.service.mission;
 
-import com.ssafy.edu.model.mission.*;
-import com.ssafy.edu.model.mission.MissionDifficultyResponse;
-import com.ssafy.edu.model.mission.MissionFavoriteResponse;
-import com.ssafy.edu.model.mission.MissionOneResponse;
-import com.ssafy.edu.model.mission.MissionResponse;
+import com.ssafy.edu.model.mission.Response.*;
+import com.ssafy.edu.model.mission.Request.*;
 import org.springframework.http.ResponseEntity;
-
-import java.awt.print.Pageable;
 
 public interface MissionService {
     public ResponseEntity<MissionPageResponse> findAll(MissionSearchTypeRequest missionSearchTypeRequest);

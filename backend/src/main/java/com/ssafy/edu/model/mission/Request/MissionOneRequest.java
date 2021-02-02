@@ -1,4 +1,4 @@
-package com.ssafy.edu.model.mission;
+package com.ssafy.edu.model.mission.Request;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -7,10 +7,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * 미션 참여 응답
- * email : 미션 참여 유저 email
- * missionId : 미션 참여 미션 id (pk)
- * todo : 미션 진행도
+ * 조회중인 미션 요청
+ * email : 조회중인 미션에 대한 요청
+ * missionId : 요청한 미션에 대한 미션 id
  */
 @Valid
 @ToString
@@ -18,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MissionTodoRequest {
+public class MissionOneRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String email;
@@ -26,8 +25,4 @@ public class MissionTodoRequest {
     @ApiModelProperty(required = true)
     @NotNull
     Long missionId;
-
-    @ApiModelProperty(required = true)
-    @NotNull
-    String todo;
 }

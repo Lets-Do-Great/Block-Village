@@ -1,13 +1,14 @@
-package com.ssafy.edu.model.mission;
+package com.ssafy.edu.model.mission.Response;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.List;
 /**
- * 미션 난이도 응답
+ * 조회중인 미션 응답
  * status : 응답 상태
- * data : 요청 Object 데이터
+ * data : 요청 Object List 데이터
  */
-public class MissionDifficultyResponse {
+public class MissionOneResponse {
     @ApiModelProperty(value = "status", position = 1)
     public boolean status;
 

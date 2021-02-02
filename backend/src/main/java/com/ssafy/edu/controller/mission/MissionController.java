@@ -1,10 +1,7 @@
 package com.ssafy.edu.controller.mission;
 
-import com.ssafy.edu.model.mission.*;
-import com.ssafy.edu.model.mission.MissionDifficultyResponse;
-import com.ssafy.edu.model.mission.MissionFavoriteResponse;
-import com.ssafy.edu.model.mission.MissionOneResponse;
-import com.ssafy.edu.model.mission.MissionResponse;
+import com.ssafy.edu.model.mission.Response.*;
+import com.ssafy.edu.model.mission.Request.*;
 import com.ssafy.edu.service.mission.MissionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

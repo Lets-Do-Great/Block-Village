@@ -1,9 +1,11 @@
 package com.ssafy.edu.service.mission;
 
 import com.ssafy.edu.model.mission.*;
-import com.ssafy.edu.model.mission.responseModel.findAllModel;
-import com.ssafy.edu.model.mission.responseModel.findOneModel;
-import com.ssafy.edu.model.mission.responseModel.pageModel;
+import com.ssafy.edu.model.mission.Request.*;
+import com.ssafy.edu.model.mission.Response.*;
+import com.ssafy.edu.model.mission.Response.responseModel.findAllModel;
+import com.ssafy.edu.model.mission.Response.responseModel.findOneModel;
+import com.ssafy.edu.model.mission.Response.responseModel.pageModel;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.repository.mission.MissionDifficultyJpaRepository;
@@ -13,14 +15,12 @@ import com.ssafy.edu.repository.mission.MissionTodoJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 @Service
 public class MissionServiceImpl implements MissionService {

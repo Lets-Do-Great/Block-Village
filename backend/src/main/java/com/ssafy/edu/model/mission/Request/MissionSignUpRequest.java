@@ -1,16 +1,17 @@
-package com.ssafy.edu.model.mission;
+package com.ssafy.edu.model.mission.Request;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
-import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
 /**
- * 미선 좋아요 요청
- * email : 미션 좋아요 요청 유저 email
- * missionId : 좋아요 누른 미션의 id
- * favorite : 좋아요 boolean
+ * 미션 제작 요청
+ * email : 미션 제작하는 유저 email
+ * title : 미션 제작 제목
+ * content : 미션 제작 내용
+ * code : 미션 제작 코드
  */
 @Valid
 @ToString
@@ -18,16 +19,21 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MissionFavoriteRequest {
+public class MissionSignUpRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String email;
 
     @ApiModelProperty(required = true)
     @NotNull
-    Long missionId;
+    String title;
 
     @ApiModelProperty(required = true)
     @NotNull
-    boolean favorite;
+    String content;
+
+    @ApiModelProperty(required = true)
+    @NotNull
+    String code;
+
 }
