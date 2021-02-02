@@ -48,10 +48,11 @@ export const modifyMission = (
 }
 
 // 미션 삭제
-export const deleteMission = ({ missionId }) => {
+export const deleteMission = ({ missionId, email }) => {
     return client({
         url: `mission/${missionId}`,
-        method: 'delete',       
+        method: 'delete',
+        data: { email, missionId },       
     });
 }
 
@@ -73,7 +74,7 @@ export const setDifficultyMission = ({ email, missionId, difficulty }) => {
     });
 }
 
-// 미션 참가/완료 설정
+// 미션 참여 / 답 제출완료 설정
 export const setTodoMission = ({ email, missionId, todo }) => {
     return client({
         url: 'mission/todo',

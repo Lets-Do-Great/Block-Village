@@ -38,6 +38,30 @@
     text-align: center;
 }
 
+.participating_button {
+    margin: 15px;
+    width: 300px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #fff788;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.participated_button {
+    margin: 15px;
+    width: 300px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #88e7ff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .close {
     display: inline;
     top: 29%;

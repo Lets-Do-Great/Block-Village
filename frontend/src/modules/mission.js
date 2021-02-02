@@ -12,6 +12,7 @@ const MODIFY_MISSION = 'mission/MODIFY_MISSION';
 const DELETE_MISSION = 'mission/DELETE_MISSION';
 const LIKE_MISSION = 'mission/LIKE_MISSION';
 const DIFFICULTY_MISSION = 'mission/DIFFICULTY_MISSION';
+const PARTICIPATE_MISSION = 'mission/PARTICIPATE_MISSION';
 
 // 액션 객체 생성 함수
 export const getMissionList = createAction(
@@ -52,6 +53,11 @@ export const setLikeMission = createAction(
 export const setDifficultyMission = createAction(
     DIFFICULTY_MISSION,
     MissionAPI.setDifficultyMission
+)
+
+export const setTodoMission = createAction(
+    PARTICIPATE_MISSION,
+    MissionAPI.setTodoMission
 )
 
 // 초기상태
@@ -272,6 +278,29 @@ export default applyPenders(missionReducer, [
                 }
             } else { // 에러 발생
                 alert("난이도를 설정하는데 문제가 발생했습니다.");
+                console.log(action.payload.status);
+            }
+            return updateObject(state, state);
+        },
+        onFailure: (state, action) => {
+            return updateObject(state, state);
+        }
+    },
+    {
+        type: PARTICIPATE_MISSION,
+        onSuccess: (state, action) => {
+            const response = action.payload;
+
+            if(response.status === 200){
+                if(response.data.status){
+                    return updateObject(state, {
+                        ...state,
+                    });
+                } else{
+                    alert("미션에 참여하는데 문제가 발생했습니다.");
+                }
+            } else { // 에러 발생
+                alert("미션에 참여하는데 문제가 발생했습니다.");
                 console.log(action.payload.status);
             }
             return updateObject(state, state);

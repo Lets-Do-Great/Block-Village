@@ -76,7 +76,7 @@ const MissionContainer = () => {
     const likeMission = async () => {
         try{
             await dispatch(MissionAction.setLikeMission(
-                { email: userInfo.email, missionId:selectedMission.missionId, favorite:true }))
+                { email: userInfo.email, missionId:selectedMission.missionId, favorite:true }));
         } catch(e) {
             console.log(e);
         }
@@ -86,10 +86,27 @@ const MissionContainer = () => {
     const dislikeMission = async () => {
         try{
             await dispatch(MissionAction.setLikeMission(
-                { email: userInfo.email, missionId:selectedMission.missionId, favorite:false }))
+                { email: userInfo.email, missionId:selectedMission.missionId, favorite:false }));
         } catch(e) {
             console.log(e);
         }
+    }
+
+    // 미션 참여 시작 요청
+    const onParticipateMission = async () => {
+        try{
+            await dispatch(MissionAction.setTodoMission(
+                { email: userInfo.email, missionId:selectedMission.missionId, todo:'todo' }));
+            getMission(selectedMission.missionId);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    // 미션 삭제 요청
+    const onDeleteMission = async () => {
+        await dispatch(MissionAction.deleteMission(
+            { email: userInfo.email, missionId:selectedMission.missionId }));
     }
 
     return (
@@ -106,6 +123,7 @@ const MissionContainer = () => {
             />
 
             <ListForm
+                userInfo={userInfo.email}
                 list={missionList}
                 detail={selectedMission}
                 getList={getMissionList}
@@ -113,7 +131,8 @@ const MissionContainer = () => {
                 setLike={likeMission}
                 setDislike={dislikeMission}
                 onChangeSearchType={onChangeSearchType}
-                userInfo={userInfo.email}
+                onDelete={onDeleteMission}
+                onParticipateMission={onParticipateMission}
             />
         </>
     );

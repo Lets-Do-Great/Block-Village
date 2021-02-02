@@ -3,16 +3,19 @@ import ListCardForm from '../list_card_form/list_card_form';
 import DetailCardForm from '../detail_card_form/detail_card_form';
 import styles from './list_form.module.css';
 
-const ListForm = ({ list, detail, getDetail, getList,
-                    setLike, setDislike, onChangeSearchType, userInfo }) => {
+const ListForm = ({ list, detail, getDetail, getList, setLike, setDislike, 
+                    onDelete, onChangeSearchType, userInfo, onParticipateMission }) => {
 
+    // 모달 상태 저장
     const [ modal, setModal ] = useState(false);
 
+    // 디테일 모달 열기
     const clickCard = (e) => {
         getDetail(e.target.id);
         setModal(true);
     }
 
+    // 디테일 모달 닫기
     const closeModal = () => {
         setModal(false);
         getList();
@@ -33,6 +36,8 @@ const ListForm = ({ list, detail, getDetail, getList,
                 setDislike={setDislike}
                 closeModal={closeModal}
                 userInfo={userInfo}
+                onParticipateMission={onParticipateMission}
+                onDelete={onDelete}
             />
         </div> }
 

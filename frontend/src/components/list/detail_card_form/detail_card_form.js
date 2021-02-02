@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import styles from './detail_card_form.module.css';
 import * as Icon from 'react-icons/md';
 
-const DetailCardForm = ({ detail, setLike, setDislike, closeModal, userInfo }) => {
+const DetailCardForm = ({ detail, setLike, setDislike, closeModal, 
+                            userInfo, onParticipateMission, onDelete }) => {
+
     const {email, nickName, title, created_at, updated_at, favorite,
-        content, difficulty, likeCnt, peopleCnt } = detail;
+        content, difficulty, likeCnt, peopleCnt, todo } = detail;
 
     const changeLike = () => {
         if(favorite){
@@ -13,6 +15,15 @@ const DetailCardForm = ({ detail, setLike, setDislike, closeModal, userInfo }) =
             setLike();
         }
     };
+
+    const onSubmitDelete = () => {
+        try{
+            onDelete();
+            closeModal();
+        }catch(e) {
+            console.log(e);
+        }
+    }
 
     return (
     <div className={styles.detail_form}>
@@ -50,9 +61,17 @@ const DetailCardForm = ({ detail, setLike, setDislike, closeModal, userInfo }) =
         { userInfo === email
             ? (<>
                 <button>수정하기</button>
-                <button>삭제하기</button>
+                <button onClick={onSubmitDelete}>삭제하기</button>
             </>)
-            : <button className={styles.participate_button}>미션 시작하기</button>
+            : <>{ !todo && 
+                <button onClick={onParticipateMission} 
+                    className={styles.participate_button}>미션 참여하기</button> }
+              { todo === 'todo' &&
+                <button 
+                    className={styles.participating_button}>미션 참여중</button> }
+              { todo === 'done' &&
+                <button
+                    className={styles.participated_button}>참여 완료</button> }</>
         }
     </div>
     );
