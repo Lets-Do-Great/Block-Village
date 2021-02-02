@@ -1,6 +1,7 @@
 package com.ssafy.edu.controller.project;
 
 import com.ssafy.edu.model.project.Request.*;
+import com.ssafy.edu.model.project.Response.ProjectCommentResponse;
 import com.ssafy.edu.model.project.Response.ProjectFavoriteResponse;
 import com.ssafy.edu.model.project.Response.ProjectPageResponse;
 import com.ssafy.edu.model.project.Response.ProjectResponse;
@@ -63,22 +64,23 @@ public class ProjectController {
 
     @ApiOperation(value = "작품 댓글 달기", notes = "")
     @PostMapping("/comment/{userEmail}")
-    public ResponseEntity<ProjectFavoriteResponse> projectsignUpComments(@RequestBody ProjectFavoriteRequest projectFavoriteRequest) {
-        return projectService.projectFavorite(projectFavoriteRequest);
+    public ResponseEntity<ProjectCommentResponse> projectsignUpComments(@RequestBody ProjectCommentSignUpRequest projectCommentSignUpRequest) {
+        return projectService.projectsignUpComment(projectCommentSignUpRequest);
     }
     @ApiOperation(value = "작품 댓글 수정", notes = "")
     @PutMapping("/comment/{commentId}")
-    public ResponseEntity<ProjectFavoriteResponse> projectupdateComments(@RequestBody ProjectFavoriteRequest projectFavoriteRequest) {
-        return projectService.projectFavorite(projectFavoriteRequest);
+    public ResponseEntity<ProjectCommentResponse> projectupdateComments(@RequestBody ProjectCommentUpdateRequest projectCommentUpdateRequest) {
+        return projectService.projectupdateComment(projectCommentUpdateRequest);
     }
     @ApiOperation(value = "작품 댓글 삭제", notes = "")
     @DeleteMapping("/comment/{commentId}")
-    public ResponseEntity<ProjectFavoriteResponse> projectFavorite(@RequestBody ProjectFavoriteRequest projectFavoriteRequest) {
-        return projectService.projectFavorite(projectFavoriteRequest);
+    public ResponseEntity<ProjectCommentResponse> projectdeleteComments(@RequestBody ProjectCommentDeleteRequest projectCommentDeleteRequest) {
+        return projectService.projectdeleteComment(projectCommentDeleteRequest);
     }
     @ApiOperation(value = "작품 댓글 목록 불러오기", notes = "")
     @GetMapping("/comment/{projectId}")
-    public ResponseEntity<ProjectFavoriteResponse> projectFavorite(@RequestBody ProjectFavoriteRequest projectFavoriteRequest) {
-        return projectService.projectFavorite(projectFavoriteRequest);
+    public ResponseEntity<ProjectCommentResponse> projectfindAllComments(@PathVariable("projectId")Long projectId ) {
+        return projectService.projectGetComment(projectId);
     }
+
 }

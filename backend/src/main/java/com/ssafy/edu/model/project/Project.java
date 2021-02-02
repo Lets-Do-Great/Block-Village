@@ -43,8 +43,8 @@ public class Project {
     @JsonManagedReference
     @OneToMany(mappedBy = "project")
     private List<ProjectFavorite> projectFavorites = new ArrayList<>();
-//
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "project")
-//    private List<ProjectComment> projectComments = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "project")
+    private List<ProjectComment> projectComments = new ArrayList<>();
 }

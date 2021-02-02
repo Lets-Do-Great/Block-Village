@@ -1,13 +1,16 @@
 package com.ssafy.edu.service.project;
 
 import com.ssafy.edu.model.project.Project;
+import com.ssafy.edu.model.project.ProjectComment;
 import com.ssafy.edu.model.project.ProjectFavorite;
 import com.ssafy.edu.model.project.Request.*;
+import com.ssafy.edu.model.project.Response.ProjectCommentResponse;
 import com.ssafy.edu.model.project.Response.ProjectFavoriteResponse;
 import com.ssafy.edu.model.project.Response.ProjectPageResponse;
 import com.ssafy.edu.model.project.Response.ProjectResponse;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.UserJpaRepository;
+import com.ssafy.edu.repository.project.ProjectCommentJpaRepository;
 import com.ssafy.edu.repository.project.ProjectFavoriteJpaRepository;
 import com.ssafy.edu.repository.project.ProjectJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,8 @@ public class ProjectServiceImpl implements ProjectService{
     UserJpaRepository userJpaRepository;
     @Autowired
     ProjectFavoriteJpaRepository projectFavoriteJpaRepository;
+    @Autowired
+    ProjectCommentJpaRepository projectCommentJpaRepository;
     @Override
     public ResponseEntity<ProjectPageResponse> findAll(ProjectSearchTypeRequest projectSearchTypeRequest) {
         ResponseEntity response;
@@ -67,8 +72,12 @@ public class ProjectServiceImpl implements ProjectService{
         Optional<Project> projectOptional = projectJpaRepository.findById(projectId);
 
         if(projectOptional.isPresent()){
+
+            projectOptional.get().setView(projectOptional.get().getView()+1);
+            Project proejct = projectJpaRepository.save(projectOptional.get());
+
             result.status = true;
-            result.data = projectOptional.get();
+            result.data = proejct;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
@@ -212,6 +221,101 @@ public class ProjectServiceImpl implements ProjectService{
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
 
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<ProjectCommentResponse> projectGetComment(Long projectId) {
+        ResponseEntity response;
+        ProjectCommentResponse result = new ProjectCommentResponse();
+        List<ProjectComment> projectCommentList = projectCommentJpaRepository.findByProjectId(projectId);
+
+        if(projectCommentList.size()>=0){
+            result.status = true;
+            result.data = projectCommentList;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<ProjectCommentResponse> projectsignUpComment(ProjectCommentSignUpRequest projectCommentSignUpRequest) {
+        ResponseEntity response;
+        ProjectCommentResponse result = new ProjectCommentResponse();
+
+        Optional<Project> projectOptional = projectJpaRepository.findById(projectCommentSignUpRequest.getProjectId());
+        Optional<User> userOptional = userJpaRepository.findByEmail(projectCommentSignUpRequest.getEmail());
+        if(projectOptional.isPresent()&&userOptional.isPresent()){
+            Date now = new Date(System.currentTimeMillis());
+
+            ProjectComment projectComment = new ProjectComment().builder()
+                    .comment(projectCommentSignUpRequest.getComment())
+                    .project(projectOptional.get())
+                    .user(userOptional.get())
+                    .updatedAt(now)
+                    .build();
+
+            ProjectComment projectCommentResult = projectCommentJpaRepository.save(projectComment);
+
+            result.status = true;
+            result.data = projectCommentResult;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<ProjectCommentResponse> projectupdateComment(ProjectCommentUpdateRequest projectCommentUpdateRequest) {
+        ResponseEntity response;
+        ProjectCommentResponse result = new ProjectCommentResponse();
+
+       Optional<ProjectComment> projectCommentOptional = Optional.ofNullable(projectCommentJpaRepository.findByIdAndUserEmail(projectCommentUpdateRequest.getProjectCommentId(),projectCommentUpdateRequest.getEmail()));
+
+        if(projectCommentOptional.isPresent()){
+            Date now = new Date(System.currentTimeMillis());
+
+            ProjectComment projectComment = new ProjectComment().builder()
+                    .id(projectCommentOptional.get().getId())
+                    .comment(projectCommentUpdateRequest.getComment())
+                    .project(projectCommentOptional.get().getProject())
+                    .user(projectCommentOptional.get().getUser())
+                    .updatedAt(now)
+                    .build();
+
+            ProjectComment projectCommentResult = projectCommentJpaRepository.save(projectComment);
+
+            result.status = true;
+            result.data = projectCommentResult;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<ProjectCommentResponse> projectdeleteComment(ProjectCommentDeleteRequest projectCommentDeleteRequest) {
+        ResponseEntity response;
+        ProjectCommentResponse result = new ProjectCommentResponse();
+
+        Optional<ProjectComment> projectCommentOptional = Optional.ofNullable(projectCommentJpaRepository.findByIdAndUserEmail(projectCommentDeleteRequest.getProjectCommentId(),projectCommentDeleteRequest.getEmail()));
+
+        if(projectCommentOptional.isPresent()){
+            projectCommentJpaRepository.delete(projectCommentOptional.get());
+
+            result.status = true;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
         return response;
     }
 }
