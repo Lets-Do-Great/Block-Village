@@ -16,6 +16,6 @@ public interface ProjectJpaRepository extends JpaRepository<Project,Long> {
     public Optional<Project> findByIdAndUserEmail(Long projectId,String email);
     public Page<Project> findByUserNicknameContaining(String userNickname, Pageable pageable);
     public Page<Project> findByTitleContaining(String missionTitle,  Pageable pageable);
-    public List<Project> findByUserEmail(String userEmail);
+    public List<Project> findByUserEmailOrderByUpdatedAtDesc(String userEmail);
     public void delete(Project project);
 }

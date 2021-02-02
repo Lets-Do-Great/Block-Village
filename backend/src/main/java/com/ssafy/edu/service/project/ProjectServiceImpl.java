@@ -91,7 +91,7 @@ public class ProjectServiceImpl implements ProjectService{
         Optional<User> userOptional = userJpaRepository.findByEmail(userEmail);
         if(userOptional.isPresent()){
             result.status = true;
-            result.data = projectJpaRepository.findByUserEmail(userOptional.get().getEmail());
+            result.data = projectJpaRepository.findByUserEmailOrderByUpdatedAtDesc(userOptional.get().getEmail());
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
