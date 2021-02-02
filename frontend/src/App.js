@@ -8,7 +8,6 @@ import MissionMaze from './components/blockly/mission_maze/mission_maze';
 import BlockStoreContainer from './containers/block_store_container';
 import ChallengeContainer from './containers/challenge_container';
 import SubMain from './components/main/sub_main/sub_main';
-import TestMypage from './components/my_page/test_mypage';
 import TutorialSubmain from './components/blockly/tutorial/tutorial_submain/tutorial_submain';
 import MissionContainer from './containers/mission_container';
 
