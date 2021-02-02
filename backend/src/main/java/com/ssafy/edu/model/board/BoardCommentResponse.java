@@ -1,15 +1,22 @@
 package com.ssafy.edu.model.board;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
+import lombok.*;
+import java.time.LocalDateTime;
 
-import java.time.LocalDate;
+/*
+* 특정 공지사항 조회 - 댓글 객체
+* */
+
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class BoardCommentResponse {
 
-    public String nickname;
-    public String content;
-    public LocalDate createdAt;
-    public LocalDate updatedAt;
+    Long commentId;
+    String content;
+    String email;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
 
 }

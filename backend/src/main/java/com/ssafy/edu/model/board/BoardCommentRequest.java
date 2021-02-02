@@ -6,6 +6,10 @@ import lombok.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
+/* 
+* 댓글 작성 요청 객체
+* */
+
 @Valid
 @ToString
 @Getter

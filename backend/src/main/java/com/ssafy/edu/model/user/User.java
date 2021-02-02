@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ssafy.edu.model.board.Board;
 import com.ssafy.edu.model.board.BoardComment;
-import com.ssafy.edu.model.board.BoardLikeUsers;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.List;
@@ -56,8 +54,5 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     List<BoardComment> boardCommentList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user")
-    List<BoardLikeUsers> boardLikeUsers = new ArrayList<>();
 
 }

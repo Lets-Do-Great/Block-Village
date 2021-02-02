@@ -39,7 +39,7 @@ public class Board extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
-    private Long id;
+    private Long boardId;
 
     @Lob
     private String title;
@@ -57,8 +57,5 @@ public class Board extends BaseTimeEntity {
     @OneToMany(mappedBy = "board")
     @JsonManagedReference
     List<BoardComment> boardCommentList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "board")
-    List<BoardLikeUsers> boardLikeUsersList = new ArrayList<>();
 
 }

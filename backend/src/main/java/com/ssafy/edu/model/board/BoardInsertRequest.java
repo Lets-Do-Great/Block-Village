@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Valid
 @ToString
@@ -13,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BoardRequest {
+public class BoardInsertRequest {
 
     @ApiModelProperty(required = true)
     @NotEmpty

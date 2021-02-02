@@ -12,7 +12,11 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BoardUpdateRequest {
+public class BoardRequest {
+
+    @ApiModelProperty(required = true)
+    @NotEmpty
+    String email;
 
     @ApiModelProperty(required = true)
     @NotEmpty

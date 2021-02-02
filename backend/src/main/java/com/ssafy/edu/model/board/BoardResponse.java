@@ -1,13 +1,27 @@
 package com.ssafy.edu.model.board;
 
-import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+
+/*
+* 전체 공지사항 조회
+* 응답 객체
+* */
+
+@Valid
+@ToString
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class BoardResponse {
-
-    @ApiModelProperty(value = "status", position = 1)
-    public boolean status;
-
-    @ApiModelProperty(value = "data", position = 2)
-    public Object data;
-
+    Long boardId;
+    String title;
+    String email;
+    Long views;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
 }
