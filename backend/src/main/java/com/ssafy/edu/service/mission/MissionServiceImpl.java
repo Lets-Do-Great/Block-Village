@@ -283,6 +283,11 @@ public class MissionServiceImpl implements MissionService {
                     .build();
 
             MissionFavorite missionLikeUsersResult = missionFavoriteJpaRepository.save(missionLikeUsers);
+            if (missionOptional.isPresent()) {
+                List<MissionFavorite> missionFavoriteList = missionFavoriteJpaRepository.findByMissionId(missionLikeRequest.getMissionId());
+                missionOptional.get().setFavorite((int) missionFavoriteList.stream().filter(m -> m.isFavorite()).count());
+                missionJpaRepository.save(missionOptional.get());
+            }
             Optional<Mission> mission = missionJpaRepository.findById(missionLikeUsersResult.getMission().getId());
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(), missionLikeUsersResult.getMission().getId()));
             Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmail(missionLikeUsersResult.getUser().getEmail()));
@@ -313,7 +318,11 @@ public class MissionServiceImpl implements MissionService {
                     .build();
 
             MissionFavorite missionLikeUsersResult = missionFavoriteJpaRepository.save(missionLikeUsers);
-
+            if (missionOptional.isPresent()) {
+                List<MissionFavorite> missionFavoriteList = missionFavoriteJpaRepository.findByMissionId(missionLikeRequest.getMissionId());
+                missionOptional.get().setFavorite((int) missionFavoriteList.stream().filter(m -> m.isFavorite()).count());
+                missionJpaRepository.save(missionOptional.get());
+            }
             Optional<Mission> mission = missionJpaRepository.findById(missionLikeUsersResult.getMission().getId());
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(), missionLikeUsersResult.getMission().getId()));
             Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmail(missionLikeUsersResult.getUser().getEmail()));
@@ -339,11 +348,7 @@ public class MissionServiceImpl implements MissionService {
             result.status = false;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
-        if (missionOptional.isPresent()) {
-            List<MissionFavorite> missionFavoriteList = missionFavoriteJpaRepository.findByMissionId(missionLikeRequest.getMissionId());
-            missionOptional.get().setFavorite((int) missionFavoriteList.stream().filter(m -> m.isFavorite()).count());
-            missionJpaRepository.save(missionOptional.get());
-        }
+
         return response;
     }
 
