@@ -55,7 +55,6 @@ public class ProjectServiceImpl implements ProjectService{
                 projectList = projectJpaRepository.findByUserNicknameContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),3, Sort.by(projectSearchTypeRequest.getSearchType())));
             }else if(projectSearchTypeRequest.getSortType().equals("decrease")){
                 projectList = projectJpaRepository.findByUserNicknameContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),3, Sort.by(projectSearchTypeRequest.getSearchType()).descending()));
-
             }
         }
         resultObject.add(projectList);
@@ -72,7 +71,6 @@ public class ProjectServiceImpl implements ProjectService{
         Optional<Project> projectOptional = projectJpaRepository.findById(projectId);
 
         if(projectOptional.isPresent()){
-
             projectOptional.get().setView(projectOptional.get().getView()+1);
             Project proejct = projectJpaRepository.save(projectOptional.get());
 
