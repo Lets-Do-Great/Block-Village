@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import block from './block';
+import challenge from './challenge';
 import user from './user';
 import mission from './mission';
 
@@ -6,6 +8,7 @@ import mission from './mission';
 const rootReducer = combineReducers({ 
     user,
     mission,
-});
-
+    block,
+    challenge,
+})
 export default rootReducer;

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import FindPW from '../components/find_pw/find_pw';
-import LogIn from '../components/log_in/log_in';
-import SignUp from '../components/sign_up/sign_up';
+import { useHistory } from 'react-router-dom';
+import FindPW from '../components/user/find_pw/find_pw/find_pw';
+import LogIn from '../components/user/log_in/log_in/log_in';
+import SignUp from '../components/user/sign_up/sign_up/sign_up';
 import * as UserAction from '../modules/user';
 
 const UserContainer = ({ setSkip }) => {
+    const history = useHistory();
     const [type, setType] = useState('logIn');
 
     // 로그인폼 데이터 저장하는 변수
@@ -88,6 +90,7 @@ const UserContainer = ({ setSkip }) => {
         try{
             await dispatch(UserAction.logIn(logInInput)); 
             initialLogInInput();
+            history.push('/main')
         } catch (e) {
             console.log(e);
         }
