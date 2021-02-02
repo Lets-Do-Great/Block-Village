@@ -12,20 +12,11 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProjectSignUpRequest {
+public class ProjectDeleteRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String email;
-
     @ApiModelProperty(required = true)
     @NotNull
-    String title;
-
-    @ApiModelProperty(required = true)
-    @NotNull
-    String content;
-
-    @ApiModelProperty(required = true)
-    @NotNull
-    int blockCnt;
+    Long projectId;
 }

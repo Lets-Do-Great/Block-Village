@@ -12,20 +12,16 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProjectSignUpRequest {
+public class ProjectFavoriteRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String email;
 
     @ApiModelProperty(required = true)
     @NotNull
-    String title;
+    Long projectId;
 
     @ApiModelProperty(required = true)
     @NotNull
-    String content;
-
-    @ApiModelProperty(required = true)
-    @NotNull
-    int blockCnt;
+    boolean favorite;
 }

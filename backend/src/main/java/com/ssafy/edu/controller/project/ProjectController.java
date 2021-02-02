@@ -1,7 +1,7 @@
 package com.ssafy.edu.controller.project;
 
-import com.ssafy.edu.model.project.Request.ProjectSearchTypeRequest;
-import com.ssafy.edu.model.project.Request.ProjectSignUpRequest;
+import com.ssafy.edu.model.project.Request.*;
+import com.ssafy.edu.model.project.Response.ProjectFavoriteResponse;
 import com.ssafy.edu.model.project.Response.ProjectPageResponse;
 import com.ssafy.edu.model.project.Response.ProjectResponse;
 import com.ssafy.edu.service.project.ProjectService;
@@ -30,11 +30,55 @@ public class ProjectController {
     public ResponseEntity<ProjectPageResponse> GetProjects(@RequestBody ProjectSearchTypeRequest projectSearchTypeRequest) {
         return projectService.findAll(projectSearchTypeRequest);
     }
-
-
+    @ApiOperation(value = "현재 조회중인 작품 조회", notes = "")
+    @GetMapping("/{userEmail}/{projectId}")
+    public ResponseEntity<ProjectResponse> GetOneProject(@PathVariable("userEmail")String userEmail, @PathVariable("projectId")Long projectId) {
+        return projectService.findGetOne(userEmail,projectId);
+    }
+    @ApiOperation(value = "내가 만든 작품 조회", notes = "")
+    @GetMapping("/uesr/{userEmail}")
+    public ResponseEntity<ProjectResponse> GetUserProject(@PathVariable("userEmail")String userEmail) {
+        return projectService.findGetOneByUserId(userEmail);
+    }
     @ApiOperation(value = "작품 제작하기", notes = "")
-    @PostMapping()
+    @PostMapping("/{userEmail}")
     public ResponseEntity<ProjectResponse> signUpProjects(@RequestBody ProjectSignUpRequest projectSignUpRequest) {
-        return null;
+        return projectService.signUpProject(projectSignUpRequest);
+    }
+    @ApiOperation(value = "작품 수정하기", notes = "")
+    @PutMapping("/{projectId}")
+    public ResponseEntity<ProjectResponse> updateProjects(@RequestBody ProjectUpdateRequest projectUpdateRequest) {
+        return projectService.updateProject(projectUpdateRequest);
+    }
+    @ApiOperation(value = "작품 삭제하기", notes = "")
+    @DeleteMapping("/{projectId}")
+    public ResponseEntity<ProjectResponse> deleteProjects(@RequestBody ProjectDeleteRequest projectDeleteRequest) {
+        return projectService.deleteProject(projectDeleteRequest);
+    }
+    @ApiOperation(value = "작품 좋아요", notes = "")
+    @PostMapping("/like")
+    public ResponseEntity<ProjectFavoriteResponse> projectFavorite(@RequestBody ProjectFavoriteRequest projectFavoriteRequest) {
+        return projectService.projectFavorite(projectFavoriteRequest);
+    }
+
+    @ApiOperation(value = "작품 댓글 달기", notes = "")
+    @PostMapping("/comment/{userEmail}")
+    public ResponseEntity<ProjectFavoriteResponse> projectsignUpComments(@RequestBody ProjectFavoriteRequest projectFavoriteRequest) {
+        return projectService.projectFavorite(projectFavoriteRequest);
+    }
+    @ApiOperation(value = "작품 댓글 수정", notes = "")
+    @PutMapping("/comment/{commentId}")
+    public ResponseEntity<ProjectFavoriteResponse> projectupdateComments(@RequestBody ProjectFavoriteRequest projectFavoriteRequest) {
+        return projectService.projectFavorite(projectFavoriteRequest);
+    }
+    @ApiOperation(value = "작품 댓글 삭제", notes = "")
+    @DeleteMapping("/comment/{commentId}")
+    public ResponseEntity<ProjectFavoriteResponse> projectFavorite(@RequestBody ProjectFavoriteRequest projectFavoriteRequest) {
+        return projectService.projectFavorite(projectFavoriteRequest);
+    }
+    @ApiOperation(value = "작품 댓글 목록 불러오기", notes = "")
+    @GetMapping("/comment/{projectId}")
+    public ResponseEntity<ProjectFavoriteResponse> projectFavorite(@RequestBody ProjectFavoriteRequest projectFavoriteRequest) {
+        return projectService.projectFavorite(projectFavoriteRequest);
     }
 }

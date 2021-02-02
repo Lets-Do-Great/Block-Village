@@ -33,6 +33,7 @@ import java.time.LocalDate;
 public class User {
 
     @Id @GeneratedValue
+    @Column(name = "user_id")
     private Long id;
 
     private String email;

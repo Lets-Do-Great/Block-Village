@@ -27,7 +27,6 @@ public class Project {
     private Long id;
     private String title;
     private String content;
-    private String code;
     private int favorite;
     private int view;
     private int blockCnt;
@@ -44,8 +43,8 @@ public class Project {
     @JsonManagedReference
     @OneToMany(mappedBy = "project")
     private List<ProjectFavorite> projectFavorites = new ArrayList<>();
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "project")
-    private List<ProjectComment> projectComments = new ArrayList<>();
+//
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "project")
+//    private List<ProjectComment> projectComments = new ArrayList<>();
 }
