@@ -199,7 +199,7 @@ Blockly.JavaScript['set_angle_move'] = function(block) {
   var angle_angle = block.getFieldValue('angle');
   var value_distance = Blockly.JavaScript.valueToCode(block, 'distance', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `set_angle_move(${angle_angle}, ${value_distance})`;
+  var code = `set_angle_move(${angle_angle}, ${value_distance});`;
   return code;
 };
 
@@ -222,7 +222,7 @@ Blockly.Blocks['move_forward'] = {
 Blockly.JavaScript['move_forward'] = function(block) {
   var value_distance = Blockly.JavaScript.valueToCode(block, 'distance', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `move_forward(${value_distance})`;
+  var code = `move_forward(${value_distance});`;
   return code;
 };
 
@@ -241,6 +241,6 @@ Blockly.Blocks['move_forward_1'] = {
 };
 Blockly.JavaScript['move_forward_1'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = `move_forward(1)`;
+  var code = `move_forward(1);`;
   return code;
 };
