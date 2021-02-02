@@ -4,18 +4,15 @@ import com.ssafy.edu.model.BasicResponse;
 import com.ssafy.edu.model.board.Board;
 import com.ssafy.edu.model.board.BoardComment;
 import com.ssafy.edu.model.board.BoardCommentRequest;
-import com.ssafy.edu.model.board.BoardResponse;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.BoardCommentJpaRepository;
 import com.ssafy.edu.repository.BoardJpaRepository;
-import com.ssafy.edu.repository.BoardLikeUsersJpaRepository;
 import com.ssafy.edu.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -28,11 +25,9 @@ public class BoardCommentServiceImpl implements BoardCommentService{
     private BoardJpaRepository boardJpaRepository;
 
     @Autowired
-    private BoardLikeUsersJpaRepository boardLikeUsersJpaRepository;
-
-    @Autowired
     private BoardCommentJpaRepository boardCommentJpaRepository;
 
+    /* 댓글 작성 */
     @Override
     public ResponseEntity<BasicResponse> insertComment(Long id, BoardCommentRequest boardCommentRequest) {
 
@@ -41,8 +36,10 @@ public class BoardCommentServiceImpl implements BoardCommentService{
         Optional<User> userOptional = userJpaRepository.findByEmail(boardCommentRequest.getEmail());
         Optional<Board> boardOptional = boardJpaRepository.findById(id);
         
-        // BaseTimeEntity 먹히지않음
         if(userOptional.isPresent() && boardOptional.isPresent()){
+
+            System.out.println("here?");
+
             BoardComment boardComment = BoardComment.builder()
                     .content(boardCommentRequest.getContent())
                     .board(boardOptional.get())
@@ -50,16 +47,18 @@ public class BoardCommentServiceImpl implements BoardCommentService{
                     .build();
 
             boardCommentJpaRepository.save(boardComment);
-        }else {
-            result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+
+            result.status = true;
+            return new ResponseEntity<>(result, HttpStatus.OK);
+
         }
 
-        result.status = true;
+        result.status = false;
         return new ResponseEntity<>(result, HttpStatus.OK);
 
     }
 
+    /* 댓글 수정 */
     @Override
     public ResponseEntity<BasicResponse> updateComment(Long id, Long cid, String content) {
 
@@ -68,10 +67,14 @@ public class BoardCommentServiceImpl implements BoardCommentService{
         Optional<Board> boardOptional = boardJpaRepository.findById(id);
         Optional<BoardComment> commentOptional = boardCommentJpaRepository.findById(cid);
 
-        if(commentOptional.isPresent()){
+        // commentId와 boardId가 같이 없는 경우,
+
+
+        if(boardOptional.isPresent() && commentOptional.isPresent()
+                && commentOptional.get().getBoard() == boardOptional.get()){
+
             BoardComment boardComment = commentOptional.get();
             boardComment.setContent(content);
-            boardComment.setBoard(boardOptional.get());
 
             boardCommentJpaRepository.save(boardComment);
 
@@ -80,15 +83,31 @@ public class BoardCommentServiceImpl implements BoardCommentService{
         }
 
         result.status = false;
-        return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /* 댓글 삭제 */
     @Override
     public ResponseEntity<BasicResponse> deleteComment(Long id, Long cid) {
 
         BasicResponse result = new BasicResponse();
-        boardCommentJpaRepository.deleteById(cid);
-        result.status = true;
+        Optional<Board> boardOptional = boardJpaRepository.findById(id);
+        Optional<BoardComment> commentOptional = boardCommentJpaRepository.findById(cid);
+
+
+        if(boardOptional.isPresent() && commentOptional.isPresent()
+            && boardOptional.get() == commentOptional.get().getBoard()){
+
+            boardCommentJpaRepository.deleteById(cid);
+
+            if(!boardCommentJpaRepository.findById(cid).isPresent()){
+                result.status = true;
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }
+
+        }
+
+        result.status = false;
         return new ResponseEntity<>(result, HttpStatus.OK);
 
     }

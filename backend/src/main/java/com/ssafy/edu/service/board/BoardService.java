@@ -1,15 +1,17 @@
 package com.ssafy.edu.service.board;
 
 import com.ssafy.edu.model.board.*;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+
 
 public interface BoardService {
 
-    public ResponseEntity<BoardResponse> getBoardList();
-    public ResponseEntity<BoardResponse> insertBoard(BoardRequest boardInsertRequest);
-    public ResponseEntity<BoardResponse> getBoard(Long id);
-    public ResponseEntity<BoardResponse> updateBoard(Long id, BoardUpdateRequest boardUpdateRequest);
-    public ResponseEntity<BoardResponse> deleteBoard(Long id);
-    public ResponseEntity<BoardResponse> likeBoard(Long id, String email);
+    public ResponseEntity<BoardBasicResponse> getBoardList(final Pageable pageable);
+    public ResponseEntity<BoardBasicResponse> getBoardList(final Pageable pageable, String keywordType, String keyword);
+    public ResponseEntity<BoardBasicResponse> insertBoard(BoardRequest boardInsertRequest);
+    public ResponseEntity<BoardBasicResponse> getBoard(Long id);
+    public ResponseEntity<BoardBasicResponse> updateBoard(Long id, BoardUpdateRequest boardUpdateRequest);
+    public ResponseEntity<BoardBasicResponse> deleteBoard(Long id);
 
 }

@@ -1,4 +1,4 @@
-package com.ssafy.edu.controller.user;
+package com.ssafy.edu.controller.board;
 
 import com.ssafy.edu.model.BasicResponse;
 import com.ssafy.edu.model.board.*;
@@ -8,13 +8,15 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@ApiResponses(value = {@ApiResponse(code = 401, message = "Unauthorized", response = BoardResponse.class),
-        @ApiResponse(code = 403, message = "Forbidden", response = BoardResponse.class),
-        @ApiResponse(code = 404, message = "Not Found", response = BoardResponse.class),
-        @ApiResponse(code = 500, message = "Failure", response = BoardResponse.class)})
+@ApiResponses(value = {@ApiResponse(code = 401, message = "Unauthorized", response = BoardBasicResponse.class),
+        @ApiResponse(code = 403, message = "Forbidden", response = BoardBasicResponse.class),
+        @ApiResponse(code = 404, message = "Not Found", response = BoardBasicResponse.class),
+        @ApiResponse(code = 500, message = "Failure", response = BoardBasicResponse.class)})
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
@@ -27,58 +29,57 @@ public class BoardController {
     @Autowired
     private BoardCommentServiceImpl boardCommentService;
 
-    @ApiOperation(value = "게시글 모두 불러오기", notes = "데이터베이스에 저장된 모든 게시글을 불러옵니다.")
+    @ApiOperation(value = "공지사항 전체 조회", notes = "데이터베이스에 저장된 모든 게시글을 불러옵니다.")
     @GetMapping
-    public ResponseEntity<BoardResponse> getBoardList(){
-        return boardService.getBoardList();
+    public ResponseEntity<BoardBasicResponse> getBoardList(@PageableDefault(size=5, sort="createdDate") final Pageable pageable,
+                                                           @RequestParam(value = "keywordType", required = false) String keywordType,
+                                                           @RequestParam(value = "keyword", required = false) String keyword){
+        if(keywordType!=null && keyword!=null){
+            return boardService.getBoardList(pageable, keywordType, keyword);
+        }
+        return boardService.getBoardList(pageable);
     }
 
-    @ApiOperation(value = "id번 게시글, 댓글 불러오기", notes = "board_id가 {id}인 게시글과 댓글들을 불러옵니다.")
-    @GetMapping("/{id}")
-    public ResponseEntity<BoardResponse> getBoard(@PathVariable("id") Long id){
+    @ApiOperation(value = "공지사항 조회", notes = "{boardId}번 게시글과 댓글들을 불러옵니다.")
+    @GetMapping("/{boardId}")
+    public ResponseEntity<BoardBasicResponse> getBoard(@PathVariable("boardId") Long id){
         return boardService.getBoard(id);
     }
 
-    @ApiOperation(value = "작성한 게시글 저장", notes = "작성한 게시글이 데이터베이스에 저장됩니다.")
-    @PostMapping("/")
-    public ResponseEntity<BoardResponse> insertBoard(@RequestBody BoardRequest boardInsertRequest){
+    @ApiOperation(value = "공지사항 등록", notes = "작성한 게시글이 데이터베이스에 저장됩니다.")
+    @PostMapping
+    public ResponseEntity<BoardBasicResponse> insertBoard(@RequestBody BoardRequest boardInsertRequest){
         return boardService.insertBoard(boardInsertRequest);
     }
 
-    @ApiOperation(value = "게시글 수정", notes = "{id}번째 게시글을 수정합니다.")
-    @PutMapping("/{id}")
-    public ResponseEntity<BoardResponse> updateBoard(@PathVariable("id") Long id, @RequestBody BoardUpdateRequest boardUpdateRequest){
+    @ApiOperation(value = "공지사항 수정", notes = "{boardId}번째 게시글을 수정합니다.")
+    @PutMapping("/{boardId}")
+    public ResponseEntity<BoardBasicResponse> updateBoard(@PathVariable("boardId") Long id, @RequestBody BoardUpdateRequest boardUpdateRequest){
         return boardService.updateBoard(id, boardUpdateRequest);
     }
 
-    @ApiOperation(value = "게시글 삭제", notes = "{id}번째 게시글을 삭제합니다.")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<BoardResponse> deleteBoard(@PathVariable("id") Long id){
+    @ApiOperation(value = "공지사항 삭제", notes = "{boardId}번째 게시글을 삭제합니다.")
+    @DeleteMapping("/{boardId}")
+    public ResponseEntity<BoardBasicResponse> deleteBoard(@PathVariable("boardId") Long id){
         return boardService.deleteBoard(id);
     }
 
-    @ApiOperation(value = "id번 게시글에 댓글 추가", notes = "{id}번째 게시글에 댓글을 작성합니다.")
-    @PostMapping("/{id}/comments")
-    public ResponseEntity<BasicResponse> insertComment(@PathVariable("id") Long id, @RequestBody BoardCommentRequest boardCommentRequest){
+    @ApiOperation(value = "댓글 작성", notes = "{boardId}번째 게시글에 댓글을 작성합니다.")
+    @PostMapping("/{boardId}/comments")
+    public ResponseEntity<BasicResponse> insertComment(@PathVariable("boardId") Long id, @RequestBody BoardCommentRequest boardCommentRequest){
         return boardCommentService.insertComment(id, boardCommentRequest);
     }
 
-    @ApiOperation(value = "id번 게시글의 cid번 댓글 수정", notes = "{id}번째 게시글에 있는 cid번 댓글을 수정합니다.")
-    @PutMapping("/{id}/comments/{cid}")
-    public ResponseEntity<BasicResponse> updateComment(@PathVariable("id") Long id,@PathVariable("cid") Long cid, @RequestBody String content){
+    @ApiOperation(value = "댓글 수정", notes = "{boardId}번째 게시글에 있는 {commentId}번 댓글을 수정합니다.")
+    @PutMapping("/{boardId}/comments/{commentId}")
+    public ResponseEntity<BasicResponse> updateComment(@PathVariable("boardId") Long id,@PathVariable("commentId") Long cid, @RequestBody String content){
         return boardCommentService.updateComment(id, cid, content);
     }
 
-    @ApiOperation(value = "id번 게시글의 cid번 댓글 삭제", notes = "{id}번째 게시글에 있는 cid번 댓글을 삭제합니다.")
-    @DeleteMapping("/{id}/comments/{cid}")
-    public ResponseEntity<BasicResponse> deleteComment(@PathVariable("id") Long id,@PathVariable("cid") Long cid){
+    @ApiOperation(value = "댓글 삭제", notes = "{boardId}번째 게시글에 있는 {commentId}번 댓글을 삭제합니다.")
+    @DeleteMapping("/{boardId}/comments/{commentId}")
+    public ResponseEntity<BasicResponse> deleteComment(@PathVariable("boardId") Long id,@PathVariable("commentId") Long cid){
         return boardCommentService.deleteComment(id, cid);
-    }
-
-    @ApiOperation(value = "id번 게시글 좋아요 등록/취소", notes = "{id}번째 게시글에 사용자 {email}이 좋아요 등록/취소 합니다.")
-    @PutMapping("/{id}/likes/{email}")
-    public ResponseEntity<BoardResponse> likeButton(@PathVariable("id") Long id, @PathVariable("email") String email){
-        return boardService.likeBoard(id, email);
     }
 
 }

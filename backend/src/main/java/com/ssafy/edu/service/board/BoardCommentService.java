@@ -2,7 +2,6 @@ package com.ssafy.edu.service.board;
 
 import com.ssafy.edu.model.BasicResponse;
 import com.ssafy.edu.model.board.BoardCommentRequest;
-import com.ssafy.edu.model.board.BoardResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface BoardCommentService {

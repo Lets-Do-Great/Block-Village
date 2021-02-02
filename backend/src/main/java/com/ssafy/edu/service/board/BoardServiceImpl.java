@@ -4,17 +4,22 @@ import com.ssafy.edu.model.board.*;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.BoardCommentJpaRepository;
 import com.ssafy.edu.repository.BoardJpaRepository;
-import com.ssafy.edu.repository.BoardLikeUsersJpaRepository;
 import com.ssafy.edu.repository.UserJpaRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.function.Function;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -28,182 +33,222 @@ public class BoardServiceImpl implements BoardService{
     @Autowired
     private BoardCommentJpaRepository boardCommentJpaRepository;
 
-    @Autowired
-    private BoardLikeUsersJpaRepository boardLikeUsersJpaRepository;
+    @Override
+    public ResponseEntity<BoardBasicResponse> getBoardList(Pageable pageable) {
+
+        BoardBasicResponse result = new BoardBasicResponse();
+        Page<Board> page = boardJpaRepository.findAll(pageable);
+
+        if(!page.isEmpty()){
+
+            List<BoardResponse> boardResponseList = new ArrayList<>();
+
+            for(Board b : page){
+                BoardResponse br = new BoardResponse();
+                br.setBoardId(b.getBoardId());
+                br.setTitle(b.getTitle());
+                br.setEmail(b.getUser().getEmail());
+                br.setViews(b.getViews());
+                br.setCreatedAt(b.getCreatedDate());
+                br.setUpdatedAt(b.getModifiedDate());
+                boardResponseList.add(br);
+            }
+
+            result.status = true;
+            result.data = boardResponseList;
+            return new ResponseEntity<>(result, HttpStatus.OK);
+
+        }
+
+        result.status = false;
+        return new ResponseEntity<>(result, HttpStatus.OK);
+
+    }
 
     @Override
-    public ResponseEntity<BoardResponse> getBoardList() {
+    public ResponseEntity<BoardBasicResponse> getBoardList(final Pageable pageable, String keywordType, String keyword) {
 
-        BoardResponse result = new BoardResponse();
+        BoardBasicResponse result = new BoardBasicResponse();
 
-        List<Board> boardList = boardJpaRepository.findAll();
-        
-        if(boardList.get(0)!=null){
-            System.out.println("boardList는 널아님");
+        if(keywordType.equals("title")){
+            Page<Board> page = boardJpaRepository.findByTitleContaining(pageable, keyword);
+            return makeBoardResponse(page);
+        }else if(keywordType.equals("content")){
+            Page<Board> page = boardJpaRepository.findByContentContaining(pageable, keyword);
+            return makeBoardResponse(page);
         }
-        
-//        List<BoardResult> resultList = boardList.stream().map(boardEntity -> {
-//            BoardResult boardResult = new BoardResult();
-//            boardResult.setId(boardEntity.getId());
-//            boardResult.setTitle(boardEntity.getTitle());
-//            boardResult.setContent(boardEntity.getContent());
-////            boardResult.setWriter(boardEntity.getUser().getNickname());
-//            if(boardEntity.getUser()!=null){
-//                System.out.println("이새기 널아님");
-//                System.out.println(boardEntity.getUser().getNickname());
-//            }else{
-//                System.out.println("이새기 널임");
-//            }
-//            return boardResult;
-//        }).collect(Collectors.toList());
 
-        List<BoardResult> resultList = new ArrayList<>();
-        for(Board br : boardList){
-            BoardResult boardResult = new BoardResult();
-            boardResult.setId(br.getId());
-            boardResult.setTitle(br.getTitle());
-            boardResult.setContent(br.getContent());
-            boardResult.setWriter(br.getUser().getNickname());
-            System.out.println("br.getUser().toString() = " + br.getUser().toString());
-        resultList.add(boardResult);
-        }
-        
-//        if(resultList.get(0)!=null){
-//            System.out.println("resultList 널아님");
-//        }
-        
-        result.status = true;
-        result.data = resultList;
+        result.status = false;
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    private ResponseEntity<BoardBasicResponse> makeBoardResponse(Page<Board> page) {
 
-    @Override
-    public ResponseEntity<BoardResponse> getBoard(Long id) {
+        BoardBasicResponse result = new BoardBasicResponse();
 
-        BoardResponse result = new BoardResponse();
+        if(!page.isEmpty()){
 
-        Optional<Board> board = boardJpaRepository.findById(id);
+            List<BoardResponse> boardResponseList = new ArrayList<>();
 
-        if(board.isPresent()){
-
-            BoardResult bResult = board.map(boardEntity -> {
-                BoardResult boardResult = new BoardResult();
-                boardResult.setId(boardEntity.getId());
-                boardResult.setTitle(boardEntity.getTitle());
-                boardResult.setContent(boardEntity.getContent());
-                boardResult.setWriter(boardEntity.getUser().getNickname());
-                if(boardEntity.getCreatedDate()!=null) {
-                    boardResult.setCreatedDate(boardEntity.getCreatedDate());
-                }
-                if(boardEntity.getModifiedDate()!=null){
-                    boardResult.setUpdatedDate(boardEntity.getModifiedDate());
-                }
-                return boardResult;
-            }).get();
-
-            List<BoardCommentResponse> bCommentList = new ArrayList<>();
-            for(BoardComment b : board.get().getBoardCommentList()){
-                BoardCommentResponse bc = BoardCommentResponse.builder()
-                        .content(b.getContent())
-                        .nickname(b.getUser().getNickname())
-                        .build();
-                bCommentList.add(bc);
+            for(Board b : page){
+                BoardResponse br = new BoardResponse();
+                br.setBoardId(b.getBoardId());
+                br.setTitle(b.getTitle());
+                br.setEmail(b.getUser().getEmail());
+                br.setViews(b.getViews());
+                br.setCreatedAt(b.getCreatedDate());
+                br.setUpdatedAt(b.getModifiedDate());
+                boardResponseList.add(br);
             }
-            bResult.setBoardCommentList(bCommentList);
 
             result.status = true;
-            result.data = bResult;
+            result.data = boardResponseList;
             return new ResponseEntity<>(result, HttpStatus.OK);
 
-        }else {
-            result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
+
+        result.status = false;
+        return new ResponseEntity<>(result, HttpStatus.OK);
 
     }
 
-    @Override
-    public ResponseEntity<BoardResponse> insertBoard(BoardRequest boardInsertRequest) {
 
-        BoardResponse result = new BoardResponse();
+    /* 공지사항 조회 */
+    @Override
+    public ResponseEntity<BoardBasicResponse> getBoard(Long id) {
+
+        BoardBasicResponse result = new BoardBasicResponse();
+        Optional<Board> boardOptional = boardJpaRepository.findById(id);
+
+        if(boardOptional.isPresent()){
+
+            Board board = boardOptional.get();
+
+            // 조회수 증가 처리
+            board.setViews(board.getViews()+1L);
+            boardJpaRepository.save(board);
+
+            BoardOneResult boardOne = new BoardOneResult();
+            boardOne.setBoardId(board.getBoardId());
+            boardOne.setTitle(board.getTitle());
+            boardOne.setEmail(board.getUser().getEmail());
+            boardOne.setContent(board.getContent());
+            boardOne.setViews(board.getViews());
+            boardOne.setCreatedDate(board.getCreatedDate());
+            boardOne.setUpdatedDate(board.getModifiedDate());
+
+            List<BoardCommentResponse> bCommentList = new ArrayList<>();
+            for(BoardComment c : board.getBoardCommentList()){
+                BoardCommentResponse bc = BoardCommentResponse.builder()
+                        .commentId(c.getCommentId())
+                        .content(c.getContent())
+                        .email(c.getUser().getEmail())
+                        .createdAt(c.getCreatedDate())
+                        .updatedAt(c.getModifiedDate())
+                        .build();
+                bCommentList.add(bc);
+            }
+
+            boardOne.setComments(bCommentList);
+
+            result.status = true;
+            result.data = boardOne;
+            return new ResponseEntity<>(result, HttpStatus.OK);
+
+        }
+
+        result.status = false;
+        return new ResponseEntity<>(result, HttpStatus.OK);
+
+    }
+
+    /* 공지사항 등록 */
+    @Override
+    public ResponseEntity<BoardBasicResponse> insertBoard(BoardRequest boardInsertRequest) {
+
+        BoardBasicResponse result = new BoardBasicResponse();
         Optional<User> userOptional = userJpaRepository.findByEmail(boardInsertRequest.getEmail());
 
         if(userOptional.isPresent()){
+
             Board board = Board.builder()
                     .title(boardInsertRequest.getTitle())
                     .content(boardInsertRequest.getContent())
                     .user(userOptional.get())
                     .views(0L)
                     .build();
-
             Board save = boardJpaRepository.save(board);
-        }else {
-            result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+
+            BoardResponse br = BoardResponse.builder()
+                    .boardId(save.getBoardId())
+                    .title(save.getTitle())
+                    .email(save.getUser().getEmail())
+                    .views(save.getViews())
+                    .createdAt(save.getCreatedDate())
+                    .updatedAt(save.getModifiedDate())
+                    .build();
+
+            result.status = true;
+            result.data = br;
+            return new ResponseEntity<>(result, HttpStatus.OK);
+
         }
 
-        result.status = true;
+        result.status = false;
         return new ResponseEntity<>(result, HttpStatus.OK);
 
     }
 
+    /* 공지사항 수정 */
     @Override
-    public ResponseEntity<BoardResponse> updateBoard(Long id, BoardUpdateRequest boardUpdateRequest) {
+    public ResponseEntity<BoardBasicResponse> updateBoard(Long id, BoardUpdateRequest boardUpdateRequest) {
 
-        BoardResponse result = new BoardResponse();
+        BoardBasicResponse result = new BoardBasicResponse();
         Optional<Board> boardOptional = boardJpaRepository.findById(id);
 
         if(boardOptional.isPresent()){
             Board board = boardOptional.get();
-            board.setId(id);
+            board.setBoardId(id);
             board.setTitle(boardUpdateRequest.getTitle());
             board.setContent(boardUpdateRequest.getContent());
-            boardJpaRepository.save(board);
+            Board save = boardJpaRepository.save(board);
+
+            BoardResponse br = BoardResponse.builder()
+                    .boardId(save.getBoardId())
+                    .title(save.getTitle())
+                    .email(save.getUser().getEmail())
+                    .views(save.getViews())
+                    .createdAt(save.getCreatedDate())
+                    .updatedAt(save.getModifiedDate())
+                    .build();
 
             result.status = true;
+            result.data = br;
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
 
         result.status = false;
-        return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /* 공지사항 삭제 */
     @Override
-    public ResponseEntity<BoardResponse> deleteBoard(Long id) {
+    public ResponseEntity<BoardBasicResponse> deleteBoard(Long id) {
 
-        BoardResponse result = new BoardResponse();
+        BoardBasicResponse result = new BoardBasicResponse();
         Optional<Board> boardOptional = boardJpaRepository.findById(id);
 
-        boardLikeUsersJpaRepository.deleteAllByBoard(boardOptional.get());
         boardCommentJpaRepository.deleteAllByBoard(boardOptional.get());
         boardJpaRepository.deleteById(id);
 
-        result.status = true;
-        return new ResponseEntity<>(result, HttpStatus.OK);
-
-    }
-
-    @Override
-    public ResponseEntity<BoardResponse> likeBoard(Long id, String email) {
-
-        BoardResponse result = new BoardResponse();
-
-        Optional<Board> boardOpt = boardJpaRepository.findById(id);
-        Optional<User> userOpt = userJpaRepository.findByEmail(email);
-
-        Optional<BoardLikeUsers> likeUsersOptional = boardLikeUsersJpaRepository.findByBoardAndUser(boardOpt.get(), userOpt.get());
-        if(likeUsersOptional.isPresent()){
-            boardLikeUsersJpaRepository.delete(likeUsersOptional.get());
+        if(!boardJpaRepository.findById(id).isPresent()){
+            result.status = true;
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }else {
-            BoardLikeUsers boardLikeUsers = new BoardLikeUsers();
-            boardLikeUsers.setBoard(boardOpt.get());
-            boardLikeUsers.setUser(userOpt.get());
-            boardLikeUsersJpaRepository.save(boardLikeUsers);
+            result.status = false;
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
 
-        result.status = true;
-        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }
