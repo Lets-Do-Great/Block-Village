@@ -28,7 +28,6 @@ public class Answer {
     private Long id;
     private String title;
     private String content;
-    private String category;
     private String code;
     private int favorite;
     private int view;
@@ -47,11 +46,11 @@ public class Answer {
     @JoinColumn(name="mission_id")
     private Mission mission;
 
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "project")
-//    private List<ProjectFavorite> projectFavorites = new ArrayList<>();
-//
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "project")
-//    private List<ProjectComment> projectComments = new ArrayList<>();
+    @JsonManagedReference
+    @OneToMany(mappedBy = "answer")
+    private List<AnswerFavorite> answerFavoriteList = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "answer")
+    private List<AnswerComment> answerCommentList = new ArrayList<>();
 }

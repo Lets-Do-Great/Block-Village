@@ -6,6 +6,8 @@ import com.ssafy.edu.model.answer.Response.AnswerCommentResponse;
 import com.ssafy.edu.model.answer.Response.AnswerFavoriteResponse;
 import com.ssafy.edu.model.answer.Response.AnswerPageResponse;
 import com.ssafy.edu.model.answer.Response.AnswerResponse;
+import com.ssafy.edu.model.mission.Mission;
+import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.repository.answer.AnswerCommentJpaRepository;
 import com.ssafy.edu.repository.answer.AnswerFavoriteJapRepository;
@@ -20,11 +22,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AnswerServiceImpl implements AnswerService{
+public class AnswerServiceImpl implements AnswerService {
 
     @Autowired
     AnswerJapRepository answerJapRepository;
@@ -49,17 +52,17 @@ public class AnswerServiceImpl implements AnswerService{
         List<Object> resultObject = new ArrayList<>();
         Page<Answer> answerList = null;
 
-        if(answerSearchTypeRequest.getKeywordType().equals("title")){
-            if(answerSearchTypeRequest.getSortType().equals("increase")){
-                answerList = answerJapRepository.findByTitleContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(),3, Sort.by(answerSearchTypeRequest.getSearchType())));
-            }else if(answerSearchTypeRequest.getSortType().equals("decrease")){
-                answerList = answerJapRepository.findByTitleContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(),3, Sort.by(answerSearchTypeRequest.getSearchType()).descending()));
+        if (answerSearchTypeRequest.getKeywordType().equals("title")) {
+            if (answerSearchTypeRequest.getSortType().equals("increase")) {
+                answerList = answerJapRepository.findByTitleContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType())));
+            } else if (answerSearchTypeRequest.getSortType().equals("decrease")) {
+                answerList = answerJapRepository.findByTitleContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType()).descending()));
             }
-        }else if(answerSearchTypeRequest.getKeywordType().equals("user")){
-            if(answerSearchTypeRequest.getSortType().equals("increase")){
-                answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(),3, Sort.by(answerSearchTypeRequest.getSearchType())));
-            }else if(answerSearchTypeRequest.getSortType().equals("decrease")){
-                answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(),3, Sort.by(answerSearchTypeRequest.getSearchType()).descending()));
+        } else if (answerSearchTypeRequest.getKeywordType().equals("user")) {
+            if (answerSearchTypeRequest.getSortType().equals("increase")) {
+                answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType())));
+            } else if (answerSearchTypeRequest.getSortType().equals("decrease")) {
+                answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType()).descending()));
 
             }
         }
@@ -77,14 +80,14 @@ public class AnswerServiceImpl implements AnswerService{
 
         Optional<Answer> answerOptional = answerJapRepository.findByMissionId(missionId);
 
-        if(answerOptional.isPresent()){
-            answerOptional.get().setView(answerOptional.get().getView()+1);
+        if (answerOptional.isPresent()) {
+            answerOptional.get().setView(answerOptional.get().getView() + 1);
             Answer answer = answerJapRepository.save(answerOptional.get());
 
             result.status = true;
             result.data = answer;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
+        } else {
             result.status = false;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
@@ -96,50 +99,120 @@ public class AnswerServiceImpl implements AnswerService{
         ResponseEntity response;
         AnswerResponse result = new AnswerResponse();
 
-        List<Answer> answerOptional = answerJapRepository.findByUserEmail(userEmail);
+        Optional<User> userOptional = userJpaRepository.findByEmail(userEmail);
 
-        if(answerOptional.size()>=0)
+        if (userOptional.isPresent()) {
+            result.status = true;
+            result.data = answerJapRepository.findByUserEmailOrderByUpdatedAtDesc(userOptional.get().getEmail());
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
+    }
 
+    @Override
+    public ResponseEntity<AnswerResponse> signUpAnswer(AnswerSignupRequest answerSignupRequest) {
+        ResponseEntity response;
+        AnswerResponse result = new AnswerResponse();
+
+        Optional<User> userOptional = userJpaRepository.findByEmail(answerSignupRequest.getEmail());
+        Optional<Mission> missionOptional = missionJpaRepository.findById(answerSignupRequest.getMissionId());
+
+        if(userOptional.isPresent()&&missionOptional.isPresent()){
+            Date now = new Date(System.currentTimeMillis());
+            Answer answer = new Answer().builder()
+                    .title(answerSignupRequest.getTitle())
+                    .content(answerSignupRequest.getContent())
+                    .code(answerSignupRequest.getCode())
+                    .favorite(0)
+                    .view(0)
+                    .createdAt(now)
+                    .updatedAt(now)
+                    .user(userOptional.get())
+                    .mission(missionOptional.get())
+                    .build();
+
+            Answer answerResult = answerJapRepository.save(answer);
+            result.status = true;
+            result.data = answerResult;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<AnswerResponse> updateAnswer(AnswerUpdateRequest answerUpdateRequest) {
+        ResponseEntity response;
+        AnswerResponse result = new AnswerResponse();
+
+        Optional<Answer> answerOptional = answerJapRepository.findByIdAndUserEmail(answerUpdateRequest.getAnswerId(),answerUpdateRequest.getEmail());
+
+        if(answerOptional.isPresent()){
+            Date now = new Date(System.currentTimeMillis());
+            Answer answer = answerOptional.get();
+            answer.setTitle(answerUpdateRequest.getTitle());
+            answer.setContent(answerUpdateRequest.getContent());
+            answer.setCode(answerUpdateRequest.getCode());
+            answer.setUpdatedAt(now);
+
+            Answer answerResult = answerJapRepository.save(answer);
+            result.status = true;
+            result.data = answerResult;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<AnswerResponse> deleteAnswer(AnswerDeleteRequest answerDeleteRequest) {
+        ResponseEntity response;
+        AnswerResponse result = new AnswerResponse();
+
+        Optional<Answer> answerOptional = answerJapRepository.findByIdAndUserEmail(answerDeleteRequest.getAnswerId(),answerDeleteRequest.getEmail());
+
+        if(answerOptional.isPresent()){
+            answerJapRepository.delete(answerOptional.get());
+            result.status = true;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<AnswerFavoriteResponse> answerFavorite(AnswerFavoriteRequest answerFavoriteRequest) {
         return null;
     }
 
     @Override
-    public ResponseEntity<AnswerResponse> signUpProject(AnswerSignupRequest answerSignupRequest) {
+    public ResponseEntity<AnswerCommentResponse> answerGetComment(Long answerId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<AnswerResponse> updateProject(AnswerUpdateRequest answerUpdateRequest) {
+    public ResponseEntity<AnswerCommentResponse> answersignUpComment(AnswerCommentSignUpRequest answerCommentSignUpRequest) {
         return null;
     }
 
     @Override
-    public ResponseEntity<AnswerResponse> deleteProject(AnswerDeleteRequest answerDeleteRequest) {
+    public ResponseEntity<AnswerCommentResponse> answerupdateComment(AnswerCommentUpdateRequest answerCommentUpdateRequest) {
         return null;
     }
 
     @Override
-    public ResponseEntity<AnswerFavoriteResponse> projectFavorite(AnswerFavoriteRequest answerFavoriteRequest) {
+    public ResponseEntity<AnswerCommentResponse> answerdeleteComment(AnswerCommentDeleteRequest answerCommentDeleteRequest) {
         return null;
     }
 
-    @Override
-    public ResponseEntity<AnswerCommentResponse> projectGetComment(Long answerId) {
-        return null;
-    }
 
-    @Override
-    public ResponseEntity<AnswerCommentResponse> projectsignUpComment(AnswerCommentSignUpRequest answerCommentSignUpRequest) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<AnswerCommentResponse> projectupdateComment(AnswerCommentUpdateRequest answerCommentUpdateRequest) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<AnswerCommentResponse> projectdeleteComment(AnswerCommentDeleteRequest answerCommentDeleteRequest) {
-        return null;
-    }
 }

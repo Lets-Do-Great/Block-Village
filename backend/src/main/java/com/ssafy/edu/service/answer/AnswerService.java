@@ -11,12 +11,12 @@ public interface AnswerService {
     public ResponseEntity<AnswerPageResponse> findAll(AnswerSearchTypeRequest answerSearchTypeRequest);
     public ResponseEntity<AnswerResponse> findGetOne(String userEmail, Long missionId);
     public ResponseEntity<AnswerResponse> findGetOneByUserId(String userEmail);
-    public ResponseEntity<AnswerResponse> signUpProject(AnswerSignupRequest answerSignupRequest);
-    public ResponseEntity<AnswerResponse> updateProject(AnswerUpdateRequest answerUpdateRequest);
-    public ResponseEntity<AnswerResponse> deleteProject(AnswerDeleteRequest answerDeleteRequest);
-    public ResponseEntity<AnswerFavoriteResponse> projectFavorite(AnswerFavoriteRequest answerFavoriteRequest);
-    public ResponseEntity<AnswerCommentResponse> projectGetComment(Long answerId);
-    public ResponseEntity<AnswerCommentResponse> projectsignUpComment(AnswerCommentSignUpRequest answerCommentSignUpRequest);
-    public ResponseEntity<AnswerCommentResponse> projectupdateComment(AnswerCommentUpdateRequest answerCommentUpdateRequest);
-    public ResponseEntity<AnswerCommentResponse> projectdeleteComment(AnswerCommentDeleteRequest answerCommentDeleteRequest);
+    public ResponseEntity<AnswerResponse> signUpAnswer(AnswerSignupRequest answerSignupRequest);
+    public ResponseEntity<AnswerResponse> updateAnswer(AnswerUpdateRequest answerUpdateRequest);
+    public ResponseEntity<AnswerResponse> deleteAnswer(AnswerDeleteRequest answerDeleteRequest);
+    public ResponseEntity<AnswerFavoriteResponse> answerFavorite(AnswerFavoriteRequest answerFavoriteRequest);
+    public ResponseEntity<AnswerCommentResponse> answerGetComment(Long answerId);
+    public ResponseEntity<AnswerCommentResponse> answersignUpComment(AnswerCommentSignUpRequest answerCommentSignUpRequest);
+    public ResponseEntity<AnswerCommentResponse> answerupdateComment(AnswerCommentUpdateRequest answerCommentUpdateRequest);
+    public ResponseEntity<AnswerCommentResponse> answerdeleteComment(AnswerCommentDeleteRequest answerCommentDeleteRequest);
 }

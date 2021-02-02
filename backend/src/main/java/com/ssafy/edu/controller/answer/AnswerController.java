@@ -30,31 +30,31 @@ public class AnswerController {
     @ApiOperation(value = "전체 미션 답안 조회", notes = "")
     @PostMapping()
     public ResponseEntity<AnswerPageResponse> GetAnswer(@RequestBody AnswerSearchTypeRequest answerSearchTypeRequest) {
-        return null;
+        return answerService.findAll(answerSearchTypeRequest);
     }
     @ApiOperation(value = "특정 미션에 제출한 답안 목록 조회", notes = "")
     @GetMapping("/{userEmail}/{missionId}")
     public ResponseEntity<AnswerResponse> GetOneAnswer(@PathVariable("userEmail")String userEmail, @PathVariable("missionId")Long missionId) {
-        return null;
+        return answerService.findGetOne(userEmail,missionId);
     }
     @ApiOperation(value = "내가 참여한 미션 답안 목록", notes = "")
     @GetMapping("/user/{userEmail}")
     public ResponseEntity<AnswerResponse> GetUserAnswer(@PathVariable("userEmail")String userEmail) {
-        return null;
+        return answerService.findGetOneByUserId(userEmail);
     }
     @ApiOperation(value = "미션 답안 제출", notes = "")
     @PostMapping("/{userEmail}")
     public ResponseEntity<AnswerResponse> signUpAnswer(@RequestBody AnswerSignupRequest answerSignupRequest) {
-        return null;
+        return answerService.signUpAnswer(answerSignupRequest);
     }
     @ApiOperation(value = "내가 제출한 미션 답안 수정", notes = "")
     @PutMapping("/{answerId}")
     public ResponseEntity<AnswerResponse> updateAnswer(@RequestBody AnswerUpdateRequest answerUpdateRequest) {
-        return null;
+        return answerService.updateAnswer(answerUpdateRequest);
     }
     @ApiOperation(value = "내가 제출한 미션 답안 삭제", notes = "")
     @DeleteMapping("/{answerId}")
     public ResponseEntity<AnswerResponse> deleteAnswer(@RequestBody AnswerDeleteRequest answerDeleteRequest) {
-        return null;
+        return answerService.deleteAnswer(answerDeleteRequest);
     }
 }

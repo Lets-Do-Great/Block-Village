@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface AnswerFavoriteJapRepository extends JpaRepository<AnswerFavorite,Long> {
     public AnswerFavorite findByUserEmailAndAnswerId(String userEmail,Long answerId);
-    public List<AnswerFavorite> findByAnswertId(Long answerId);
+    public List<AnswerFavorite> findByAnswerId(Long answerId);
 }

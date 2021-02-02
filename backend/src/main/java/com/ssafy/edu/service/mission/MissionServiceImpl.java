@@ -133,7 +133,8 @@ public class MissionServiceImpl implements MissionService {
 
         if (userOptional.isPresent()) {
             List<findOneModel> findOneModelList = new ArrayList<>();
-            for (Mission mission : userOptional.get().getMissionList()) {
+
+            for (Mission mission : missionJpaRepository.findByUserEmailOrderByUpdatedAtDesc(userEmail)) {
                 Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, mission.getId()));
                 Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(userEmail,mission.getId()));
                 findOneModel findOneModel = new findOneModel().builder()

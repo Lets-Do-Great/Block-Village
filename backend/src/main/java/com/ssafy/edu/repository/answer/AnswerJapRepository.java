@@ -17,6 +17,6 @@ public interface AnswerJapRepository extends JpaRepository<Answer,Long> {
     public Optional<Answer> findByIdAndUserEmail(Long answerId, String email);
     public Page<Answer> findByUserNicknameContaining(String userNickname, Pageable pageable);
     public Page<Answer> findByTitleContaining(String answerTitle,  Pageable pageable);
-    public List<Answer> findByUserEmail(String userEmail);
+    public List<Answer> findByUserEmailOrderByUpdatedAtDesc(String userEmail);
     public void delete(Answer project);
 }

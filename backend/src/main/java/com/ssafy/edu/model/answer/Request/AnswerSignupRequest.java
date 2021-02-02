@@ -19,6 +19,10 @@ public class AnswerSignupRequest {
 
     @ApiModelProperty(required = true)
     @NotNull
+    Long missionId;
+
+    @ApiModelProperty(required = true)
+    @NotNull
     String title;
 
     @ApiModelProperty(required = true)
