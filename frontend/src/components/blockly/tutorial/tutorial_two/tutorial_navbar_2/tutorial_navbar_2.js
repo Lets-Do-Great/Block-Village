@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './tutorial_navbar.module.css'
+import styles from './tutorial_navbar_2.module.css'
 import { BsDisplayFill, BsDisplay } from 'react-icons/bs';
 import { FaRegCircle, FaRegCheckCircle } from 'react-icons/fa';
 
 import { useHistory } from 'react-router-dom';
 
-const TutorialNavbar = ({ title, modal, statusModal, icon_status }) => {
+const TutorialNavbar2 = ({ title, modal, statusModal, icon_status }) => {
   const history = useHistory();
 
   const onoffModal = () => {
@@ -51,4 +51,4 @@ const TutorialNavbar = ({ title, modal, statusModal, icon_status }) => {
   )
 }
 
-export default TutorialNavbar;
+export default TutorialNavbar2;

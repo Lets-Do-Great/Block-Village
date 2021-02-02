@@ -1,38 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import TutorialMain from '../tutorial_main/tutorial_main';
+import styles from './tutorial_submain.module.css'
+import TutorialMain1 from '../tutorial_one/tutorial_main_1/tutorial_main_1';
+import TutorialMain2 from '../tutorial_two/tutorial_main_2/tutorial_main_2';
+import TutorialMain3 from '../tutorial_three/tutorial_main_3/tutorial_main_3';
 
 const TutorialSubmain = (props) => {
   // state
-  const [tutorial_real, setTutorial_real] = useState({
-    id: 1,
-    title: '튜토리얼 1',
-    initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml"><Block type="start_button" x="70" y="30"></Block><Block type="move_forward_1" x="70" y="170"></Block></xml>',
-    toolboxCategories: [
-      {
-        name: '시작',
-        colour: '#C30D23',
-        blocks: [
-          {type: 'start_button',},
-          {type: 'end_button',},
-        ],
-      },
-      {
-        name: '움직임',
-        colour: '#8FC31F',
-        blocks: [
-          {type: 'move_forward_1'},
-        ],
-      },
-    ],
-    map_image: '../../../../images/test_playground.png',
-    character_image: '/images/bug.png',
-    icon_status: [false, false, false],
-  });
+  const [stage, setStage] = useState(1);
 
   const tutorial_one = {
     id: 1,
     title: '튜토리얼 1',
-    initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml"><Block type="start_button" x="70" y="30"></Block><Block type="move_forward_1" x="70" y="170"></Block></xml>',
+    initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml">' +
+                '<Block type="start_button" x="70" y="30"></Block>' +
+                '<Block type="move_forward_1" x="70" y="170"></Block>' +
+                '</xml>',
     toolboxCategories: [
       {
         name: '시작',
@@ -58,7 +40,10 @@ const TutorialSubmain = (props) => {
   const tutorial_two = {
     id: 2,
     title: '튜토리얼 2',
-    initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml"><Block type="start_button" x="70" y="30"></Block><Block type="move_forward_1" x="70" y="170"></Block></xml>',
+    initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml">' +
+                '<Block type="start_button" x="70" y="30"></Block>' +
+                '<Block type="turn_angle" x="70" y="170"></Block>' +
+                '</xml>',
     toolboxCategories: [
       {
         name: '시작',
@@ -72,6 +57,7 @@ const TutorialSubmain = (props) => {
         colour: '#8FC31F',
         blocks: [
           {type: 'move_forward_1'},
+          {type: 'turn_angle'},
         ],
       },
     ],
@@ -83,7 +69,12 @@ const TutorialSubmain = (props) => {
   const tutorial_three = {
     id: 3,
     title: '튜토리얼 3',
-    initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml"><Block type="start_button" x="70" y="30"></Block><Block type="move_forward_1" x="70" y="170"></Block></xml>',
+    initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml">' +
+                '<Block type="start_button" x="70" y="30"></Block>' +
+                '<Block type="turn_angle" x="70" y="170"></Block>' +
+                '<Block type="number" x="10" y="320"></Block>' +
+                '<Block type="repeat_times" x="70" y="320"></Block>' +
+                '</xml>',
     toolboxCategories: [
       {
         name: '시작',
@@ -98,7 +89,16 @@ const TutorialSubmain = (props) => {
         colour: '#8FC31F',
         blocks: [
           {type: 'move_forward_1'},
+          {type: 'turn_angle'},
         ],
+      },
+      {
+        name: '흐름',
+        colour: '#55CFFF',
+        blocks: [
+          {type: 'number'},
+          {type: 'repeat_times'},
+        ]
       },
     ],
     map_image: '../../../../images/test_playground.png',
@@ -108,19 +108,23 @@ const TutorialSubmain = (props) => {
 
   // function
   const change_one_two = () => {
-    setTutorial_real(tutorial_two)
+    setStage(2)
   }
 
   const change_two_three = () => {
-    setTutorial_real(tutorial_three)
+    setStage(3)
+  }
+
+  const GoMyPage = () => {
+    console.log();
   }
 
   return (
-    <TutorialMain 
-      info={tutorial_real}
-      change_one_two={change_one_two}
-      change_two_three={change_two_three}
-    />
+    <div className={styles.body}>
+      {stage === 1 && <TutorialMain1 info={tutorial_one} GoTwo={change_one_two} />}
+      {stage === 2 && <TutorialMain2 info={tutorial_two} GoThree={change_two_three} />}
+      {stage === 3 && <TutorialMain3 info={tutorial_three} GoMyPage={GoMyPage}/>}
+    </div>
   )
 };
 

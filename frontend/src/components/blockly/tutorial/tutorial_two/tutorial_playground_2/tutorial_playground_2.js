@@ -1,17 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './tutorial_playground.module.css'
+import styles from './tutorial_playground_2.module.css'
 
-const TutorialPlayground = ({ javascript_code }) => {
+const TutorialPlayground2 = ({ javascript_code, onChangeModalSuccess, onChangeModalFail }) => {
   var x = 0;
   var y = 0;
   var move = [];
   var cur_angle = 0;
 
+
+  // 맵 정답 위치 (이것만 바꾸면 됨)
+  const tutorial_map = [
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 3, 0, 0],
+    [0, 0, 0, 1, 0, 0],
+    [0, 2, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+  ]
+  const char_location = [3, 1]
+  const answer_location = [1, 3]
+  //==================================
+
+
   const fieldsize = useRef();
   const fieldchar = useRef();
   const item = fieldchar.current;
-
-  const [test, setTest] = useState(0);
 
   const [image_x, setImage_x] = useState(0);
   const [image_y, setImage_y] = useState(0);
@@ -20,21 +33,41 @@ const TutorialPlayground = ({ javascript_code }) => {
   const playGame = () => {
     eval(javascript_code);
     console.log(move);
+    item.style.transition = `all .${move.length*10}s ease .5s`
 
     let x = image_x;
     let y = image_y;
 
-    item.style.transition = `all .${move.length + 2}s`
-
     const timer = ms => new Promise(res => setTimeout(res, ms))
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
-        x = image_x + (move[i][0] * 40)
-        y = image_y - (move[i][1] * 40)
+        
+        const new_move_x = Math.round(move[i][0])
+        const new_move_y = Math.round(move[i][1])
+        x = image_x + (new_move_x * 40)
+        y = image_y - (new_move_y * 40)
+
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
-        console.log(x, y);
-        await timer(600);
+
+        await timer(1500);
+        
+        let check_lo_x = char_location[0] - new_move_y;
+        let check_lo_y = char_location[1] + new_move_x;
+
+        if (tutorial_map[check_lo_x][check_lo_y] === 0) {
+          onChangeModalFail()
+          return
+        }
+      }
+      if (
+        (char_location[0] - Math.round(move[move.length - 1][1])) === answer_location[0] 
+        && (char_location[1] + Math.round(move[move.length - 1][0])) === answer_location[1]
+        ) {
+        onChangeModalSuccess();
+      }
+      else {
+        onChangeModalFail()
       }
     }
     jinok()
@@ -312,4 +345,4 @@ const TutorialPlayground = ({ javascript_code }) => {
   )
 }
 
-export default TutorialPlayground;
+export default TutorialPlayground2;

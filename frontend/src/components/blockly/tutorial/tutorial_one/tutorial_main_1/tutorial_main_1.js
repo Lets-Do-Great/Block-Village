@@ -1,29 +1,34 @@
 import React, {useState} from 'react';
-import styles from './tutorial_main.module.css'
+import styles from './tutorial_main_1.module.css'
 
 import Draggable from 'react-draggable';
 
-import '../../all_blocks/start_blocks';
-import '../../all_blocks/judgement_blocks';
-import '../../all_blocks/flow_blocks';
-import '../../all_blocks/calculation_blocks';
-import '../../all_blocks/movement_blocks';
-import '../../all_blocks/drawing_blocks';
-import '../../all_blocks/function_blocks';
+import '../../../all_blocks/start_blocks';
+import '../../../all_blocks/judgement_blocks';
+import '../../../all_blocks/flow_blocks';
+import '../../../all_blocks/calculation_blocks';
+import '../../../all_blocks/movement_blocks';
+import '../../../all_blocks/drawing_blocks';
+import '../../../all_blocks/function_blocks';
 
 import ReactBlockly from 'react-blockly';
 import Blockly from 'blockly';
 
-import TutorialNavbar from '../tutorial_navbar/tutorial_navbar';
-import TutorialPlayground from '../tutorial_playground/tutorial_playground';
+import TutorialNavbar from '../tutorial_navbar_1/tutorial_navbar_1';
+import TutorialPlayground from '../tutorial_playground_1/tutorial_playground_1';
+import ModalSuccess1 from '../modal_1/modal_success_1/modal_success_1';
+import ModalFail1 from '../modal_1/modal_fail_1/modal_fail_1';
 
-const TutorialMain = ({ info, change_one_two, change_two_three}) => {
+const TutorialMain1 = ({ info, GoTwo }) => {
   const { 
     id,
     title, initialXml, toolboxCategories, 
     map_image, character_image, 
     icon_status,
   } = info;
+
+  const [modal_success_state, setModal_success_state] = useState(false);
+  const [modal_fail_state, setModal_fail_state] = useState(false);
 
   const [activeDrags, setActiveDrags] = useState(0);
   const [modal, setModal] = useState(true);
@@ -90,6 +95,21 @@ const TutorialMain = ({ info, change_one_two, change_two_three}) => {
   };
 
   // play ground 관련 function
+  const onChangeModalSuccess = () => {
+    setModal(false)
+    setModal_success_state(true)
+  };
+
+  const onChangeModalFail = () => {
+    setModal(false)
+    setModal_fail_state(true)
+  };
+
+  const reStart = () => {
+    setModal(true)
+    setModal_fail_state(false)
+  }
+
   const onStart = () => {
     setActiveDrags(activeDrags + 1);
   };
@@ -109,12 +129,21 @@ const TutorialMain = ({ info, change_one_two, change_two_three}) => {
 
   return (
     <div className={styles.body}>
+
+      <ModalSuccess1 
+        modal_success_state={modal_success_state}
+        GoTwo={GoTwo}
+      />
+      <ModalFail1 
+        modal_fail_state={modal_fail_state}
+        reStart={reStart}
+      />
+
       <TutorialNavbar 
         title={title}
         modal={modal} 
         statusModal={statusModal} 
         icon_status={icon_status}
-        change_one_two={change_one_two}
       />
       <div className={styles.container}>
 
@@ -125,7 +154,12 @@ const TutorialMain = ({ info, change_one_two, change_two_three}) => {
             bounds="parent"
             >
             <div className={styles.playground}>
-              <TutorialPlayground javascript_code={javascript} />
+              <TutorialPlayground 
+                javascript_code={javascript} 
+                onChangeModalSuccess={onChangeModalSuccess}
+                onChangeModalFail={onChangeModalFail}
+                
+              />
             </div>
           </Draggable>
         }
@@ -170,4 +204,4 @@ const TutorialMain = ({ info, change_one_two, change_two_three}) => {
   )
 };
 
-export default TutorialMain;
+export default TutorialMain1;
