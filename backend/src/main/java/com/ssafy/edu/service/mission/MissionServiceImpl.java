@@ -302,6 +302,7 @@ public class MissionServiceImpl implements MissionService {
                     .code(mission.get().getCode())
                     .difficulty(mission.get().getDifficulty())
                     .likeCnt(mission.get().getFavorite())
+                    .peopleCnt(mission.get().getPeople())
                     .favorite(missionFavorite.orElseGet(MissionFavorite::new).isFavorite())
                     .todo(missionDoUsers.orElseGet(MissionDoUsers::new).getTodo())
                     .build();
@@ -337,6 +338,7 @@ public class MissionServiceImpl implements MissionService {
                     .code(mission.get().getCode())
                     .difficulty(mission.get().getDifficulty())
                     .likeCnt(mission.get().getFavorite())
+                    .peopleCnt(mission.get().getPeople())
                     .favorite(missionFavorite.orElseGet(MissionFavorite::new).isFavorite())
                     .todo(missionDoUsers.orElseGet(MissionDoUsers::new).getTodo())
                     .build();
