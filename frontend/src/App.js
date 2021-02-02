@@ -14,7 +14,6 @@ import MissionContainer from './containers/mission_container';
 import TestMypage from './components/my_page/test_mypage';
 
 
-
 function App() {
   return (
     <div className={styles.app}>
