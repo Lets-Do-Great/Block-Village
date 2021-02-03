@@ -15,11 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class BlockBuyRequest {
-    @ApiModelProperty(required = true)
-    @NotEmpty
-    String email;
 
     @ApiModelProperty(required = true)
     @NotEmpty
     List<Long> blockId;
+
 }

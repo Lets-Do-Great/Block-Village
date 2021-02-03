@@ -6,6 +6,15 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/*
+* id : 블록 pk
+* name : 블록의 이름
+* type : 블록의 type
+* price : 블록의 가격
+* */
 
 @Getter @Setter
 @Builder
@@ -14,15 +23,22 @@ import javax.persistence.*;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Entity
 public class Block {
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "block_id")
     private Long id;
 
     @Lob
     private String name;
 
     @Lob
-    private String type;
+    private String category;
 
     @Lob
     private int price;
+
+    @OneToMany(mappedBy = "block")
+    List<BlockUsers> blockUsers = new ArrayList<>();
+
 }
