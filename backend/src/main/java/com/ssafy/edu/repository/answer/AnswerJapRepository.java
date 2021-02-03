@@ -13,7 +13,8 @@ import java.util.Optional;
 public interface AnswerJapRepository extends JpaRepository<Answer,Long> {
     public List<Answer> findAll();
     public Optional<Answer> findById(Long answerId);
-    public Optional<Answer> findByMissionId(Long missionId);
+    public List<Answer> findByMissionIdOrderByUpdatedAtDesc(Long missionId);
+    public Optional<Answer> findByIdAndMissionId(Long answerId,Long missionId);
     public Optional<Answer> findByIdAndUserEmail(Long answerId, String email);
     public Page<Answer> findByUserNicknameContaining(String userNickname, Pageable pageable);
     public Page<Answer> findByTitleContaining(String answerTitle,  Pageable pageable);

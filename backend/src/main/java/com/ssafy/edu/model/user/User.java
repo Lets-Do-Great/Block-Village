@@ -57,12 +57,4 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "user")
-    private List<Mission> missionList = new ArrayList<>();
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "user")
-    private List<MissionFavorite> missionLikeUsersList = new ArrayList<>();
-
 }

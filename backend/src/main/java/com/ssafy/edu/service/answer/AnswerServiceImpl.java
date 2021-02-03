@@ -1,6 +1,8 @@
 package com.ssafy.edu.service.answer;
 
 import com.ssafy.edu.model.answer.Answer;
+import com.ssafy.edu.model.answer.AnswerComment;
+import com.ssafy.edu.model.answer.AnswerFavorite;
 import com.ssafy.edu.model.answer.Request.*;
 import com.ssafy.edu.model.answer.Response.AnswerCommentResponse;
 import com.ssafy.edu.model.answer.Response.AnswerFavoriteResponse;
@@ -44,7 +46,6 @@ public class AnswerServiceImpl implements AnswerService {
     @Autowired
     AnswerFavoriteJapRepository answerFavoriteJapRepository;
 
-
     @Override
     public ResponseEntity<AnswerPageResponse> findAll(AnswerSearchTypeRequest answerSearchTypeRequest) {
         ResponseEntity response;
@@ -74,18 +75,36 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public ResponseEntity<AnswerResponse> findGetOne(String userEmail, Long missionId) {
+    public ResponseEntity<AnswerResponse> findGetList(Long missionId) {
         ResponseEntity response;
         AnswerResponse result = new AnswerResponse();
 
-        Optional<Answer> answerOptional = answerJapRepository.findByMissionId(missionId);
+        List<Answer> answerOptional = answerJapRepository.findByMissionIdOrderByUpdatedAtDesc(missionId);
+
+        if (answerOptional.size() >= 0) {
+            result.status = true;
+            result.data = answerOptional;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<AnswerResponse> findGetOne(Long missionId, Long answerId) {
+        ResponseEntity response;
+        AnswerResponse result = new AnswerResponse();
+
+        Optional<Answer> answerOptional = answerJapRepository.findByIdAndMissionId(answerId, missionId);
 
         if (answerOptional.isPresent()) {
             answerOptional.get().setView(answerOptional.get().getView() + 1);
-            Answer answer = answerJapRepository.save(answerOptional.get());
+            answerJapRepository.save(answerOptional.get());
 
             result.status = true;
-            result.data = answer;
+            result.data = answerOptional;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -120,7 +139,7 @@ public class AnswerServiceImpl implements AnswerService {
         Optional<User> userOptional = userJpaRepository.findByEmail(answerSignupRequest.getEmail());
         Optional<Mission> missionOptional = missionJpaRepository.findById(answerSignupRequest.getMissionId());
 
-        if(userOptional.isPresent()&&missionOptional.isPresent()){
+        if (userOptional.isPresent() && missionOptional.isPresent()) {
             Date now = new Date(System.currentTimeMillis());
             Answer answer = new Answer().builder()
                     .title(answerSignupRequest.getTitle())
@@ -138,7 +157,7 @@ public class AnswerServiceImpl implements AnswerService {
             result.status = true;
             result.data = answerResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
+        } else {
             result.status = false;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
@@ -150,9 +169,9 @@ public class AnswerServiceImpl implements AnswerService {
         ResponseEntity response;
         AnswerResponse result = new AnswerResponse();
 
-        Optional<Answer> answerOptional = answerJapRepository.findByIdAndUserEmail(answerUpdateRequest.getAnswerId(),answerUpdateRequest.getEmail());
+        Optional<Answer> answerOptional = answerJapRepository.findByIdAndUserEmail(answerUpdateRequest.getAnswerId(), answerUpdateRequest.getEmail());
 
-        if(answerOptional.isPresent()){
+        if (answerOptional.isPresent()) {
             Date now = new Date(System.currentTimeMillis());
             Answer answer = answerOptional.get();
             answer.setTitle(answerUpdateRequest.getTitle());
@@ -164,7 +183,7 @@ public class AnswerServiceImpl implements AnswerService {
             result.status = true;
             result.data = answerResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
+        } else {
             result.status = false;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
@@ -176,13 +195,13 @@ public class AnswerServiceImpl implements AnswerService {
         ResponseEntity response;
         AnswerResponse result = new AnswerResponse();
 
-        Optional<Answer> answerOptional = answerJapRepository.findByIdAndUserEmail(answerDeleteRequest.getAnswerId(),answerDeleteRequest.getEmail());
+        Optional<Answer> answerOptional = answerJapRepository.findByIdAndUserEmail(answerDeleteRequest.getAnswerId(), answerDeleteRequest.getEmail());
 
-        if(answerOptional.isPresent()){
+        if (answerOptional.isPresent()) {
             answerJapRepository.delete(answerOptional.get());
             result.status = true;
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
+        } else {
             result.status = false;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
@@ -191,28 +210,147 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public ResponseEntity<AnswerFavoriteResponse> answerFavorite(AnswerFavoriteRequest answerFavoriteRequest) {
-        return null;
+        ResponseEntity response;
+        AnswerResponse result = new AnswerResponse();
+
+        Optional<User> userOptional = userJpaRepository.findByEmail(answerFavoriteRequest.getEmail());
+        Optional<Answer> answerOptional = answerJapRepository.findById(answerFavoriteRequest.getAnswerId());
+        Optional<AnswerFavorite> answerFavoriteOptional = Optional.ofNullable(answerFavoriteJapRepository.findByUserEmailAndAnswerId(userOptional.get().getEmail(), answerOptional.get().getId()));
+
+        if (answerFavoriteOptional.isEmpty()) {
+            AnswerFavorite answerFavorite = new AnswerFavorite().builder()
+                    .answer(answerOptional.get())
+                    .user(answerOptional.get().getUser())
+                    .favorite(answerFavoriteRequest.isFavorite())
+                    .build();
+
+            AnswerFavorite answerFavoriteResult = answerFavoriteJapRepository.save(answerFavorite);
+
+            List<AnswerFavorite> answerFavoriteList = answerFavoriteJapRepository.findByAnswerId(answerOptional.get().getId());
+            answerOptional.get().setFavorite((int) answerFavoriteList.stream().filter(a -> a.isFavorite()).count());
+
+            answerJapRepository.save(answerOptional.get());
+            result.status = true;
+            result.data = answerFavoriteResult;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else if (answerFavoriteOptional.isPresent()) {
+            AnswerFavorite answerFavorite = new AnswerFavorite().builder()
+                    .id(answerFavoriteOptional.get().getId())
+                    .answer(answerOptional.get())
+                    .user(answerOptional.get().getUser())
+                    .favorite(answerFavoriteRequest.isFavorite())
+                    .build();
+
+            AnswerFavorite answerFavoriteResult = answerFavoriteJapRepository.save(answerFavorite);
+
+            List<AnswerFavorite> answerFavoriteList = answerFavoriteJapRepository.findByAnswerId(answerOptional.get().getId());
+            answerOptional.get().setFavorite((int) answerFavoriteList.stream().filter(a -> a.isFavorite()).count());
+
+            answerJapRepository.save(answerOptional.get());
+            result.status = true;
+            result.data = answerFavoriteResult;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
     }
 
     @Override
-    public ResponseEntity<AnswerCommentResponse> answerGetComment(Long answerId) {
-        return null;
+    public ResponseEntity<AnswerCommentResponse> answerfindGetComment(Long answerId) {
+        ResponseEntity response;
+        AnswerResponse result = new AnswerResponse();
+
+        List<AnswerComment> answerCommentList = answerCommentJpaRepository.findByAnswerId(answerId);
+
+        if (answerCommentList.size() >= 0) {
+            result.status = true;
+            result.data = answerCommentList;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
     }
+
 
     @Override
     public ResponseEntity<AnswerCommentResponse> answersignUpComment(AnswerCommentSignUpRequest answerCommentSignUpRequest) {
-        return null;
+        ResponseEntity response;
+        AnswerResponse result = new AnswerResponse();
+
+        Optional<Answer> answerOptional = answerJapRepository.findById(answerCommentSignUpRequest.getAnswerId());
+        Optional<User> userOptional = userJpaRepository.findByEmail(answerCommentSignUpRequest.getEmail());
+
+        if (answerOptional.isPresent() && userOptional.isPresent()) {
+            Date now = new Date(System.currentTimeMillis());
+
+            AnswerComment answerComment = new AnswerComment().builder()
+                    .comment(answerCommentSignUpRequest.getComment())
+                    .answer(answerOptional.get())
+                    .user(userOptional.get())
+                    .updatedAt(now)
+                    .build();
+
+            AnswerComment answerCommentResult = answerCommentJpaRepository.save(answerComment);
+
+            result.status = true;
+            result.data = answerCommentResult;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
     }
 
     @Override
     public ResponseEntity<AnswerCommentResponse> answerupdateComment(AnswerCommentUpdateRequest answerCommentUpdateRequest) {
-        return null;
+        ResponseEntity response;
+        AnswerResponse result = new AnswerResponse();
+
+        Optional<AnswerComment> answerCommentOptional = Optional.ofNullable(answerCommentJpaRepository.findByIdAndUserEmail(answerCommentUpdateRequest.getAnswerCommentId(), answerCommentUpdateRequest.getEmail()));
+
+        if (answerCommentOptional.isPresent()) {
+            Date now = new Date(System.currentTimeMillis());
+
+            AnswerComment answerComment = new AnswerComment().builder()
+                    .id(answerCommentOptional.get().getId())
+                    .comment(answerCommentUpdateRequest.getComment())
+                    .answer(answerCommentOptional.get().getAnswer())
+                    .user(answerCommentOptional.get().getUser())
+                    .updatedAt(now)
+                    .build();
+
+            AnswerComment answerCommentResult = answerCommentJpaRepository.save(answerComment);
+
+            result.status = true;
+            result.data = answerCommentResult;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
     }
 
     @Override
     public ResponseEntity<AnswerCommentResponse> answerdeleteComment(AnswerCommentDeleteRequest answerCommentDeleteRequest) {
-        return null;
+        ResponseEntity response;
+        AnswerResponse result = new AnswerResponse();
+
+        Optional<AnswerComment> answerCommentOptional = Optional.ofNullable(answerCommentJpaRepository.findByIdAndUserEmail(answerCommentDeleteRequest.getAnswerCommentId(), answerCommentDeleteRequest.getEmail()));
+
+        if (answerCommentOptional.isPresent()) {
+            answerCommentJpaRepository.delete(answerCommentOptional.get());
+            result.status = true;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
     }
-
-
 }
