@@ -68,7 +68,7 @@ const MyMissionContainer = () => {
     // 미션 전체 리스트 조회
     const getMissionList = async () => {
         try{
-            await dispatch(MissionAction.getMissionList(search));
+            // await dispatch(MissionAction.getMissionList(search));
         } catch(e) {
             console.log(e);
         }
