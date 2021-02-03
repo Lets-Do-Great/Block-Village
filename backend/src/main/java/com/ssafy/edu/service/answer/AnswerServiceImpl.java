@@ -144,7 +144,8 @@ public class AnswerServiceImpl implements AnswerService {
             Answer answer = new Answer().builder()
                     .title(answerSignupRequest.getTitle())
                     .content(answerSignupRequest.getContent())
-                    .code(answerSignupRequest.getCode())
+                    .xmlCode(answerSignupRequest.getXmlCode())
+                    .javascriptCode(answerSignupRequest.getJavascriptCode())
                     .favorite(0)
                     .view(0)
                     .createdAt(now)
@@ -176,7 +177,8 @@ public class AnswerServiceImpl implements AnswerService {
             Answer answer = answerOptional.get();
             answer.setTitle(answerUpdateRequest.getTitle());
             answer.setContent(answerUpdateRequest.getContent());
-            answer.setCode(answerUpdateRequest.getCode());
+            answer.setXmlCode(answerUpdateRequest.getXmlCode());
+            answer.setJavascriptCode(answerUpdateRequest.getJavascriptCode());
             answer.setUpdatedAt(now);
 
             Answer answerResult = answerJapRepository.save(answer);

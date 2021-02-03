@@ -28,7 +28,8 @@ public class Answer {
     private Long id;
     private String title;
     private String content;
-    private String code;
+    private String xmlCode;
+    private String javascriptCode;
     private int favorite;
     private int view;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

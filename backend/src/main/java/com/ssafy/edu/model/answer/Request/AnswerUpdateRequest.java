@@ -31,5 +31,9 @@ public class AnswerUpdateRequest {
 
     @ApiModelProperty(required = true)
     @NotNull
-    String code;
+    String xmlCode;
+
+    @ApiModelProperty(required = true)
+    @NotNull
+    String javascriptCode;
 }
