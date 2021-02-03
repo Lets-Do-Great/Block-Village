@@ -71,7 +71,7 @@ const DetailCardForm = ({ detail, setLike, setDislike, closeModal,
                     className={styles.participating_button}>미션 참여중</button> }
               { todo === 'done' &&
                 <button
-                    className={styles.participated_button}>참여 완료</button> }</>
+                    className={styles.participated_button}>참여 완료! 다른 답안 보러 가기</button> }</>
         }
     </div>
     );
