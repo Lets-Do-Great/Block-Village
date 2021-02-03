@@ -115,12 +115,10 @@ const MissionContainer = () => {
                 onChangeSearch={onChangeSearch}
                 onChangeSearchType={onChangeSearchType}
                 onClickEnter={onClickEnter}
-                search={search}
-            /> 
+                search={search}/> 
 
             <SearchType
-                onChangeSearchType={onChangeSearchType}
-            />
+                onChangeSearchType={onChangeSearchType}/>
 
             <ListForm
                 userInfo={userInfo.email}
@@ -132,8 +130,7 @@ const MissionContainer = () => {
                 setDislike={dislikeMission}
                 onChangeSearchType={onChangeSearchType}
                 onDelete={onDeleteMission}
-                onParticipateMission={onParticipateMission}
-            />
+                onParticipateMission={onParticipateMission}/>
         </>
     );
 }

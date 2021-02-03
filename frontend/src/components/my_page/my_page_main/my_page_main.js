@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MyPageContainer from '../../../containers/my_page_container';
+import MyInfoContainer from '../../../containers/my_info_container';
 import MyBlockContainer from '../../../containers/my_block_container';
 import styles from './my_page_main.module.css';
 import MyMissionContainer from '../../../containers/my_mission_container';
@@ -29,13 +29,11 @@ const MyPageMain = () => {
                 <button onClick={openCard} value="mission">내 미션 목록</button> 
                 <button onClick={openCard} value="project">내 작품 목록</button>
             </div>
-
             
-                    
             {  modal && openType === 'info' &&
                 <div className={styles.modal_wrapper}>
                     <div className={styles.modal}>
-                        <MyPageContainer
+                        <MyInfoContainer
                             closeModal={closeModal}/>
                     </div>
                 </div>
