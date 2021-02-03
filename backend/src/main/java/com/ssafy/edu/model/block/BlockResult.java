@@ -15,12 +15,5 @@ public class BlockResult {
     String category;
     int price;
     // 임시
-    List<Block> calculation;
-    List<Block> drawing;
-    List<Block> flow;
-    List<Block> function;
-    List<Block> judgement;
-    List<Block> movement;
-    List<Block> start;
-
+    List<List> blockList;
 }
