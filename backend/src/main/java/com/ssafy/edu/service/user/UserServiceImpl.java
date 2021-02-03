@@ -1,10 +1,9 @@
 package com.ssafy.edu.service.user;
 
-import com.ssafy.edu.model.user.SignUpRequest;
-import com.ssafy.edu.model.user.UpdateRequest;
-import com.ssafy.edu.model.user.User;
-import com.ssafy.edu.model.user.UserResponse;
+import com.amazonaws.services.xray.model.Http;
+import com.ssafy.edu.model.user.*;
 import com.ssafy.edu.repository.UserJpaRepository;
+import com.ssafy.edu.service.S3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +17,9 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private S3Service s3Service;
 
     @Autowired
     private UserJpaRepository userJpaRepository;
@@ -39,22 +41,32 @@ public class UserServiceImpl implements UserService {
         UserResponse result = new UserResponse();
 
         Optional<User> userOptional = userJpaRepository.findByEmail(email);
-        boolean match = encryptService.isMatch(password, userOptional.get().getPassword());
+        if(userOptional.isPresent()) {
+            boolean match = encryptService.isMatch(password, userOptional.get().getPassword());
 
-        if(match && userOptional.isPresent() && userOptional.get().getEmailAuth().equals("true")){
+            if (match && userOptional.isPresent() && userOptional.get().getEmailAuth().equals("true")) {
 
-            Map<String, Object> resultMap = new HashMap<>();
-            String token = jwtServiceImpl.createToken(email);
-            resultMap.put("token", token);
-            resultMap.put("user", userOptional.get());
+                String token = jwtServiceImpl.createToken(email);
 
-            result.status = true;
-            result.data = resultMap;
-            response = new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            result.status = false;
-            response = new ResponseEntity<>(result, HttpStatus.OK);
+                LoginResponse loginResponse = LoginResponse.builder()
+                        .email(userOptional.get().getEmail())
+                        .nickname(userOptional.get().getNickname())
+                        .mileage(userOptional.get().getMileage())
+                        .introduction(userOptional.get().getIntroduction())
+                        .admin(userOptional.get().isAdmin())
+                        .profileImage(userOptional.get().getProfileImage())
+//                    .follower(userOptional.get().getFollower())
+//                    .following(userOptional.get().getFollowing())
+                        .token(token)
+                        .build();
+
+                result.status = true;
+                result.data = loginResponse;
+                response = new ResponseEntity<>(result, HttpStatus.OK);
+            }
         }
+        result.status = false;
+        response = new ResponseEntity<>(result, HttpStatus.OK);
 
         return response;
     }
@@ -164,6 +176,25 @@ public class UserServiceImpl implements UserService {
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
         return response;
+
+    }
+
+    public void updateFile(String email, String imagePath){
+
+        ResponseEntity response;
+        UserResponse result = new UserResponse();
+
+        Optional<User> userOptional = userJpaRepository.findByEmail(email);
+
+        if(userOptional.isPresent()){
+
+            User user = userOptional.get();
+            user.setFileName(imagePath);
+            user.setProfileImage("https://"+s3Service.CLOUD_FRONT_DOMAIN_NAME+ "/" + imagePath);
+
+            User save = userJpaRepository.save(user);
+
+        }
 
     }
     

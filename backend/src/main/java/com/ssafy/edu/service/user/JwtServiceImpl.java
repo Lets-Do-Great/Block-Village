@@ -3,22 +3,15 @@ package com.ssafy.edu.service.user;
 import java.util.Date;
 import java.util.Map;
 
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtServiceImpl implements JwtService{
-
-//    @Value("${JWT.ISSUER}")
-//    private String ISSUER;
 
     @Value("${JWT.SECRET}")
     private String SECRET;
