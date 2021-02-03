@@ -3,6 +3,7 @@ package com.ssafy.edu.controller.user;
 
 import com.ssafy.edu.model.block.BlockBuyRequest;
 import com.ssafy.edu.model.block.BlockResponse;
+import com.ssafy.edu.model.block.BlocksignUpTest;
 import com.ssafy.edu.model.board.BoardResponse;
 import com.ssafy.edu.model.user.LoginRequest;
 import com.ssafy.edu.model.user.UserResponse;
@@ -49,5 +50,9 @@ public class BlockController {
     public ResponseEntity<BlockResponse> getMyBlocks(@PathVariable("email") String email, @PathVariable("category") String category){
         return blockService.getMyBlockList(email, category);
     }
-
+    @ApiOperation(value = "내가 소유한 블록 목록 조회")
+    @PostMapping("/test")
+    public ResponseEntity<BlockResponse> signUpBlocks(@RequestBody BlocksignUpTest blocksignUpTest){
+        return blockService.signUpBlocks(blocksignUpTest);
+    }
 }

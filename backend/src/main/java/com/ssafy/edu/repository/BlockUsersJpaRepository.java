@@ -9,5 +9,4 @@ import java.util.Optional;
 
 public interface BlockUsersJpaRepository extends JpaRepository<BlockUsers, Long> {
     public Optional<BlockUsers> findByUserAndBlock(User user, Block block);
-    public Optional<BlockUsers> findByCategoryAndEmail(String category, String email);
 }

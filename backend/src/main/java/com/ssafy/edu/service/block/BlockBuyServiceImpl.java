@@ -58,12 +58,9 @@ public class BlockBuyServiceImpl implements BlockBuyService{
                 BlockUsers save = blockUsersJpaRepository.save(blockUsers);
 
             }else {
-
                 result.status = false;
                 return new ResponseEntity<>(result, HttpStatus.OK);
-
             }
-
         }
         result.status = true;
         return new ResponseEntity<>(result, HttpStatus.OK);

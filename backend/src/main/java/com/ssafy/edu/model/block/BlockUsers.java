@@ -28,8 +28,5 @@ public class BlockUsers {
     @JoinColumn(name = "block_id")
     private Block block;
 
-    @Lob
     private int quantity;
-
-
 }

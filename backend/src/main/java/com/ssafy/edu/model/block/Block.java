@@ -29,13 +29,10 @@ public class Block {
     @Column(name = "block_id")
     private Long id;
 
-    @Lob
     private String name;
 
-    @Lob
     private String category;
 
-    @Lob
     private int price;
 
     @OneToMany(mappedBy = "block")

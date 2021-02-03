@@ -25,9 +25,6 @@ public class BoardCommentServiceImpl implements BoardCommentService{
     private BoardJpaRepository boardJpaRepository;
 
     @Autowired
-    private BoardLikeUsersJpaRepository boardLikeUsersJpaRepository;
-
-    @Autowired
     private BoardCommentJpaRepository boardCommentJpaRepository;
 
     @Override

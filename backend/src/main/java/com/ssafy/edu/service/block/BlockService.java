@@ -6,4 +6,5 @@ import org.springframework.http.ResponseEntity;
 public interface BlockService {
     public ResponseEntity<BlockResponse> getBlockList();
     public ResponseEntity<BlockResponse> getMyBlockList(String email, String category);
+    public ResponseEntity<BlockResponse> signUpBlocks(BlocksignUpTest blocksignUpTest);
 }

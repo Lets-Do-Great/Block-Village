@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BlockServiceImpl implements BlockService{
+public class BlockServiceImpl implements BlockService {
 
     @Autowired
     private UserJpaRepository userJpaRepository;
@@ -32,9 +32,9 @@ public class BlockServiceImpl implements BlockService{
         BlockResponse result = new BlockResponse();
         List<Block> blockList = blockJpaRepository.findAll();
 
-        List<List> resultList = new ArrayList<>();
+        BlockCategoryResult resultList = new BlockCategoryResult();
 
-        if(!blockList.isEmpty()) {
+        if (!blockList.isEmpty()) {
 
             List<BlockResult> calculationList = new ArrayList<>();
             List<BlockResult> drawingList = new ArrayList<>();
@@ -44,74 +44,83 @@ public class BlockServiceImpl implements BlockService{
             List<BlockResult> movementList = new ArrayList<>();
             List<BlockResult> startList = new ArrayList<>();
 
-            for(Block b : blockList){
+            for (Block b : blockList) {
 
                 BlockResult blockResult = new BlockResult();
-                blockResult.setName(b.getName());
-                blockResult.setPrice(b.getPrice());
 
-                switch (b.getCategory()){
-                    case "calculation" :
+                switch (b.getCategory()) {
+                    case "calculation":
+                        blockResult.setName(b.getName());
+                        blockResult.setPrice(b.getPrice());
                         calculationList.add(blockResult);
                         break;
-                    case "drawing" :
+                    case "drawing":
+                        blockResult.setName(b.getName());
+                        blockResult.setPrice(b.getPrice());
                         drawingList.add(blockResult);
                         break;
-                    case "flow" :
+                    case "flow":
+                        blockResult.setName(b.getName());
+                        blockResult.setPrice(b.getPrice());
                         flowList.add(blockResult);
                         break;
-                    case "function" :
+                    case "function":
+                        blockResult.setName(b.getName());
+                        blockResult.setPrice(b.getPrice());
                         functionList.add(blockResult);
                         break;
-                    case "judgement" :
+                    case "judgement":
+                        blockResult.setName(b.getName());
+                        blockResult.setPrice(b.getPrice());
                         judgementList.add(blockResult);
                         break;
-                    case "movement" :
+                    case "movement":
+                        blockResult.setName(b.getName());
+                        blockResult.setPrice(b.getPrice());
                         movementList.add(blockResult);
                         break;
-                    case "start" :
+                    case "start":
+                        blockResult.setName(b.getName());
+                        blockResult.setPrice(b.getPrice());
                         startList.add(blockResult);
                         break;
                 }
             }
-            resultList.add(calculationList);
-            resultList.add(drawingList);
-            resultList.add(flowList);
-            resultList.add(functionList);
-            resultList.add(judgementList);
-            resultList.add(movementList);
-            resultList.add(startList);
+            resultList.setCalculation(calculationList);
+            resultList.setDrawing(drawingList);
+            resultList.setFlow(flowList);
+            resultList.setFunction(functionList);
+            resultList.setJudgement(judgementList);
+            resultList.setMovement(movementList);
+            resultList.setStart(startList);
 
 
             result.status = true;
             result.data = resultList;
-            return new ResponseEntity<>(result, HttpStatus.OK);
 
-        } else{
-
+        } else {
             result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.OK);
-
         }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /* 내가 소유한 블록 목록 조회 */
     @Override
-    public ResponseEntity<BlockResponse> getMyBlockList(String email, String category){
+    public ResponseEntity<BlockResponse> getMyBlockList(String email, String category) {
 
         BlockResponse result = new BlockResponse();
 
         // 테스트 요망
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
-        if(userOpt.isPresent()){
+        if (userOpt.isPresent()) {
 
             List<BlockUsers> blockUsersList = userOpt.get().getBlockUsersList();
 
-            if(!blockUsersList.isEmpty()) {
+            if (!blockUsersList.isEmpty()) {
 
                 List<BlockMyResponse> blockMyResponses = new ArrayList<>();
-                for(BlockUsers blockUsers : blockUsersList){
-                    if((blockUsers.getBlock().getCategory()).equals(category)){
+                for (BlockUsers blockUsers : blockUsersList) {
+                    if ((blockUsers.getBlock().getCategory()).equals(category)) {
                         BlockMyResponse blockMyResponse = BlockMyResponse.builder()
                                 .blockId(blockUsers.getBlock().getId())
                                 .name(blockUsers.getBlock().getName())
@@ -131,6 +140,22 @@ public class BlockServiceImpl implements BlockService{
         result.status = false;
         return new ResponseEntity<>(result, HttpStatus.OK);
 
+    }
+
+    @Override
+    public ResponseEntity<BlockResponse> signUpBlocks(BlocksignUpTest blocksignUpTest) {
+        BlockResponse result = new BlockResponse();
+
+       Block block = new Block().builder()
+               .category(blocksignUpTest.getCategory())
+               .name(blocksignUpTest.getName())
+               .price(blocksignUpTest.getPrice())
+               .build();
+       Block blockResult =  blockJpaRepository.save(block);
+
+        result.status = true;
+        result.data = blockResult;
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

@@ -10,10 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 public class BlockResult {
-
     String name;
-    String category;
     int price;
-    // 임시
-    List<List> blockList;
 }
