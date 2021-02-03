@@ -12,6 +12,7 @@ import TutorialSubmain from './components/blockly/tutorial/tutorial_submain/tuto
 import MissionContainer from './containers/mission_container';
 
 import TestMypage from './components/my_page/test_mypage';
+import MissionCreateSubmain from './components/blockly/mission_create/mission_create_submain/mission_create_submain';
 
 
 function App() {
@@ -50,6 +51,10 @@ function App() {
 
         <Route exact path="/main/mission_main/maze_1">
           <MissionMaze />
+        </Route>
+
+        <Route exact path="/main/mission_create">
+          <MissionCreateSubmain />
         </Route>
 
       </Switch>

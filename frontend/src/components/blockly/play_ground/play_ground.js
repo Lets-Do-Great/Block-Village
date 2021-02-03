@@ -4,24 +4,24 @@ import styles from './play_ground.module.css';
 
 const PlayGround = ({ javascript_code }) => {
   const fieldsize = useRef();
-    const fieldchar = useRef();
-    console.log(javascript_code);
-  
-    const playGame = () => {
-      eval(javascript_code);
-      console.log(move);
-    };
+  const fieldchar = useRef();
+  console.log(javascript_code);
+
+  const playGame = () => {
+    eval(javascript_code);
+    console.log(move);
+  };
   
   
     // 함수
   /////////////////////////////////////////////////////////////////
-    var my_var = 0;  
-    const set_var = (value_variable) => {
-      my_var = value_variable;
-    }
-    const change_var = (value_variable) => {
-      my_var += value_variable;
-    }  
+  var my_var = 0;  
+  const set_var = (value_variable) => {
+    my_var = value_variable;
+  }
+  const change_var = (value_variable) => {
+    my_var += value_variable;
+  }  
   
     // 움직임 
   /////////////////////////////////////////////////////////////////
