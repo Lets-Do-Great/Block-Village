@@ -4,18 +4,15 @@ import com.ssafy.edu.model.BasicResponse;
 import com.ssafy.edu.model.board.Board;
 import com.ssafy.edu.model.board.BoardComment;
 import com.ssafy.edu.model.board.BoardCommentRequest;
-import com.ssafy.edu.model.board.BoardResponse;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.BoardCommentJpaRepository;
 import com.ssafy.edu.repository.BoardJpaRepository;
-import com.ssafy.edu.repository.BoardLikeUsersJpaRepository;
 import com.ssafy.edu.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Service

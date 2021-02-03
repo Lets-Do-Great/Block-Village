@@ -4,7 +4,6 @@ import com.ssafy.edu.model.board.*;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.BoardCommentJpaRepository;
 import com.ssafy.edu.repository.BoardJpaRepository;
-import com.ssafy.edu.repository.BoardLikeUsersJpaRepository;
 import com.ssafy.edu.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,8 +27,8 @@ public class BoardServiceImpl implements BoardService{
     @Autowired
     private BoardCommentJpaRepository boardCommentJpaRepository;
 
-    @Autowired
-    private BoardLikeUsersJpaRepository boardLikeUsersJpaRepository;
+//    @Autowired
+//    private BoardLikeUsersJpaRepository boardLikeUsersJpaRepository;
 
     @Override
     public ResponseEntity<BoardResponse> getBoardList() {
@@ -57,16 +56,16 @@ public class BoardServiceImpl implements BoardService{
             return boardResult;
         }).collect(Collectors.toList());
 
-        List<BoardResult> resultList = new ArrayList<>();
-        for(Board br : boardList){
-            BoardResult boardResult = new BoardResult();
-            boardResult.setId(br.getId());
-            boardResult.setTitle(br.getTitle());
-            boardResult.setContent(br.getContent());
-            boardResult.setWriter(br.getUser().getNickname());
-            System.out.println("br.getUser().toString() = " + br.getUser().toString());
-        resultList.add(boardResult);
-        }
+//        List<BoardResult> resultList = new ArrayList<>();
+//        for(Board br : boardList){
+//            BoardResult boardResult = new BoardResult();
+//            boardResult.setId(br.getId());
+//            boardResult.setTitle(br.getTitle());
+//            boardResult.setContent(br.getContent());
+//            boardResult.setWriter(br.getUser().getNickname());
+//            System.out.println("br.getUser().toString() = " + br.getUser().toString());
+//        resultList.add(boardResult);
+//        }
         
 //        if(resultList.get(0)!=null){
 //            System.out.println("resultList 널아님");
@@ -175,7 +174,7 @@ public class BoardServiceImpl implements BoardService{
         BoardResponse result = new BoardResponse();
         Optional<Board> boardOptional = boardJpaRepository.findById(id);
 
-        boardLikeUsersJpaRepository.deleteAllByBoard(boardOptional.get());
+//        boardLikeUsersJpaRepository.deleteAllByBoard(boardOptional.get());
         boardCommentJpaRepository.deleteAllByBoard(boardOptional.get());
         boardJpaRepository.deleteById(id);
 
@@ -192,15 +191,15 @@ public class BoardServiceImpl implements BoardService{
         Optional<Board> boardOpt = boardJpaRepository.findById(id);
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
 
-        Optional<BoardLikeUsers> likeUsersOptional = boardLikeUsersJpaRepository.findByBoardAndUser(boardOpt.get(), userOpt.get());
-        if(likeUsersOptional.isPresent()){
-            boardLikeUsersJpaRepository.delete(likeUsersOptional.get());
-        }else {
-            BoardLikeUsers boardLikeUsers = new BoardLikeUsers();
-            boardLikeUsers.setBoard(boardOpt.get());
-            boardLikeUsers.setUser(userOpt.get());
-            boardLikeUsersJpaRepository.save(boardLikeUsers);
-        }
+//        Optional<BoardLikeUsers> likeUsersOptional = boardLikeUsersJpaRepository.findByBoardAndUser(boardOpt.get(), userOpt.get());
+//        if(likeUsersOptional.isPresent()){
+//            boardLikeUsersJpaRepository.delete(likeUsersOptional.get());
+//        }else {
+//            BoardLikeUsers boardLikeUsers = new BoardLikeUsers();
+//            boardLikeUsers.setBoard(boardOpt.get());
+//            boardLikeUsers.setUser(userOpt.get());
+//            boardLikeUsersJpaRepository.save(boardLikeUsers);
+//        }
 
         result.status = true;
         return new ResponseEntity<>(result, HttpStatus.OK);

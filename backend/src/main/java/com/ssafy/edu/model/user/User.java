@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ssafy.edu.model.block.Block;
+import com.ssafy.edu.model.block.BlockUsers;
 import com.ssafy.edu.model.board.Board;
 import com.ssafy.edu.model.board.BoardComment;
 import com.ssafy.edu.model.board.BoardLikeUsers;
@@ -59,9 +60,6 @@ public class User {
     List<BoardComment> boardCommentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    List<BoardLikeUsers> boardLikeUsers = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user")
-    List<Block> blockList = new ArrayList<>();
+    List<BlockUsers> blockUsersList = new ArrayList<>();
 
 }

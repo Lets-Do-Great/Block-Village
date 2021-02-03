@@ -14,19 +14,22 @@ import javax.persistence.*;
 @Builder
 @Table(name = "user_block")
 public class BlockUsers {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_block_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_email")
-    private String email;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "block_id")
-    private Long block_id;
+    private Block block;
 
     @Lob
     private int quantity;
+
+
 }

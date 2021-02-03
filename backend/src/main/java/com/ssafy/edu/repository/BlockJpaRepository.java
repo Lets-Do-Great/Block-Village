@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface BlockJpaRepository extends JpaRepository<Block, Long> {
     public Optional<Block> findById(Long id);
-    public Optional<Block> findByType(String type);
+    public Optional<Block> findByCategory(String category);
 }

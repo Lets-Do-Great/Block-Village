@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class BlockServiceImpl implements BlockService{
@@ -29,37 +28,84 @@ public class BlockServiceImpl implements BlockService{
 
     @Override
     public ResponseEntity<BlockResponse> getBlockList() {
+
         BlockResponse result = new BlockResponse();
         List<Block> blockList = blockJpaRepository.findAll();
-        if(blockList.isPresent()) {
-            List<BlockResult> resultList = blockList.stream().map(blockEntity -> {
+
+        List<List> resultList = new ArrayList<>();
+
+        if(!blockList.isEmpty()) {
+
+            List<BlockResult> calculationList = new ArrayList<>();
+            List<BlockResult> ifList = new ArrayList<>();
+
+            for(Block b : blockList){
+
                 BlockResult blockResult = new BlockResult();
-                blockResult.setId(blockEntity.getId());
-                blockResult.setType(blockEntity.getType());
-                blockResult.setTitle(blockEntity.getTitle());
-                blockResult.setPrice(blockEntity.getPrice());
-                return blockResult;
-            }).get();
+                blockResult.setName(b.getName());
+                blockResult.setPrice(b.getPrice());
+
+                switch (b.getCategory()){
+                    case "calculation" :
+                        calculationList.add(blockResult);
+                        break;
+
+                }
+
+            }
+
+            resultList.add(calculationList);
+            resultList.add(ifList);
+
+
             result.status = true;
             result.data = resultList;
             return new ResponseEntity<>(result, HttpStatus.OK);
+
         } else{
+
             result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+
         }
     }
+
+    /* 내가 소유한 블록 목록 조회 */
     @Override
-    public ResponseEntity<BlockResponse> getMyBlockList(BlockMyRequest getMyBlockRequest){
+    public ResponseEntity<BlockResponse> getMyBlockList(String email, String category){
+
         BlockResponse result = new BlockResponse();
 
-        Optional<BlockUsers> blockUsers = blockUsersJpaRepository.findByTypeAndEmail(getMyBlockRequest.getType(), getMyBlockRequest.getEmail());
-        if(blockUsers.isPresent()) {
-            result.data = blockUsers;
-            result.status = true;
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
-            result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        // 테스트 요망
+        Optional<User> userOpt = userJpaRepository.findByEmail(email);
+        if(userOpt.isPresent()){
+
+            List<BlockUsers> blockUsersList = userOpt.get().getBlockUsersList();
+
+            if(!blockUsersList.isEmpty()) {
+
+                List<BlockMyResponse> blockMyResponses = new ArrayList<>();
+                for(BlockUsers blockUsers : blockUsersList){
+                    if((blockUsers.getBlock().getCategory()).equals(category)){
+                        BlockMyResponse blockMyResponse = BlockMyResponse.builder()
+                                .blockId(blockUsers.getBlock().getId())
+                                .name(blockUsers.getBlock().getName())
+                                .quantity(blockUsers.getQuantity())
+                                .build();
+                        blockMyResponses.add(blockMyResponse);
+                    }
+                }
+
+                result.status = true;
+                result.data = blockMyResponses;
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }
+
         }
+
+        result.status = false;
+        return new ResponseEntity<>(result, HttpStatus.OK);
+
     }
+
 }

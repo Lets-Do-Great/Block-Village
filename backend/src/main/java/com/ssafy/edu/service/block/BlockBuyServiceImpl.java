@@ -4,6 +4,7 @@ package com.ssafy.edu.service.block;
 import com.ssafy.edu.model.BasicResponse;
 import com.ssafy.edu.model.block.Block;
 import com.ssafy.edu.model.block.BlockBuyRequest;
+import com.ssafy.edu.model.block.BlockResponse;
 import com.ssafy.edu.model.block.BlockUsers;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.BlockJpaRepository;
@@ -29,22 +30,40 @@ public class BlockBuyServiceImpl implements BlockBuyService{
     private BlockUsersJpaRepository blockUsersJpaRepository;
 
     @Override
-    public ResponseEntity<BasicResponse> buyBlock(BlockBuyRequest blockBuyRequest){
-        BasicResponse result = new BasicResponse();
+    public ResponseEntity<BlockResponse> buyBlock(BlockBuyRequest blockBuyRequest, String email){
 
-        Optional<User> userOpt = userJpaRepository.findByEmail(blockBuyRequest.getEmail());
+        BlockResponse result = new BlockResponse();
+
+        Optional<User> userOpt = userJpaRepository.findByEmail(email);
+
         for(Long id: blockBuyRequest.getBlockId()){
+
             Optional<Block> blockOpt = blockJpaRepository.findById(id);
+
             if(userOpt.isPresent() && blockOpt.isPresent()){
+
+                Optional<BlockUsers> blockUsersOpt = blockUsersJpaRepository.findByUserAndBlock(userOpt.get(), blockOpt.get());
+
+                int quantity = 0;
+                if(blockUsersOpt.isPresent()){
+                    quantity = blockUsersOpt.get().getQuantity();
+                }
+
                 BlockUsers blockUsers = BlockUsers.builder()
-                        .email(blockBuyRequest.getEmail())
-                        .block(blockBuyRequest.getBlockId())
-                        .quantity();
+                        .user(userOpt.get())
+                        .block(blockOpt.get())
+                        .quantity(quantity+1)
+                        .build();
+
                 BlockUsers save = blockUsersJpaRepository.save(blockUsers);
+
             }else {
+
                 result.status = false;
-                return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(result, HttpStatus.OK);
+
             }
+
         }
         result.status = true;
         return new ResponseEntity<>(result, HttpStatus.OK);
