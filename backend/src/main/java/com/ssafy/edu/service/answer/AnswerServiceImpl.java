@@ -220,7 +220,7 @@ public class AnswerServiceImpl implements AnswerService {
         if (answerFavoriteOptional.isEmpty()) {
             AnswerFavorite answerFavorite = new AnswerFavorite().builder()
                     .answer(answerOptional.get())
-                    .user(answerOptional.get().getUser())
+                    .user(userOptional.get())
                     .favorite(answerFavoriteRequest.isFavorite())
                     .build();
 
@@ -230,16 +230,14 @@ public class AnswerServiceImpl implements AnswerService {
             answerOptional.get().setFavorite((int) answerFavoriteList.stream().filter(a -> a.isFavorite()).count());
 
             answerJapRepository.save(answerOptional.get());
+
             result.status = true;
             result.data = answerFavoriteResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
+
         } else if (answerFavoriteOptional.isPresent()) {
-            AnswerFavorite answerFavorite = new AnswerFavorite().builder()
-                    .id(answerFavoriteOptional.get().getId())
-                    .answer(answerOptional.get())
-                    .user(answerOptional.get().getUser())
-                    .favorite(answerFavoriteRequest.isFavorite())
-                    .build();
+            AnswerFavorite answerFavorite = answerFavoriteOptional.get();
+            answerFavorite.setFavorite(answerFavoriteRequest.isFavorite());
 
             AnswerFavorite answerFavoriteResult = answerFavoriteJapRepository.save(answerFavorite);
 
