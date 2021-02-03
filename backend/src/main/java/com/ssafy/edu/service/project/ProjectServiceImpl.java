@@ -191,26 +191,29 @@ public class ProjectServiceImpl implements ProjectService{
         if(projectFavoriteOptional.isEmpty()){
             ProjectFavorite projectFavorite = new ProjectFavorite().builder()
                     .project(projectOptional.get())
-                    .user(projectOptional.get().getUser())
+                    .user(userOptional.get())
                     .favorite(projectFavoriteRequest.isFavorite())
                     .build();
+
             ProjectFavorite projectFavoriteResult = projectFavoriteJpaRepository.save(projectFavorite);
+
             if(projectOptional.isPresent()) {
                 List<ProjectFavorite> projectFavoriteList = projectFavoriteJpaRepository.findByProjectId(projectOptional.get().getId());
                 projectOptional.get().setFavorite((int) projectFavoriteList.stream().filter(p -> p.isFavorite()).count());
                 projectJpaRepository.save(projectOptional.get());
             }
+
             result.status = true;
             result.data = projectFavoriteResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
+
         }else if(projectFavoriteOptional.isPresent()){
-            ProjectFavorite projectFavorite = new ProjectFavorite().builder()
-                    .id(projectFavoriteOptional.get().getId())
-                    .project(projectOptional.get())
-                    .user(projectOptional.get().getUser())
-                    .favorite(projectFavoriteRequest.isFavorite())
-                    .build();
+
+            ProjectFavorite projectFavorite = projectFavoriteOptional.get();
+            projectFavorite.setFavorite(projectFavoriteRequest.isFavorite());
+
             ProjectFavorite projectFavoriteResult = projectFavoriteJpaRepository.save(projectFavorite);
+
             if(projectOptional.isPresent()) {
                 List<ProjectFavorite> projectFavoriteList = projectFavoriteJpaRepository.findByProjectId(projectOptional.get().getId());
                 projectOptional.get().setFavorite((int) projectFavoriteList.stream().filter(p -> p.isFavorite()).count());
