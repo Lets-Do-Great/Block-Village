@@ -23,6 +23,14 @@ public class ProjectSignUpRequest {
 
     @ApiModelProperty(required = true)
     @NotNull
+    String xmlCode;
+
+    @ApiModelProperty(required = true)
+    @NotNull
+    String javascriptCode;
+
+    @ApiModelProperty(required = true)
+    @NotNull
     String content;
 
     @ApiModelProperty(required = true)

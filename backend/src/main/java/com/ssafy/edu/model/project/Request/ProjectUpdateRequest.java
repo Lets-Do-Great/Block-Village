@@ -23,6 +23,14 @@ public class ProjectUpdateRequest {
 
     @ApiModelProperty(required = true)
     @NotNull
+    String xmlCode;
+
+    @ApiModelProperty(required = true)
+    @NotNull
+    String javascriptCode;
+
+    @ApiModelProperty(required = true)
+    @NotNull
     String title;
 
     @ApiModelProperty(required = true)

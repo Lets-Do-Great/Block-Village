@@ -113,6 +113,8 @@ public class ProjectServiceImpl implements ProjectService{
                     .content(projectSignUpRequest.getTitle())
                     .favorite(0)
                     .view(0)
+                    .xmlCode(projectSignUpRequest.getXmlCode())
+                    .javascriptCode(projectSignUpRequest.getJavascriptCode())
                     .blockCnt(projectSignUpRequest.getBlockCnt())
                     .createdAt(now)
                     .updatedAt(now)
@@ -144,6 +146,8 @@ public class ProjectServiceImpl implements ProjectService{
             project.setTitle(projectUpdateRequest.getTitle());
             project.setContent(projectUpdateRequest.getContent());
             project.setBlockCnt(projectUpdateRequest.getBlockCnt());
+            project.setXmlCode(projectUpdateRequest.getXmlCode());
+            project.setJavascriptCode(projectUpdateRequest.getJavascriptCode());
             project.setUpdatedAt(now);
 
             Project projectResult = projectJpaRepository.save(project);

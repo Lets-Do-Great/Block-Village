@@ -27,6 +27,8 @@ public class Project {
     private Long id;
     private String title;
     private String content;
+    private String xmlCode;
+    private String javascriptCode;
     private int favorite;
     private int view;
     private int blockCnt;
