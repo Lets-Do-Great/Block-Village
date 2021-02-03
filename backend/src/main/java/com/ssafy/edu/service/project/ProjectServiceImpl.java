@@ -180,8 +180,9 @@ public class ProjectServiceImpl implements ProjectService{
         ResponseEntity response;
         ProjectResponse result = new ProjectResponse();
 
-        Optional<Project> projectOptional = projectJpaRepository.findByIdAndUserEmail(projectFavoriteRequest.getProjectId(),projectFavoriteRequest.getEmail());
-        Optional<ProjectFavorite> projectFavoriteOptional = Optional.ofNullable(projectFavoriteJpaRepository.findByUserEmailAndProjectId(projectOptional.get().getUser().getEmail(),projectOptional.get().getId()));
+        Optional<User> userOptional = userJpaRepository.findByEmail(projectFavoriteRequest.getEmail());
+        Optional<Project> projectOptional = projectJpaRepository.findById(projectFavoriteRequest.getProjectId());
+        Optional<ProjectFavorite> projectFavoriteOptional = Optional.ofNullable(projectFavoriteJpaRepository.findByUserEmailAndProjectId(userOptional.get().getEmail(),projectOptional.get().getId()));
 
         if(projectFavoriteOptional.isEmpty()){
             ProjectFavorite projectFavorite = new ProjectFavorite().builder()
