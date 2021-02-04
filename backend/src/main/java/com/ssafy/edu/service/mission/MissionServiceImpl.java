@@ -3,9 +3,9 @@ package com.ssafy.edu.service.mission;
 import com.ssafy.edu.model.mission.*;
 import com.ssafy.edu.model.mission.Request.*;
 import com.ssafy.edu.model.mission.Response.*;
-import com.ssafy.edu.model.mission.Response.responseModel.findAllModel;
-import com.ssafy.edu.model.mission.Response.responseModel.findOneModel;
-import com.ssafy.edu.model.mission.Response.responseModel.pageModel;
+import com.ssafy.edu.model.mission.Response.Model.findAllModel;
+import com.ssafy.edu.model.mission.Response.Model.findOneModel;
+import com.ssafy.edu.model.mission.Response.Model.pageModel;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.repository.mission.MissionDifficultyJpaRepository;
@@ -106,7 +106,7 @@ public class MissionServiceImpl implements MissionService {
                     .created_at(missionOptional.get().getCreatedAt())
                     .updated_at(missionOptional.get().getUpdatedAt())
                     .content(missionOptional.get().getContent())
-                    .code(missionOptional.get().getCode())
+                    .xmlCode(missionOptional.get().getXmlCode())
                     .difficulty(missionOptional.get().getDifficulty())
                     .likeCnt(missionOptional.get().getFavorite())
                     .peopleCnt(missionOptional.get().getPeople())
@@ -132,30 +132,21 @@ public class MissionServiceImpl implements MissionService {
         Optional<User> userOptional = userJpaRepository.findByEmail(userEmail);
 
         if (userOptional.isPresent()) {
-            List<findOneModel> findOneModelList = new ArrayList<>();
+            List<findAllModel> findAllModelList = new ArrayList<>();
 
             for (Mission mission : missionJpaRepository.findByUserEmailOrderByUpdatedAtDesc(userEmail)) {
-                Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, mission.getId()));
-                Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(userEmail,mission.getId()));
-                findOneModel findOneModel = new findOneModel().builder()
-                        .missionId(mission.getId())
+                findAllModel findAllModel = new findAllModel().builder()
+                       .missionId(mission.getId())
                         .email(userOptional.get().getEmail())
-                        .nickname(userOptional.get().getNickname())
                         .title(mission.getTitle())
-                        .created_at(mission.getCreatedAt())
-                        .updated_at(mission.getUpdatedAt())
-                        .content(mission.getContent())
-                        .code(mission.getCode())
                         .difficulty(mission.getDifficulty())
                         .likeCnt(mission.getFavorite())
                         .peopleCnt(mission.getPeople())
-                        .favorite(missionFavorite.orElseGet(MissionFavorite::new).isFavorite())
-                        .todo(missionDoUsers.orElseGet(MissionDoUsers::new).getTodo())
                         .build();
-                findOneModelList.add(findOneModel);
+                findAllModelList.add(findAllModel);
             }
             result.status = true;
-            result.data = findOneModelList;
+            result.data = findAllModelList;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -165,40 +156,31 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public ResponseEntity<MissionResponse> GetUserTodoMissions(String userEmail) {
+    public ResponseEntity<MissionResponse> GetUserTodoMissions(MissionUserTodoRequest missionUserTodoRequest) {
         ResponseEntity response;
         MissionResponse result = new MissionResponse();
 
-        Optional<User> userOptional = userJpaRepository.findByEmail(userEmail);
+        Optional<User> userOptional = userJpaRepository.findByEmail(missionUserTodoRequest.getEmail());
 
         if (userOptional.isPresent()) {
-            List<findOneModel> findOneModelList = new ArrayList<>();
-            List<MissionDoUsers> missionDoUsersList = missionTodoJpaRepository.findByUserEmailAndTodo(userEmail,"todo");
+            List<findAllModel> findAllModelList = new ArrayList<>();
+            List<MissionDoUsers> missionDoUsersList = missionTodoJpaRepository.findByUserEmailAndTodo(missionUserTodoRequest.getEmail(),missionUserTodoRequest.getTodo());
             
             for (MissionDoUsers missionDoUsers : missionDoUsersList) {
                 Mission mission = missionJpaRepository.findByIdOrderByUpdatedAtDesc(missionDoUsers.getMission().getId());
 
-                Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, mission.getId()));
-
-                findOneModel findOneModel = new findOneModel().builder()
+                findAllModel findAllModel = new findAllModel().builder()
                         .missionId(mission.getId())
                         .email(userOptional.get().getEmail())
-                        .nickname(userOptional.get().getNickname())
                         .title(mission.getTitle())
-                        .created_at(mission.getCreatedAt())
-                        .updated_at(mission.getUpdatedAt())
-                        .content(mission.getContent())
-                        .code(mission.getCode())
                         .difficulty(mission.getDifficulty())
                         .likeCnt(mission.getFavorite())
                         .peopleCnt(mission.getPeople())
-                        .favorite(missionFavorite.orElseGet(MissionFavorite::new).isFavorite())
-                        .todo(missionDoUsers.getTodo())
                         .build();
-                findOneModelList.add(findOneModel);
+                findAllModelList.add(findAllModel);
             }
             result.status = true;
-            result.data = findOneModelList;
+            result.data = findAllModelList;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -217,7 +199,11 @@ public class MissionServiceImpl implements MissionService {
             Mission mission = new Mission().builder()
                     .title(missionSignUpRequest.getTitle())
                     .content(missionSignUpRequest.getContent())
-                    .code(missionSignUpRequest.getCode())
+                    .xmlCode(missionSignUpRequest.getXmlCode())
+                    .startPositionX(missionSignUpRequest.getStartPositionX())
+                    .startPositionY(missionSignUpRequest.getStartPositionY())
+                    .endPositionX(missionSignUpRequest.getEndPositionX())
+                    .endPositionY(missionSignUpRequest.getEndPositionY())
                     .createdAt(now)
                     .updatedAt(now)
                     .user(userOptional.get())
@@ -234,8 +220,12 @@ public class MissionServiceImpl implements MissionService {
                     .title(missionResult.getTitle())
                     .created_at(missionResult.getCreatedAt())
                     .updated_at(missionResult.getUpdatedAt())
+                    .startPositionX(missionResult.getStartPositionX())
+                    .startPositionY(missionResult.getStartPositionY())
+                    .endPositionX(missionResult.getEndPositionX())
+                    .endPositionY(missionResult.getEndPositionY())
                     .content(missionResult.getContent())
-                    .code(missionResult.getCode())
+                    .xmlCode(missionResult.getXmlCode())
                     .difficulty(missionResult.getDifficulty())
                     .likeCnt(missionResult.getFavorite())
                     .peopleCnt(missionResult.getPeople())
@@ -263,7 +253,6 @@ public class MissionServiceImpl implements MissionService {
             Mission mission = missionOptional.get();
             mission.setTitle(missionUpdateRequest.getTitle());
             mission.setContent(missionUpdateRequest.getContent());
-            mission.setCode(missionUpdateRequest.getCode());
             mission.setUpdatedAt(now);
             Mission missionResult = missionJpaRepository.save(mission);
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionUpdateRequest.getEmail(), missionResult.getId()));
@@ -276,9 +265,12 @@ public class MissionServiceImpl implements MissionService {
                     .created_at(missionResult.getCreatedAt())
                     .updated_at(missionResult.getUpdatedAt())
                     .content(missionResult.getContent())
-                    .code(missionResult.getCode())
                     .difficulty(missionResult.getDifficulty())
                     .likeCnt(missionResult.getFavorite())
+                    .startPositionX(missionResult.getStartPositionX())
+                    .startPositionY(missionResult.getStartPositionY())
+                    .endPositionX(missionResult.getEndPositionX())
+                    .endPositionY(missionResult.getEndPositionY())
                     .favorite(missionFavorite.orElseGet(MissionFavorite::new).isFavorite())
                     .todo(missionDoUsers.orElseGet(MissionDoUsers::new).getTodo())
                     .build();
@@ -343,10 +335,14 @@ public class MissionServiceImpl implements MissionService {
                     .created_at(mission.get().getCreatedAt())
                     .updated_at(mission.get().getUpdatedAt())
                     .content(mission.get().getContent())
-                    .code(mission.get().getCode())
+                    .xmlCode(mission.get().getXmlCode())
                     .difficulty(mission.get().getDifficulty())
                     .likeCnt(mission.get().getFavorite())
                     .peopleCnt(mission.get().getPeople())
+                    .startPositionX(mission.get().getStartPositionX())
+                    .startPositionY(mission.get().getStartPositionY())
+                    .endPositionX(mission.get().getEndPositionX())
+                    .endPositionY(mission.get().getEndPositionY())
                     .favorite(missionFavorite.orElseGet(MissionFavorite::new).isFavorite())
                     .todo(missionDoUsers.orElseGet(MissionDoUsers::new).getTodo())
                     .build();
@@ -379,10 +375,14 @@ public class MissionServiceImpl implements MissionService {
                     .created_at(mission.get().getCreatedAt())
                     .updated_at(mission.get().getUpdatedAt())
                     .content(mission.get().getContent())
-                    .code(mission.get().getCode())
+                    .xmlCode(mission.get().getXmlCode())
                     .difficulty(mission.get().getDifficulty())
                     .likeCnt(mission.get().getFavorite())
                     .peopleCnt(mission.get().getPeople())
+                    .startPositionX(mission.get().getStartPositionX())
+                    .startPositionY(mission.get().getStartPositionY())
+                    .endPositionX(mission.get().getEndPositionX())
+                    .endPositionY(mission.get().getEndPositionY())
                     .favorite(missionFavorite.orElseGet(MissionFavorite::new).isFavorite())
                     .todo(missionDoUsers.orElseGet(MissionDoUsers::new).getTodo())
                     .build();

@@ -1,4 +1,4 @@
-package com.ssafy.edu.model.mission.Response.responseModel;
+package com.ssafy.edu.model.mission.Response.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +19,11 @@ public class findOneModel {
     private Date created_at;
     private Date updated_at;
     private String content;
-    private String code;
+    private String xmlCode;
+    private int startPositionX;
+    private int startPositionY;
+    private int endPositionX;
+    private int endPositionY;
     private double difficulty;
     private int likeCnt;
     private int peopleCnt;

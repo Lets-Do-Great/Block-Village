@@ -37,7 +37,4 @@ public class MissionUpdateRequest {
     @NotNull
     String content;
 
-    @ApiModelProperty(required = true)
-    @NotNull
-    String code;
 }

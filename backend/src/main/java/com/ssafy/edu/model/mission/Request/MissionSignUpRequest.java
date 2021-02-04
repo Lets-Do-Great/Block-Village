@@ -27,13 +27,23 @@ public class MissionSignUpRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String title;
-
     @ApiModelProperty(required = true)
     @NotNull
     String content;
-
     @ApiModelProperty(required = true)
     @NotNull
-    String code;
+    int startPositionX;
+    @ApiModelProperty(required = true)
+    @NotNull
+    int startPositionY;
+    @ApiModelProperty(required = true)
+    @NotNull
+    int endPositionX;
+    @ApiModelProperty(required = true)
+    @NotNull
+    int endPositionY;
+    @ApiModelProperty(required = true)
+    @NotNull
+    String xmlCode;
 
 }

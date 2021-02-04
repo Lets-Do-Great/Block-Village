@@ -44,11 +44,14 @@ public class Mission {
     private Long id;
     private String title;
     private String content;
-    private String category;
     @Column(columnDefinition = "TEXT")
-    private String code;
+    private String xmlCode;
     private double difficulty;
     private int favorite;
+    private int startPositionX;
+    private int startPositionY;
+    private int endPositionX;
+    private int endPositionY;
     private int people;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;

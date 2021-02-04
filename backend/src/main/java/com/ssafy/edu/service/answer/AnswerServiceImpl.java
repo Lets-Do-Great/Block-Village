@@ -12,7 +12,7 @@ import com.ssafy.edu.model.answer.Response.Model.findAllCommentModel;
 import com.ssafy.edu.model.answer.Response.Model.findAllModel;
 import com.ssafy.edu.model.answer.Response.Model.findOneModel;
 import com.ssafy.edu.model.mission.Mission;
-import com.ssafy.edu.model.mission.Response.responseModel.pageModel;
+import com.ssafy.edu.model.mission.Response.Model.pageModel;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.repository.answer.AnswerCommentJpaRepository;

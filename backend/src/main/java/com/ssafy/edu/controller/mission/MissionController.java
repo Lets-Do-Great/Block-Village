@@ -41,9 +41,9 @@ public class MissionController {
         return missionService.GetUserMissions(userEmail);
     }
     @ApiOperation(value = "특정 유저의 진행중인 미션목록 조회", notes = "특정 유저의 미션목록 조회 email")
-    @GetMapping("/user/todo/{userEmail}")
-    public ResponseEntity<MissionResponse> GetUserTodoMissions(@PathVariable("userEmail") String userEmail) {
-        return missionService.GetUserTodoMissions(userEmail);
+    @PostMapping("/user/{userEmail}")
+    public ResponseEntity<MissionResponse> GetUserTodoMissions(@RequestBody MissionUserTodoRequest missionUserTodoRequest) {
+        return missionService.GetUserTodoMissions(missionUserTodoRequest);
     }
     @ApiOperation(value = "미션 제작하기", notes = "미션 저장하기 {\n" + "\temail,\n" + "\tmissionId,\n" + "\ttitle,\n" + "\tcontent, \n" + "\tcode, \n" + "\timage, \n" + "}")
     @PostMapping("/{userEmail}")

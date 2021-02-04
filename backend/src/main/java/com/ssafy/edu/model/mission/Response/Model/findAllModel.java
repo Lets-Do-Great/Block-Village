@@ -1,4 +1,4 @@
-package com.ssafy.edu.model.mission.Response.responseModel;
+package com.ssafy.edu.model.mission.Response.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
