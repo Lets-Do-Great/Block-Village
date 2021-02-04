@@ -34,21 +34,21 @@ public class BlockController {
     private BlockServiceImpl blockService;
 
     @ApiOperation(value = "블록 구입하기")
-    @PostMapping("/{email}")
+    @PostMapping("/buy/{email}")
     public ResponseEntity<BlockResponse> buyBlock(@PathVariable("email") String email, @RequestBody BlockBuyRequest blockBuyRequest){
         return blockBuyService.buyBlock(blockBuyRequest, email);
     }
 
     @ApiOperation(value = "상점에서 파는 블록 목록 조회")
-    @GetMapping
-    public ResponseEntity<BlockResponse> getBlockList(){
-        return blockService.getBlockList();
+    @GetMapping("{email}")
+    public ResponseEntity<BlockResponse> getBlockList(@PathVariable("email") String email){
+        return blockService.getBlockList(email);
     }
 
     @ApiOperation(value = "내가 소유한 블록 목록 조회")
-    @GetMapping("/{email}/{category}")
-    public ResponseEntity<BlockResponse> getMyBlocks(@PathVariable("email") String email, @PathVariable("category") String category){
-        return blockService.getMyBlockList(email, category);
+    @GetMapping("/myblocks/{email}")
+    public ResponseEntity<BlockResponse> getMyBlocks(@PathVariable("email") String email){
+        return blockService.getMyBlockList(email);
     }
     @ApiOperation(value = "내가 소유한 블록 목록 조회")
     @PostMapping("/test")
