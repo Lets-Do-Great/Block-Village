@@ -17,13 +17,15 @@ import Blockly from 'blockly';
 import MissionOnNavbar from '../mission_do_navbar/mission_do_navbar';
 import MissionOnPlayground from '../mission_do_playground/mission_do_playground';
 
-const MissionOnMain = ({ formInfo, onChangeXml, onChangeStep, onChangeEnd }) => {
+const MissionOnMain = ({ formInfo, onChangeXml, onChangeSuccess, onChangeFail }) => {
   const { 
     initialXml, 
     toolboxCategories,
     startPosition,
     stepPosition,
     endPosition,
+    title,
+    difficulty,
   } = formInfo;
 
   const [activeDrags, setActiveDrags] = useState(0);
@@ -110,7 +112,12 @@ const MissionOnMain = ({ formInfo, onChangeXml, onChangeStep, onChangeEnd }) => 
   
   return (
     <section className={styles.page_style}>
-      <MissionOnNavbar modal={modal} statusModal={statusModal} />
+      <MissionOnNavbar 
+        modal={modal} 
+        statusModal={statusModal} 
+        title={title}
+        difficulty={difficulty}
+      />
       <div className={styles.container}>
         {modal && 
           <Draggable
@@ -123,8 +130,8 @@ const MissionOnMain = ({ formInfo, onChangeXml, onChangeStep, onChangeEnd }) => 
                 javascript_code={javascript}
                 startPosition={startPosition}
                 endPosition={endPosition}
-                onChangeStep={onChangeStep} 
-                onChangeEnd={onChangeEnd}  
+                onChangeSuccess={onChangeSuccess}
+                onChangeFail={onChangeFail}
               />
             </div>
           </Draggable>

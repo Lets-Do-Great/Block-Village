@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import MissionDoMain from '../mission_do_main/mission_do_main';
+import MissionDoModalSuccess from '../mission_do_modal/mission_do_modal_success/mission_do_modal_success';
+import MissionDoModalFail from '../mission_do_modal/mission_do_modal_fail/mission_do_modal_fail';
 import styles from './mission_do_submain.module.css';
 
-const MissionDoSubmain = (props) => {
+const MissionDoSubmain = ({ onChangeTodo, onSetTodoMission, onSetDifficultyMission }) => {
+  const [successModal, setSuccessModal] = useState(false);
+  const [failModal, setFailModal] = useState(false);
+
   const [formInfo, setFormInfo] = useState({
     initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
     toolboxCategories: [
@@ -106,7 +111,10 @@ const MissionDoSubmain = (props) => {
     ],
     startPosition: [50, 50],
     stepPosition: [],
-    endPosition: [50, 50],
+    endPosition: [170, 90],
+    title: '미션1',
+    content: 'asfsafs',
+    difficulty: 0,
   });
 
   const onChangeXml = (e) => {
@@ -115,31 +123,6 @@ const MissionDoSubmain = (props) => {
       initialXml: e,
     })
   };
-
-  const onChangeStep = (e) => {
-    console.log(e);
-    setFormInfo({
-      ...formInfo,
-      stepPosition: e,
-    })
-    onChangeEnd(e)
-  };
-
-  const onChangeEnd = (move) => {
-    let xx = formInfo.startPosition[0];
-    let yy = formInfo.startPosition[1];
-    for (let i = 0; i < move.length; i++) {
-      const new_move_x = move[i][0]
-      const new_move_y = move[i][1]
-      xx = formInfo.startPosition[0] + (new_move_x * 60)
-      yy = formInfo.startPosition[1] - (new_move_y * 60)
-    }
-    console.log(xx, yy);
-    setFormInfo({
-      ...formInfo,
-      endPosition: [xx, yy],
-    })
-  }
 
   const saveUploadNo = () => {
     // 임시 저장
@@ -154,15 +137,44 @@ const MissionDoSubmain = (props) => {
   const loadDate = () => {
     // 임시저장 n 수정시 form 변환용 함수
     console.log();
-  }
+  };
+
+  const onChangeSuccess = () => {
+    setSuccessModal(!successModal)
+  };
+
+  const onChangeFail = () => {
+    setFailModal(!failModal)
+  };
+
+  // 여기가 성공 후 난이도 변화 시킨 곳
+  // 이 후 요청보내고 나가는 로직 하면 됨
+  const onChangedifficulty = (e) => {
+    setFormInfo({
+      ...formInfo,
+      difficulty: e,
+    })
+  } 
 
   return (
-    <MissionDoMain 
-      formInfo={formInfo}
-      onChangeXml={onChangeXml}
-      onChangeStep={onChangeStep}
-      onChangeEnd={onChangeEnd}
-    />
+    <div className={styles.body}>
+      {successModal && 
+        <MissionDoModalSuccess 
+          onChangedifficulty={onChangedifficulty}
+        />
+      }
+      {failModal && 
+        <MissionDoModalFail
+          onChangeFail={onChangeFail}
+        />
+      }
+      <MissionDoMain 
+        formInfo={formInfo}
+        onChangeXml={onChangeXml}
+        onChangeSuccess={onChangeSuccess}
+        onChangeFail={onChangeFail}
+      />
+    </div>
   )
 }
 

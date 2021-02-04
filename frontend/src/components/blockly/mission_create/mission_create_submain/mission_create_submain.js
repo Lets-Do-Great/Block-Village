@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import MissionCreateMain from '../mission_create_main/mission_create_main';
+import MissionCreateModal from '../mission_create_modal/mission_create_modal';
 import styles from './mission_create_submain.module.css';
 
-const MissionCreateSubmain = (props) => {
+const MissionCreateSubmain = ({ onChangeState, onSetMission }) => {
+  const history = useHistory();
+
+  const [TCmodal, setTCmodal] = useState(false);
   const [formInfo, setFormInfo] = useState({
-    initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
+    xmlCode: '<xml xmlns="https://developers.google.com/blockly/xml"></xml>',
     toolboxCategories: [
       {
         name: '시작',
@@ -104,20 +109,29 @@ const MissionCreateSubmain = (props) => {
         ]
       },
     ],
+    javascriptCode: '',
     startPosition: [50, 50],
     stepPosition: [],
     endPosition: [50, 50],
-  });
+    type: '미션 제작소',
+    title: '',
+    content: '',
+    difficulty: 0,
+  });	
+
+  useEffect(() => {
+    onChangeState(formInfo);
+  }, [formInfo])
 
   const onChangeXml = (e) => {
+    // console.log(e);
     setFormInfo({
       ...formInfo,
-      initialXml: e,
+      xmlCode: e,
     })
   };
 
   const onChangeStep = (e) => {
-    console.log(e);
     setFormInfo({
       ...formInfo,
       stepPosition: e,
@@ -134,35 +148,44 @@ const MissionCreateSubmain = (props) => {
       xx = formInfo.startPosition[0] + (new_move_x * 60)
       yy = formInfo.startPosition[1] - (new_move_y * 60)
     }
-    console.log(xx, yy);
     setFormInfo({
       ...formInfo,
       endPosition: [xx, yy],
     })
   }
 
-  const saveUploadNo = () => {
-    // 임시 저장
-    console.log();
+  const onChangeModal = () => {
+    setTCmodal(!TCmodal)
   };
 
-  const saveUpload = () => {
-    // 저장엔 출시
-    console.log();
+  // 여기가 마지막에 미션제작 버튼 누르면 들어오는 함수임.
+  const onChangeTC = () => {
+    onSetMission();
   };
 
-  const loadDate = () => {
-    // 임시저장 n 수정시 form 변환용 함수
-    console.log();
-  }
+  const updateState = (event) => {
+    setFormInfo(event)
+  };
 
   return (
-    <MissionCreateMain 
-      formInfo={formInfo}
-      onChangeXml={onChangeXml}
-      onChangeStep={onChangeStep}
-      onChangeEnd={onChangeEnd}
-    />
+    <div className={styles.body}>
+      {TCmodal && 
+        <MissionCreateModal 
+          formInfo={formInfo}
+          onChangeModal={onChangeModal}
+          title={formInfo.title}
+          onChangeTC={onChangeTC}
+          updateState={updateState}
+        />
+      }
+      <MissionCreateMain 
+        formInfo={formInfo}
+        onChangeModal={onChangeModal}
+        onChangeXml={onChangeXml}
+        onChangeStep={onChangeStep}
+        onChangeEnd={onChangeEnd}
+      />
+    </div>
   )
 }
 

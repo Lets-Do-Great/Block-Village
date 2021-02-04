@@ -6,14 +6,14 @@ var y = 0;
 var move = [];
 var cur_angle = 0;
 
-const MissionCreatePlayground = ({ startPosition, endPosition, javascript_code, onChangeStep, onChangeEnd }) => {
+const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, javascript_code, onChangeStep }) => {
   const fieldchar = useRef();
   const item = fieldchar.current;
 
   const image_x = startPosition[0];
   const image_y = startPosition[1];
 
-  const [moveStep, setMoveStep] = useState(move);
+  // const [moveStep, setMoveStep] = useState(move);
   
   const playGame = () => {
     eval(javascript_code);
@@ -52,10 +52,8 @@ const MissionCreatePlayground = ({ startPosition, endPosition, javascript_code, 
   };
   
   useEffect(() => {
-    // move = [];
-    // x = 0;
-    // y = 0;
-    // cur_angle = 0;
+
+    setMoveStep(move);
     const item = fieldchar.current; 
     
     item.setAttribute('className', `image`)
@@ -65,13 +63,12 @@ const MissionCreatePlayground = ({ startPosition, endPosition, javascript_code, 
     item.style.left = `${endPosition[0]}px`;
     item.style.top = `${endPosition[1]}px`;
     
-    return () => {
-      onChangeStep(moveStep)
-      move = [];
-      x = 0;
-      y = 0;
-      cur_angle = 0;
-    }
+    // return () => {
+    move = [];
+    x = 0;
+    y = 0;
+    cur_angle = 0;
+    // }
   }, [])
   
   

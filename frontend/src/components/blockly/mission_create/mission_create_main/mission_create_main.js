@@ -10,20 +10,22 @@ import '../../all_blocks/movement_blocks';
 import '../../all_blocks/drawing_blocks';
 import '../../all_blocks/function_blocks';
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactBlockly from 'react-blockly';
 import Blockly from 'blockly';
 
 import MissionCreateNavbar from '../mission_create_navbar/mission_create_navbar';
 import MissionCreatePlayground from '../mission_create_playground/mission_create_playground';
 
-const MissionCreateMain = ({ formInfo, onChangeXml, onChangeStep, onChangeEnd }) => {
+const MissionCreateMain = ({ formInfo, onChangeModal, onChangeXml, onChangeStep }) => {
+  const [moveStep, setMoveStep] = useState([]);
   const { 
-    initialXml, 
+    xmlCode, 
     toolboxCategories,
     startPosition,
     stepPosition,
     endPosition,
+    type,
   } = formInfo;
 
   const [activeDrags, setActiveDrags] = useState(0);
@@ -91,7 +93,9 @@ const MissionCreateMain = ({ formInfo, onChangeXml, onChangeStep, onChangeEnd })
 
   const workspaceDidChange = (workspace) => {
     // save 형태
+    // console.log(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)));
     onChangeXml(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)))
+    // console.log(Blockly.JavaScript.workspaceToCode(workspace));
     setJavascript(Blockly.JavaScript.workspaceToCode(workspace))
   };
 
@@ -105,12 +109,24 @@ const MissionCreateMain = ({ formInfo, onChangeXml, onChangeStep, onChangeEnd })
 
   const statusModal = () => {
     setModal(!modal)
+    // onChangeStep()
   };
+
+  useEffect(() => {
+    if(!modal) {
+      onChangeStep(moveStep);
+    }
+  }, [modal]);
 
   
   return (
     <section className={styles.page_style}>
-      <MissionCreateNavbar modal={modal} statusModal={statusModal} />
+      <MissionCreateNavbar 
+        modal={modal} 
+        type={type}
+        statusModal={statusModal} 
+        onChangeModal={onChangeModal} 
+      />
       <div className={styles.container}>
         {modal && 
           <Draggable
@@ -120,11 +136,11 @@ const MissionCreateMain = ({ formInfo, onChangeXml, onChangeStep, onChangeEnd })
             >
             <div className={styles.playground}>
               <MissionCreatePlayground 
+              setMoveStep={setMoveStep}
                 javascript_code={javascript}
                 startPosition={startPosition}
                 endPosition={endPosition}
-                onChangeStep={onChangeStep} 
-                onChangeEnd={onChangeEnd}  
+                onChangeStep={onChangeStep}  
               />
             </div>
           </Draggable>
@@ -133,7 +149,7 @@ const MissionCreateMain = ({ formInfo, onChangeXml, onChangeStep, onChangeEnd })
           <div className={styles.workspace}>
             <ReactBlockly
               toolboxCategories={toolboxCategories}
-              initialXml={initialXml}
+              initialXml={xmlCode}
               wrapperDivClassName={styles.fill_height}
               workspaceConfiguration={{
                 grid: {

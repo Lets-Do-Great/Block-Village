@@ -5,7 +5,7 @@ import { FaRegSave } from 'react-icons/fa';
 import { TiShoppingCart } from 'react-icons/ti';
 import { useHistory } from 'react-router-dom';
 
-const MissionDoNavbar = ({ modal, statusModal }) => {
+const MissionDoNavbar = ({ modal, statusModal, title, difficulty }) => {
   const history = useHistory();
 
   const onoffModal = () => {
@@ -22,7 +22,8 @@ const MissionDoNavbar = ({ modal, statusModal }) => {
       <img className={styles.logo_img} src="/images/logo1.png" />
 
 
-      <h1 className={styles.title}>미션 제작소</h1>
+      <h1 className={styles.title}>{title}</h1>
+      {/* <h1 className={styles.title}>{difficulty}</h1> */}
       <div className={styles.save_button}>
         <FaRegSave size="50" color="#FFFFFF" />
       </div>

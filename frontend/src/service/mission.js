@@ -28,6 +28,7 @@ export const getMyMissionList = ({ email }) => {
 // 미션 제작
 export const setMission = (
     { email, missionId, title, content, code, image }) => {
+        console.log(title, content);
         return client({
             url: `mission/${email}`,
             method: 'post',

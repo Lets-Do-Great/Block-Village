@@ -1,78 +1,61 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './mission_do_playground.module.css';
 
-var x = 0;
-var y = 0;
-var move = [];
-var cur_angle = 0;
+const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onChangeSuccess, onChangeFail }) => {
+  var x = 0;
+  var y = 0;
+  var move = [];
+  var cur_angle = 0;
 
-const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onChangeStep, onChangeEnd }) => {
   const fieldchar = useRef();
   const item = fieldchar.current;
 
-  const image_x = startPosition[0];
-  const image_y = startPosition[1];
+  const [image_x, setImage_x] = useState(startPosition[0]);
+  const [image_y, setImage_y] = useState(startPosition[1]);
+  // const [image_speed, setImage_speed] = useState(5);
 
-  const [moveStep, setMoveStep] = useState(move);
-  
   const playGame = () => {
     eval(javascript_code);
     console.log(move);
-    setMoveStep(move)
-    item.style.transition = `all .${move.length*20}s ease .5s`
+    item.style.transition = `all .${move.length*10}s ease .5s`
 
-    let xx = image_x;
-    let yy = image_y;
-    
+    let x = image_x;
+    let y = image_y;
+
     const timer = ms => new Promise(res => setTimeout(res, ms))
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
-        
-        const new_move_x = move[i][0]
-        const new_move_y = move[i][1]
-        xx = image_x + (new_move_x * 60)
-        yy = image_y - (new_move_y * 60)
-        
-        item.style.left = `${xx}px`;
-        item.style.top = `${yy}px`;
-        
-        await timer(2000);
+        x = image_x + (move[i][0] * 40)
+        y = image_y - (move[i][1] * 40)
+
+        item.style.left = `${x}px`;
+        item.style.top = `${y}px`;
+
+        await timer(1500);
+
+        // if (tutorial_map[check_lo_x][check_lo_y] === 0) {
+        //   onChangeModalFail()
+        //   return
+        // }
+      }
+      if (endPosition[0] >= (x - 5) && endPosition[0] <= (x + 5) &&
+          endPosition[1] >= (y - 5) && endPosition[1] <= (y + 5)) {
+        onChangeSuccess();
+      } else {
+        onChangeFail();
       }
     }
     jinok()
   };
 
-  const setfirstPosition = () => {
-    move = [];
-    x = 0;
-    y = 0;
-    cur_angle = 0;
-    item.style.left = `${image_x}px`;
-    item.style.top = `${image_y}px`;
-  };
-  
   useEffect(() => {
-    // move = [];
-    // x = 0;
-    // y = 0;
-    // cur_angle = 0;
     const item = fieldchar.current; 
-    
     item.setAttribute('className', `image`)
     item.setAttribute('src', `/images/bug.png`)
-    
     item.style.position = 'absolute';
-    item.style.left = `${endPosition[0]}px`;
-    item.style.top = `${endPosition[1]}px`;
-    
-    return () => {
-      onChangeStep(moveStep)
-      move = [];
-      x = 0;
-      y = 0;
-      cur_angle = 0;
-    }
-  }, [])
+    item.style.left = `${image_x}px`;
+    item.style.top = `${image_y}px`;
+  })
   
   
     // 함수
@@ -316,7 +299,7 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
 
   return (
     <div className={styles.body}>
-      <section className={styles.game}>
+      <section className={styles.game}r>
         <img ref={fieldchar}></img>
       </section>
       <footer className={styles.footer}>
@@ -325,7 +308,6 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
           className={styles.game__button}
         >시작하기
         </button>
-        <button onClick={setfirstPosition}>제자리로</button>
       </footer>
     </div>
   )

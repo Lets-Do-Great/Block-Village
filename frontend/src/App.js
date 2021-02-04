@@ -13,6 +13,8 @@ import MissionContainer from './containers/mission_container';
 
 import TestMypage from './components/my_page/test_mypage';
 import MissionCreateSubmain from './components/blockly/mission_create/mission_create_submain/mission_create_submain';
+import MissionDoSubmain from './components/blockly/mission_do/mission_do_submain/mission_do_submain';
+import EditorMissionContainer from './containers/editor_mission_container';
 
 
 function App() {
@@ -20,42 +22,61 @@ function App() {
     <div className={styles.app}>
 
       <Switch>
+
         <Route exact path="/">
           <SubMain />
         </Route>
-        
         <Route exact path="/my_page">
           <TestMypage />
           {/* <MyPageContainer /> */}
         </Route>
-
         <Route exact path="/main">
           <Main />
         </Route>
 
-        <Route exact path="/main/tutorial_main">
-          <TutorialSubmain />
-        </Route>
 
-        <Route exact path="/main/mission_main">
-          <MissionContainer />
-        </Route>
 
-        <Route exact path="/main/challenge_main">
-          <ChallengeContainer />
-        </Route>
+
 
         <Route exact path="/main/block_store">
           <BlockStoreContainer />
         </Route>
 
-        <Route exact path="/main/mission_main/maze_1">
+
+        <Route exact path="/main/tutorial">
+          <TutorialSubmain />
+        </Route>
+        
+
+
+
+
+        <Route exact path="/main/mission">
+          <MissionContainer />
+        </Route>
+        <Route exact path="/main/mission/create">
+          <EditorMissionContainer />
+        </Route>
+        <Route exact path="/main/mission/update">
+
+        </Route>
+        <Route exact path="/main/mission/answer">
+          <MissionDoSubmain />
+        </Route>
+
+
+
+
+
+        <Route exact path="/main/challenge">
+          <ChallengeContainer />
+        </Route>
+        <Route exact path="/main/challenge/answer/">
           <MissionMaze />
         </Route>
 
-        <Route exact path="/main/mission_create">
-          <MissionCreateSubmain />
-        </Route>
+
+
 
       </Switch>
     </div>

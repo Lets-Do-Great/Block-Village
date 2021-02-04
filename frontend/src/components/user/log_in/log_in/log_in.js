@@ -5,7 +5,7 @@ import LogInForm from '../log_in_form/log_in_form';
 import SnsLogInForm from '../sns_log_in_form/sns_log_in_form';
 import { MdArrowBack } from 'react-icons/md';
 
-const LogIn = ({logIn, logInInput, onChangeLogIn, setType, setSkip}) => {
+const LogIn = ({ logIn, logInInput, onChangeLogIn, setType, setSkip }) => {
   const back = () => setSkip(false);
   const goToSignUp = () => setType('signUp');
 
