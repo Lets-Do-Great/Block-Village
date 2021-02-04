@@ -8,10 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BlockMyResponse {
-
     // blockId, name, quantity
     Long blockId;
     String name;
     int quantity;
-
 }

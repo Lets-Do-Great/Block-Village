@@ -1,7 +1,6 @@
 package com.ssafy.edu.service.block;
 
 
-import com.ssafy.edu.model.BasicResponse;
 import com.ssafy.edu.model.block.Block;
 import com.ssafy.edu.model.block.BlockBuyRequest;
 import com.ssafy.edu.model.block.BlockResponse;
@@ -37,23 +36,23 @@ public class BlockBuyServiceImpl implements BlockBuyService{
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
 
         for(Long id: blockBuyRequest.getBlockId()){
-
+            System.out.println("blockBuyRequest = " + id);
+            System.out.println("userOpt = " + userOpt.get().getEmail());
             Optional<Block> blockOpt = blockJpaRepository.findById(id);
-
             if(userOpt.isPresent() && blockOpt.isPresent()){
-
                 Optional<BlockUsers> blockUsersOpt = blockUsersJpaRepository.findByUserAndBlock(userOpt.get(), blockOpt.get());
-
-                int quantity = 0;
+                BlockUsers blockUsers = new BlockUsers();
                 if(blockUsersOpt.isPresent()){
-                    quantity = blockUsersOpt.get().getQuantity();
-                }
+                    blockUsers = blockUsersOpt.get();
+                    blockUsers.setQuantity(blockUsersOpt.get().getQuantity()+1);
 
-                BlockUsers blockUsers = BlockUsers.builder()
-                        .user(userOpt.get())
-                        .block(blockOpt.get())
-                        .quantity(quantity+1)
-                        .build();
+                }else if(blockUsersOpt.isEmpty()){
+                     blockUsers = BlockUsers.builder()
+                            .user(userOpt.get())
+                            .block(blockOpt.get())
+                            .quantity(1)
+                            .build();
+                }
 
                 BlockUsers save = blockUsersJpaRepository.save(blockUsers);
 
