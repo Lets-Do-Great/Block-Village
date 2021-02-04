@@ -8,6 +8,7 @@ import com.ssafy.edu.model.block.BlockUsers;
 import com.ssafy.edu.model.board.Board;
 import com.ssafy.edu.model.board.BoardComment;
 import com.ssafy.edu.model.board.BoardLikeUsers;
+import com.ssafy.edu.model.challenge.ChallengeUser;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -61,5 +62,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     List<BlockUsers> blockUsersList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    List<ChallengeUser> challengeUserList = new ArrayList<>();
 
 }

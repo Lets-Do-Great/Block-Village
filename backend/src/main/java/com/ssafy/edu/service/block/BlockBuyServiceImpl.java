@@ -36,8 +36,6 @@ public class BlockBuyServiceImpl implements BlockBuyService{
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
 
         for(Long id: blockBuyRequest.getBlockId()){
-            System.out.println("blockBuyRequest = " + id);
-            System.out.println("userOpt = " + userOpt.get().getEmail());
             Optional<Block> blockOpt = blockJpaRepository.findById(id);
             if(userOpt.isPresent() && blockOpt.isPresent()){
                 Optional<BlockUsers> blockUsersOpt = blockUsersJpaRepository.findByUserAndBlock(userOpt.get(), blockOpt.get());
