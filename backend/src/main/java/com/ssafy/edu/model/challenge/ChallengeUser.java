@@ -1,6 +1,5 @@
 package com.ssafy.edu.model.challenge;
 
-
 import com.ssafy.edu.model.user.User;
 import lombok.*;
 

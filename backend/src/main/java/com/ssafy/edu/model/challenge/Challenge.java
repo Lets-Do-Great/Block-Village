@@ -16,27 +16,23 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-public class Challenge extends BaseTimeEntity {
+public class Challenge{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "challenge_id")
     private Long id;
 
-    @Lob
     private String title;
 
-    @Lob
     private String image;
 
-    @Lob
     private String StartDate;
 
-    @Lob
     private String EndDate;
 
     private Long peopleCnt;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "challenge")
     List<ChallengeUser> challengeUsers = new ArrayList<>();
 }
