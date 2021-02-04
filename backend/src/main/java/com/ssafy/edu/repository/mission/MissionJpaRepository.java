@@ -21,5 +21,6 @@ public interface MissionJpaRepository extends JpaRepository<Mission,Long> {
     public Page<Mission> findByTitleContaining(String missionTitle,  Pageable pageable);
 
     public List<Mission> findByUserEmailOrderByUpdatedAtDesc(String userEmail);
+    public Mission findByIdOrderByUpdatedAtDesc(Long missionId);
     public void delete(Mission mission);
 }

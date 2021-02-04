@@ -28,7 +28,9 @@ public class Answer {
     private Long id;
     private String title;
     private String content;
+    @Column(columnDefinition = "TEXT")
     private String xmlCode;
+    @Column(columnDefinition = "TEXT")
     private String javascriptCode;
     private int favorite;
     private int view;

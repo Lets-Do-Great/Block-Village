@@ -7,7 +7,8 @@ import org.springframework.http.ResponseEntity;
 public interface MissionService {
     public ResponseEntity<MissionPageResponse> findAll(MissionSearchTypeRequest missionSearchTypeRequest);
     public ResponseEntity<MissionOneResponse> findGetOne(Long missionId , String userEmail);
-    public ResponseEntity<MissionResponse> findGetOneByUserId(String userEmail);
+    public ResponseEntity<MissionResponse> GetUserMissions(String userEmail);
+    public ResponseEntity<MissionResponse> GetUserTodoMissions(String userEmail);
     public ResponseEntity<MissionOneResponse> signUpMission(MissionSignUpRequest missionSignUpRequest);
     public ResponseEntity<MissionOneResponse> updateMission(MissionUpdateRequest missionUpdateRequest);
     public ResponseEntity<MissionResponse> deleteMission(MissionDeleteRequest missionDeleteRequest);

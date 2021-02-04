@@ -45,6 +45,7 @@ public class Mission {
     private String title;
     private String content;
     private String category;
+    @Column(columnDefinition = "TEXT")
     private String code;
     private double difficulty;
     private int favorite;

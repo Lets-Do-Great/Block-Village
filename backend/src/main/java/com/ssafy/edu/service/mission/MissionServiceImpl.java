@@ -125,7 +125,7 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public ResponseEntity<MissionResponse> findGetOneByUserId(String userEmail) {
+    public ResponseEntity<MissionResponse> GetUserMissions(String userEmail) {
         ResponseEntity response;
         MissionResponse result = new MissionResponse();
 
@@ -151,6 +151,49 @@ public class MissionServiceImpl implements MissionService {
                         .peopleCnt(mission.getPeople())
                         .favorite(missionFavorite.orElseGet(MissionFavorite::new).isFavorite())
                         .todo(missionDoUsers.orElseGet(MissionDoUsers::new).getTodo())
+                        .build();
+                findOneModelList.add(findOneModel);
+            }
+            result.status = true;
+            result.data = findOneModelList;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<MissionResponse> GetUserTodoMissions(String userEmail) {
+        ResponseEntity response;
+        MissionResponse result = new MissionResponse();
+
+        Optional<User> userOptional = userJpaRepository.findByEmail(userEmail);
+
+        if (userOptional.isPresent()) {
+            List<findOneModel> findOneModelList = new ArrayList<>();
+            List<MissionDoUsers> missionDoUsersList = missionTodoJpaRepository.findByUserEmailAndTodo(userEmail,"todo");
+            
+            for (MissionDoUsers missionDoUsers : missionDoUsersList) {
+                Mission mission = missionJpaRepository.findByIdOrderByUpdatedAtDesc(missionDoUsers.getMission().getId());
+
+                Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, mission.getId()));
+
+                findOneModel findOneModel = new findOneModel().builder()
+                        .missionId(mission.getId())
+                        .email(userOptional.get().getEmail())
+                        .nickname(userOptional.get().getNickname())
+                        .title(mission.getTitle())
+                        .created_at(mission.getCreatedAt())
+                        .updated_at(mission.getUpdatedAt())
+                        .content(mission.getContent())
+                        .code(mission.getCode())
+                        .difficulty(mission.getDifficulty())
+                        .likeCnt(mission.getFavorite())
+                        .peopleCnt(mission.getPeople())
+                        .favorite(missionFavorite.orElseGet(MissionFavorite::new).isFavorite())
+                        .todo(missionDoUsers.getTodo())
                         .build();
                 findOneModelList.add(findOneModel);
             }
