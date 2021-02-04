@@ -7,6 +7,7 @@ import { updateObject } from '../service/common';
 const GET_MISSION_LIST = 'mission/GET_MISSION_LIST';
 const GET_MISSION = 'mission/GET_MISSION';
 const GET_MY_MISSION_LIST = 'mission/GET_MY_MISSION_LIST';
+const GET_MY_TODO_MISSION_LIST = 'mission/GET_MY_TODO_MISSION_LIST';
 const SET_MISSION = 'mission/SET_MISSION';
 const MODIFY_MISSION = 'mission/MODIFY_MISSION';
 const DELETE_MISSION = 'mission/DELETE_MISSION';
@@ -28,6 +29,11 @@ export const getMission = createAction(
 export const getMyMissionList = createAction(
     GET_MY_MISSION_LIST,
     MissionAPI.getMyMissionList
+)
+
+export const getMyTodoMissionList = createAction(
+    GET_MY_TODO_MISSION_LIST,
+    MissionAPI.getMyTodoMissionList
 )
 
 export const setMission = createAction(
@@ -144,6 +150,30 @@ export default applyPenders(missionReducer, [
     },
     {
         type: GET_MY_MISSION_LIST,
+        onSuccess: (state, action) => {
+            const response = action.payload;
+
+            if(response.status === 200){
+                if(response.data.status){
+                    return updateObject(state, {
+                        ...state,
+                        missionList: response.data.data,
+                    });
+                } else{
+                    alert("리스트를 불러오는데 문제가 발생했습니다.");
+                }
+            } else { // 에러 발생
+                alert("리스트를 불러오는데 문제가 발생했습니다.");
+                console.log(action.payload.status);
+            }
+            return updateObject(state, state);
+        },
+        onFailure: (state, action) => {
+            return updateObject(state, state);
+        }
+    },
+    {
+        type: GET_MY_TODO_MISSION_LIST,
         onSuccess: (state, action) => {
             const response = action.payload;
 
