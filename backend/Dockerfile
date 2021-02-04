@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:jre-11.0.6_10-alpine AS builder
+FROM openjdk:11 AS builder
 COPY gradlew .
 COPY gradle gradle
 COPY build.gradle .
