@@ -12,6 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface ChallengeUsersJpaRepository extends JpaRepository<ChallengeUser, Long> {
-    public List<ChallengeUser> findByUserAndTodo(User user, int done);
+    public List<ChallengeUser> findByUserAndDone(User user, int done);
     public Optional<ChallengeUser> findByChallenge(Challenge Challenge);
 }
