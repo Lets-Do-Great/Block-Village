@@ -15,13 +15,14 @@ const CommentListForm = ({ userInfo, commentList, onChangeCommentInput,
                 key={comment.id}
                 id={comment.id}
                 userInfo={userInfo}
-                email={email}
+                email={comment.email}
                 nickname={comment.id}
-                comment={comment}
-                date={updated_at}
+                comment={comment.comment}
+                date={comment.updated_at}
                 onChangeCommentInput={onChangeCommentInput}
                 modifyComment={modifyComment}
-                deleteComment={deleteComment}/>
+                deleteComment={deleteComment}
+                commentInput={commentInput}/>
         ))}
     </>);
 };
