@@ -15,6 +15,9 @@ const MissionContainer = () => {
         pageNum: 0,
     });
 
+    // 모달 상태 저장
+    const [ modal, setModal ] = useState(false);
+
     // 검색 조건에 따라 미션 리스트 가져오기
     useEffect(() => {
         getMissionList(search);
@@ -105,8 +108,12 @@ const MissionContainer = () => {
 
     // 미션 삭제 요청
     const onDeleteMission = async () => {
-        await dispatch(MissionAction.deleteMission(
-            { email: userInfo.email, missionId:selectedMission.missionId }));
+        try{
+            await dispatch(MissionAction.deleteMission(
+                { email: userInfo.email, missionId:selectedMission.missionId }));
+        } catch(e){
+            console.log(e);
+        }
     }
 
     return (
@@ -123,6 +130,7 @@ const MissionContainer = () => {
             />
 
             <ListForm
+                type="mission"
                 userInfo={userInfo.email}
                 list={missionList}
                 detail={selectedMission}
@@ -133,6 +141,8 @@ const MissionContainer = () => {
                 onChangeSearchType={onChangeSearchType}
                 onDelete={onDeleteMission}
                 onParticipateMission={onParticipateMission}
+                openDetail={modal}
+                setOpenDetail={setModal}
             />
         </>
     );
