@@ -53,7 +53,7 @@ function App() {
           <MissionMaze />
         </Route>
 
-        <Route exact path="/main/answer/:missionId" component={AnswerContainer}/>
+        <Route exact path="/main/answer/:id" component={AnswerContainer}/>
 
       </Switch>
     </div>

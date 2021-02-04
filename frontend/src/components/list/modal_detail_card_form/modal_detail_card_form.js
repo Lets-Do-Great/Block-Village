@@ -7,7 +7,7 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
                             userInfo, onParticipateMission, onDelete }) => {
                          
     const history = useHistory();
-    const {email, missionId, nickName, title, created_at, updated_at, favorite,
+    const {email, id, nickName, title, created_at, updated_at, favorite,
         content, difficulty, likeCnt, peopleCnt, todo } = detail;
 
     const changeLike = () => {
@@ -28,7 +28,7 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
     }
 
     const goToAnswerList= () => {
-        history.push(`/main/answer/${missionId}`);
+        history.push(`/main/answer/${id}`);
     }
 
     return (

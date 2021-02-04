@@ -6,7 +6,7 @@ import CommentForm from '../components/comment_form/comment_form';
 import * as AnswerAction from '../modules/answer';
 
 const AnswerContainer = ({ match }) => {
-    const { missionId } = match.params;
+    const { id } = match.params;
     const [ commentInput, setCommentInput ] = useState('');
     const [ detail, setDetail ] = useState(false);
 
@@ -26,7 +26,7 @@ const AnswerContainer = ({ match }) => {
         if(detail){
             getAnswerCommentList();
         }
-    }, []);
+    }, [ selectedAnswer ]);
 
     // 댓글 입력 및 수정 데이터 변경 처리 함수
     const onChangeCommentInput = (e) => {
@@ -39,16 +39,16 @@ const AnswerContainer = ({ match }) => {
     // 현재 미션의 답안 목록 조회
     const getMissionAnswerList = async () => {
         try {
-            await dispatch(AnswerAction.getMissionAnswerList({ missionId }));
+            await dispatch(AnswerAction.getMissionAnswerList({ id }));
         } catch(e) {
             console.log(e);
         }
     };
 
     // 현재 선택한 답안 조회
-    const getAnswer = async (id) => {
+    const getAnswer = async (answerId) => {
         try {
-            await dispatch(AnswerAction.getAnswer({ missionId, answerId: id }));
+            await dispatch(AnswerAction.getAnswer({ id, answerId }));
         } catch(e) {
             console.log(e);
         }
@@ -58,7 +58,7 @@ const AnswerContainer = ({ match }) => {
     const deleteAnswer = async () => {
         try {
             await dispatch(AnswerAction.deleteAnswer({
-                email: userInfo.email, answerId: selectedAnswer.answerId,
+                email: userInfo.email, answerId: selectedAnswer.id,
             }))
         } catch(e) {
             console.log(e);
@@ -69,7 +69,7 @@ const AnswerContainer = ({ match }) => {
     const likeAnswer = async () => {
         try{
             await dispatch(AnswerAction.setLikeAnswer({
-                email: userInfo.email, answerId: selectedAnswer.answerId, favorite:true,
+                email: userInfo.email, answerId: selectedAnswer.id, favorite:true,
             }))
         }catch(e) {
             console.log(e);
@@ -80,7 +80,7 @@ const AnswerContainer = ({ match }) => {
     const dislikeAnswer = async () => {
         try{
             await dispatch(AnswerAction.setLikeAnswer({
-                email: userInfo.email, answerId: selectedAnswer.answerId, favorite:false,
+                email: userInfo.email, answerId: selectedAnswer.id, favorite:false,
             }))
         }catch(e) {
             console.log(e);
@@ -90,7 +90,7 @@ const AnswerContainer = ({ match }) => {
     // 현재 선택한 답안의 댓글 조회
     const getAnswerCommentList = async () => {
         try{
-            await dispatch(AnswerAction.getAnswerCommentList({ answerId: selectedAnswer.answerId }))
+            await dispatch(AnswerAction.getAnswerCommentList({ answerId: selectedAnswer.id }))
         }catch(e) {
             console.log(e);
         }
@@ -100,9 +100,10 @@ const AnswerContainer = ({ match }) => {
     const setAnswerComment = async () => {
         try{
             await dispatch(AnswerAction.setAnswerComment({ 
-                email: userInfo.email, answerId: selectedAnswer.answerId, comment:commentInput,
+                email: userInfo.email, answerId: selectedAnswer.id, comment:commentInput,
             }));
             getAnswerCommentList();
+            setCommentInput('');
         }catch(e) {
             console.log(e);
         }

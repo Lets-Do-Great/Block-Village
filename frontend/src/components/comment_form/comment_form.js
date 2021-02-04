@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const CommentInputForm = ({ onChangeCommentInput, setComment }) => {
     return (<>
         <input onChange={onChangeCommentInput} />
-        <button onChange={setComment}>댓글 달기</button>
+        <button 
+            onClick={setComment}>댓글 달기</button>
     </>);
 };
 
@@ -66,8 +67,8 @@ const CommentListLineForm = ({ id, userInfo, email, nickname, comment, date,
 };
 
 const CommentForm = ({ userInfo, commentList, commentInput, onChangeCommentInput, 
-            setComment, modifyComment, deleteComment }) => {
-    
+                             setComment, modifyComment, deleteComment }) => {
+
     return (<>
         <CommentInputForm 
             onChangeCommentInput={onChangeCommentInput}

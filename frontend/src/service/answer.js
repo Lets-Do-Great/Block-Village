@@ -38,17 +38,17 @@ export const deleteAnswer = ({ email, answerId }) => {
 };
 
 // 특정 미션의 답안 목록 조회
-export const getMissionAnswerList = ({ missionId }) => {
+export const getMissionAnswerList = ({ id }) => {
     return client({
-       url: `answer/${missionId}`,
+       url: `answer/${id}`,
        method: 'get', 
     });
 };
 
 // 답안 1개 조회
-export const getAnswer = ({ missionId, answerId }) => {
+export const getAnswer = ({ id, answerId }) => {
     return client({
-       url: `answer/${missionId}/${answerId}`,
+       url: `answer/${id}/${answerId}`,
        method: 'get', 
     });
 }
