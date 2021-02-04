@@ -70,7 +70,7 @@ export const setTodoMission = createAction(
 const initialState = {
     missionList: [],
     selectedMission: {
-        missionId: '',
+        id: '',
         nickName: '',
         title: '',
         created_at: '',

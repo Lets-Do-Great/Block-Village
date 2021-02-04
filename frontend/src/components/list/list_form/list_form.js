@@ -44,8 +44,8 @@ const ListForm = ({ list, detail, getDetail, getList, setLike, setDislike,
         <div className={styles.listForm}>
         { list.map(card => (
             <ListCardForm
-                key={card.missionId}
-                id={card.missionId}
+                key={card.id}
+                id={card.id}
                 title={card.title}
                 difficulty={card.difficulty}
                 likeCnt={card.likeCnt}
