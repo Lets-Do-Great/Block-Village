@@ -46,3 +46,14 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+bootRun {
+	String activeProfile = System.properties['spring.profiles.active']
+	systemProperty "spring.profiles.active", activeProfile
+}
+
+bootJar {
+	archiveBaseName = '-'
+	archiveFileName = 'backend.jar'
+	archiveVersion = "0.0.0"
+}
