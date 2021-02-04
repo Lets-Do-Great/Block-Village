@@ -73,7 +73,7 @@ public class AnswerServiceImpl implements AnswerService {
         List<findAllModel> findAllModelList = new ArrayList<>();
         for(Answer answer : answerList) {
             findAllModel findAllModel = new findAllModel().builder()
-                    .answerId(answer.getId())
+                    .id(answer.getId())
                     .missionId(answer.getMission().getId())
                     .email(answer.getUser().getEmail())
                     .title(answer.getTitle())
@@ -114,7 +114,7 @@ public class AnswerServiceImpl implements AnswerService {
             List<findAllModel> findAllModelList = new ArrayList<>();
             for(Answer answer : answerOptional){
                 findAllModel findAllModel = new findAllModel().builder()
-                        .answerId(answer.getId())
+                        .id(answer.getId())
                         .missionId(answer.getMission().getId())
                         .email(answer.getUser().getEmail())
                         .title(answer.getTitle())
@@ -148,7 +148,7 @@ public class AnswerServiceImpl implements AnswerService {
             Answer answerResult = answerJapRepository.save(answerOptional.get());
 
             findOneModel findOneModel = new findOneModel().builder()
-                    .answerId(answerResult.getId())
+                    .id(answerResult.getId())
                     .email(answerResult.getUser().getEmail())
                     .title(answerResult.getTitle())
                     .missionId(answerResult.getMission().getId())
@@ -183,7 +183,7 @@ public class AnswerServiceImpl implements AnswerService {
 
             for(Answer answer : answerList){
                 findAllModel findAllModel = new findAllModel().builder()
-                        .answerId(answer.getId())
+                        .id(answer.getId())
                         .missionId(answer.getMission().getId())
                         .email(answer.getUser().getEmail())
                         .title(answer.getTitle())
@@ -230,7 +230,7 @@ public class AnswerServiceImpl implements AnswerService {
             Answer answerResult = answerJapRepository.save(answer);
 
             findOneModel findOneModel = new findOneModel().builder()
-                    .answerId(answerResult.getId())
+                    .id(answerResult.getId())
                     .email(answerResult.getUser().getEmail())
                     .title(answerResult.getTitle())
                     .missionId(answerResult.getMission().getId())
@@ -271,7 +271,7 @@ public class AnswerServiceImpl implements AnswerService {
             Answer answerResult = answerJapRepository.save(answer);
 
             findOneModel findOneModel = new findOneModel().builder()
-                    .answerId(answerResult.getId())
+                    .id(answerResult.getId())
                     .email(answerResult.getUser().getEmail())
                     .title(answerResult.getTitle())
                     .missionId(answerResult.getMission().getId())
@@ -367,7 +367,7 @@ public class AnswerServiceImpl implements AnswerService {
             List<findAllCommentModel> findAllCommentModelsList = new ArrayList<>();
             for(AnswerComment answerResult : answerCommentList){
                 findAllCommentModel findAllCommentModel = new findAllCommentModel().builder()
-                        .answerId(answerResult.getId())
+                        .id(answerResult.getId())
                         .email(answerResult.getUser().getEmail())
                         .nickname(answerResult.getUser().getNickname())
                         .comment(answerResult.getComment())

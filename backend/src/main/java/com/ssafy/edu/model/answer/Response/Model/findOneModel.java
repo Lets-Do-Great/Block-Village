@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class findOneModel {
-    private Long answerId;
+    private Long id;
     private String email;
     private String title;
     private Long missionId;

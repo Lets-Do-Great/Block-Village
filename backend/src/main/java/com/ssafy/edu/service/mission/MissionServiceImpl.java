@@ -64,7 +64,7 @@ public class MissionServiceImpl implements MissionService {
         List<Object> findAllModelList = new ArrayList<>();
         for (Mission mission : missionList) {
             findAllModel findAllModel = new findAllModel().builder()
-                    .missionId(mission.getId())
+                    .id(mission.getId())
                     .email(mission.getUser().getEmail())
                     .title(mission.getTitle())
                     .difficulty(mission.getDifficulty())
@@ -99,7 +99,7 @@ public class MissionServiceImpl implements MissionService {
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, missionId));
             Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(userEmail,missionId));
             findOneModel findOneModel = new findOneModel().builder()
-                    .missionId(missionOptional.get().getId())
+                    .id(missionOptional.get().getId())
                     .email(missionOptional.get().getUser().getEmail())
                     .nickname(missionOptional.get().getUser().getNickname())
                     .title(missionOptional.get().getTitle())
@@ -136,7 +136,7 @@ public class MissionServiceImpl implements MissionService {
 
             for (Mission mission : missionJpaRepository.findByUserEmailOrderByUpdatedAtDesc(userEmail)) {
                 findAllModel findAllModel = new findAllModel().builder()
-                       .missionId(mission.getId())
+                       .id(mission.getId())
                         .email(userOptional.get().getEmail())
                         .title(mission.getTitle())
                         .difficulty(mission.getDifficulty())
@@ -170,7 +170,7 @@ public class MissionServiceImpl implements MissionService {
                 Mission mission = missionJpaRepository.findByIdOrderByUpdatedAtDesc(missionDoUsers.getMission().getId());
 
                 findAllModel findAllModel = new findAllModel().builder()
-                        .missionId(mission.getId())
+                        .id(mission.getId())
                         .email(userOptional.get().getEmail())
                         .title(mission.getTitle())
                         .difficulty(mission.getDifficulty())
@@ -206,6 +206,7 @@ public class MissionServiceImpl implements MissionService {
                     .endPositionY(missionSignUpRequest.getEndPositionY())
                     .createdAt(now)
                     .updatedAt(now)
+                    .difficulty(missionSignUpRequest.getDifficulty())
                     .user(userOptional.get())
                     .favorite(0)
                     .people(0)
@@ -213,8 +214,16 @@ public class MissionServiceImpl implements MissionService {
 
             Mission missionResult = missionJpaRepository.save(mission);
 
+            MissionDifficulty missionDifficulty = new MissionDifficulty().builder()
+                    .difficulty(missionSignUpRequest.getDifficulty())
+                    .user(userOptional.get())
+                    .mission(missionResult)
+                    .build();
+
+            missionDifficultyJpaRepository.save(missionDifficulty);
+
             findOneModel findOneModel = new findOneModel().builder()
-                    .missionId(missionResult.getId())
+                    .id(missionResult.getId())
                     .email(missionResult.getUser().getEmail())
                     .nickname(missionResult.getUser().getNickname())
                     .title(missionResult.getTitle())
@@ -258,7 +267,7 @@ public class MissionServiceImpl implements MissionService {
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionUpdateRequest.getEmail(), missionResult.getId()));
             Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionUpdateRequest.getEmail(),missionResult.getId()));
             findOneModel findOneModel = new findOneModel().builder()
-                    .missionId(missionResult.getId())
+                    .id(missionResult.getId())
                     .email(missionResult.getUser().getEmail())
                     .nickname(missionResult.getUser().getNickname())
                     .title(missionResult.getTitle())
@@ -328,7 +337,7 @@ public class MissionServiceImpl implements MissionService {
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(), missionLikeUsersResult.getMission().getId()));
             Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(),missionLikeUsersResult.getMission().getId()));
             findOneModel findOneModel = new findOneModel().builder()
-                    .missionId(mission.get().getId())
+                    .id(mission.get().getId())
                     .email(mission.get().getUser().getEmail())
                     .nickname(mission.get().getUser().getNickname())
                     .title(mission.get().getTitle())
@@ -368,7 +377,7 @@ public class MissionServiceImpl implements MissionService {
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(), missionLikeUsersResult.getMission().getId()));
             Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(),missionLikeUsersResult.getMission().getId()));
             findOneModel findOneModel = new findOneModel().builder()
-                    .missionId(mission.get().getId())
+                    .id(mission.get().getId())
                     .email(mission.get().getUser().getEmail())
                     .nickname(mission.get().getUser().getNickname())
                     .title(mission.get().getTitle())

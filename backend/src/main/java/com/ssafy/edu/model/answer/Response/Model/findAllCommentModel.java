@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class findAllCommentModel {
-    private Long answerId;
+    private Long id;
     private String email;
     private String nickname;
     private String comment;

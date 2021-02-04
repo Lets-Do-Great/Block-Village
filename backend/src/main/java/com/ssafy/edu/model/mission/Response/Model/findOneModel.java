@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class findOneModel {
-    private Long missionId;
+    private Long id;
     private String email;
     private String nickname;
     private String title;

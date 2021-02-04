@@ -44,6 +44,9 @@ public class MissionSignUpRequest {
     int endPositionY;
     @ApiModelProperty(required = true)
     @NotNull
+    double difficulty;
+    @ApiModelProperty(required = true)
+    @NotNull
     String xmlCode;
 
 }

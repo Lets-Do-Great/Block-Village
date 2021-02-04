@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class findAllModel {
-    private Long answerId;
+    private Long id;
     private Long missionId;
     private String email;
     private String title;

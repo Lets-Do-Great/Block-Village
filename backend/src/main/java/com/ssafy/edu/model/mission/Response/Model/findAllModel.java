@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class findAllModel {
-    private Long missionId;
+    private Long id;
     private String email;
     private String title;
     private double difficulty;
