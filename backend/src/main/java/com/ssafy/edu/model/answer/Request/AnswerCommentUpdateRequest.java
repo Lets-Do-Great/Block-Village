@@ -18,7 +18,7 @@ public class AnswerCommentUpdateRequest {
     String email;
     @ApiModelProperty(required = true)
     @NotNull
-    Long answerCommentId;
+    Long commentId;
     @ApiModelProperty(required = true)
     @NotNull
     String comment;

@@ -8,7 +8,11 @@ import com.ssafy.edu.model.answer.Response.AnswerCommentResponse;
 import com.ssafy.edu.model.answer.Response.AnswerFavoriteResponse;
 import com.ssafy.edu.model.answer.Response.AnswerPageResponse;
 import com.ssafy.edu.model.answer.Response.AnswerResponse;
+import com.ssafy.edu.model.answer.Response.Model.findAllCommentModel;
+import com.ssafy.edu.model.answer.Response.Model.findAllModel;
+import com.ssafy.edu.model.answer.Response.Model.findOneModel;
 import com.ssafy.edu.model.mission.Mission;
+import com.ssafy.edu.model.mission.Response.responseModel.pageModel;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.repository.answer.AnswerCommentJpaRepository;
@@ -64,10 +68,35 @@ public class AnswerServiceImpl implements AnswerService {
                 answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType())));
             } else if (answerSearchTypeRequest.getSortType().equals("decrease")) {
                 answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType()).descending()));
-
             }
         }
-        resultObject.add(answerList);
+        List<findAllModel> findAllModelList = new ArrayList<>();
+        for(Answer answer : answerList) {
+            findAllModel findAllModel = new findAllModel().builder()
+                    .answerId(answer.getId())
+                    .missionId(answer.getMission().getId())
+                    .email(answer.getUser().getEmail())
+                    .title(answer.getTitle())
+                    .readCnt(answer.getView())
+                    .likeCnt(answer.getFavorite())
+                    .commentCnt(answer.getAnswerCommentList().size())
+                    .build();
+
+            findAllModelList.add(findAllModel);
+        }
+
+        resultObject.add(findAllModelList);
+
+        pageModel pageModel = new pageModel().builder()
+                .pageisFirst(answerList.isFirst())
+                .pageSize(answerList.getNumberOfElements())
+                .pageNumber(answerList.getNumber())
+                .pageTotalPages(answerList.getTotalPages())
+                .pageTotalElements((int)answerList.getTotalElements())
+                .build();
+
+        resultObject.add(pageModel);
+
         result.status = true;
         result.data = resultObject;
         response = new ResponseEntity<>(result, HttpStatus.OK);
@@ -82,8 +111,23 @@ public class AnswerServiceImpl implements AnswerService {
         List<Answer> answerOptional = answerJapRepository.findByMissionIdOrderByUpdatedAtDesc(missionId);
 
         if (answerOptional.size() >= 0) {
+            List<findAllModel> findAllModelList = new ArrayList<>();
+            for(Answer answer : answerOptional){
+                findAllModel findAllModel = new findAllModel().builder()
+                        .answerId(answer.getId())
+                        .missionId(answer.getMission().getId())
+                        .email(answer.getUser().getEmail())
+                        .title(answer.getTitle())
+                        .readCnt(answer.getView())
+                        .likeCnt(answer.getFavorite())
+                        .commentCnt(answer.getAnswerCommentList().size())
+                        .build();
+
+                findAllModelList.add(findAllModel);
+            }
+
             result.status = true;
-            result.data = answerOptional;
+            result.data = findAllModelList;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -101,10 +145,23 @@ public class AnswerServiceImpl implements AnswerService {
 
         if (answerOptional.isPresent()) {
             answerOptional.get().setView(answerOptional.get().getView() + 1);
-            answerJapRepository.save(answerOptional.get());
+            Answer answerResult = answerJapRepository.save(answerOptional.get());
+
+            findOneModel findOneModel = new findOneModel().builder()
+                    .answerId(answerResult.getId())
+                    .email(answerResult.getUser().getEmail())
+                    .title(answerResult.getTitle())
+                    .missionId(answerResult.getMission().getId())
+                    .javascriptCode(answerResult.getJavascriptCode())
+                    .xmlCode(answerResult.getXmlCode())
+                    .content(answerResult.getContent())
+                    .readCnt(answerResult.getView())
+                    .likeCnt(answerResult.getFavorite())
+                    .commentCnt(answerResult.getAnswerCommentList().size())
+                    .build();
 
             result.status = true;
-            result.data = answerOptional;
+            result.data = findOneModel;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -121,8 +178,24 @@ public class AnswerServiceImpl implements AnswerService {
         Optional<User> userOptional = userJpaRepository.findByEmail(userEmail);
 
         if (userOptional.isPresent()) {
+            List<findAllModel> findAllModelList = new ArrayList<>();
+            List<Answer> answerList = answerJapRepository.findByUserEmailOrderByUpdatedAtDesc(userOptional.get().getEmail());
+
+            for(Answer answer : answerList){
+                findAllModel findAllModel = new findAllModel().builder()
+                        .answerId(answer.getId())
+                        .missionId(answer.getMission().getId())
+                        .email(answer.getUser().getEmail())
+                        .title(answer.getTitle())
+                        .readCnt(answer.getView())
+                        .likeCnt(answer.getFavorite())
+                        .commentCnt(answer.getAnswerCommentList().size())
+                        .build();
+                findAllModelList.add(findAllModel);
+            }
+
             result.status = true;
-            result.data = answerJapRepository.findByUserEmailOrderByUpdatedAtDesc(userOptional.get().getEmail());
+            result.data = findAllModelList;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -155,8 +228,22 @@ public class AnswerServiceImpl implements AnswerService {
                     .build();
 
             Answer answerResult = answerJapRepository.save(answer);
+
+            findOneModel findOneModel = new findOneModel().builder()
+                    .answerId(answerResult.getId())
+                    .email(answerResult.getUser().getEmail())
+                    .title(answerResult.getTitle())
+                    .missionId(answerResult.getMission().getId())
+                    .javascriptCode(answerResult.getJavascriptCode())
+                    .xmlCode(answerResult.getXmlCode())
+                    .content(answerResult.getContent())
+                    .readCnt(answerResult.getView())
+                    .likeCnt(answerResult.getFavorite())
+                    .commentCnt(0)
+                    .build();
+
             result.status = true;
-            result.data = answerResult;
+            result.data = findOneModel;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -182,8 +269,22 @@ public class AnswerServiceImpl implements AnswerService {
             answer.setUpdatedAt(now);
 
             Answer answerResult = answerJapRepository.save(answer);
+
+            findOneModel findOneModel = new findOneModel().builder()
+                    .answerId(answerResult.getId())
+                    .email(answerResult.getUser().getEmail())
+                    .title(answerResult.getTitle())
+                    .missionId(answerResult.getMission().getId())
+                    .javascriptCode(answerResult.getJavascriptCode())
+                    .xmlCode(answerResult.getXmlCode())
+                    .content(answerResult.getContent())
+                    .readCnt(answerResult.getView())
+                    .likeCnt(answerResult.getFavorite())
+                    .commentCnt(answerResult.getAnswerCommentList().size())
+                    .build();
+
             result.status = true;
-            result.data = answerResult;
+            result.data = findOneModel;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -226,7 +327,7 @@ public class AnswerServiceImpl implements AnswerService {
                     .favorite(answerFavoriteRequest.isFavorite())
                     .build();
 
-            AnswerFavorite answerFavoriteResult = answerFavoriteJapRepository.save(answerFavorite);
+            answerFavoriteJapRepository.save(answerFavorite);
 
             List<AnswerFavorite> answerFavoriteList = answerFavoriteJapRepository.findByAnswerId(answerOptional.get().getId());
             answerOptional.get().setFavorite((int) answerFavoriteList.stream().filter(a -> a.isFavorite()).count());
@@ -234,21 +335,19 @@ public class AnswerServiceImpl implements AnswerService {
             answerJapRepository.save(answerOptional.get());
 
             result.status = true;
-            result.data = answerFavoriteResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
 
         } else if (answerFavoriteOptional.isPresent()) {
             AnswerFavorite answerFavorite = answerFavoriteOptional.get();
             answerFavorite.setFavorite(answerFavoriteRequest.isFavorite());
 
-            AnswerFavorite answerFavoriteResult = answerFavoriteJapRepository.save(answerFavorite);
+            answerFavoriteJapRepository.save(answerFavorite);
 
             List<AnswerFavorite> answerFavoriteList = answerFavoriteJapRepository.findByAnswerId(answerOptional.get().getId());
             answerOptional.get().setFavorite((int) answerFavoriteList.stream().filter(a -> a.isFavorite()).count());
 
             answerJapRepository.save(answerOptional.get());
             result.status = true;
-            result.data = answerFavoriteResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -265,8 +364,20 @@ public class AnswerServiceImpl implements AnswerService {
         List<AnswerComment> answerCommentList = answerCommentJpaRepository.findByAnswerId(answerId);
 
         if (answerCommentList.size() >= 0) {
+            List<findAllCommentModel> findAllCommentModelsList = new ArrayList<>();
+            for(AnswerComment answerResult : answerCommentList){
+                findAllCommentModel findAllCommentModel = new findAllCommentModel().builder()
+                        .answerId(answerResult.getId())
+                        .email(answerResult.getUser().getEmail())
+                        .nickname(answerResult.getUser().getNickname())
+                        .comment(answerResult.getComment())
+                        .updated_at(answerResult.getUpdatedAt())
+                        .build();
+                findAllCommentModelsList.add(findAllCommentModel);
+            }
+
             result.status = true;
-            result.data = answerCommentList;
+            result.data = findAllCommentModelsList;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -294,10 +405,9 @@ public class AnswerServiceImpl implements AnswerService {
                     .updatedAt(now)
                     .build();
 
-            AnswerComment answerCommentResult = answerCommentJpaRepository.save(answerComment);
+            answerCommentJpaRepository.save(answerComment);
 
             result.status = true;
-            result.data = answerCommentResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -311,7 +421,7 @@ public class AnswerServiceImpl implements AnswerService {
         ResponseEntity response;
         AnswerResponse result = new AnswerResponse();
 
-        Optional<AnswerComment> answerCommentOptional = Optional.ofNullable(answerCommentJpaRepository.findByIdAndUserEmail(answerCommentUpdateRequest.getAnswerCommentId(), answerCommentUpdateRequest.getEmail()));
+        Optional<AnswerComment> answerCommentOptional = Optional.ofNullable(answerCommentJpaRepository.findByIdAndUserEmail(answerCommentUpdateRequest.getCommentId(), answerCommentUpdateRequest.getEmail()));
 
         if (answerCommentOptional.isPresent()) {
             Date now = new Date(System.currentTimeMillis());
@@ -324,10 +434,9 @@ public class AnswerServiceImpl implements AnswerService {
                     .updatedAt(now)
                     .build();
 
-            AnswerComment answerCommentResult = answerCommentJpaRepository.save(answerComment);
+            answerCommentJpaRepository.save(answerComment);
 
             result.status = true;
-            result.data = answerCommentResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -341,7 +450,7 @@ public class AnswerServiceImpl implements AnswerService {
         ResponseEntity response;
         AnswerResponse result = new AnswerResponse();
 
-        Optional<AnswerComment> answerCommentOptional = Optional.ofNullable(answerCommentJpaRepository.findByIdAndUserEmail(answerCommentDeleteRequest.getAnswerCommentId(), answerCommentDeleteRequest.getEmail()));
+        Optional<AnswerComment> answerCommentOptional = Optional.ofNullable(answerCommentJpaRepository.findByIdAndUserEmail(answerCommentDeleteRequest.getCommentId(), answerCommentDeleteRequest.getEmail()));
 
         if (answerCommentOptional.isPresent()) {
             answerCommentJpaRepository.delete(answerCommentOptional.get());

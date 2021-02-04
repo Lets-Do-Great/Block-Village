@@ -18,5 +18,5 @@ public class AnswerCommentDeleteRequest {
     String email;
     @ApiModelProperty(required = true)
     @NotNull
-    Long answerCommentId;
+    Long commentId;
 }
