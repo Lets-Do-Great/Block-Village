@@ -33,9 +33,9 @@ public class ChallengeController {
     }
 
     @ApiOperation(value = "특정 유저가 참가한 챌린지 목록 불러오기")
-    @GetMapping("/getuserchallenge")
-    public ResponseEntity<ChallengeResponse> getUserChallengeList(@RequestBody ChallengeUserRequest challengeUserRequest){
-        return challengeService.getUserChallengeList(challengeUserRequest);
+    @GetMapping("/{email}/{todo}")
+    public ResponseEntity<ChallengeResponse> getUserChallengeList(@PathVariable("email")String email, @PathVariable("todo")String todo){
+        return challengeService.getUserChallengeList(email, todo);
     }
 
     @ApiOperation(value = "현재 로그인한 유저가 챌린지 참여하기")

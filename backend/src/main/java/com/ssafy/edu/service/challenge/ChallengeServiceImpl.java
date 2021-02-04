@@ -52,10 +52,10 @@ public class ChallengeServiceImpl implements ChallengeService{
     }
 
     @Override
-    public ResponseEntity<ChallengeResponse> getUserChallengeList(ChallengeUserRequest challengeUserRequest) {
+    public ResponseEntity<ChallengeResponse> getUserChallengeList(String email, String todo) {
         ChallengeResponse result = new ChallengeResponse();
-        Optional<User> userOpt = userJpaRepository.findByEmail(challengeUserRequest.getEmail());
-        List<ChallengeUser> challengeList = challengeUsersJpaRepository.findByUserAndDone(userOpt.get(), challengeUserRequest.getTodo());
+        Optional<User> userOpt = userJpaRepository.findByEmail(email);
+        List<ChallengeUser> challengeList = challengeUsersJpaRepository.findByUserAndDone(userOpt.get(), todo);
         if(!challengeList.isEmpty()){
             List<ChallengeListForm> challengeListFormList = new ArrayList<>();
             for(ChallengeUser ch: challengeList){

@@ -6,6 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface ChallengeService {
     public ResponseEntity<ChallengeResponse> getChallengeList();
-    public ResponseEntity<ChallengeResponse> getUserChallengeList(ChallengeUserRequest challengeUserRequest);
+    public ResponseEntity<ChallengeResponse> getUserChallengeList(String email, String todo);
     public ResponseEntity<ChallengeResponse> joinChallenge(ChallengeUserRequest challengeUserRequest, Long challengeId);
 }

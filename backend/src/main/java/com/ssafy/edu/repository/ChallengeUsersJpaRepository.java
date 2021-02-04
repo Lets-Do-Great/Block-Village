@@ -1,7 +1,6 @@
 package com.ssafy.edu.repository;
 
 
-import com.ssafy.edu.model.challenge.Challenge;
 import com.ssafy.edu.model.challenge.ChallengeUser;
 import com.ssafy.edu.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
