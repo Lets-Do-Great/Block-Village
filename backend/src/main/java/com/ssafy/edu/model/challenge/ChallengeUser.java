@@ -27,5 +27,5 @@ public class ChallengeUser {
     @JoinColumn(name = "challenge_id")
     private Challenge challenge;
 
-    private int done;
+    private String done;
 }

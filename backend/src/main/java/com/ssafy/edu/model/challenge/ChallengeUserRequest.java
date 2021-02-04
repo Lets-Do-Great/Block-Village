@@ -20,5 +20,5 @@ public class ChallengeUserRequest {
 
     @ApiModelProperty(required = true)
     @NotEmpty
-    int todo;
+    String todo;
 }

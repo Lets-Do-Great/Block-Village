@@ -65,7 +65,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                     .user(userOpt.get())
                     .challenge(challengeOpt.get())
                     .done(challengeUserRequest.getTodo());
-            if(challengeUserRequest.getTodo() == 1) {
+            if(challengeUserRequest.getTodo() == "done") {
                 Long tmp_people = challengeOpt.get().getPeopleCnt();
                 challengeOpt.get().setPeopleCnt(tmp_people + 1);
             }
