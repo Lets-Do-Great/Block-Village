@@ -98,6 +98,7 @@ public class MissionServiceImpl implements MissionService {
         if (missionOptional.isPresent()) {
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, missionId));
             Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(userEmail,missionId));
+
             findOneModel findOneModel = new findOneModel().builder()
                     .id(missionOptional.get().getId())
                     .email(missionOptional.get().getUser().getEmail())

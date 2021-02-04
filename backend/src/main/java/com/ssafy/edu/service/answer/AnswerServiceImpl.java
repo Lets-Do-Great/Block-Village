@@ -8,9 +8,7 @@ import com.ssafy.edu.model.answer.Response.AnswerCommentResponse;
 import com.ssafy.edu.model.answer.Response.AnswerFavoriteResponse;
 import com.ssafy.edu.model.answer.Response.AnswerPageResponse;
 import com.ssafy.edu.model.answer.Response.AnswerResponse;
-import com.ssafy.edu.model.answer.Response.Model.findAllCommentModel;
-import com.ssafy.edu.model.answer.Response.Model.findAllModel;
-import com.ssafy.edu.model.answer.Response.Model.findOneModel;
+import com.ssafy.edu.model.answer.Response.Model.*;
 import com.ssafy.edu.model.mission.Mission;
 import com.ssafy.edu.model.mission.Response.Model.pageModel;
 import com.ssafy.edu.model.user.User;
@@ -70,22 +68,23 @@ public class AnswerServiceImpl implements AnswerService {
                 answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType()).descending()));
             }
         }
-        List<findAllModel> findAllModelList = new ArrayList<>();
+        List<findAllModelName> findModelList = new ArrayList<>();
         for(Answer answer : answerList) {
-            findAllModel findAllModel = new findAllModel().builder()
+            findAllModelName findModel = new findAllModelName().builder()
                     .id(answer.getId())
                     .missionId(answer.getMission().getId())
                     .email(answer.getUser().getEmail())
+                    .nickname(answer.getUser().getNickname())
                     .title(answer.getTitle())
                     .readCnt(answer.getView())
                     .likeCnt(answer.getFavorite())
                     .commentCnt(answer.getAnswerCommentList().size())
                     .build();
 
-            findAllModelList.add(findAllModel);
+            findModelList.add(findModel);
         }
 
-        resultObject.add(findAllModelList);
+        resultObject.add(findModelList);
 
         pageModel pageModel = new pageModel().builder()
                 .pageisFirst(answerList.isFirst())
@@ -147,11 +146,12 @@ public class AnswerServiceImpl implements AnswerService {
             answerOptional.get().setView(answerOptional.get().getView() + 1);
             Answer answerResult = answerJapRepository.save(answerOptional.get());
 
-            findOneModel findOneModel = new findOneModel().builder()
+            findOneModelName findOneModelName  = new findOneModelName().builder()
                     .id(answerResult.getId())
                     .email(answerResult.getUser().getEmail())
                     .title(answerResult.getTitle())
                     .missionId(answerResult.getMission().getId())
+                    .nickname(answerResult.getUser().getNickname())
                     .javascriptCode(answerResult.getJavascriptCode())
                     .xmlCode(answerResult.getXmlCode())
                     .content(answerResult.getContent())
@@ -161,7 +161,7 @@ public class AnswerServiceImpl implements AnswerService {
                     .build();
 
             result.status = true;
-            result.data = findOneModel;
+            result.data = findOneModelName;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
