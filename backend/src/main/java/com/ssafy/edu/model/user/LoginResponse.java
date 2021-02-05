@@ -15,7 +15,5 @@ public class LoginResponse {
     String introduction;
     boolean admin;
     String token;
-//    int follwer;
-//    int follwing;
 
 }

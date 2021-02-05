@@ -190,7 +190,7 @@ public class UserServiceImpl implements UserService {
 
             User user = userOptional.get();
             user.setFileName(imagePath);
-            user.setProfileImage("https://"+s3Service.CLOUD_FRONT_DOMAIN_NAME+ "/" + imagePath);
+            user.setProfileImage("https://"+s3Service.CLOUD_FRONT_DOMAIN_NAME+ "/profile/" + imagePath);
 
             User save = userJpaRepository.save(user);
 

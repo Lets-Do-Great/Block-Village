@@ -56,7 +56,7 @@ public class S3Service {
         metadata.setContentLength(bytes.length);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 
-        s3Client.putObject(new PutObjectRequest(bucket, fileName, byteArrayInputStream, metadata)
+        s3Client.putObject(new PutObjectRequest(bucket, "profile/"+fileName, byteArrayInputStream, metadata)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
 
         return fileName;
