@@ -1,74 +1,228 @@
 .body {
-  /* width: 100%;
-  height: 97%; */
   width: 100%;
   height: 100%;
-  /* overflow-y: hidden; */
-  /* position: absolute; */
-
-  /* background: url(../../../images/main/main_background_image.png);
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  cursor: grab; */
 }
 
-.background_img {
+.scrollcontainer {
   height: inherit;
   max-height: 100%;
   width: auto;
   overflow-x: auto;
+  cursor: grab;
 }
 
 .container {
+  z-index: -3;
 }
 
-.goStore {
+.background_img {
+  position: relative;
+  height: inherit;
+  max-height: 100%;
+  /* width: auto; */
+  overflow-x: auto;
+  cursor: grab;
+
+  background: url(../../../images/main/main_background_image.png);
+  background-size: auto 100%;
+}
+
+.chalenge_img {
   position: absolute;
-  width: 300px;
-  height: 300px;
-  left: 3250px;
-  bottom: 235px;
-  z-index: 1;
-  border: 2px solid black;
-  border-radius: 10px;
+  left: 1%;
+  bottom: 20.7%;
+  z-index: 1001;
+  border: 0;
+  padding: 0;
+
+  background: url(../../../images/main/main_challenge_image_before.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
-.goMission {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  left: 5290px;
-  bottom: 140px;
-  z-index: 1;
-  border: 2px solid black;
-  border-radius: 10px;
-}
-
-.goChallenge {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  left: 4020px;
-  bottom: 140px;
-  z-index: 1;
-  border: 2px solid black;
-  border-radius: 10px;
-}
-
-.left_btn {
-  opacity: 0.3;
+.chalenge_img:hover {
+  background: url(../../../images/main/main_challenge_image_after.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  bottom: 23.2%;
   cursor: pointer;
 }
 
-.left_btn:hover {
-  transform: scale(1.1);
+.makeMission_img {
+  position: absolute;
+  left: 12.5%;
+  bottom: 30.5%;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+
+  background: url(../../../images/main/main_make_mission_image_before.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
-.right_btn {
-  opacity: 0.3;
+.makeMission_img:hover {
+  background: url(../../../images/main/main_make_mission_image_after.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
   cursor: pointer;
+  bottom: 33%;
+  left: 13%;
 }
 
-.right_btn:hover {
+.participateMission_img {
+  position: absolute;
+  left: 23.7%;
+  bottom: 21.5%;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+
+  background: url(../../../images/main/main_participate_mission_image_before.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.participateMission_img:hover {
+  background: url(../../../images/main/main_participate_mission_image_after.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   transform: scale(1.1);
+  cursor: pointer;
+  bottom: 23.3%;
+}
+
+.myPage_img {
+  position: absolute;
+  left: 34%;
+  bottom: 28.1%;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+
+  background: url(../../../images/main/main_my_page_image_before.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.myPage_img:hover {
+  background: url(../../../images/main/main_my_page_image_after.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  cursor: pointer;
+  bottom: 30%;
+}
+
+.tutorial_img {
+  position: absolute;
+  left: 41.5%;
+  bottom: 21%;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+
+  background: url(../../../images/main/main_tutorial_image_before.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.tutorial_img:hover {
+  background: url(../../../images/main/main_tutorial_image_after.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  cursor: pointer;
+  bottom: 23%;
+}
+
+.logout_img {
+  position: absolute;
+  left: 58.7%;
+  bottom: 19.3%;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+
+  background: url(../../../images/main/main_logout_image_before.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.logout_img:hover {
+  background: url(../../../images/main/main_logout_image_after.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  cursor: pointer;
+  bottom: 20.5%;
+}
+
+.board_img {
+  position: absolute;
+  left: 69.5%;
+  bottom: 18.3%;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+
+  background: url(../../../images/main/main_board_image_before.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.board_img:hover {
+  background: url(../../../images/main/main_board_image_after.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  cursor: pointer;
+  bottom: 19.6%;
+}
+
+.service_img {
+  position: absolute;
+  left: 75.4%;
+  bottom: 19.6%;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+
+  background: url(../../../images/main/main_service_image_before.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.service_img:hover {
+  background: url(../../../images/main/main_service_image_after.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  cursor: pointer;
+  bottom: 21.7%;
+}
+
+.store_img {
+  position: absolute;
+  left: 87.7%;
+  bottom: 31.3%;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+
+  background: url(../../../images/main/main_store_image_before.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.store_img:hover {
+  background: url(../../../images/main/main_store_image_after.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  cursor: pointer;
+  bottom: 33.7%;
+  left: 87.4%;
 }

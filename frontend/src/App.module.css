@@ -2,14 +2,14 @@
   box-sizing: border-box;
 }
 
-/* .app::-webkit-scrollbar {
+.app::-webkit-scrollbar {
   display: none;
-} */
+}
 
 .app {
   width: 100%;
   height: 100vh;
-  /* overflow-y: hidden; */
+  overflow-y: hidden;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -22,6 +22,26 @@ const PlayGround = ({ javascript_code }) => {
   const change_var = (value_variable) => {
     my_var += value_variable;
   }  
+
+
+
+  useEffect(() => {
+    
+    const field = fieldsize.current;
+    const fieldRect = field.getBoundingClientRect();
+    const item = fieldchar.current;
+    item.setAttribute('className', `image`)
+    item.setAttribute('src', `/images/bug.png`)
+    item.style.position = 'absolute';
+    const x = (fieldRect.width - 0 - 50) / 2;
+    const y = (fieldRect.height - 0 - 50) / 2;
+    item.style.left = `${x}px`;
+    item.style.top = `${y}px`;
+  })
+
+
+
+
   
     // 움직임 
   /////////////////////////////////////////////////////////////////
@@ -255,19 +275,7 @@ const PlayGround = ({ javascript_code }) => {
       pen_angle += angle_angle * Math.PI / 180;
     }
   
-  useEffect(() => {
-    
-    const field = fieldsize.current;
-    const fieldRect = field.getBoundingClientRect();
-    const item = fieldchar.current;
-    item.setAttribute('className', `image`)
-    item.setAttribute('src', `/images/bug.png`)
-    item.style.position = 'absolute';
-    const x = (fieldRect.width - 0 - 50) / 2;
-    const y = (fieldRect.height - 0 - 50) / 2;
-    item.style.left = `${x}px`;
-    item.style.top = `${y}px`;
-  })
+  
 
   return (
     

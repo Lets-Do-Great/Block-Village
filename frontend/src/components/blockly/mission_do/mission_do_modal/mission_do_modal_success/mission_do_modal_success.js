@@ -1,24 +1,36 @@
 import React, { useRef }  from 'react';
 import styles from './mission_do_modal_success.module.css';
 
-const MissionDoModalSuccess = ({ onChangedifficulty }) => {
+const MissionDoModalSuccess = ({ setUseDifficulty, onSubmitDifficulty }) => {
   const formRef = useRef();
   const difficultyRef = useRef();
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const difficulty = difficultyRef.current.value || 0
     formRef.current.reset();
-    onChangedifficulty(difficulty)
-  };
+    onSubmitDifficulty()
+  };  
 
+  const onChange = event => {
+    if (event.currentTarget == null) {
+      return;
+    }
+    event.preventDefault();
+    setUseDifficulty(event.currentTarget.value * 1.0)
+  };
+  
   return (
     <>
       <div className={styles.modal_background} />
       <div className={styles.body}>
         <form ref={formRef}>
           <h3>당신이 생각하는 난이도!</h3><br/>
-          <input type="number" ref={difficultyRef} /><br/>
+          <input 
+            type="number" 
+            name="difficulty" 
+            ref={difficultyRef}
+            onChange={onChange} 
+          /><br/>
           <button onClick={onSubmit}>제출하기</button>
         </form>
       </div>

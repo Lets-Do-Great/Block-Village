@@ -5,6 +5,7 @@ import * as MissionAction from '../modules/mission';
 
 const EditorAnswerContainer = (props) => {
   const [todo, setTodo] = useState('todo');
+  const [useDifficulty, setUseDifficulty] = useState(0);
 
   const onChangeTodo = () => {
     setTodo('done')
@@ -14,9 +15,6 @@ const EditorAnswerContainer = (props) => {
   const selectedMission = useSelector(state => state.mission.selectedMission);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-
-  })
 
   const onSetTodoMission = async () => {
     try {
@@ -35,17 +33,17 @@ const EditorAnswerContainer = (props) => {
       await dispatch(MissionAction.setTodoMission({
         email: email,
         missionId: missionId,
-        difficulty: 0,
+        difficulty: useDifficulty,
       }))
     } catch(e) {
       console.log(e);
     }
   };
-
-  
   return (
     <>
       <MissionDoSubmain
+        missionInfo={selectedMission}
+        setUseDifficulty={setUseDifficulty}
         onChangeTodo={onChangeTodo}
         onSetTodoMission={onSetTodoMission}
         onSetDifficultyMission={onSetDifficultyMission}
