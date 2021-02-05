@@ -10,6 +10,7 @@ import com.ssafy.edu.model.answer.Response.AnswerPageResponse;
 import com.ssafy.edu.model.answer.Response.AnswerResponse;
 import com.ssafy.edu.model.answer.Response.Model.*;
 import com.ssafy.edu.model.mission.Mission;
+import com.ssafy.edu.model.mission.MissionFavorite;
 import com.ssafy.edu.model.mission.Response.Model.pageModel;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.UserJpaRepository;
@@ -136,15 +137,18 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public ResponseEntity<AnswerResponse> findGetOne(Long missionId, Long answerId) {
+    public ResponseEntity<AnswerResponse> findGetOne(String userEmail, Long answerId) {
         ResponseEntity response;
         AnswerResponse result = new AnswerResponse();
 
-        Optional<Answer> answerOptional = answerJapRepository.findByIdAndMissionId(answerId, missionId);
+        Optional<Answer> answerOptional = answerJapRepository.findById(answerId);
+        Optional<User> userOptional = userJpaRepository.findByEmail(userEmail);
+        if (answerOptional.isPresent()&&userOptional.isPresent()) {
 
-        if (answerOptional.isPresent()) {
             answerOptional.get().setView(answerOptional.get().getView() + 1);
             Answer answerResult = answerJapRepository.save(answerOptional.get());
+
+            Optional<AnswerFavorite> answerFavorite = Optional.ofNullable(answerFavoriteJapRepository.findByUserEmailAndAnswerId(userOptional.get().getEmail(),answerResult.getId()));
 
             findOneModelName findOneModelName  = new findOneModelName().builder()
                     .id(answerResult.getId())
@@ -156,6 +160,7 @@ public class AnswerServiceImpl implements AnswerService {
                     .xmlCode(answerResult.getXmlCode())
                     .content(answerResult.getContent())
                     .readCnt(answerResult.getView())
+                    .favorite((answerFavorite.orElseGet(AnswerFavorite::new).isFavorite()))
                     .likeCnt(answerResult.getFavorite())
                     .commentCnt(answerResult.getAnswerCommentList().size())
                     .build();
@@ -228,7 +233,7 @@ public class AnswerServiceImpl implements AnswerService {
                     .build();
 
             Answer answerResult = answerJapRepository.save(answer);
-
+            Optional<AnswerFavorite> answerFavorite = Optional.ofNullable(answerFavoriteJapRepository.findByUserEmailAndAnswerId(userOptional.get().getEmail(),answerResult.getId()));
             findOneModel findOneModel = new findOneModel().builder()
                     .id(answerResult.getId())
                     .email(answerResult.getUser().getEmail())
@@ -238,6 +243,7 @@ public class AnswerServiceImpl implements AnswerService {
                     .xmlCode(answerResult.getXmlCode())
                     .content(answerResult.getContent())
                     .readCnt(answerResult.getView())
+                    .favorite((answerFavorite.orElseGet(AnswerFavorite::new).isFavorite()))
                     .likeCnt(answerResult.getFavorite())
                     .commentCnt(0)
                     .build();
@@ -269,6 +275,7 @@ public class AnswerServiceImpl implements AnswerService {
             answer.setUpdatedAt(now);
 
             Answer answerResult = answerJapRepository.save(answer);
+            Optional<AnswerFavorite> answerFavorite = Optional.ofNullable(answerFavoriteJapRepository.findByUserEmailAndAnswerId(answerResult.getUser().getEmail(),answerResult.getId()));
 
             findOneModel findOneModel = new findOneModel().builder()
                     .id(answerResult.getId())
@@ -280,6 +287,7 @@ public class AnswerServiceImpl implements AnswerService {
                     .content(answerResult.getContent())
                     .readCnt(answerResult.getView())
                     .likeCnt(answerResult.getFavorite())
+                    .favorite((answerFavorite.orElseGet(AnswerFavorite::new).isFavorite()))
                     .commentCnt(answerResult.getAnswerCommentList().size())
                     .build();
 

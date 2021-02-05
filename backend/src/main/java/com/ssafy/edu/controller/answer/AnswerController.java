@@ -37,9 +37,9 @@ public class AnswerController {
         return answerService.findGetList(missionId);
     }
     @ApiOperation(value = "특정 미션에 제출한 답안 목록 한개 조회", notes = "")
-    @GetMapping("/{missionId}/{answerId}")
-    public ResponseEntity<AnswerResponse> GetOneAnswer(@PathVariable("missionId")Long missionId, @PathVariable("answerId")Long answerId) {
-        return answerService.findGetOne(missionId,answerId);
+    @GetMapping("/{userEmail}/{answerId}")
+    public ResponseEntity<AnswerResponse> GetOneAnswer(@PathVariable("userEmail")String userEmail, @PathVariable("answerId")Long answerId) {
+        return answerService.findGetOne(userEmail,answerId);
     }
     @ApiOperation(value = "내가 참여한 미션 답안 목록", notes = "")
     @GetMapping("/user/{userEmail}")

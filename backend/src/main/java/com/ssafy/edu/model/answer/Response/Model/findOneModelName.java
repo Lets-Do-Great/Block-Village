@@ -18,6 +18,7 @@ public class findOneModelName {
     private String xmlCode;
     private String javascriptCode;
     private String content;
+    private boolean favorite;
     private int likeCnt;
     private int readCnt;
     private int commentCnt;

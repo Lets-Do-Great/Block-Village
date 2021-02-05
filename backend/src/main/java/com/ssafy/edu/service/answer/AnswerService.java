@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 public interface AnswerService {
     public ResponseEntity<AnswerPageResponse> findAll(AnswerSearchTypeRequest answerSearchTypeRequest);
     public ResponseEntity<AnswerResponse> findGetList(Long missionId);
-    public ResponseEntity<AnswerResponse> findGetOne(Long missionId,Long answerId);
+    public ResponseEntity<AnswerResponse> findGetOne(String userEmail,Long answerId);
     public ResponseEntity<AnswerResponse> findGetOneByUserId(String userEmail);
     public ResponseEntity<AnswerResponse> signUpAnswer(AnswerSignupRequest answerSignupRequest);
     public ResponseEntity<AnswerResponse> updateAnswer(AnswerUpdateRequest answerUpdateRequest);
