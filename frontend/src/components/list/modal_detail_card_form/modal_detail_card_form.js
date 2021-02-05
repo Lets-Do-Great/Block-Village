@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import styles from './detail_card_form.module.css';
+import styles from './modal_detail_card_form.module.css';
 import * as Icon from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 
-const DetailCardForm = ({ detail, setLike, setDislike, closeModal, 
+const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal, 
                             userInfo, onParticipateMission, onDelete }) => {
-
-    const {email, nickName, title, created_at, updated_at, favorite,
+                         
+    const history = useHistory();
+    const {email, id, nickName, title, created_at, updated_at, favorite,
         content, difficulty, likeCnt, peopleCnt, todo } = detail;
 
     const changeLike = () => {
@@ -23,6 +25,10 @@ const DetailCardForm = ({ detail, setLike, setDislike, closeModal,
         }catch(e) {
             console.log(e);
         }
+    }
+
+    const goToAnswerList= () => {
+        history.push(`/main/answer/${id}`);
     }
 
     return (
@@ -71,10 +77,11 @@ const DetailCardForm = ({ detail, setLike, setDislike, closeModal,
                     className={styles.participating_button}>미션 참여중</button> }
               { todo === 'done' &&
                 <button
+                    onClick={goToAnswerList}
                     className={styles.participated_button}>참여 완료! 다른 답안 보러 가기</button> }</>
         }
     </div>
     );
 };
 
-export default DetailCardForm;
+export default ModalDetailCardForm;
