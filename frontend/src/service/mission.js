@@ -25,25 +25,35 @@ export const getMyMissionList = ({ email }) => {
     });
 }
 
+// 특정 유저의 진행중 / 진행완료 미션 목록 조회
+export const getMyTodoMissionList = ({ email, todo }) => {
+    return client({
+        url: `mission/user/${email}`,
+        method: 'post',
+        data: { email, todo },
+    });
+}
+
 // 미션 제작
 export const setMission = (
-    { email, missionId, title, content, code, image }) => {
-        console.log(title, content);
+    { email, title, content, xmlCode, image, difficulty, 
+        startPositionX, startPositionY, endPositionX, endPositionY }) => {
         return client({
             url: `mission/${email}`,
             method: 'post',
-            data : { email, missionId, title, content, code, image },        
+            data : { email, title, content, xmlCode, image, difficulty, 
+                startPositionX, startPositionY, endPositionX, endPositionY },        
         }
     );
 }
 
 // 미션 수정
 export const modifyMission = (
-    { email, missionId, title, content, code, image }) => {
+    { email, missionId, title, content }) => {
         return client({
             url: `mission/${missionId}`,
             method: 'put',
-            data : { email, missionId, title, content, code, image },        
+            data : { email, missionId, title, content },        
         }
     );
 }

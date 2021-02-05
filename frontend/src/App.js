@@ -12,9 +12,13 @@ import TutorialSubmain from './components/blockly/tutorial/tutorial_submain/tuto
 import MissionContainer from './containers/mission_container';
 
 import TestMypage from './components/my_page/test_mypage';
+<<<<<<< HEAD
 import MissionCreateSubmain from './components/blockly/mission_create/mission_create_submain/mission_create_submain';
 import MissionDoSubmain from './components/blockly/mission_do/mission_do_submain/mission_do_submain';
 import EditorMissionContainer from './containers/editor_mission_container';
+=======
+import AnswerContainer from './containers/answer_container';
+>>>>>>> developer
 
 
 function App() {
@@ -77,6 +81,7 @@ function App() {
 
 
 
+        <Route exact path="/main/answer/:id" component={AnswerContainer}/>
 
       </Switch>
     </div>
