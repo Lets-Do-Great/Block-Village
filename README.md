@@ -28,10 +28,8 @@
 
 ## 프로젝트명 : 모여봐요
 
-- 서비스 설명 : 우리는 무언가를 개선하기위해 -을 제공한다.
-- 서비스 설명 : 또한 ~ 가 가능한 웹 플랫폼이다.
-
-⇒ **호연 팀장님이 적는걸로**
+- 목적  : 주어진 문제를 해결하고, 공유하는 과정을 통해서 **사고력을 증진**시킬 수 있게 도와주는 웹 플랫폼이다.
+- 목표 :  우리는 사고력 증진 도구로서 블록코딩을 이용할 수 있는 에디터를 제공하며, 각자 제작한 게시물을 공유함으로써 **다양한 생각과 접근의 경험**을 제공한다.
 
 ## 기능
 
@@ -131,7 +129,7 @@
 ```mermaid
 gantt
     dateFormat  MM-DD
-    title       리코타 보드 진행상황
+    title       Sub PJT 2 진행상황
     %% excludes    weekends
     %% (`excludes` accepts specific dates in YYYY-MM-DD format, days of the week ("sunday") or "weekends", but not the word "weekdays".)
 

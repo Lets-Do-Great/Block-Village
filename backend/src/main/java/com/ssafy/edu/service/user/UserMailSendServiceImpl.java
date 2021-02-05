@@ -1,6 +1,5 @@
 package com.ssafy.edu.service.user;
 
-import com.ssafy.edu.service.user.UserMailSendService;
 import com.ssafy.edu.model.user.SignUpRequest;
 import com.ssafy.edu.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,7 @@ public class UserMailSendServiceImpl implements UserMailSendService {
                 + "<h3>" + nickname + "님</h3>" + "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : "
                 + "<a href='http://localhost:8080" // 우리의 서버 주소
                 // + 우리의 contextPath
-                + "/users/email_auth?email="+ email +"&key="+key+"'>인증하기</a></p>"
+                + "/users/do/email_auth?email="+ email +"&key="+key+"'>인증하기</a></p>"
                 + "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
         try {
             mail.setSubject("[본인인증] : 대전 B205팀에서 도착한 인증메일입니다.", "utf-8");
