@@ -15,6 +15,9 @@ const MissionContainer = () => {
         pageNum: 0,
     });
 
+    // 모달 상태 저장
+    const [ modal, setModal ] = useState(false);
+
     // 검색 조건에 따라 미션 리스트 가져오기
     useEffect(() => {
         getMissionList(search);
@@ -76,7 +79,7 @@ const MissionContainer = () => {
     const likeMission = async () => {
         try{
             await dispatch(MissionAction.setLikeMission(
-                { email: userInfo.email, missionId:selectedMission.missionId, favorite:true }));
+                { email: userInfo.email, missionId:selectedMission.id, favorite:true }));
         } catch(e) {
             console.log(e);
         }
@@ -86,7 +89,7 @@ const MissionContainer = () => {
     const dislikeMission = async () => {
         try{
             await dispatch(MissionAction.setLikeMission(
-                { email: userInfo.email, missionId:selectedMission.missionId, favorite:false }));
+                { email: userInfo.email, missionId:selectedMission.id, favorite:false }));
         } catch(e) {
             console.log(e);
         }
@@ -94,10 +97,11 @@ const MissionContainer = () => {
 
     // 미션 참여 시작 요청
     const onParticipateMission = async () => {
+        console.log(selectedMission);
         try{
             await dispatch(MissionAction.setTodoMission(
-                { email: userInfo.email, missionId:selectedMission.missionId, todo:'todo' }));
-            getMission(selectedMission.missionId);
+                { email: userInfo.email, missionId:selectedMission.id, todo:'todo' }));
+            getMission(selectedMission.id);
         } catch(e) {
             console.log(e);
         }
@@ -105,8 +109,12 @@ const MissionContainer = () => {
 
     // 미션 삭제 요청
     const onDeleteMission = async () => {
-        await dispatch(MissionAction.deleteMission(
-            { email: userInfo.email, missionId:selectedMission.missionId }));
+        try{
+            await dispatch(MissionAction.deleteMission(
+                { email: userInfo.email, missionId:selectedMission.id }));
+        } catch(e){
+            console.log(e);
+        }
     }
 
     return (
@@ -123,6 +131,7 @@ const MissionContainer = () => {
             />
 
             <ListForm
+                type="mission"
                 userInfo={userInfo.email}
                 list={missionList}
                 detail={selectedMission}
@@ -133,6 +142,8 @@ const MissionContainer = () => {
                 onChangeSearchType={onChangeSearchType}
                 onDelete={onDeleteMission}
                 onParticipateMission={onParticipateMission}
+                openDetail={modal}
+                setOpenDetail={setModal}
             />
         </>
     );
