@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder // Setter 대신
+@Builder
 public class SignUpRequest {
 
     @ApiModelProperty(required = true)

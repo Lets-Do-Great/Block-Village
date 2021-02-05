@@ -7,10 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /*
@@ -32,7 +29,8 @@ import java.time.LocalDate;
 @Entity
 public class User {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     private String email;
@@ -46,8 +44,17 @@ public class User {
     private String emailAuth;
 
     private int mileage;
-//    @Column(name = "profile_image")
-//    private File?String profileImage;
+
+    @Column
+    private String fileName;
+    @Column(name="profile_image")
+    private String profileImage;
+
     private String introduction;
+
+    private boolean admin;
+
+//    private int follower;
+//    private int following;
 
 }
