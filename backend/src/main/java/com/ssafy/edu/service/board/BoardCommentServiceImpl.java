@@ -38,8 +38,6 @@ public class BoardCommentServiceImpl implements BoardCommentService{
         
         if(userOptional.isPresent() && boardOptional.isPresent()){
 
-            System.out.println("here?");
-
             BoardComment boardComment = BoardComment.builder()
                     .content(boardCommentRequest.getContent())
                     .board(boardOptional.get())
@@ -69,7 +67,6 @@ public class BoardCommentServiceImpl implements BoardCommentService{
 
         // commentId와 boardId가 같이 없는 경우,
 
-
         if(boardOptional.isPresent() && commentOptional.isPresent()
                 && commentOptional.get().getBoard() == boardOptional.get()){
 
@@ -94,7 +91,6 @@ public class BoardCommentServiceImpl implements BoardCommentService{
         Optional<Board> boardOptional = boardJpaRepository.findById(id);
         Optional<BoardComment> commentOptional = boardCommentJpaRepository.findById(cid);
 
-
         if(boardOptional.isPresent() && commentOptional.isPresent()
             && boardOptional.get() == commentOptional.get().getBoard()){
 
@@ -104,7 +100,6 @@ public class BoardCommentServiceImpl implements BoardCommentService{
                 result.status = true;
                 return new ResponseEntity<>(result, HttpStatus.OK);
             }
-
         }
 
         result.status = false;

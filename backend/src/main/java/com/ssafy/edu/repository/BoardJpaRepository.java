@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
-import java.util.List;
 
 public interface BoardJpaRepository extends JpaRepository<Board, Long> {
     public Page<Board> findAll(Pageable pageable);
