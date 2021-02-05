@@ -1,30 +1,38 @@
 import React, {useState} from 'react';
-import styles from './tutorial_main.module.css'
+import styles from './tutorial_main_1.module.css'
 
 import Draggable from 'react-draggable';
 
-import '../../all_blocks/start_blocks';
-import '../../all_blocks/judgement_blocks';
-import '../../all_blocks/flow_blocks';
-import '../../all_blocks/calculation_blocks';
-import '../../all_blocks/movement_blocks';
-import '../../all_blocks/drawing_blocks';
-import '../../all_blocks/function_blocks';
+import '../../../all_blocks/start_blocks';
+import '../../../all_blocks/judgement_blocks';
+import '../../../all_blocks/flow_blocks';
+import '../../../all_blocks/calculation_blocks';
+import '../../../all_blocks/movement_blocks';
+import '../../../all_blocks/drawing_blocks';
+import '../../../all_blocks/function_blocks';
 
 import ReactBlockly from 'react-blockly';
 import Blockly from 'blockly';
 
-import TutorialNavbar from '../tutorial_navbar/tutorial_navbar';
-import TutorialPlayground from '../tutorial_playground/tutorial_playground';
+import TutorialNavbar from '../tutorial_navbar_1/tutorial_navbar_1';
+import TutorialPlayground from '../tutorial_playground_1/tutorial_playground_1';
+import ModalSuccess1 from '../modal_1/modal_success_1/modal_success_1';
+import ModalFail1 from '../modal_1/modal_fail_1/modal_fail_1';
 
-const TutorialMain = (props) => {
+const TutorialMain1 = ({ info, GoTwo }) => {
+  const { 
+    id,
+    title, initialXml, toolboxCategories, 
+    map_image, character_image, 
+    icon_status,
+  } = info;
+
+  const [modal_success_state, setModal_success_state] = useState(false);
+  const [modal_fail_state, setModal_fail_state] = useState(false);
+
   const [activeDrags, setActiveDrags] = useState(0);
   const [modal, setModal] = useState(true);
-
   const [javascript, setJavascript] = useState();
-  const [initialXml, setInitialXml] = useState(
-    '<xml xmlns="http://www.w3.org/1999/xhtml"><Block type="start_button"></Block></xml>'
-  );
 
   const theme = {
     'blockStyles' : {
@@ -86,107 +94,22 @@ const TutorialMain = (props) => {
     }
   };
 
-  const [toolboxCategories, setToolboxCategories] = useState([
-    {
-      name: '시작',
-      colour: '#C30D23',
-      blocks: [
-        {type: 'start_button',},
-        {type: 'end_button',},
-      ],
-    },
-    {
-      name: '판단',
-      colour: '#FFA31D',
-      blocks: [
-        {type: 'input',},
-        {type: 'block_judgment_equals',},
-        {type: 'block_judgment_strictinequality_left',},
-        {type: 'block_judgment_strictinequality_right',},
-        {type: 'block_judgment_notequal',},
-        {type: 'block_judgment_strictinequality_leftequal',},
-        {type: 'block_judgment_strictinequality_rightequal',},
-        {type: 'block_judgment_compare_and',},
-        {type: 'block_judgment_compare_or',},
-        {type: 'block_judgment_compare_not',},
-      ],
-    },
-    {
-      name: '움직임',
-      colour: '#8FC31F',
-      blocks: [
-        {type: 'move_x',},
-        {type: 'move_y'},
-        {type: 'point_x'},
-        {type: 'point_y'},
-        {type: 'point_x_y'},
-        {type: 'turn_angle'},
-        {type: 'set_angle'},
-        {type: 'set_angle_move'},
-        {type: 'move_forward'},
-        {type: 'move_forward_1'},
-      ],
-    },
-    {
-      name: '흐름',
-      colour: '#55CFFF',
-      blocks: [
-        {type: 'repeat_times'},
-        {type: 'repeat'},
-        {type: 'do_while'},
-        {type: 'while_not'},
-        {type: 'break'},
-        {type: 'condition'},
-        {type: 'if_else'},
-        {type: 'if_else_double'},
-        {type: 'if_else_triple'},
-        {type: 'switch_input'},
-        {type: 'input_value'},
-      ]
-    },
-    {
-      name: '계산',
-      colour: '#1060FF',
-      blocks: [
-        {type: 'number'},
-        {type: 'addition'},
-        {type: 'subtraction'},
-        {type: 'multiplication'},
-        {type: 'division'},
-        {type: 'random_num'},
-        {type: 'quotient'},
-        {type: 'remainder'},
-        {type: 'square'},
-        {type: 'sqrt'},
-        {type: 'integer'},
-        {type: 'roundup'},
-        {type: 'round'},
-        {type: 'abs_val'},
-      ]
-    },
-    {
-      name: '그리기',
-      colour: '#7D10C4',
-      blocks: [
-        {type: 'pen_down'},
-        {type: 'pen_up'},
-        {type: 'draw_line'},
-        {type: 'rotate_pen'},
-        {type: 'change_colour'},
-      ]
-    },
-    {
-      name: '함수',
-      colour: '#CC6666',
-      blocks: [
-        {type: 'variable'},
-        {type: 'set_variable'},
-        {type: 'change_variable'},        
-      ]
-    },
-  ])
-
   // play ground 관련 function
+  const onChangeModalSuccess = () => {
+    setModal(false)
+    setModal_success_state(true)
+  };
+
+  const onChangeModalFail = () => {
+    setModal(false)
+    setModal_fail_state(true)
+  };
+
+  const reStart = () => {
+    setModal(true)
+    setModal_fail_state(false)
+  }
+
   const onStart = () => {
     setActiveDrags(activeDrags + 1);
   };
@@ -201,20 +124,27 @@ const TutorialMain = (props) => {
   //########################################
 
   function workspaceDidChange(workspace) {
-    // save 형태
-    setInitialXml(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)))
-    // document.getElementById('generated-xml').innerText = newXml;
-
-    // playground 형태로 예상 중
     setJavascript(Blockly.JavaScript.workspaceToCode(workspace))
-    console.log(javascript);
-    // document.getElementById('code').value = code;
   }
-
 
   return (
     <div className={styles.body}>
-      <TutorialNavbar modal={modal} statusModal={statusModal} />
+
+      <ModalSuccess1 
+        modal_success_state={modal_success_state}
+        GoTwo={GoTwo}
+      />
+      <ModalFail1 
+        modal_fail_state={modal_fail_state}
+        reStart={reStart}
+      />
+
+      <TutorialNavbar 
+        title={title}
+        modal={modal} 
+        statusModal={statusModal} 
+        icon_status={icon_status}
+      />
       <div className={styles.container}>
 
         {modal && 
@@ -224,7 +154,12 @@ const TutorialMain = (props) => {
             bounds="parent"
             >
             <div className={styles.playground}>
-              <TutorialPlayground javascript_code={javascript} />
+              <TutorialPlayground 
+                javascript_code={javascript} 
+                onChangeModalSuccess={onChangeModalSuccess}
+                onChangeModalFail={onChangeModalFail}
+                
+              />
             </div>
           </Draggable>
         }
@@ -242,7 +177,7 @@ const TutorialMain = (props) => {
                   snap: true,
                 },
                 move:{
-                  scrollbars: false,
+                  scrollbars: true,
                   drag: true,
                   wheel: false,
                 },
@@ -253,7 +188,8 @@ const TutorialMain = (props) => {
                   maxScale: 3,
                   minScale: 0.3,
                   scaleSpeed: 1.2,
-                  pinch: true},
+                  pinch: true
+                },
                 trashcan: true,
                 renderer : "Zelos",
                 theme: theme,
@@ -268,4 +204,4 @@ const TutorialMain = (props) => {
   )
 };
 
-export default TutorialMain;
+export default TutorialMain1;

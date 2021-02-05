@@ -1,57 +1,61 @@
 import React, { useEffect, useState } from 'react';
 import ListCardForm from '../list_card_form/list_card_form';
-import DetailCardForm from '../detail_card_form/detail_card_form';
+import ModalDetailCardForm from '../modal_detail_card_form/modal_detail_card_form';
 import styles from './list_form.module.css';
 
-const ListForm = ({ list, detail, getDetail, getList, setLike, setDislike, 
-                    onDelete, onChangeSearchType, userInfo, onParticipateMission }) => {
-
-    // 모달 상태 저장
-    const [ modal, setModal ] = useState(false);
+// type : mission, answer, project
+const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike, 
+                    onDelete, onChangeSearchType, userInfo, onParticipateMission,
+                    openDetail, setOpenDetail }) => {
 
     // 디테일 모달 열기
     const clickCard = (e) => {
         getDetail(e.target.id);
-        setModal(true);
+        setOpenDetail(true);
     }
 
     // 디테일 모달 닫기
     const closeModal = () => {
-        setModal(false);
+        setOpenDetail(false);
         getList();
     }
 
     return (
-    <>
-        <select name="sortType" className={styles.select} onChange={onChangeSearchType}>
-            <option value="decrease">높은 순</option>
-            <option value="increase">낮은 순</option>
-        </select>
+    <>  
+        { type === 'mission' && 
+            <>
+            <select name="sortType" className={styles.select} onChange={onChangeSearchType}>
+                <option value="decrease">높은 순</option>
+                <option value="increase">낮은 순</option>
+            </select>
 
-        { modal && 
-        <div className={styles.modal_wrapper}>
-            <DetailCardForm
-                detail={detail}
-                setLike={setLike}
-                setDislike={setDislike}
-                closeModal={closeModal}
-                userInfo={userInfo}
-                onParticipateMission={onParticipateMission}
-                onDelete={onDelete}
-            />
-        </div> }
+            { openDetail && 
+                <div className={styles.modal_wrapper}>
+                    <ModalDetailCardForm
+                        detail={detail}
+                        setLike={setLike}
+                        setDislike={setDislike}
+                        closeModal={closeModal}
+                        userInfo={userInfo}
+                        onParticipateMission={onParticipateMission}
+                        onDelete={onDelete}
+                    />
+                </div> }
+            </>
+        }
 
         <div className={styles.listForm}>
         { list.map(card => (
             <ListCardForm
-                key={card.missionId}
-                id={card.missionId}
+                type={type}
+                key={card.id}
+                id={card.id}
                 title={card.title}
                 difficulty={card.difficulty}
+                readCnt={card.readCnt}
                 likeCnt={card.likeCnt}
                 peopleCnt={card.peopleCnt}
-                clickCard={clickCard}
-            />
+                clickCard={clickCard} />
         ))}
         </div>
     </>
