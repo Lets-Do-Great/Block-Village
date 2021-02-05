@@ -1,15 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-const CommentInputForm = ({ onChangeCommentInput, setComment }) => {
+const CommentInputForm = ({ setComment }) => {
+    const [ setInput, setSetInput ] = useState('');
+
+    const onChange = (e) => {
+        setSetInput(e.target.value);
+    }
+
+    const onClick = () => {
+        setComment(setInput);
+        setSetInput('');
+    }
+
     return (<>
-        <input onChange={onChangeCommentInput} />
+        <input onChange={onChange} value={setInput}/>
         <button 
-            onClick={setComment}>댓글 달기</button>
+            onClick={onClick}>댓글 달기</button>
     </>);
 };
 
-const CommentListForm = ({ userInfo, commentList, onChangeCommentInput,
-                        commentInput, modifyComment, deleteComment }) => {
+const CommentListForm = ({ userInfo, commentList,
+                            modifyComment, deleteComment }) => {
     return (<>
         { commentList.map(comment => (
             <CommentListLineForm
@@ -20,25 +31,29 @@ const CommentListForm = ({ userInfo, commentList, onChangeCommentInput,
                 nickname={comment.id}
                 comment={comment.comment}
                 date={comment.updated_at}
-                onChangeCommentInput={onChangeCommentInput}
                 modifyComment={modifyComment}
-                deleteComment={deleteComment}
-                commentInput={commentInput}/>
+                deleteComment={deleteComment}/>
         ))}
     </>);
 };
 
 const CommentListLineForm = ({ id, userInfo, email, nickname, comment, date,
-            onChangeCommentInput, commentInput, modifyComment, deleteComment }) => {
+                                modifyComment, deleteComment }) => {
 
-    const [modify, setModify] = useState(false);
+    const [ modify, setModify ] = useState(false);
+    const [ modifyInput, setModifyInput ] = useState(comment);
+ 
+    const onChangeModifyInput = (e) => {
+        setModifyInput(e.target.value);
+    }
 
     const onChangeModify = () => {
         setModify(true);
     }   
 
-    const onSubmotComment = () => {
-        modifyComment(id);
+    const onSubitComment = () => {
+        modifyComment(id, modifyInput);
+        setModify(false);
     }
 
     const onDeleteComment = () => {
@@ -48,8 +63,8 @@ const CommentListLineForm = ({ id, userInfo, email, nickname, comment, date,
     return (<>
         { modify
         ? <>
-            <input onChange={onChangeCommentInput} value={commentInput}/>
-            <button onClick={onSubmotComment}>수정 완료</button>
+            <input onChange={onChangeModifyInput} value={modifyInput}/>
+            <button onClick={onSubitComment}>수정 완료</button>
         </>
         : <>
             [{nickname}]
@@ -66,18 +81,15 @@ const CommentListLineForm = ({ id, userInfo, email, nickname, comment, date,
     </>);
 };
 
-const CommentForm = ({ userInfo, commentList, commentInput, onChangeCommentInput, 
+const CommentForm = ({ userInfo, commentList,
                              setComment, modifyComment, deleteComment }) => {
 
     return (<>
         <CommentInputForm 
-            onChangeCommentInput={onChangeCommentInput}
             setComment={setComment}/>
         <CommentListForm
             userInfo={userInfo}
             commentList={commentList}
-            commentInput={commentInput}
-            onChangeCommentInput={onChangeCommentInput}
             modifyComment={modifyComment}
             deleteComment={deleteComment}/>
     </>);

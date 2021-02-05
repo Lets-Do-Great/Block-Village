@@ -7,7 +7,6 @@ import * as AnswerAction from '../modules/answer';
 
 const AnswerContainer = ({ match }) => {
     const { id } = match.params;
-    const [ commentInput, setCommentInput ] = useState('');
     const [ detail, setDetail ] = useState(false);
 
     // store에 있는 state와 dispatch 가져오는 작업
@@ -20,18 +19,13 @@ const AnswerContainer = ({ match }) => {
 
     useEffect(() => {
         getMissionAnswerList();
-    }, []);
+    }, [detail]);
 
     useEffect(() => {
         if(detail){
             getAnswerCommentList();
         }
     }, [ selectedAnswer ]);
-
-    // 댓글 입력 및 수정 데이터 변경 처리 함수
-    const onChangeCommentInput = (e) => {
-        setCommentInput(e.target.value);
-    }
 
     /*
     api 요청 보내는 함수
@@ -48,7 +42,7 @@ const AnswerContainer = ({ match }) => {
     // 현재 선택한 답안 조회
     const getAnswer = async (answerId) => {
         try {
-            await dispatch(AnswerAction.getAnswer({ id, answerId }));
+            await dispatch(AnswerAction.getAnswer({ email: userInfo.email, answerId }));
         } catch(e) {
             console.log(e);
         }
@@ -56,10 +50,12 @@ const AnswerContainer = ({ match }) => {
 
     // 현재 선택한 답안 삭제
     const deleteAnswer = async () => {
+        console.log(userInfo.email, selectedAnswer.id);
         try {
             await dispatch(AnswerAction.deleteAnswer({
                 email: userInfo.email, answerId: selectedAnswer.id,
             }))
+            getMissionAnswerList();
         } catch(e) {
             console.log(e);
         }
@@ -71,6 +67,7 @@ const AnswerContainer = ({ match }) => {
             await dispatch(AnswerAction.setLikeAnswer({
                 email: userInfo.email, answerId: selectedAnswer.id, favorite:true,
             }))
+            getAnswer(selectedAnswer.id);
         }catch(e) {
             console.log(e);
         }
@@ -82,6 +79,7 @@ const AnswerContainer = ({ match }) => {
             await dispatch(AnswerAction.setLikeAnswer({
                 email: userInfo.email, answerId: selectedAnswer.id, favorite:false,
             }))
+            getAnswer(selectedAnswer.id);
         }catch(e) {
             console.log(e);
         }
@@ -97,23 +95,22 @@ const AnswerContainer = ({ match }) => {
     };    
 
     // 현재 선택한 답안의 댓글 제작
-    const setAnswerComment = async () => {
+    const setAnswerComment = async (comment) => {
         try{
             await dispatch(AnswerAction.setAnswerComment({ 
-                email: userInfo.email, answerId: selectedAnswer.id, comment:commentInput,
+                email: userInfo.email, answerId: selectedAnswer.id, comment,
             }));
             getAnswerCommentList();
-            setCommentInput('');
         }catch(e) {
             console.log(e);
         }
     }; 
 
     // 현재 선택한 답안의 댓글 수정
-    const modifyAnswerComment = async (id) => {
+    const modifyAnswerComment = async (id, comment) => {
         try{
             await dispatch(AnswerAction.modifyAnswerComment({ 
-                email: userInfo.email, commentId: id, comment:commentInput,
+                email: userInfo.email, commentId: id, comment,
             }));
             getAnswerCommentList();
         }catch(e) {
@@ -143,9 +140,8 @@ const AnswerContainer = ({ match }) => {
                 setOpenDetail={setDetail}
                 onDelete={deleteAnswer}/>
             <CommentForm
+                userInfo={userInfo.email}
                 commentList={commentList}
-                commentInput={commentInput}
-                onChangeCommentInput={onChangeCommentInput}
                 setComment={setAnswerComment}
                 modifyComment={modifyAnswerComment}
                 deleteComment={deleteAnswerComment}/>

@@ -46,9 +46,9 @@ export const getMissionAnswerList = ({ id }) => {
 };
 
 // 답안 1개 조회
-export const getAnswer = ({ id, answerId }) => {
+export const getAnswer = ({ email, answerId }) => {
     return client({
-       url: `answer/${id}/${answerId}`,
+       url: `answer/${email}/${answerId}`,
        method: 'get', 
     });
 }
