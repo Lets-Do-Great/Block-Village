@@ -79,7 +79,7 @@ const MissionContainer = () => {
     const likeMission = async () => {
         try{
             await dispatch(MissionAction.setLikeMission(
-                { email: userInfo.email, missionId:selectedMission.missionId, favorite:true }));
+                { email: userInfo.email, missionId:selectedMission.id, favorite:true }));
         } catch(e) {
             console.log(e);
         }
@@ -89,7 +89,7 @@ const MissionContainer = () => {
     const dislikeMission = async () => {
         try{
             await dispatch(MissionAction.setLikeMission(
-                { email: userInfo.email, missionId:selectedMission.missionId, favorite:false }));
+                { email: userInfo.email, missionId:selectedMission.id, favorite:false }));
         } catch(e) {
             console.log(e);
         }
@@ -97,10 +97,11 @@ const MissionContainer = () => {
 
     // 미션 참여 시작 요청
     const onParticipateMission = async () => {
+        console.log(selectedMission);
         try{
             await dispatch(MissionAction.setTodoMission(
-                { email: userInfo.email, missionId:selectedMission.missionId, todo:'todo' }));
-            getMission(selectedMission.missionId);
+                { email: userInfo.email, missionId:selectedMission.id, todo:'todo' }));
+            getMission(selectedMission.id);
         } catch(e) {
             console.log(e);
         }
@@ -110,7 +111,7 @@ const MissionContainer = () => {
     const onDeleteMission = async () => {
         try{
             await dispatch(MissionAction.deleteMission(
-                { email: userInfo.email, missionId:selectedMission.missionId }));
+                { email: userInfo.email, missionId:selectedMission.id }));
         } catch(e){
             console.log(e);
         }
