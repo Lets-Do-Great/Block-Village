@@ -53,6 +53,7 @@ public class Mission {
     private int endPositionX;
     private int endPositionY;
     private int people;
+    private String missionImg;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

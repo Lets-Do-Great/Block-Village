@@ -12,6 +12,7 @@ import com.ssafy.edu.repository.mission.MissionDifficultyJpaRepository;
 import com.ssafy.edu.repository.mission.MissionJpaRepository;
 import com.ssafy.edu.repository.mission.MissionFavoriteJpaRepository;
 import com.ssafy.edu.repository.mission.MissionTodoJpaRepository;
+import com.ssafy.edu.service.s3Service.s3ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -79,7 +80,7 @@ public class MissionServiceImpl implements MissionService {
                 .pageSize(missionList.getNumberOfElements())
                 .pageNumber(missionList.getNumber())
                 .pageTotalPages(missionList.getTotalPages())
-                .pageTotalElements((int)missionList.getTotalElements())
+                .pageTotalElements((int) missionList.getTotalElements())
                 .build();
         resultObject.add(pageModel);
         result.status = true;
@@ -97,7 +98,7 @@ public class MissionServiceImpl implements MissionService {
 
         if (missionOptional.isPresent()) {
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, missionId));
-            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(userEmail,missionId));
+            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(userEmail, missionId));
 
             findOneModel findOneModel = new findOneModel().builder()
                     .id(missionOptional.get().getId())
@@ -108,6 +109,7 @@ public class MissionServiceImpl implements MissionService {
                     .updated_at(missionOptional.get().getUpdatedAt())
                     .content(missionOptional.get().getContent())
                     .xmlCode(missionOptional.get().getXmlCode())
+                    .imageUrl(missionOptional.get().getMissionImg())
                     .difficulty(missionOptional.get().getDifficulty())
                     .likeCnt(missionOptional.get().getFavorite())
                     .peopleCnt(missionOptional.get().getPeople())
@@ -137,7 +139,7 @@ public class MissionServiceImpl implements MissionService {
 
             for (Mission mission : missionJpaRepository.findByUserEmailOrderByUpdatedAtDesc(userEmail)) {
                 findAllModel findAllModel = new findAllModel().builder()
-                       .id(mission.getId())
+                        .id(mission.getId())
                         .email(userOptional.get().getEmail())
                         .title(mission.getTitle())
                         .difficulty(mission.getDifficulty())
@@ -165,8 +167,8 @@ public class MissionServiceImpl implements MissionService {
 
         if (userOptional.isPresent()) {
             List<findAllModel> findAllModelList = new ArrayList<>();
-            List<MissionDoUsers> missionDoUsersList = missionTodoJpaRepository.findByUserEmailAndTodo(missionUserTodoRequest.getEmail(),missionUserTodoRequest.getTodo());
-            
+            List<MissionDoUsers> missionDoUsersList = missionTodoJpaRepository.findByUserEmailAndTodo(missionUserTodoRequest.getEmail(), missionUserTodoRequest.getTodo());
+
             for (MissionDoUsers missionDoUsers : missionDoUsersList) {
                 Mission mission = missionJpaRepository.findByIdOrderByUpdatedAtDesc(missionDoUsers.getMission().getId());
 
@@ -235,6 +237,7 @@ public class MissionServiceImpl implements MissionService {
                     .endPositionX(missionResult.getEndPositionX())
                     .endPositionY(missionResult.getEndPositionY())
                     .content(missionResult.getContent())
+                    .imageUrl(missionResult.getMissionImg())
                     .xmlCode(missionResult.getXmlCode())
                     .difficulty(missionResult.getDifficulty())
                     .likeCnt(missionResult.getFavorite())
@@ -266,7 +269,7 @@ public class MissionServiceImpl implements MissionService {
             mission.setUpdatedAt(now);
             Mission missionResult = missionJpaRepository.save(mission);
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionUpdateRequest.getEmail(), missionResult.getId()));
-            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionUpdateRequest.getEmail(),missionResult.getId()));
+            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionUpdateRequest.getEmail(), missionResult.getId()));
             findOneModel findOneModel = new findOneModel().builder()
                     .id(missionResult.getId())
                     .email(missionResult.getUser().getEmail())
@@ -277,6 +280,7 @@ public class MissionServiceImpl implements MissionService {
                     .content(missionResult.getContent())
                     .difficulty(missionResult.getDifficulty())
                     .likeCnt(missionResult.getFavorite())
+                    .imageUrl(missionResult.getMissionImg())
                     .startPositionX(missionResult.getStartPositionX())
                     .startPositionY(missionResult.getStartPositionY())
                     .endPositionX(missionResult.getEndPositionX())
@@ -336,7 +340,7 @@ public class MissionServiceImpl implements MissionService {
             }
             Optional<Mission> mission = missionJpaRepository.findById(missionLikeUsersResult.getMission().getId());
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(), missionLikeUsersResult.getMission().getId()));
-            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(),missionLikeUsersResult.getMission().getId()));
+            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(), missionLikeUsersResult.getMission().getId()));
             findOneModel findOneModel = new findOneModel().builder()
                     .id(mission.get().getId())
                     .email(mission.get().getUser().getEmail())
@@ -348,6 +352,7 @@ public class MissionServiceImpl implements MissionService {
                     .xmlCode(mission.get().getXmlCode())
                     .difficulty(mission.get().getDifficulty())
                     .likeCnt(mission.get().getFavorite())
+                    .imageUrl(mission.get().getMissionImg())
                     .peopleCnt(mission.get().getPeople())
                     .startPositionX(mission.get().getStartPositionX())
                     .startPositionY(mission.get().getStartPositionY())
@@ -376,7 +381,7 @@ public class MissionServiceImpl implements MissionService {
             }
             Optional<Mission> mission = missionJpaRepository.findById(missionLikeUsersResult.getMission().getId());
             Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(), missionLikeUsersResult.getMission().getId()));
-            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(),missionLikeUsersResult.getMission().getId()));
+            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(missionLikeUsersResult.getUser().getEmail(), missionLikeUsersResult.getMission().getId()));
             findOneModel findOneModel = new findOneModel().builder()
                     .id(mission.get().getId())
                     .email(mission.get().getUser().getEmail())
@@ -388,6 +393,7 @@ public class MissionServiceImpl implements MissionService {
                     .xmlCode(mission.get().getXmlCode())
                     .difficulty(mission.get().getDifficulty())
                     .likeCnt(mission.get().getFavorite())
+                    .imageUrl(mission.get().getMissionImg())
                     .peopleCnt(mission.get().getPeople())
                     .startPositionX(mission.get().getStartPositionX())
                     .startPositionY(mission.get().getStartPositionY())
@@ -503,6 +509,29 @@ public class MissionServiceImpl implements MissionService {
                 missionOptional.get().setPeople(missionDoUsersCalculation.size());
                 missionJpaRepository.save(missionOptional.get());
             }
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<MissionResponse> uploadMissionImage(String userEmail, Long missionId, String imagePath) {
+
+        ResponseEntity response;
+        MissionResponse result = new MissionResponse();
+
+        Optional<Mission> missionOptional = missionJpaRepository.findById(missionId);
+
+        if (missionOptional.isPresent()) {
+
+            Mission mission = missionOptional.get();
+            mission.setMissionImg("https://" + s3ServiceImpl.CLOUD_FRONT_DOMAIN_NAME + "/mission/" + imagePath);
+
+            missionJpaRepository.save(mission);
+            result.status = true;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
         }
         return response;
     }

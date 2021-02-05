@@ -20,6 +20,7 @@ public class findOneModel {
     private Date updated_at;
     private String content;
     private String xmlCode;
+    private String imageUrl;
     private int startPositionX;
     private int startPositionY;
     private int endPositionX;
