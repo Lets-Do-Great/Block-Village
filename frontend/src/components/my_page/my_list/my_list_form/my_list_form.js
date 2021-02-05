@@ -15,8 +15,8 @@ const MyListForm = ({ list, getList, getDetail, onOpenDetail }) => {
     return (<>
         { list.map(card => (
             <MyListCardForm 
-                key={card.missionId}
-                id={card.missionId}
+                key={card.id}
+                id={card.id}
                 title={card.title}
                 difficulty={card.difficulty}
                 likeCnt={card.likeCnt}

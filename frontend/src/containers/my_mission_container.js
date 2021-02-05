@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import MyDetailCardForm from '../components/my_page/my_list/my_datail_card_form/my_detail_card_form';
+import MyDetailCardForm from '../components/my_page/my_list/my_detail_card_form/my_detail_card_form';
 import MyListCategory from '../components/my_page/my_list/my_list_category/my_list_category';
 import MyListForm from '../components/my_page/my_list/my_list_form/my_list_form';
 import * as MissionAction from '../modules/mission';
+import * as AnswerAction from '../modules/answer';
 
 const MyMissionContainer = () => {
     const [ category, setCategory ] = useState('myMission');
@@ -12,9 +13,9 @@ const MyMissionContainer = () => {
     // store에 있는 state와 dispatch 가져오는 작업
     const userInfo = useSelector(state => state.user.userInfo);
     const missionList = useSelector(state => state.mission.missionList);
-    // const answerList = useSelector(state => state.mission.answerList);
+    const answerList = useSelector(state => state.answer.answerList);
     const selectedMission = useSelector(state => state.mission.selectedMission);
-    // const selectedAnswer = useSelector(state => state.mission.selectedAnswer);
+    const selectedAnswer = useSelector(state => state.answer.selectedAnswer);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -26,9 +27,9 @@ const MyMissionContainer = () => {
         if(category === 'myMission') {
             getMyMissionList();
         } else if(category === 'makingAnswer') {
-            getMissionList();
+            getMakingMissionList();
         } else if(category === 'myAnswer') {
-            // getMyAnswerList();
+            getMyAnswerList();
         }
     }, [ category ]);
 
@@ -56,6 +57,15 @@ const MyMissionContainer = () => {
         }
     }
 
+    // 내가 만든 답안 리스트 조회
+    const getMyAnswerList = async () => {
+        try{
+            await dispatch(AnswerAction.getMyAnswerList({ email: userInfo.email }));
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
     // 현재 선택한 미션 조회
     const getMission = async (id) => {
         try{
@@ -65,10 +75,20 @@ const MyMissionContainer = () => {
         }
     }
 
-    // 미션 전체 리스트 조회
-    const getMissionList = async () => {
+    // 현재 선택한 답안 조회
+    const getAnswer = async (id) => {
         try{
-            // await dispatch(MissionAction.getMissionList(search));
+            await dispatch(AnswerAction.getAnswer({ email: userInfo.email, answerId: id }));
+        }catch (e) {
+            console.log(e);
+        }
+    }
+
+    // 현재 유저의 진행중 미션 목록 조회
+    const getMakingMissionList = async () => {
+        try{
+            await dispatch(MissionAction.getMyTodoMissionList(
+                            { email: userInfo.email, todo:'todo'}));
         } catch(e) {
             console.log(e);
         }
@@ -76,24 +96,35 @@ const MyMissionContainer = () => {
 
     // 미션 수정 요청
     const onModifyMission = async () => {
-        // await dispatch(MissionAction.deleteMission(
-        //     { email: userInfo.email, missionId:selectedMission.missionId }));
+        console.log("미션 수정 페이지 이동");
+    }
+
+    // 답안 수정 요청
+    const onModifyAnswer = async () => {
+        console.log("답안 수정 페이지 이동");
     }
 
     // 미션 삭제 요청
     const onDeleteMission = async () => {
-        await dispatch(MissionAction.deleteMission(
-            { email: userInfo.email, missionId:selectedMission.missionId }));
+        try{
+            await dispatch(MissionAction.deleteMission(
+                { email: userInfo.email, missionId:selectedMission.id }));
+        } catch(e) {
+            console.log(e);
+        }
     }
-    
-    // 내가 만든 답안 리스트 조회
-    // const getMyAnswerList = async () => {
-    //     try{
-    //         await dispatch(AnswerAction.getMyAnswerList({ email: userInfo.email }));
-    //     } catch(e) {
-    //         console.log(e);
-    //     }
-    // }
+
+    // 답안 삭제 요청
+    const onDeleteAnswer = async () => {
+        console.log(selectedAnswer);
+        try{
+            await dispatch(AnswerAction.deleteAnswer(
+                { email: userInfo.email, answerId:selectedAnswer.id }));
+            getMyAnswerList();
+        } catch(e) {
+            console.log(e);
+        }
+    }
     
     return (<>
             
@@ -107,10 +138,10 @@ const MyMissionContainer = () => {
                         onCloseDetail={onCloseDetail}/> }
                 { category === 'myAnswer' && 
                     <MyDetailCardForm
-                        // detail={selectedAnswer}
-                        // onModify={onModifyMission}
-                        // onDelete={onDeleteMission}
-                        // onCloseDetail={onCloseDetail}
+                        detail={selectedAnswer}
+                        onModify={onModifyAnswer}
+                        onDelete={onDeleteAnswer}
+                        onCloseDetail={onCloseDetail}
                     /> }
             </> )
             : (<> 
@@ -126,8 +157,11 @@ const MyMissionContainer = () => {
                         onOpenDetail={onOpenDetail}/> }
                 { category === 'myAnswer' &&
                     <MyListForm
-                        // list={answerList}
-                        />
+                        list={answerList}
+                        getList={getMyAnswerList}
+                        getDetail={getAnswer}
+                        onDelete={onDeleteAnswer}
+                        onOpenDetail={onOpenDetail} />
                 }
             </>)
         }
