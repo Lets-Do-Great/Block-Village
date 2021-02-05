@@ -36,7 +36,8 @@ import java.util.ArrayList;
 @Entity
 public class User {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     private String email;
@@ -50,6 +51,13 @@ public class User {
     private String emailAuth;
 
     private int mileage;
+
+    @Column
+    private String fileName;
+    @Column(name="profile_image")
+    private String profileImage;
+
+    private boolean admin;
 
     private String introduction;
 
