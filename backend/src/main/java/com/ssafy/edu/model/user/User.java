@@ -1,14 +1,20 @@
 package com.ssafy.edu.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import com.ssafy.edu.model.board.Board;
+import com.ssafy.edu.model.board.BoardComment;
+import lombok.*;
+
+import com.ssafy.edu.model.block.BlockUsers;
+import com.ssafy.edu.model.challenge.ChallengeUser;
+
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 
 /*
 * id : users 테이블의 pk
@@ -22,10 +28,11 @@ import java.time.LocalDate;
 * joinDate : 회원가입 날짜
 * */
 
-@Data
+@Getter @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Entity
 public class User {
 
@@ -50,11 +57,20 @@ public class User {
     @Column(name="profile_image")
     private String profileImage;
 
-    private String introduction;
-
     private boolean admin;
 
-//    private int follower;
-//    private int following;
+    private String introduction;
+
+    @OneToMany(mappedBy = "user")
+    private List<Board> boardList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    List<BoardComment> boardCommentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    List<BlockUsers> blockUsersList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    List<ChallengeUser> challengeUserList = new ArrayList<>();
 
 }
