@@ -30,16 +30,9 @@ dependencies {
 	implementation 'org.jetbrains:annotations:20.1.0'
 
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.5.0'
 
 	compile group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
-	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-
-
-	// AWS s3
-	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.1.RELEASE'
-	// AWS SDK
-	compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.534'
 
 	compile('org.springframework.boot:spring-boot-starter-mustache')
 
@@ -48,8 +41,22 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 }
 
 test {
 	useJUnitPlatform()
+}
+
+bootRun {
+	String activeProfile = System.properties['spring.profiles.active']
+	systemProperty "spring.profiles.active", activeProfile
+}
+
+bootJar {
+	archiveBaseName = '-'
+	archiveFileName = 'backend.jar'
+	archiveVersion = "0.0.0"
 }
