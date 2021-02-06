@@ -1,11 +1,10 @@
-package com.ssafy.edu.controller.user;
+package com.ssafy.edu.controller.Challenge;
 
 
 import com.ssafy.edu.model.board.BoardResponse;
 import com.ssafy.edu.model.challenge.ChallengeResponse;
 import com.ssafy.edu.model.challenge.ChallengeUserRequest;
 import com.ssafy.edu.service.challenge.ChallengeServiceImpl;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

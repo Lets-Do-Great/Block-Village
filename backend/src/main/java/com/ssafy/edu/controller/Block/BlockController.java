@@ -1,4 +1,4 @@
-package com.ssafy.edu.controller.user;
+package com.ssafy.edu.controller.Block;
 
 
 import com.ssafy.edu.model.block.BlockBuyRequest;
