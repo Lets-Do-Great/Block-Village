@@ -27,6 +27,10 @@ const AnswerContainer = ({ match }) => {
         }
     }, [ selectedAnswer ]);
 
+    const closeDetail = () => {
+        setDetail(false);
+    }
+
     /*
     api 요청 보내는 함수
     */
@@ -137,7 +141,7 @@ const AnswerContainer = ({ match }) => {
                 setLike={likeAnswer}
                 setDislike={dislikeAnswer}
                 userInfo={userInfo.email}
-                setOpenDetail={setDetail}
+                closeDetail={closeDetail}
                 onDelete={deleteAnswer}/>
             <CommentForm
                 userInfo={userInfo.email}

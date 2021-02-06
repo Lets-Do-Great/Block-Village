@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MyDetailCardForm from '../components/my_page/my_list/my_detail_card_form/my_detail_card_form';
 import MyListCategory from '../components/my_page/my_list/my_list_category/my_list_category';
 import MyListForm from '../components/my_page/my_list/my_list_form/my_list_form';
+import ComponentDetailCardForm from '../components/list/component_detail_card_form/component_detail_card_form';
 import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
 
@@ -127,6 +128,30 @@ const MyMissionContainer = () => {
         }
     }
     
+    // 답안 좋아요 요청
+    const likeAnswer = async () => {
+        try{
+            await dispatch(AnswerAction.setLikeAnswer({
+                email: userInfo.email, answerId: selectedAnswer.id, favorite:true,
+            }))
+            getAnswer(selectedAnswer.id);
+        }catch(e) {
+            console.log(e);
+        }
+    };
+
+    // 답안 좋아요 취소 요청
+    const dislikeAnswer = async () => {
+        try{
+            await dispatch(AnswerAction.setLikeAnswer({
+                email: userInfo.email, answerId: selectedAnswer.id, favorite:false,
+            }))
+            getAnswer(selectedAnswer.id);
+        }catch(e) {
+            console.log(e);
+        }
+    };
+    
     return (<>
             
         { detailComponent
@@ -138,11 +163,15 @@ const MyMissionContainer = () => {
                         onDelete={onDeleteMission}
                         onCloseDetail={onCloseDetail}/> }
                 { category === 'myAnswer' && 
-                    <MyDetailCardForm
-                        detail={selectedAnswer}
-                        onModify={onModifyAnswer}
-                        onDelete={onDeleteAnswer}
-                        onCloseDetail={onCloseDetail}
+                    <ComponentDetailCardForm
+                        detail={selectedMission}
+                        setLike={likeAnswer}
+                        setDisLike={dislikeAnswer}
+                        userInfo={userInfo.email}
+                        closeDetail={onCloseDetail}
+
+                        onModify={onModifyMission}
+                        onDelete={onDeleteMission}
                     /> }
             </> )
             : (<> 
@@ -151,6 +180,7 @@ const MyMissionContainer = () => {
                 
                 { category !== 'myAnswer' &&
                     <MyListForm
+                        type={category}
                         list={missionList}
                         getList={getMyMissionList}
                         getDetail={getMission}
@@ -158,6 +188,7 @@ const MyMissionContainer = () => {
                         onOpenDetail={onOpenDetail}/> }
                 { category === 'myAnswer' &&
                     <MyListForm
+                        type={category}
                         list={answerList}
                         getList={getMyAnswerList}
                         getDetail={getAnswer}
