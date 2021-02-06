@@ -3,6 +3,7 @@ package com.ssafy.edu.service.user;
 import java.util.Date;
 import java.util.Map;
 
+import com.ssafy.edu.model.user.LoginResponse;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,16 +17,16 @@ public class JwtServiceImpl implements JwtService{
     @Value("${JWT.SECRET}")
     private String SECRET;
 
-    private Long expireMin = 5L;
+    private Long expireMin = 24L;
 
     @Override
-    public String createToken(String email) {
+    public String createToken(LoginResponse loginResponse) {
         JwtBuilder jwtBuilder = Jwts.builder();
 
         jwtBuilder.setHeaderParam("typ", "JWT")
                 .setSubject("Login Token")
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * expireMin))
-                .claim("email", email)
+                .claim("userInfo", loginResponse)
                 .signWith(SignatureAlgorithm.HS256, SECRET.getBytes());
 
         String jwt = jwtBuilder.compact();
