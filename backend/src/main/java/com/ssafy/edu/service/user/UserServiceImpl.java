@@ -95,7 +95,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<UserResponse> signUp(SignUpRequest signUpRequest){
 
-        ResponseEntity response;
         UserResponse result = new UserResponse();
 
         String key = userMailSendService.getKey(false, 20);
@@ -125,15 +124,14 @@ public class UserServiceImpl implements UserService {
 
             userMailSendService.mailSendWithUserKey(signUpRequest, key);
             result.status = true;
-            response = new ResponseEntity<>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
 
         }catch (MessagingException | MailException e){
             e.printStackTrace();
             result.status = false;
+        }finally {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
-
-        return response;
 
     }
     
