@@ -109,6 +109,7 @@ const MyMissionContainer = () => {
         try{
             await dispatch(MissionAction.deleteMission(
                 { email: userInfo.email, missionId:selectedMission.id }));
+            getMyMissionList();
         } catch(e) {
             console.log(e);
         }
