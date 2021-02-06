@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MyInfoModifyForm from './my_info_modify_form';
+import MyInfoModifyForm from '../my_info_modify_form/my_info_modify_form';
 
 const MyInfoModify = ({ modifyInfo, modifyInput, onChangeModify, setType }) => {
   // 비밀번호 일치하는지 확인하는 데이터

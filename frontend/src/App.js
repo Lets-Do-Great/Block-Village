@@ -11,6 +11,7 @@ import ChallengeContainer from './containers/challenge_container';
 import SubMain from './components/main/sub_main/sub_main';
 import TutorialSubmain from './components/blockly/tutorial/tutorial_submain/tutorial_submain';
 import MissionContainer from './containers/mission_container';
+import MyPageMain from './components/my_page/my_page_main/my_page_main';
 
 import TestMypage from './components/my_page/test_mypage';
 import MissionCreateSubmain from './components/blockly/mission_create/mission_create_submain/mission_create_submain';
@@ -60,8 +61,8 @@ function App() {
           <SubMain />
         </Route>
         <Route exact path="/my_page">
-          <TestMypage />
-          {/* <MyPageContainer /> */}
+          {/* <TestMypage /> */}
+          <MyPageMain />
         </Route>
         <Route exact path="/main">
           <Main />
