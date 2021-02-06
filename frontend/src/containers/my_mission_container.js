@@ -4,6 +4,7 @@ import MyDetailCardForm from '../components/my_page/my_list/my_detail_card_form/
 import MyListCategory from '../components/my_page/my_list/my_list_category/my_list_category';
 import MyListForm from '../components/my_page/my_list/my_list_form/my_list_form';
 import ComponentDetailCardForm from '../components/list/component_detail_card_form/component_detail_card_form';
+import CommentContainer from '../containers/comment_container';
 import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
 
@@ -162,7 +163,7 @@ const MyMissionContainer = () => {
                         onModify={onModifyMission}
                         onDelete={onDeleteMission}
                         onCloseDetail={onCloseDetail}/> }
-                { category === 'myAnswer' && 
+                { category === 'myAnswer' && <>
                     <ComponentDetailCardForm
                         detail={selectedMission}
                         setLike={likeAnswer}
@@ -172,7 +173,12 @@ const MyMissionContainer = () => {
 
                         onModify={onModifyMission}
                         onDelete={onDeleteMission}
-                    /> }
+                    /> 
+                    <CommentContainer
+                        userInfo={userInfo.email}
+                        type="answer"
+                        selectedId={selectedAnswer.id}/>
+                </>}
             </> )
             : (<> 
                 <MyListCategory
