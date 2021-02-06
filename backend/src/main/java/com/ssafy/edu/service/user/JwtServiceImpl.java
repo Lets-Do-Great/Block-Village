@@ -41,14 +41,8 @@ public class JwtServiceImpl implements JwtService{
     }
 
     //	JWT Token을 분석해서 필요한 정보를 반환.
-    public Map<String, Object> getInfo(String jwt) {
-        Jws<Claims> claims = null;
-        try {
-            claims = Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(jwt);
-        } catch (final Exception e) {
-            throw new RuntimeException();
-        }
+    public Map<String, Object> getInfo(String jwt) throws Exception {
+        Jws<Claims> claims = Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(jwt);
         return claims.getBody();
     }
-
 }

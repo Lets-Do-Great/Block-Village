@@ -3,12 +3,15 @@ package com.ssafy.edu.config;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ssafy.edu.model.user.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.service.user.JwtServiceImpl;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+
+import java.util.Map;
 
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
@@ -23,21 +26,38 @@ public class JwtInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         String givenToken = request.getHeader("token");
-        System.out.println(givenToken);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        JSONObject obj = new JSONObject();
 
         if(givenToken != null && givenToken.length()>0){
 
-            Object email = jwtServiceImpl.getInfo(givenToken).get("email");
+            try {
 
-            User user = userJpaRepository.findByEmail(email.toString())
-                .orElseThrow(() -> new IllegalArgumentException(("존재하지 않는 유저입니다.")));
+                Map<String, Object> info = jwtServiceImpl.getInfo(givenToken);
 
-            jwtServiceImpl.checkValid(givenToken);
-            return true;
+                ObjectMapper objectMapper = new ObjectMapper();
+                Map<String, String> result = objectMapper.convertValue(info.get("userInfo"), Map.class);
 
-        }else {
-            throw new RuntimeException("인증 토큰이 없습니다.");
+                if (result != null && userJpaRepository.findByEmail(result.get("email")).isPresent()) {
+                    jwtServiceImpl.checkValid(givenToken);
+                    return true;
+                }
+
+            } catch (final Exception e){
+                e.printStackTrace();
+                obj.put("status", false);
+                response.getWriter().print(obj.toString());
+                response.getWriter().flush();
+                return false;
+            }
         }
 
+        obj.put("status", "false");
+        response.getWriter().print(obj.toString());
+        response.getWriter().flush();
+        return false;
     }
 }
