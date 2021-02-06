@@ -2,6 +2,7 @@ package com.ssafy.edu.model.user;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -24,7 +25,6 @@ public class UpdateRequest {
     @NotNull
     String nickname;
 
-    //    private File?String profileImage;
     @ApiModelProperty(required = true)
     @NotNull
     String introduction;

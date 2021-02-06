@@ -191,7 +191,6 @@ export default function MissionMaze() {
   function workspaceDidChange(workspace) {
     // save 형태
     setInitialXml(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)))
-    // document.getElementById('generated-xml').innerText = newXml;
 
     // playground 형태로 예상 중
     setJavascript(Blockly.JavaScript.workspaceToCode(workspace))

@@ -1,0 +1,15 @@
+가로px * 세로px
+
+background image (큰거) : 5760 * 1080
+background image (여러개) : 1920 * 1080
+board : 300 * 270 
+challenge : 590 * 560
+logout : 270 * 290 
+make mission : 500 * 480
+my page : 510 * 430
+participate mission : 440 * 420
+service : 460 * 460
+store : 440 * 530
+tutorial : 800 * 420
+
+tutorial_playground_bg: 420 * 420

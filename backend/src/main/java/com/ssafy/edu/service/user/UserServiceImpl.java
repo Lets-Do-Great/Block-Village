@@ -1,10 +1,9 @@
 package com.ssafy.edu.service.user;
 
-import com.ssafy.edu.model.user.SignUpRequest;
-import com.ssafy.edu.model.user.UpdateRequest;
-import com.ssafy.edu.model.user.User;
-import com.ssafy.edu.model.user.UserResponse;
+import com.amazonaws.services.xray.model.Http;
+import com.ssafy.edu.model.user.*;
 import com.ssafy.edu.repository.UserJpaRepository;
+import com.ssafy.edu.service.S3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +11,15 @@ import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private S3Service s3Service;
 
     @Autowired
     private UserJpaRepository userJpaRepository;
@@ -26,27 +29,50 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private EncryptService encryptService;
-    
-    /* 로그인 */
-    @Override
-    public ResponseEntity<UserResponse> findByEmailAndPassword(String email, String password){
 
-        ResponseEntity response;
+    @Autowired
+    private JwtServiceImpl jwtServiceImpl;
+    
+    /* 로그인 - JWT 토큰 발급 */
+    @Override
+    public ResponseEntity<UserResponse> login(String email, String password){
+
         UserResponse result = new UserResponse();
 
         Optional<User> userOptional = userJpaRepository.findByEmail(email);
-        boolean match = encryptService.isMatch(password, userOptional.get().getPassword());
+        if(userOptional.isPresent()) {
+            boolean match = encryptService.isMatch(password, userOptional.get().getPassword());
 
-        if(match && userOptional.isPresent() && userOptional.get().getEmailAuth().equals("true")){
-            result.status = true;
-            result.data = userOptional.get();
-            response = new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
+            if (match && userOptional.isPresent() && userOptional.get().getEmailAuth().equals("true")) {
+
+
+                LoginResponse loginResponse = LoginResponse.builder()
+                        .email(userOptional.get().getEmail())
+                        .nickname(userOptional.get().getNickname())
+                        .mileage(userOptional.get().getMileage())
+                        .introduction(userOptional.get().getIntroduction())
+                        .admin(userOptional.get().isAdmin())
+                        .profileImage(userOptional.get().getProfileImage())
+                        .build();
+
+                String token = jwtServiceImpl.createToken(loginResponse);
+
+                Map<String, Object> map = new HashMap<>();
+                map.put("userInfo", loginResponse);
+                map.put("token", token);
+
+                result.status = true;
+                result.data = map;
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }else {
+                result.status = false;
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }
+
+        }else {
             result.status = false;
-            response = new ResponseEntity<>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
-
-        return response;
     }
     
     /* 사용자 삭제 */
@@ -73,7 +99,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<UserResponse> signUp(SignUpRequest signUpRequest){
 
-        ResponseEntity response;
         UserResponse result = new UserResponse();
 
         String key = userMailSendService.getKey(false, 20);
@@ -103,15 +128,14 @@ public class UserServiceImpl implements UserService {
 
             userMailSendService.mailSendWithUserKey(signUpRequest, key);
             result.status = true;
-            response = new ResponseEntity<>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
 
         }catch (MessagingException | MailException e){
             e.printStackTrace();
             result.status = false;
+        }finally {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
-
-        return response;
 
     }
     
@@ -154,6 +178,25 @@ public class UserServiceImpl implements UserService {
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }
         return response;
+
+    }
+
+    public void updateFile(String email, String imagePath){
+
+        ResponseEntity response;
+        UserResponse result = new UserResponse();
+
+        Optional<User> userOptional = userJpaRepository.findByEmail(email);
+
+        if(userOptional.isPresent()){
+
+            User user = userOptional.get();
+            user.setFileName(imagePath);
+            user.setProfileImage("https://"+s3Service.CLOUD_FRONT_DOMAIN_NAME+ "/profile/" + imagePath);
+
+            User save = userJpaRepository.save(user);
+
+        }
 
     }
     
