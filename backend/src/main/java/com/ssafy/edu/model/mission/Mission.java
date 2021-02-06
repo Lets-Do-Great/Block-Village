@@ -2,6 +2,7 @@ package com.ssafy.edu.model.mission;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.ssafy.edu.model.answer.Answer;
 import com.ssafy.edu.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -61,12 +62,24 @@ public class Mission {
 
     @JsonBackReference
     @ManyToOne
+
     @JoinColumn(name="user_id")
     private User user;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "mission")
+    @OneToMany(mappedBy = "mission", cascade = {CascadeType.ALL})
     private List<MissionFavorite> missionLikeUsersList = new ArrayList<>();
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "mission", cascade = {CascadeType.ALL})
+    private List<MissionDifficulty> missionDifficultyList = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "mission", cascade = {CascadeType.ALL})
+    private List<MissionDoUsers> missionDoUsersList = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "mission", cascade = {CascadeType.ALL})
+    private List<Answer> answerList = new ArrayList<>();
 
 }

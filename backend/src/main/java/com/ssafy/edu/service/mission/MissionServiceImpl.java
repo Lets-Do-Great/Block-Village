@@ -70,6 +70,7 @@ public class MissionServiceImpl implements MissionService {
                     .title(mission.getTitle())
                     .difficulty(mission.getDifficulty())
                     .likeCnt(mission.getFavorite())
+                    .imageUrl(mission.getMissionImg())
                     .peopleCnt(mission.getPeople())
                     .build();
             findAllModelList.add(findAllModel);
@@ -142,6 +143,7 @@ public class MissionServiceImpl implements MissionService {
                         .id(mission.getId())
                         .email(userOptional.get().getEmail())
                         .title(mission.getTitle())
+                        .imageUrl(mission.getMissionImg())
                         .difficulty(mission.getDifficulty())
                         .likeCnt(mission.getFavorite())
                         .peopleCnt(mission.getPeople())
@@ -176,6 +178,7 @@ public class MissionServiceImpl implements MissionService {
                         .id(mission.getId())
                         .email(userOptional.get().getEmail())
                         .title(mission.getTitle())
+                        .imageUrl(mission.getMissionImg())
                         .difficulty(mission.getDifficulty())
                         .likeCnt(mission.getFavorite())
                         .peopleCnt(mission.getPeople())
@@ -524,9 +527,10 @@ public class MissionServiceImpl implements MissionService {
         if (missionOptional.isPresent()) {
 
             Mission mission = missionOptional.get();
-            mission.setMissionImg("https://" + s3ServiceImpl.CLOUD_FRONT_DOMAIN_NAME + "/mission/" + imagePath);
+            mission.setMissionImg("https://" + s3ServiceImpl.CLOUD_FRONT_DOMAIN_NAME + "/" + imagePath);
 
             missionJpaRepository.save(mission);
+
             result.status = true;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {

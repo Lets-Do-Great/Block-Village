@@ -92,7 +92,7 @@ public class MissionController {
     }
 
     @ApiOperation(value = "미션 이미지 저장", notes = "미션의 이미지를 저장합니다.")
-    @PostMapping("/img/{userEmail}/{missionId}")
+    @PutMapping("/img/{userEmail}/{missionId}")
     public ResponseEntity<MissionResponse> uploadMissionImage(@RequestParam MultipartFile file, @PathVariable("userEmail") String userEmail, @PathVariable("missionId") Long missionId) throws IOException {
         String imagePath = s3Service.upload(file);
         return missionService.uploadMissionImage(userEmail, missionId, imagePath);

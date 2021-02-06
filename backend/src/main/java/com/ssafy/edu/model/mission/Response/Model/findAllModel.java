@@ -13,6 +13,7 @@ public class findAllModel {
     private Long id;
     private String email;
     private String title;
+    private String imageUrl;
     private double difficulty;
     private int likeCnt;
     private int peopleCnt;

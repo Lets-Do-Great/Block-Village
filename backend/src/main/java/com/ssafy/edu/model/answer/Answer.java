@@ -50,10 +50,10 @@ public class Answer {
     private Mission mission;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "answer")
+    @OneToMany(mappedBy = "answer", cascade = {CascadeType.ALL})
     private List<AnswerFavorite> answerFavoriteList = new ArrayList<>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "answer")
+    @OneToMany(mappedBy = "answer", cascade = {CascadeType.ALL})
     private List<AnswerComment> answerCommentList = new ArrayList<>();
 }
