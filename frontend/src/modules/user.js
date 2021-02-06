@@ -6,6 +6,7 @@ import { updateObject } from '../service/common';
 // user 관련 요청 액션 타입
 const LOG_IN = 'user/LOG_IN';
 const LOG_OUT = 'user/LOG_OUT';
+const GET_USER_INFO = 'user/GET_USER_INFO';
 const SIGN_UP = 'user/SIGN_UP';
 const MODIFY_INFO = 'user/MODIFY_INFO';
 const DELETE_INFO = 'user/DELETE_INFO';
@@ -19,6 +20,10 @@ export const logIn = createAction(
 
 export const logOut = createAction(
     LOG_OUT
+);
+
+export const getUserInfo = createAction(
+    GET_USER_INFO,
 );
 
 export const signUp = createAction(
@@ -52,13 +57,20 @@ const initialState = {
         follower: '',
         following: '',
         introduction: '',
-        token: '',
     },
 };
 
 // reducer 함수
 const userReducer = handleActions({
-    [LOG_OUT]: (state, action) => updateObject(state, { ...initialState,}),
+    [LOG_OUT]: (state, action) => {
+        localStorage.removeItem('token');
+        return updateObject(state, { ...initialState,})
+    },
+    [GET_USER_INFO]: (state, action) => {
+        return updateObject(state, { 
+            ...initialState,
+            userInfo: { ...action.payload, }})
+    },
 }, initialState);
 
 // reducer 함수로 요청된 액션들을 처리하기 위한 함수
@@ -70,10 +82,12 @@ export default applyPenders(userReducer, [
 
             if(response.status === 200){
                 if(response.data.status) { // 로그인 성공
+                    localStorage.setItem('token', response.data.data.token);
+
                     return updateObject(state, {
                         ...state,
                         userInfo:{
-                            ...response.data.data,
+                            ...response.data.data.userInfo,
                             logIn: true,
                         }
                     });
@@ -90,28 +104,6 @@ export default applyPenders(userReducer, [
             return updateObject(state, { });
         }
     },
-    // {
-    //     type: LOG_OUT,
-    //     onSuccess: (state, action) => {
-    //         const response = action.payload;
-
-    //         if(response.status === 200){
-    //             if(response.data.status){
-    //                 return updateObject(state, {
-    //                     ...initialState,
-    //                 });
-    //             } else {
-    //                 alert("현재 로그아웃 요청에 문제가 발생하였습니다.");
-    //             }
-    //         } else { // 에러 발생
-    //             console.log(action.payload.status);
-    //         }
-    //         return updateObject(state, state);
-    //     },
-    //     onFailure: (state, action) => {
-    //         return updateObject(state, state);
-    //     }
-    // },
     {
         type: SIGN_UP,
         onSuccess: (state, action) => {

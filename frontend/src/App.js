@@ -1,5 +1,6 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 import styles from './App.module.css';
 
@@ -17,10 +18,41 @@ import MissionDoSubmain from './components/blockly/mission_do/mission_do_submain
 import EditorMissionContainer from './containers/editor_mission_container';
 import AnswerContainer from './containers/answer_container';
 
+import UserInfoFromToken from './containers/user_info_from_token';
 
 function App() {
+  const history = useHistory();
+  const [ userInfoFromToken, setUserInfoFromToken ] = useState({});
+  const [ callAction, setCallAction ] = useState(false);
+
+  useEffect(() => {    
+    const token = localStorage.getItem('token');
+
+    if(token){
+      const tokenDecode = jwt_decode(token);
+      const { exp, userInfo } = tokenDecode;
+
+      if( exp > new Date().getTime() / 1000 ) {
+        setUserInfoFromToken(userInfo);
+      } else {
+        history.push('/');
+      }
+    } else{
+      history.push('/');
+    }
+  }, []);
+
+  useEffect(() => {
+    setCallAction(true);
+  }, [ userInfoFromToken] );
+
   return (
     <div className={styles.app}>
+      { callAction && 
+          <UserInfoFromToken 
+                userInfo={userInfoFromToken}
+                setCallAction={setCallAction}/> 
+      }
 
       <Switch>
 
