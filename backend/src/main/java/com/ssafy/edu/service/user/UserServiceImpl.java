@@ -37,7 +37,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<UserResponse> login(String email, String password){
 
-        ResponseEntity response;
         UserResponse result = new UserResponse();
 
         Optional<User> userOptional = userJpaRepository.findByEmail(email);
@@ -46,7 +45,6 @@ public class UserServiceImpl implements UserService {
 
             if (match && userOptional.isPresent() && userOptional.get().getEmailAuth().equals("true")) {
 
-                String token = jwtServiceImpl.createToken(email);
 
                 LoginResponse loginResponse = LoginResponse.builder()
                         .email(userOptional.get().getEmail())
@@ -55,20 +53,26 @@ public class UserServiceImpl implements UserService {
                         .introduction(userOptional.get().getIntroduction())
                         .admin(userOptional.get().isAdmin())
                         .profileImage(userOptional.get().getProfileImage())
-//                    .follower(userOptional.get().getFollower())
-//                    .following(userOptional.get().getFollowing())
-                        .token(token)
                         .build();
 
-                result.status = true;
-                result.data = loginResponse;
-                response = new ResponseEntity<>(result, HttpStatus.OK);
-            }
-        }
-        result.status = false;
-        response = new ResponseEntity<>(result, HttpStatus.OK);
+                String token = jwtServiceImpl.createToken(loginResponse);
 
-        return response;
+                Map<String, Object> map = new HashMap<>();
+                map.put("userInfo", loginResponse);
+                map.put("token", token);
+
+                result.status = true;
+                result.data = map;
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }else {
+                result.status = false;
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }
+
+        }else {
+            result.status = false;
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
     }
     
     /* 사용자 삭제 */

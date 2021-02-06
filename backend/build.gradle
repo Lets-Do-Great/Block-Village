@@ -39,6 +39,8 @@ dependencies {
 
 	compile('org.springframework.boot:spring-boot-starter-mustache')
 
+	compile group: 'org.json', name: 'json', version: '20090211'
+
 	// AWS s3
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.1.RELEASE'
 	// AWS SDK
