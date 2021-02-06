@@ -9,7 +9,7 @@ import client from './client';
 // 로그인 정보 확인
 export const logIn = ({ email, password }) => {
     return client({
-        url: `users/login`,
+        url: `users/do/login`,
         method: 'post',
         data: { email, password },
     });
@@ -19,7 +19,7 @@ export const logIn = ({ email, password }) => {
 export const setUserInfo = (
     { emailId, emailSite, nickname, password }) => {    
         return client({
-            url: `users`,
+            url: `users/do`,
             method: 'post',
             data: { emailId, emailSite, nickname, password },
         }
@@ -27,7 +27,7 @@ export const setUserInfo = (
 }
 
 // 회원 정보 조회
-export const getUserInfo = ( email ) => {
+export const getUserInfo = ( email, token ) => {
     return client({
        url: `users/${email}`,
        method: 'get', 
@@ -56,7 +56,7 @@ export const deleteUserInfo = ( email ) => {
 // 비밀번호 찾기
 export const findPW = ( email ) => {
     return client({
-        url: `users/${email}`,
+        url: `users/do/${email}`,
         method: 'post',
     })
 }

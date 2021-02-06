@@ -52,6 +52,7 @@ const initialState = {
         follower: '',
         following: '',
         introduction: '',
+        token: '',
     },
 };
 
