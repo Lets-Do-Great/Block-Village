@@ -9,6 +9,7 @@ const client = axios.create();
 
 client.defaults.baseURL = 'http://localhost:8080/';
 
-client.defaults.headers.common['Authorization'] = '';
+client.defaults.headers.common['token'] = ``;
+client.defaults.headers.common['Content-Type'] = `application/json`;
 
 export default client;
