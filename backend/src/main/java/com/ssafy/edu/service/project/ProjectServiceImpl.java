@@ -4,6 +4,10 @@ import com.ssafy.edu.model.project.Project;
 import com.ssafy.edu.model.project.ProjectComment;
 import com.ssafy.edu.model.project.ProjectFavorite;
 import com.ssafy.edu.model.project.Request.*;
+import com.ssafy.edu.model.project.Response.Model.findAllCommentModel;
+import com.ssafy.edu.model.project.Response.Model.findAllModel;
+import com.ssafy.edu.model.project.Response.Model.findOneModel;
+import com.ssafy.edu.model.project.Response.Model.pageModel;
 import com.ssafy.edu.model.project.Response.ProjectCommentResponse;
 import com.ssafy.edu.model.project.Response.ProjectFavoriteResponse;
 import com.ssafy.edu.model.project.Response.ProjectPageResponse;
@@ -57,7 +61,32 @@ public class ProjectServiceImpl implements ProjectService{
                 projectList = projectJpaRepository.findByUserNicknameContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),3, Sort.by(projectSearchTypeRequest.getSearchType()).descending()));
             }
         }
-        resultObject.add(projectList);
+        List<findAllModel> findAllModelList = new ArrayList<>();
+        for(Project project : projectList){
+            findAllModel findModel = new findAllModel().builder()
+                    .id(project.getId())
+                    .email(project.getUser().getEmail())
+                    .title(project.getTitle())
+                    .blockCnt(project.getBlockCnt())
+                    .imageUrl(project.getProjectImg())
+                    .readCnt(project.getView())
+                    .likeCnt(project.getFavorite())
+                    .commentCnt(project.getProjectCommentList().size())
+                    .build();
+
+            findAllModelList.add(findModel);
+        }
+
+        pageModel pageModel = new pageModel().builder()
+                .pageisFirst(projectList.isFirst())
+                .pageSize(projectList.getNumberOfElements())
+                .pageNumber(projectList.getNumber())
+                .pageTotalPages(projectList.getTotalPages())
+                .pageTotalElements((int)projectList.getTotalElements())
+                .build();
+        resultObject.add(findAllModelList);
+        resultObject.add(pageModel);
+
         result.status = true;
         result.data = resultObject;
         response = new ResponseEntity<>(result, HttpStatus.OK);
@@ -69,13 +98,35 @@ public class ProjectServiceImpl implements ProjectService{
         ResponseEntity response;
         ProjectResponse result = new ProjectResponse();
         Optional<Project> projectOptional = projectJpaRepository.findById(projectId);
+        Optional<User> userOptional = userJpaRepository.findByEmail(userEmail);
 
-        if(projectOptional.isPresent()){
+        if(projectOptional.isPresent()&userOptional.isPresent()){
+
             projectOptional.get().setView(projectOptional.get().getView()+1);
-            Project proejct = projectJpaRepository.save(projectOptional.get());
+            Project project = projectJpaRepository.save(projectOptional.get());
+
+            Optional<ProjectFavorite> projectFavorite = Optional.ofNullable(projectFavoriteJpaRepository.findByUserEmailAndProjectId(userOptional.get().getEmail(),project.getId()));
+
+            findOneModel findOneModel = new findOneModel().builder()
+                    .id(project.getId())
+                    .email(project.getUser().getEmail())
+                    .nickname(project.getUser().getNickname())
+                    .title(project.getTitle())
+                    .blockCnt(project.getBlockCnt())
+                    .created_at(project.getCreatedAt())
+                    .updated_at(project.getUpdatedAt())
+                    .content(project.getContent())
+                    .imageUrl(project.getProjectImg())
+                    .javascriptCode(project.getJavascriptCode())
+                    .xmlCode(project.getXmlCode())
+                    .readCnt(project.getView())
+                    .likeCnt(project.getFavorite())
+                    .commentCnt(project.getProjectCommentList().size())
+                    .favorite((projectFavorite.orElseGet(ProjectFavorite::new).isFavorite()))
+                    .build();
 
             result.status = true;
-            result.data = proejct;
+            result.data = findOneModel;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
@@ -85,13 +136,33 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
-    public ResponseEntity<ProjectResponse> findGetOneByUserId(String userEmail) {
+    public ResponseEntity<ProjectResponse> findGetByUserId(String userEmail) {
         ResponseEntity response;
         ProjectResponse result = new ProjectResponse();
+
         Optional<User> userOptional = userJpaRepository.findByEmail(userEmail);
+
         if(userOptional.isPresent()){
+            List<findAllModel> findAllModelList = new ArrayList<>();
+            List<Project> projectList = projectJpaRepository.findByUserEmailOrderByUpdatedAtDesc(userOptional.get().getEmail());
+
+            for(Project project:projectList){
+                findAllModel findModel = new findAllModel().builder()
+                        .id(project.getId())
+                        .email(project.getUser().getEmail())
+                        .title(project.getTitle())
+                        .blockCnt(project.getBlockCnt())
+                        .imageUrl(project.getProjectImg())
+                        .readCnt(project.getView())
+                        .likeCnt(project.getFavorite())
+                        .commentCnt(project.getProjectCommentList().size())
+                        .build();
+
+                findAllModelList.add(findModel);
+            }
+
             result.status = true;
-            result.data = projectJpaRepository.findByUserEmailOrderByUpdatedAtDesc(userOptional.get().getEmail());
+            result.data = findAllModelList;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
@@ -105,7 +176,7 @@ public class ProjectServiceImpl implements ProjectService{
         ResponseEntity response;
         ProjectResponse result = new ProjectResponse();
         Optional<User> userOptional = userJpaRepository.findByEmail(projectSignUpRequest.getEmail());
-        System.out.println("userOptional = " + userOptional.get().toString());
+
         if(userOptional.isPresent()){
             Date now = new Date(System.currentTimeMillis());
             Project project = new Project().builder()
@@ -122,9 +193,28 @@ public class ProjectServiceImpl implements ProjectService{
                     .build();
 
             Project projectResult = projectJpaRepository.save(project);
+            Optional<ProjectFavorite> projectFavorite = Optional.ofNullable(projectFavoriteJpaRepository.findByUserEmailAndProjectId(userOptional.get().getEmail(), projectResult.getId()));
+
+            findOneModel findOneModel = new findOneModel().builder()
+                    .id(projectResult.getId())
+                    .email(projectResult.getUser().getEmail())
+                    .nickname(projectResult.getUser().getNickname())
+                    .title(projectResult.getTitle())
+                    .blockCnt(projectResult.getBlockCnt())
+                    .created_at(projectResult.getCreatedAt())
+                    .updated_at(projectResult.getUpdatedAt())
+                    .content(projectResult.getContent())
+                    .imageUrl(projectResult.getProjectImg())
+                    .javascriptCode(projectResult.getJavascriptCode())
+                    .xmlCode(projectResult.getXmlCode())
+                    .readCnt(projectResult.getView())
+                    .likeCnt(projectResult.getFavorite())
+                    .commentCnt(projectResult.getProjectCommentList().size())
+                    .favorite((projectFavorite.orElseGet(ProjectFavorite::new).isFavorite()))
+                    .build();
 
             result.status = true;
-            result.data = projectResult;
+            result.data = findOneModel;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
@@ -151,8 +241,28 @@ public class ProjectServiceImpl implements ProjectService{
             project.setUpdatedAt(now);
 
             Project projectResult = projectJpaRepository.save(project);
+            Optional<ProjectFavorite> projectFavorite = Optional.ofNullable(projectFavoriteJpaRepository.findByUserEmailAndProjectId(projectResult.getUser().getEmail(), projectResult.getId()));
+
+            findOneModel findOneModel = new findOneModel().builder()
+                    .id(projectResult.getId())
+                    .email(projectResult.getUser().getEmail())
+                    .nickname(projectResult.getUser().getNickname())
+                    .title(projectResult.getTitle())
+                    .blockCnt(projectResult.getBlockCnt())
+                    .created_at(projectResult.getCreatedAt())
+                    .updated_at(projectResult.getUpdatedAt())
+                    .content(projectResult.getContent())
+                    .imageUrl(projectResult.getProjectImg())
+                    .javascriptCode(projectResult.getJavascriptCode())
+                    .xmlCode(projectResult.getXmlCode())
+                    .readCnt(projectResult.getView())
+                    .likeCnt(projectResult.getFavorite())
+                    .commentCnt(projectResult.getProjectCommentList().size())
+                    .favorite((projectFavorite.orElseGet(ProjectFavorite::new).isFavorite()))
+                    .build();
+
             result.status = true;
-            result.data = projectResult;
+            result.data = findOneModel;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
@@ -234,11 +344,25 @@ public class ProjectServiceImpl implements ProjectService{
     public ResponseEntity<ProjectCommentResponse> projectGetComment(Long projectId) {
         ResponseEntity response;
         ProjectCommentResponse result = new ProjectCommentResponse();
+
         List<ProjectComment> projectCommentList = projectCommentJpaRepository.findByProjectId(projectId);
 
         if(projectCommentList.size()>=0){
+            List<findAllCommentModel> findAllCommentModelList = new ArrayList<>();
+
+            for(ProjectComment projectComment : projectCommentList){
+                findAllCommentModel findAllCommentModel = new findAllCommentModel().builder()
+                        .id(projectComment.getId())
+                        .email(projectComment.getUser().getEmail())
+                        .nickname(projectComment.getUser().getNickname())
+                        .comment(projectComment.getComment())
+                        .updated_at(projectComment.getUpdatedAt())
+                        .build();
+                findAllCommentModelList.add(findAllCommentModel);
+            }
+
             result.status = true;
-            result.data = projectCommentList;
+            result.data = findAllCommentModelList;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
@@ -264,10 +388,9 @@ public class ProjectServiceImpl implements ProjectService{
                     .updatedAt(now)
                     .build();
 
-            ProjectComment projectCommentResult = projectCommentJpaRepository.save(projectComment);
+            projectCommentJpaRepository.save(projectComment);
 
             result.status = true;
-            result.data = projectCommentResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
@@ -294,10 +417,9 @@ public class ProjectServiceImpl implements ProjectService{
                     .updatedAt(now)
                     .build();
 
-            ProjectComment projectCommentResult = projectCommentJpaRepository.save(projectComment);
+            projectCommentJpaRepository.save(projectComment);
 
             result.status = true;
-            result.data = projectCommentResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;

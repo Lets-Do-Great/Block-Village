@@ -27,11 +27,14 @@ public class Project {
     private Long id;
     private String title;
     private String content;
+    @Column(columnDefinition = "TEXT")
     private String xmlCode;
+    @Column(columnDefinition = "TEXT")
     private String javascriptCode;
     private int favorite;
     private int view;
     private int blockCnt;
+    private String projectImg;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -44,9 +47,9 @@ public class Project {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "project" ,cascade = {CascadeType.ALL})
-    private List<ProjectFavorite> projectFavorites = new ArrayList<>();
+    private List<ProjectFavorite> projectFavoriteList = new ArrayList<>();
 
     @JsonManagedReference
     @OneToMany(mappedBy = "project",cascade = {CascadeType.ALL})
-    private List<ProjectComment> projectComments = new ArrayList<>();
+    private List<ProjectComment> projectCommentList = new ArrayList<>();
 }

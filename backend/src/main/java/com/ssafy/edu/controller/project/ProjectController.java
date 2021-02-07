@@ -39,7 +39,7 @@ public class ProjectController {
     @ApiOperation(value = "내가 만든 작품 조회", notes = "")
     @GetMapping("/uesr/{userEmail}")
     public ResponseEntity<ProjectResponse> GetUserProject(@PathVariable("userEmail")String userEmail) {
-        return projectService.findGetOneByUserId(userEmail);
+        return projectService.findGetByUserId(userEmail);
     }
     @ApiOperation(value = "작품 제작하기", notes = "")
     @PostMapping("/{userEmail}")

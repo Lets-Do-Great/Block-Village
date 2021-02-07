@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 public interface ProjectService {
     public ResponseEntity<ProjectPageResponse> findAll(ProjectSearchTypeRequest projectSearchTypeRequest);
     public ResponseEntity<ProjectResponse> findGetOne(String userEmail, Long projectId);
-    public ResponseEntity<ProjectResponse> findGetOneByUserId(String userEmail);
+    public ResponseEntity<ProjectResponse> findGetByUserId(String userEmail);
     public ResponseEntity<ProjectResponse> signUpProject(ProjectSignUpRequest projectSignUpRequest);
     public ResponseEntity<ProjectResponse> updateProject(ProjectUpdateRequest projectUpdateRequest);
     public ResponseEntity<ProjectResponse> deleteProject(ProjectDeleteRequest projectDeleteRequest);
