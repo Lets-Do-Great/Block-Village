@@ -19,4 +19,5 @@ public interface ProjectService {
     public ResponseEntity<ProjectCommentResponse> projectsignUpComment(ProjectCommentSignUpRequest projectCommentSignUpRequest);
     public ResponseEntity<ProjectCommentResponse> projectupdateComment(ProjectCommentUpdateRequest projectCommentUpdateRequest);
     public ResponseEntity<ProjectCommentResponse> projectdeleteComment(ProjectCommentDeleteRequest projectCommentDeleteRequest);
+    public ResponseEntity<ProjectResponse> uploadMissionImage(String userEmail, Long projectId, String imagePath);
 }

@@ -17,6 +17,7 @@ import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.repository.project.ProjectCommentJpaRepository;
 import com.ssafy.edu.repository.project.ProjectFavoriteJpaRepository;
 import com.ssafy.edu.repository.project.ProjectJpaRepository;
+import com.ssafy.edu.service.s3Service.s3ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -50,15 +51,15 @@ public class ProjectServiceImpl implements ProjectService{
 
         if(projectSearchTypeRequest.getKeywordType().equals("title")){
             if(projectSearchTypeRequest.getSortType().equals("increase")){
-                projectList = projectJpaRepository.findByTitleContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),3, Sort.by(projectSearchTypeRequest.getSearchType())));
+                projectList = projectJpaRepository.findByTitleContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),20, Sort.by(projectSearchTypeRequest.getSearchType())));
             }else if(projectSearchTypeRequest.getSortType().equals("decrease")){
-                projectList = projectJpaRepository.findByTitleContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),3, Sort.by(projectSearchTypeRequest.getSearchType()).descending()));
+                projectList = projectJpaRepository.findByTitleContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),20, Sort.by(projectSearchTypeRequest.getSearchType()).descending()));
             }
         }else if(projectSearchTypeRequest.getKeywordType().equals("user")){
             if(projectSearchTypeRequest.getSortType().equals("increase")){
-                projectList = projectJpaRepository.findByUserNicknameContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),3, Sort.by(projectSearchTypeRequest.getSearchType())));
+                projectList = projectJpaRepository.findByUserNicknameContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),20, Sort.by(projectSearchTypeRequest.getSearchType())));
             }else if(projectSearchTypeRequest.getSortType().equals("decrease")){
-                projectList = projectJpaRepository.findByUserNicknameContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),3, Sort.by(projectSearchTypeRequest.getSearchType()).descending()));
+                projectList = projectJpaRepository.findByUserNicknameContaining(projectSearchTypeRequest.getKeyword(), PageRequest.of(projectSearchTypeRequest.getPageNum(),20, Sort.by(projectSearchTypeRequest.getSearchType()).descending()));
             }
         }
         List<findAllModel> findAllModelList = new ArrayList<>();
@@ -209,7 +210,7 @@ public class ProjectServiceImpl implements ProjectService{
                     .xmlCode(projectResult.getXmlCode())
                     .readCnt(projectResult.getView())
                     .likeCnt(projectResult.getFavorite())
-                    .commentCnt(projectResult.getProjectCommentList().size())
+                    .commentCnt(0)
                     .favorite((projectFavorite.orElseGet(ProjectFavorite::new).isFavorite()))
                     .build();
 
@@ -305,7 +306,7 @@ public class ProjectServiceImpl implements ProjectService{
                     .favorite(projectFavoriteRequest.isFavorite())
                     .build();
 
-            ProjectFavorite projectFavoriteResult = projectFavoriteJpaRepository.save(projectFavorite);
+            projectFavoriteJpaRepository.save(projectFavorite);
 
             if(projectOptional.isPresent()) {
                 List<ProjectFavorite> projectFavoriteList = projectFavoriteJpaRepository.findByProjectId(projectOptional.get().getId());
@@ -314,7 +315,6 @@ public class ProjectServiceImpl implements ProjectService{
             }
 
             result.status = true;
-            result.data = projectFavoriteResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
 
         }else if(projectFavoriteOptional.isPresent()){
@@ -322,7 +322,7 @@ public class ProjectServiceImpl implements ProjectService{
             ProjectFavorite projectFavorite = projectFavoriteOptional.get();
             projectFavorite.setFavorite(projectFavoriteRequest.isFavorite());
 
-            ProjectFavorite projectFavoriteResult = projectFavoriteJpaRepository.save(projectFavorite);
+            projectFavoriteJpaRepository.save(projectFavorite);
 
             if(projectOptional.isPresent()) {
                 List<ProjectFavorite> projectFavoriteList = projectFavoriteJpaRepository.findByProjectId(projectOptional.get().getId());
@@ -330,7 +330,6 @@ public class ProjectServiceImpl implements ProjectService{
                 projectJpaRepository.save(projectOptional.get());
             }
             result.status = true;
-            result.data = projectFavoriteResult;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
@@ -441,6 +440,27 @@ public class ProjectServiceImpl implements ProjectService{
             result.status = true;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
+            result.status = false;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<ProjectResponse> uploadMissionImage(String userEmail, Long projectId, String imagePath) {
+        ResponseEntity response;
+        ProjectResponse result = new ProjectResponse();
+
+        Optional<Project> projectOptional = projectJpaRepository.findById(projectId);
+
+        if(projectOptional.isPresent()){
+            Project project = projectOptional.get();
+            project.setProjectImg("https://" + s3ServiceImpl.CLOUD_FRONT_DOMAIN_NAME + "/" + imagePath);
+
+            projectJpaRepository.save(project);
+            result.status = true;
+            response = new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
             result.status = false;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }

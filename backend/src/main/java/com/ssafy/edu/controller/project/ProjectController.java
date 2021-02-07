@@ -6,12 +6,16 @@ import com.ssafy.edu.model.project.Response.ProjectFavoriteResponse;
 import com.ssafy.edu.model.project.Response.ProjectPageResponse;
 import com.ssafy.edu.model.project.Response.ProjectResponse;
 import com.ssafy.edu.service.project.ProjectService;
+import com.ssafy.edu.service.s3Service.s3Service;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @ApiResponses(value = {@ApiResponse(code = 401, message = "Unauthorized", response = ProjectResponse.class),
         @ApiResponse(code = 403, message = "Forbidden", response = ProjectResponse.class),
@@ -25,18 +29,20 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
+    @Autowired
+    s3Service s3Service;
 
     @ApiOperation(value = "전체 작품 조회", notes = "")
     @PostMapping()
     public ResponseEntity<ProjectPageResponse> GetProjects(@RequestBody ProjectSearchTypeRequest projectSearchTypeRequest) {
         return projectService.findAll(projectSearchTypeRequest);
     }
-    @ApiOperation(value = "현재 조회중인 작품 조회", notes = "")
+    @ApiOperation(value = "특정 작품 조회", notes = "")
     @GetMapping("/{userEmail}/{projectId}")
     public ResponseEntity<ProjectResponse> GetOneProject(@PathVariable("userEmail")String userEmail, @PathVariable("projectId")Long projectId) {
         return projectService.findGetOne(userEmail,projectId);
     }
-    @ApiOperation(value = "내가 만든 작품 조회", notes = "")
+    @ApiOperation(value = "특정 유저가 만든 작품 목록 조회", notes = "")
     @GetMapping("/uesr/{userEmail}")
     public ResponseEntity<ProjectResponse> GetUserProject(@PathVariable("userEmail")String userEmail) {
         return projectService.findGetByUserId(userEmail);
@@ -82,5 +88,10 @@ public class ProjectController {
     public ResponseEntity<ProjectCommentResponse> projectfindAllComments(@PathVariable("projectId")Long projectId ) {
         return projectService.projectGetComment(projectId);
     }
-
+    @ApiOperation(value = "작품 이미지 저장", notes = "작품의 이미지를 저장합니다.")
+    @PostMapping("/img/{userEmail}/{projectId}")
+    public ResponseEntity<ProjectResponse> uploadProjectImage(@RequestParam MultipartFile file, @PathVariable("userEmail") String userEmail, @PathVariable("projectId") Long projectId) throws IOException {
+        String imagePath = s3Service.upload(file);
+        return projectService.uploadMissionImage(userEmail, projectId, imagePath);
+    }
 }
