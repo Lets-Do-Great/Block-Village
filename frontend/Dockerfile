@@ -2,6 +2,7 @@ FROM node:alpine as builder
 WORKDIR /app
 COPY ./package.json ./
 RUN npm install --force
+RUN rm -r node_modules/react-blockly/node_modules
 COPY ./ ./
 RUN npm run build
 
