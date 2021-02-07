@@ -58,15 +58,15 @@ public class AnswerServiceImpl implements AnswerService {
 
         if (answerSearchTypeRequest.getKeywordType().equals("title")) {
             if (answerSearchTypeRequest.getSortType().equals("increase")) {
-                answerList = answerJapRepository.findByTitleContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType())));
+                answerList = answerJapRepository.findByTitleContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 20, Sort.by(answerSearchTypeRequest.getSearchType())));
             } else if (answerSearchTypeRequest.getSortType().equals("decrease")) {
-                answerList = answerJapRepository.findByTitleContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType()).descending()));
+                answerList = answerJapRepository.findByTitleContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 20, Sort.by(answerSearchTypeRequest.getSearchType()).descending()));
             }
         } else if (answerSearchTypeRequest.getKeywordType().equals("user")) {
             if (answerSearchTypeRequest.getSortType().equals("increase")) {
-                answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType())));
+                answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 20, Sort.by(answerSearchTypeRequest.getSearchType())));
             } else if (answerSearchTypeRequest.getSortType().equals("decrease")) {
-                answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 3, Sort.by(answerSearchTypeRequest.getSearchType()).descending()));
+                answerList = answerJapRepository.findByUserNicknameContaining(answerSearchTypeRequest.getKeyword(), PageRequest.of(answerSearchTypeRequest.getPageNum(), 20, Sort.by(answerSearchTypeRequest.getSearchType()).descending()));
             }
         }
         List<findAllModelName> findModelList = new ArrayList<>();
