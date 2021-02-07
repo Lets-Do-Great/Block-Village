@@ -11,7 +11,9 @@
 }
 
 .lists {
+  display:block;
   flex-basis: 100%;
   border: 3px solid rebeccapurple;
   padding: 2em 3em;
+  height: 100%;
 }

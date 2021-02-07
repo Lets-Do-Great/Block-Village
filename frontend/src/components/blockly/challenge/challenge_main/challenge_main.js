@@ -3,34 +3,31 @@ import BlocklyNavbar from '../../blockly_navbar/blockly_navbar';
 import ChallengeList from '../challenge_list/challenge_list';
 import styles from './challenge_main.module.css'
 
-const ChallengeMain = (props) => {
+const ChallengeMain = ({ challengeList, setTodoChallenge }) => {
   const [challenges, setChallenges] = useState([
     {
-      c_num: 1,
-      title: 'dum_data1',
-      start_date: '2021-01-15',
-      end_date: '2021-02-10',
-      p_cnt: 564893,
-      image: '이미지',
-      content: '설명',
+      challengeId: 1,
+      title: '챌린지1 제목',
+      startDate: '2021.01.15',
+      endDate: '2021.02.10',
+      peopleCnt: 1,
+      image: '../../../../images/bug.png',
     },
     {
-      c_num: 2,
-      title: 'dum_data2',
-      start_date: '2021-03-15',
-      end_date: '2021-08-10',
-      p_cnt: 564893,
-      image: '이미지',
-      content: '설명',
+      challengeId: 2,
+      title: '챌린지2 제목',
+      startDate: '2021.03.15',
+      endDate: '2021.08.10',
+      peopleCnt: 2,
+      image: '../../../../images/bug.png',
     },
     {
-      c_num: 3,
-      title: 'dum_data3',
-      start_date: '2021-05-15',
-      end_date: '2021-10-10',
-      p_cnt: 564893,
-      image: '이미지',
-      content: '설명',
+      challengeId: 3,
+      title: '챌린지3 제목',
+      startDate: '2021.05.15',
+      endDate: '2021.10.10',
+      peopleCnt: 3,
+      image: '../../../../images/bug.png',
     },
   ]);
 
@@ -39,11 +36,16 @@ const ChallengeMain = (props) => {
       <BlocklyNavbar />
       <div className={styles.container}>
         <div className={styles.lists}>
+          <div>챌린지 번호</div>
+          <div>챌린지 명</div>
+          <div>진행 기간</div>
+          <div>참가 수</div>
           {
             challenges.map((challenge) => (
               <ChallengeList 
                 key={challenge.c_num}
                 challenge={challenge}
+                setTodoChallenge={setTodoChallenge}
               />
             ))
           }
