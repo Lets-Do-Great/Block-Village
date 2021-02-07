@@ -11,8 +11,8 @@ import lombok.*;
 public class ChallengeListForm {
     Long challengeId;
     String title;
-    String Image;
-    String StartDate;
-    String EndDate;
-    Long peopleCnt;
+    String image;
+    String startdate;
+    String enddate;
+    Long peoplecnt;
 }
