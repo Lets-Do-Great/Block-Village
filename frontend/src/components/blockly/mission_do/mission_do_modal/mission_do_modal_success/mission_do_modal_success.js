@@ -1,7 +1,7 @@
 import React, { useRef }  from 'react';
 import styles from './mission_do_modal_success.module.css';
 
-const MissionDoModalSuccess = ({ setUseDifficulty, onSubmitDifficulty }) => {
+const MissionDoModalSuccess = ({ setUseDifficulty, onSubmitDifficulty, setUseContent }) => {
   const formRef = useRef();
   const difficultyRef = useRef();
 
@@ -11,12 +11,20 @@ const MissionDoModalSuccess = ({ setUseDifficulty, onSubmitDifficulty }) => {
     onSubmitDifficulty()
   };  
 
-  const onChange = event => {
+  const onChangeDifficulty = event => {
     if (event.currentTarget == null) {
       return;
     }
     event.preventDefault();
     setUseDifficulty(event.currentTarget.value * 1.0)
+  };
+
+  const onChangeContent = event => {
+    if (event.currentTarget == null) {
+      return;
+    }
+    event.preventDefault();
+    setUseContent(event.currentTarget.value)
   };
   
   return (
@@ -29,8 +37,10 @@ const MissionDoModalSuccess = ({ setUseDifficulty, onSubmitDifficulty }) => {
             type="number" 
             name="difficulty" 
             ref={difficultyRef}
-            onChange={onChange} 
+            onChange={onChangeDifficulty} 
           /><br/>
+          <h3>답안의 간단한 설명을 써주세요!</h3><br/>
+          <input type="text" name="content" onChange={onChangeContent} />
           <button onClick={onSubmit}>제출하기</button>
         </form>
       </div>

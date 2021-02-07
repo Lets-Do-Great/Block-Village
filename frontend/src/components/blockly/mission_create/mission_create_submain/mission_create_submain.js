@@ -124,7 +124,6 @@ const MissionCreateSubmain = ({ onChangeState, onSetMission }) => {
   }, [formInfo])
 
   const onChangeXml = (e) => {
-    // console.log(e);
     setFormInfo({
       ...formInfo,
       xmlCode: e,

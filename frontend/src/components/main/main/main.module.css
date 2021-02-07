@@ -51,7 +51,7 @@
 
 .makeMission_img {
   position: absolute;
-  left: 12.5%;
+  left: 12.85%;
   bottom: 30.5%;
   z-index: 1;
   border: 0;
@@ -66,10 +66,10 @@
   background: url(../../../images/main/main_make_mission_image_after.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  transform: scale(1.1);
   cursor: pointer;
-  bottom: 33%;
-  left: 13%;
+  /* left: 12.85%;
+  transform: scale(1.1);
+  bottom: 33%; */
 }
 
 .participateMission_img {

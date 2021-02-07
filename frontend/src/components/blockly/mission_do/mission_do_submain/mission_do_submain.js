@@ -4,7 +4,7 @@ import MissionDoModalSuccess from '../mission_do_modal/mission_do_modal_success/
 import MissionDoModalFail from '../mission_do_modal/mission_do_modal_fail/mission_do_modal_fail';
 import styles from './mission_do_submain.module.css';
 
-const MissionDoSubmain = ({ setUseDifficulty, onChangeTodo, onSetTodoMission, onSetDifficultyMission }) => {
+const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, onChangeTodo, onSetTodoMission, onSetDifficultyMission, onSetAnswer, onChangeXmlContainer, onChangeJavascriptContainer }) => {
   const [successModal, setSuccessModal] = useState(false);
   const [failModal, setFailModal] = useState(false);
 
@@ -109,12 +109,12 @@ const MissionDoSubmain = ({ setUseDifficulty, onChangeTodo, onSetTodoMission, on
         ]
       },
     ],
-    startPosition: [50, 50],
+    startPosition: [selectedMission.startPositionX, selectedMission.startPositionY],
     stepPosition: [],
-    endPosition: [170, 90],
-    title: '미션1',
-    content: 'asfsafs',
-    difficulty: 0,
+    endPosition: [selectedMission.endPositionX, selectedMission.endPositionY],
+    title: selectedMission.title,
+    javascript: '',
+    difficulty: selectedMission.difficulty,
   });
 
   const onChangeXml = (e) => {
@@ -122,7 +122,16 @@ const MissionDoSubmain = ({ setUseDifficulty, onChangeTodo, onSetTodoMission, on
       ...formInfo,
       initialXml: e,
     });
+    onChangeXmlContainer(e);
   };
+
+  const onChangeJavascript = (e) => {
+    setFormInfo({
+      ...formInfo,
+      javascript: e,
+    });
+    onChangeJavascriptContainer(e);
+  }
 
   const onChangeSuccess = () => {
     onChangeTodo();
@@ -136,14 +145,16 @@ const MissionDoSubmain = ({ setUseDifficulty, onChangeTodo, onSetTodoMission, on
   const onSubmitDifficulty = () => {
     onSetTodoMission();
     onSetDifficultyMission();
+    onSetAnswer();
   };
 
   return (
     <div className={styles.body}>
       {successModal && 
         <MissionDoModalSuccess 
-        onSubmitDifficulty={onSubmitDifficulty}
+          onSubmitDifficulty={onSubmitDifficulty}
           setUseDifficulty={setUseDifficulty}
+          setUseContent={setUseContent}
         />
       }
       {failModal && 
@@ -153,6 +164,7 @@ const MissionDoSubmain = ({ setUseDifficulty, onChangeTodo, onSetTodoMission, on
       }
       <MissionDoMain 
         formInfo={formInfo}
+        onChangeJavascript={onChangeJavascript}
         onChangeXml={onChangeXml}
         onChangeSuccess={onChangeSuccess}
         onChangeFail={onChangeFail}

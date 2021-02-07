@@ -52,3 +52,15 @@
 
   cursor: pointer;
 }
+
+.retutorial_button {
+  position: absolute;
+
+  right: 5.5em;
+  top: 1em;
+
+  outline: 0;
+  border-radius: 10px;
+
+  cursor: pointer;
+}

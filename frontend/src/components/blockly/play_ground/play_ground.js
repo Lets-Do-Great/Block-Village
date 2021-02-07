@@ -68,7 +68,7 @@ const PlayGround = ({ javascript_code }) => {
   
     const point_y = (y_point) => {
       y = y_point;
-      move.push([x,y]);
+      move.push([x, y]);
     }
   
     const point_x_y = (x_point, y_point) => {

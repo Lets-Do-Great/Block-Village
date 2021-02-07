@@ -19,6 +19,15 @@ import TutorialPlayground from '../tutorial_playground_1/tutorial_playground_1';
 import ModalSuccess1 from '../modal_1/modal_success_1/modal_success_1';
 import ModalFail1 from '../modal_1/modal_fail_1/modal_fail_1';
 
+import ModalStep0 from '../modal_1/modal_step_0/modal_step_0';
+import ModalStep1 from '../modal_1/modal_step_1/modal_step_1';
+import ModalStep2 from '../modal_1/modal_step_2/modal_step_2';
+import ModalStep3 from '../modal_1/modal_step_3/modal_step_3';
+import ModalStep4 from '../modal_1/modal_step_4/modal_step_4';
+import ModalStep5 from '../modal_1/modal_step_5/modal_step_5';
+import ModalStep6 from '../modal_1/modal_step_6/modal_step_6';
+import ModalStep7 from '../modal_1/modal_step_7/modal_step_7';
+
 const TutorialMain1 = ({ info, GoTwo }) => {
   const { 
     id,
@@ -27,12 +36,13 @@ const TutorialMain1 = ({ info, GoTwo }) => {
     icon_status,
   } = info;
 
-  const [modal_success_state, setModal_success_state] = useState(false);
-  const [modal_fail_state, setModal_fail_state] = useState(false);
-
   const [activeDrags, setActiveDrags] = useState(0);
   const [modal, setModal] = useState(true);
   const [javascript, setJavascript] = useState();
+
+  const [modal_success_state, setModal_success_state] = useState(false);
+  const [modal_fail_state, setModal_fail_state] = useState(false);
+
 
   const theme = {
     'blockStyles' : {
@@ -121,6 +131,61 @@ const TutorialMain1 = ({ info, GoTwo }) => {
   const statusModal = () => {
     setModal(!modal)
   };
+
+
+  //==========================================
+  const [modal_step_0, setModal_step_0] = useState(true)
+  const [modal_step_1, setModal_step_1] = useState(false)
+  const [modal_step_2, setModal_step_2] = useState(false)
+  const [modal_step_3, setModal_step_3] = useState(false)
+  const [modal_step_4, setModal_step_4] = useState(false)
+  const [modal_step_5, setModal_step_5] = useState(false)
+  const [modal_step_6, setModal_step_6] = useState(false)
+  const [modal_step_7, setModal_step_7] = useState(false)
+
+  const retutorial = () => {
+    setModal_step_1(true)
+  };
+
+  const change_modal_step_0 = () => {
+    setModal_step_0(false)
+    setModal_step_1(true)
+  };
+
+  const change_modal_step_1 = () => {
+    setModal_step_1(false)
+    setModal_step_2(true)
+  };
+
+  const change_modal_step_2 = () => {
+    setModal_step_2(false)
+    setModal_step_3(true)
+  };
+
+  const change_modal_step_3 = () => {
+    setModal_step_3(false)
+    setModal_step_4(true)
+  };
+
+  const change_modal_step_4 = () => {
+    setModal_step_4(false)
+    setModal_step_5(true)
+  };
+
+  const change_modal_step_5 = () => {
+    setModal_step_5(false)
+    setModal_step_6(true)
+  };
+
+  const change_modal_step_6 = () => {
+    setModal_step_6(false)
+    setModal_step_7(true)
+  };
+
+  const change_modal_step_7 = () => {
+    setModal_step_7(false)
+  };
+  
   //########################################
 
   function workspaceDidChange(workspace) {
@@ -129,19 +194,23 @@ const TutorialMain1 = ({ info, GoTwo }) => {
 
   return (
     <div className={styles.body}>
+      {modal_step_0 && <ModalStep0 change_modal_step_0={change_modal_step_0}/>}
+      {modal_step_1 && <ModalStep1 change_modal_step_1={change_modal_step_1}/>}
+      {modal_step_2 && <ModalStep2 change_modal_step_2={change_modal_step_2}/>}
+      {modal_step_3 && <ModalStep3 change_modal_step_3={change_modal_step_3}/>}
+      {modal_step_4 && <ModalStep4 change_modal_step_4={change_modal_step_4}/>}
+      {modal_step_5 && <ModalStep5 change_modal_step_5={change_modal_step_5}/>}
+      {modal_step_6 && <ModalStep6 change_modal_step_6={change_modal_step_6}/>}
+      {modal_step_7 && <ModalStep7 change_modal_step_7={change_modal_step_7}/>}
 
-      <ModalSuccess1 
-        modal_success_state={modal_success_state}
-        GoTwo={GoTwo}
-      />
-      <ModalFail1 
-        modal_fail_state={modal_fail_state}
-        reStart={reStart}
-      />
+      {modal_success_state && <ModalSuccess1 GoTwo={GoTwo}/>}
+      {modal_fail_state && <ModalFail1 reStart={reStart}/>}
+
 
       <TutorialNavbar 
         title={title}
         modal={modal} 
+        retutorial={retutorial}
         statusModal={statusModal} 
         icon_status={icon_status}
       />
