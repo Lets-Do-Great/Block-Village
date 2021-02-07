@@ -43,10 +43,10 @@ public class Project {
     private User user;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project" ,cascade = {CascadeType.ALL})
     private List<ProjectFavorite> projectFavorites = new ArrayList<>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project",cascade = {CascadeType.ALL})
     private List<ProjectComment> projectComments = new ArrayList<>();
 }
