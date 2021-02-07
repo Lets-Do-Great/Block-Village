@@ -373,13 +373,13 @@ public class AnswerServiceImpl implements AnswerService {
 
         if (answerCommentList.size() >= 0) {
             List<findAllCommentModel> findAllCommentModelsList = new ArrayList<>();
-            for(AnswerComment answerResult : answerCommentList){
+            for(AnswerComment answer : answerCommentList){
                 findAllCommentModel findAllCommentModel = new findAllCommentModel().builder()
-                        .id(answerResult.getId())
-                        .email(answerResult.getUser().getEmail())
-                        .nickname(answerResult.getUser().getNickname())
-                        .comment(answerResult.getComment())
-                        .updated_at(answerResult.getUpdatedAt())
+                        .id(answer.getId())
+                        .email(answer.getUser().getEmail())
+                        .nickname(answer.getUser().getNickname())
+                        .comment(answer.getComment())
+                        .updated_at(answer.getUpdatedAt())
                         .build();
                 findAllCommentModelsList.add(findAllCommentModel);
             }
