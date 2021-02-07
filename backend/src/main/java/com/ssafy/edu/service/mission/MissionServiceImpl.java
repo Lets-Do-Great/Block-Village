@@ -176,7 +176,7 @@ public class MissionServiceImpl implements MissionService {
 
                 findAllModel findAllModel = new findAllModel().builder()
                         .id(mission.getId())
-                        .email(userOptional.get().getEmail())
+                        .email(mission.getUser().getEmail())
                         .title(mission.getTitle())
                         .imageUrl(mission.getMissionImg())
                         .difficulty(mission.getDifficulty())
