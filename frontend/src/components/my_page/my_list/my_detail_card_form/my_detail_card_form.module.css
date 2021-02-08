@@ -1,0 +1,10 @@
+.detail_form {
+    width: 500px;
+    height: 400px;
+    border: 1px solid black;
+    border-radius: 10px;
+    align-items: center;
+    align-content: center;
+    background-color: white;
+    position: relative;
+}

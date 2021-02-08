@@ -108,10 +108,12 @@ const MissionContainer = () => {
     }
 
     // 미션 수정 요청
-    const onModifyMission = async () => {
+    const onModifyMission = async ( modifyInput) => {
         try{
             await dispatch(MissionAction.modifyMission(
-                { email: userInfo.email, missionId:selectedMission.id }));
+                { email: userInfo.email, missionId:selectedMission.id,
+                    title: modifyInput.title, content: modifyInput.content }));
+            getMission(selectedMission.id);
         } catch(e){
             console.log(e);
         }
@@ -122,6 +124,7 @@ const MissionContainer = () => {
         try{
             await dispatch(MissionAction.deleteMission(
                 { email: userInfo.email, missionId:selectedMission.id }));
+            getMissionList();
         } catch(e){
             console.log(e);
         }

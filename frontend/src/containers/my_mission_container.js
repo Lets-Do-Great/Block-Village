@@ -97,8 +97,15 @@ const MyMissionContainer = () => {
     }
 
     // 미션 수정 요청
-    const onModifyMission = async () => {
-        console.log("미션 수정 페이지 이동");
+    const onModifyMission = async ( modifyInput) => {
+        try{
+            await dispatch(MissionAction.modifyMission(
+                { email: userInfo.email, missionId:selectedMission.id,
+                    title: modifyInput.title, content: modifyInput.content }));
+            getMission(selectedMission.id);
+        } catch(e){
+            console.log(e);
+        }
     }
 
     // 답안 수정 요청

@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './my_detail_card_form.module.css';
 import * as Icon from "react-icons/md";
+import MissionModify from '../../../blockly/mission_modify/mission_modify';
 
 const MyDetailCardForm = ({ detail, onModify, onDelete, onCloseDetail }) => {
 
     const { nickName, title, created_at, updated_at,
         content, difficulty, likeCnt, peopleCnt } = detail;
+
+    const [ modifyModal, setModifyModal ] = useState(false);
+
+    const onSubmitModify = () => {
+        setModifyModal(true);
+    }
+
+    const closeModifyModal = () => {
+        setModifyModal(false);
+    }
 
     const onSubmitDelete = () => { 
         onCloseDetail();
@@ -36,8 +47,14 @@ const MyDetailCardForm = ({ detail, onModify, onDelete, onCloseDetail }) => {
         </div>
 
         <div>{ content }</div>
-        <button>수정하기</button>
+        <button onClick={onSubmitModify}>수정하기</button>
         <button onClick={onSubmitDelete}>삭제하기</button>
+        { modifyModal && 
+            <MissionModify
+                title={title}
+                content={content}
+                onModifyMission={onModify}
+                closeModal={closeModifyModal}/> }
     </div>);
 };
 
