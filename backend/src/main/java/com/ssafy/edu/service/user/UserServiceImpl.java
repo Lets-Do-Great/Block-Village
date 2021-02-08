@@ -256,6 +256,8 @@ public class UserServiceImpl implements UserService {
                     .admin(userOpt.get().isAdmin())
                     .profileImage(userOpt.get().getProfileImage())
                     .build();
+            userOpt.get().setMileage(userOpt.get().getMileage() + mileageRequest.getMileage());
+            User save = userJpaRepository.save(userOpt.get());
             result.data = loginResponse;
             result.status = true;
             return new ResponseEntity<>(result, HttpStatus.OK);
