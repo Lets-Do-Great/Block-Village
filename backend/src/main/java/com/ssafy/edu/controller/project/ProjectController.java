@@ -22,7 +22,7 @@ import java.io.IOException;
         @ApiResponse(code = 404, message = "Not Found", response = ProjectResponse.class),
         @ApiResponse(code = 500, message = "Failure", response = ProjectResponse.class)})
 
-@CrossOrigin(origins = {"http://i4b205.p.ssafy.io:3000", "http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
