@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import * as UserAPI from '../service/user';
 import { applyPenders } from 'redux-pender';
 import { updateObject } from '../service/common';
+import client from '../service/client';
 
 // user 관련 요청 액션 타입
 const LOG_IN = 'user/LOG_IN';
@@ -83,7 +84,7 @@ export default applyPenders(userReducer, [
             if(response.status === 200){
                 if(response.data.status) { // 로그인 성공
                     localStorage.setItem('token', response.data.data.token);
-
+                    client.defaults.headers.common['token'] = localStorage.getItem('token');
                     return updateObject(state, {
                         ...state,
                         userInfo:{
