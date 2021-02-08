@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
         @ApiResponse(code = 404, message = "Not Found", response = BoardBasicResponse.class),
         @ApiResponse(code = 500, message = "Failure", response = BoardBasicResponse.class)})
 
-@CrossOrigin(origins = {"http://i4b205.p.ssafy.io:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequestMapping("boards")
 public class BoardController {

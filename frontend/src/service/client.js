@@ -7,8 +7,7 @@ import axios from 'axios';
 
 const client = axios.create();
 
-// client.defaults.baseURL = 'http://localhost:8080/api/';
-client.defaults.baseURL = 'http://i4b205.p.ssafy.io/api';
+client.defaults.baseURL = 'http://i4b205.p.ssafy.io/api/';
 
 client.defaults.headers.common['token'] = localStorage.getItem('token');
 client.defaults.headers.common['Content-Type'] = `application/json`;
