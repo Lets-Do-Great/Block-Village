@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MissionCreateSubmain from '../components/blockly/mission_create/mission_create_submain/mission_create_submain';
+import MissionModifyForm from '../components/blockly/mission_modify_form/mission_modify_form';
 import * as MissionAction from '../modules/mission';
 
-const EditorMissionContainer = () => {
+const EditorMissionContainer = ( { type }) => {
   const [createInfo, setCreateInfo] = useState({
     email: '',
     title: '',
@@ -16,9 +17,6 @@ const EditorMissionContainer = () => {
     endPositionY: 0,
     difficulty: 0,
   });
-
-  const userInfo = useSelector(state => state.user.userInfo);
-  const dispatch = useDispatch();
 
   const onChangeState = (e) => {
     const newState = {
@@ -35,6 +33,11 @@ const EditorMissionContainer = () => {
     setCreateInfo(newState)
   };
 
+  const userInfo = useSelector(state => state.user.userInfo);
+  const selectedMission = useSelector(state => state.mission.selectedMission);
+  const dispatch = useDispatch();
+
+
   const onSetMission = async () => {
     const newXml = createInfo.xmlCode.replace(/"/gi, '\\"')
     try {
@@ -48,13 +51,33 @@ const EditorMissionContainer = () => {
     }
   };
 
+  const onModifyMission = async (e) => {
+    try {
+      await dispatch(MissionAction.modifyMission({
+        title: e.title,
+        content: e.content
+      }))
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   return (
     <>
+    { type === 'create' && 
       <MissionCreateSubmain 
         onChangeState={onChangeState}
         onSetMission={onSetMission}
       />
+    }
+    {type === 'modify' && 
+      <MissionModifyForm
+        title={selectedMission.title}
+        content={selectedMission.content}
+        onModifyMission={onModifyMission}
+      />
+    }
     </>
   )
 }
