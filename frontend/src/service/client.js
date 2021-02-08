@@ -9,7 +9,7 @@ const client = axios.create();
 
 client.defaults.baseURL = 'http://i4b205.p.ssafy.io/api';
 
-client.defaults.headers.common['token'] = ``;
+client.defaults.headers.common['token'] = localStorage.getItem('token');
 client.defaults.headers.common['Content-Type'] = `application/json`;
 
 export default client;
