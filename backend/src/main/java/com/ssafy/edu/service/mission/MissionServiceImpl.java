@@ -12,7 +12,7 @@ import com.ssafy.edu.repository.mission.MissionDifficultyJpaRepository;
 import com.ssafy.edu.repository.mission.MissionJpaRepository;
 import com.ssafy.edu.repository.mission.MissionFavoriteJpaRepository;
 import com.ssafy.edu.repository.mission.MissionTodoJpaRepository;
-import com.ssafy.edu.service.s3Service.s3ServiceImpl;
+import com.ssafy.edu.service.s3Service.S3ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -527,7 +527,7 @@ public class MissionServiceImpl implements MissionService {
         if (missionOptional.isPresent()) {
 
             Mission mission = missionOptional.get();
-            mission.setMissionImg("https://" + s3ServiceImpl.CLOUD_FRONT_DOMAIN_NAME + "/" + imagePath);
+            mission.setMissionImg("https://" + S3ServiceImpl.CLOUD_FRONT_DOMAIN_NAME + "/" + imagePath);
 
             missionJpaRepository.save(mission);
 

@@ -1,5 +1,6 @@
 package com.ssafy.edu.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ssafy.edu.model.mission.Mission;
@@ -14,6 +15,18 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import com.ssafy.edu.model.board.Board;
+import com.ssafy.edu.model.board.BoardComment;
+import lombok.*;
+
+import com.ssafy.edu.model.block.BlockUsers;
+import com.ssafy.edu.model.challenge.ChallengeUser;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
 
 /*
 * id : users 테이블의 pk
@@ -27,10 +40,11 @@ import java.util.List;
 * joinDate : 회원가입 날짜
 * */
 
-@Data
+@Getter @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Entity
 public class User {
 
@@ -49,12 +63,30 @@ public class User {
     private String emailAuth;
 
     private int mileage;
-//    @Column(name = "profile_image")
-//    private File?String profileImage;
+
+    @Column
+    private String fileName;
+    @Column(name="profile_image")
+    private String profileImage;
+
+    private boolean admin;
+
     private String introduction;
 
-    @Column(name="join_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate joinDate;
+    @Builder.Default
+    @OneToMany(mappedBy = "user")
+    private List<Board> boardList = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user")
+    List<BoardComment> boardCommentList = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user")
+    List<BlockUsers> blockUsersList = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user")
+    List<ChallengeUser> challengeUserList = new ArrayList<>();
 
 }

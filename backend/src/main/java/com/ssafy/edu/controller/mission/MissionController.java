@@ -1,10 +1,9 @@
 package com.ssafy.edu.controller.mission;
 
-import com.ssafy.edu.model.mission.Mission;
 import com.ssafy.edu.model.mission.Response.*;
 import com.ssafy.edu.model.mission.Request.*;
 import com.ssafy.edu.service.mission.MissionService;
-import com.ssafy.edu.service.s3Service.s3Service;
+import com.ssafy.edu.service.s3Service.S3Service;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -29,7 +28,7 @@ public class MissionController {
     MissionService missionService;
 
     @Autowired
-    s3Service s3Service;
+    S3Service s3Service;
 
     @ApiOperation(value = "전체 미션 조회", notes = "**sortType**\n" + "\n" + "- 오름차순 = 'increase'\n" + "- 내림차순 = 'decrease'\n" + "\n" + "**searchType**\n" + "\n" + "- 좋아요 순 = 'favorite'\n" + "- new 순 = 'updatedAt'\n" + "- 난이도 순 = 'difficulty'\n" + "- 참여한 사람 순 =  'people'\n" + "\n" + "**keyword**\n" + "\n" + "- 검색어\n" + "\n" + "**keywordType**\n" + "\n" + "- 유저 = 'user'\n" + "- 제목 = 'title'")
     @PostMapping()

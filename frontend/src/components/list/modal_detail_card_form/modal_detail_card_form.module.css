@@ -1,0 +1,76 @@
+.detail_form {
+    width: 500px;
+    height: 400px;
+    border: 1px solid black;
+    border-radius: 10px;
+    align-items: center;
+    align-content: center;
+    background-color: white;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    display: inline;
+}
+
+.icon {
+    display: inline-block;
+    width: 60px;
+    font-size: 20px;
+}
+
+.heart {
+    color: red;
+    font-size: 30px;
+    display: inline;
+}
+
+.participate_button {
+    margin: 15px;
+    width: 300px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #ff8896;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.participating_button {
+    margin: 15px;
+    width: 300px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #fff788;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.participated_button {
+    margin: 15px;
+    width: 300px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #88e7ff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.close {
+    display: inline;
+    top: 29%;
+    right: 37%;
+    position: absolute;
+    font-size: 40px;
+    color: darkgray;
+}
+
+.close:hover{
+    color: red;
+}
