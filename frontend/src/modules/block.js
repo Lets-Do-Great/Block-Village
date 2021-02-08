@@ -5,7 +5,6 @@ import { updateObject } from '../service/common';
 
 const GET_MY_BLOCKS = 'block/GET_MY_BLOCKS';
 const GET_ALL_BLOCKS = 'block/GET_ALL_BLOCKS';
-
 const BUY_BLOCKS = 'block/BUY_BLOCKS';
 
 
