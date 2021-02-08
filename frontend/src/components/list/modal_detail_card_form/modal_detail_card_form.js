@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './modal_detail_card_form.module.css';
 import * as Icon from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
+import MissionModify from '../../blockly/mission_modify/mission_modify';
 
 const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal, 
-                            userInfo, onParticipateMission, onDelete }) => {
+                            userInfo, onParticipateMission, onDelete, onModify }) => {
                          
     const history = useHistory();
     const {email, id, nickName, title, created_at, updated_at, favorite,
         content, difficulty, likeCnt, peopleCnt, todo } = detail;
+
+    const [ modifyModal, setModifyModal ] = useState(false);
 
     const changeLike = () => {
         if(favorite){
@@ -17,6 +20,14 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
             setLike();
         }
     };
+
+    const onSubmitModify = () => {
+        setModifyModal(true);
+    }
+
+    const closeModifyModal = () => {
+        setModifyModal(false);
+    }
 
     const onSubmitDelete = () => {
         try{
@@ -64,10 +75,17 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
         </div>
 
         <div>{ content }</div>
+
         { userInfo === email
             ? (<>
-                <button>수정하기</button>
+                <button onClick={onSubmitModify}>수정하기</button>
                 <button onClick={onSubmitDelete}>삭제하기</button>
+                { modifyModal && 
+                    <MissionModify
+                        title={title}
+                        content={content}
+                        onModifyMission={onModify}
+                        closeModal={closeModifyModal}/> }
             </>)
             : <>{ !todo && 
                 <button onClick={onParticipateMission} 
