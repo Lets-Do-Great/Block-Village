@@ -1,28 +1,31 @@
 import React from 'react';
 import styles from './modal_success_1.module.css'
-import Modal from 'react-modal';
+import { BsCheckCircle } from 'react-icons/bs';
+import { FaRegSmileBeam } from 'react-icons/fa';
 
-const customStyles = {
-  content : {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  }
-};
-Modal.setAppElement('#root');
-
-const ModalSuccess1 = ({ modal_success_state, GoTwo }) => {
+const ModalSuccess1 = ({ GoTwo }) => {
   return (
-    <Modal
-      isOpen={modal_success_state}
-      style={customStyles}
-    >
-      <h1>성공!!</h1>
-      <button onClick={GoTwo}>다음 스테이지</button>
-    </Modal>
+    <>
+      <div className={styles.modal_background} />
+      <div className={styles.body}>
+        <div className={styles.container}>
+
+          <header className={styles.header}>
+            <div className={styles.header_icon}>
+              <FaRegSmileBeam color="#e8f7fc" size="25"/>
+            </div>
+            <h2>성공!</h2>
+          </header>
+
+          <div className={styles.icon}>
+            <BsCheckCircle size="70" color="#27ae60"/>
+          </div>
+
+          <h1>통과 하셨습니다</h1>
+          <button className={styles.btn} onClick={GoTwo}>다음 스테이지</button>
+        </div>
+      </div>
+    </>
   )
 };
 

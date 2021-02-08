@@ -2,6 +2,19 @@ package com.ssafy.edu.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.ssafy.edu.model.mission.Mission;
+import com.ssafy.edu.model.mission.MissionFavorite;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import com.ssafy.edu.model.board.Board;
@@ -11,7 +24,6 @@ import lombok.*;
 import com.ssafy.edu.model.block.BlockUsers;
 import com.ssafy.edu.model.challenge.ChallengeUser;
 
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -20,7 +32,7 @@ import java.util.ArrayList;
 * id : users 테이블의 pk
 * email : users의 이메일
 * password : users의 비밀번호
-* name : users의 실명
+* nickname : users의 별명
 * emailAuth : 이메일 인증 여부 ("true"이면 인증 완료)
 * mileage : users의 마일리지
 * introduction : 자기소개
@@ -36,8 +48,8 @@ import java.util.ArrayList;
 @Entity
 public class User {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     private String email;
@@ -61,15 +73,19 @@ public class User {
 
     private String introduction;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<Board> boardList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     List<BoardComment> boardCommentList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     List<BlockUsers> blockUsersList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     List<ChallengeUser> challengeUserList = new ArrayList<>();
 

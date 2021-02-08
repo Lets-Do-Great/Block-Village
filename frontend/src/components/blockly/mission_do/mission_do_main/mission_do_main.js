@@ -17,7 +17,7 @@ import Blockly from 'blockly';
 import MissionOnNavbar from '../mission_do_navbar/mission_do_navbar';
 import MissionOnPlayground from '../mission_do_playground/mission_do_playground';
 
-const MissionOnMain = ({ formInfo, onChangeXml, onChangeSuccess, onChangeFail }) => {
+const MissionOnMain = ({ formInfo, onChangeJavascript, onChangeXml, onChangeSuccess, onChangeFail }) => {
   const { 
     initialXml, 
     toolboxCategories,
@@ -26,11 +26,11 @@ const MissionOnMain = ({ formInfo, onChangeXml, onChangeSuccess, onChangeFail })
     endPosition,
     title,
     difficulty,
+    javascript,
   } = formInfo;
 
   const [activeDrags, setActiveDrags] = useState(0);
   const [modal, setModal] = useState(true);
-  const [javascript, setJavascript] = useState();
   const theme = {
     'blockStyles' : {
       "start-blocks": {
@@ -94,7 +94,7 @@ const MissionOnMain = ({ formInfo, onChangeXml, onChangeSuccess, onChangeFail })
   const workspaceDidChange = (workspace) => {
     // save 형태
     onChangeXml(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)))
-    setJavascript(Blockly.JavaScript.workspaceToCode(workspace))
+    onChangeJavascript(Blockly.JavaScript.workspaceToCode(workspace))
   };
 
   const onStart = () => {

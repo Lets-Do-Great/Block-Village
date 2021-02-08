@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './tutorial_playground_1.module.css'
+import { FaRegPlayCircle } from 'react-icons/fa';
 
 const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeModalFail }) => {
   var x = 0;
@@ -46,8 +47,8 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
         const new_move_x = Math.round(move[i][0])
         const new_move_y = Math.round(move[i][1])
 
-        x = image_x + (new_move_x * 40)
-        y = image_y - (new_move_y * 40)
+        x = image_x + (new_move_x * 70)
+        y = image_y - (new_move_y * 70)
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
         await timer(1500);
@@ -82,8 +83,10 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
     item.setAttribute('src', `/images/bug.png`)
     item.style.position = 'absolute';
 
-    setImage_x((fieldRect.width - 0 - 50) / 2)
-    setImage_y((fieldRect.height - 0 - 50) / 2)
+    setImage_x((char_location[1]) * 70 + 35)
+    setImage_y((char_location[0]) * 70 + 35)
+
+    item.style.transform = `translate(-50%, -60%)`
 
     item.style.left = `${image_x}px`;
     item.style.top = `${image_y}px`;
@@ -335,11 +338,12 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
         <img ref={fieldchar}></img>
       </section>
       <footer className={styles.footer}>
-        <button 
+        <div 
           onClick={playGame}
           className={styles.game__button}
-        >시작하기
-        </button>
+        >
+          <FaRegPlayCircle size="60" color="#c30d23"/>
+        </div>
       </footer>
     </div>
   )

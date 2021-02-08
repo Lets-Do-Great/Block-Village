@@ -1,7 +1,6 @@
 package com.ssafy.edu.model.challenge;
 
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 
@@ -11,8 +10,8 @@ import lombok.*;
 public class ChallengeListForm {
     Long challengeId;
     String title;
-    String Image;
-    String StartDate;
-    String EndDate;
+    String image;
+    String startDate;
+    String endDate;
     Long peopleCnt;
 }

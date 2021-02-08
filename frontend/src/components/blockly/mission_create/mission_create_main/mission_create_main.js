@@ -112,6 +112,11 @@ const MissionCreateMain = ({ formInfo, onChangeModal, onChangeXml, onChangeStep 
     // onChangeStep()
   };
 
+  const onChangeModalMain = () => {
+    setModal(false)
+    onChangeModal();
+  }
+
   useEffect(() => {
     if(!modal) {
       onChangeStep(moveStep);
@@ -125,7 +130,7 @@ const MissionCreateMain = ({ formInfo, onChangeModal, onChangeXml, onChangeStep 
         modal={modal} 
         type={type}
         statusModal={statusModal} 
-        onChangeModal={onChangeModal} 
+        onChangeModal={onChangeModalMain} 
       />
       <div className={styles.container}>
         {modal && 

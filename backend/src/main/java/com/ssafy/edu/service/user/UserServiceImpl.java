@@ -1,9 +1,8 @@
 package com.ssafy.edu.service.user;
 
-import com.amazonaws.services.xray.model.Http;
 import com.ssafy.edu.model.user.*;
 import com.ssafy.edu.repository.UserJpaRepository;
-import com.ssafy.edu.service.S3Service;
+import com.ssafy.edu.service.s3Service.S3ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private S3Service s3Service;
+    private S3ServiceImpl s3Service;
 
     @Autowired
     private UserJpaRepository userJpaRepository;
@@ -44,7 +43,6 @@ public class UserServiceImpl implements UserService {
             boolean match = encryptService.isMatch(password, userOptional.get().getPassword());
 
             if (match && userOptional.isPresent() && userOptional.get().getEmailAuth().equals("true")) {
-
 
                 LoginResponse loginResponse = LoginResponse.builder()
                         .email(userOptional.get().getEmail())

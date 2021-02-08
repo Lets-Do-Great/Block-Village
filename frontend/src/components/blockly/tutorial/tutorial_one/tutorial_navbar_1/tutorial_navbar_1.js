@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './tutorial_navbar_1.module.css'
 import { BsDisplayFill, BsDisplay } from 'react-icons/bs';
-import { FaRegCircle, FaRegCheckCircle } from 'react-icons/fa';
+import { FaRegCircle, FaRegCheckCircle, FaUndo } from 'react-icons/fa';
 
 import { useHistory } from 'react-router-dom';
 
-const TutorialNavbar1 = ({ title, modal, statusModal, icon_status }) => {
+const TutorialNavbar1 = ({ title, modal, retutorial, statusModal, icon_status }) => {
   const history = useHistory();
 
   const onoffModal = () => {
@@ -39,6 +39,10 @@ const TutorialNavbar1 = ({ title, modal, statusModal, icon_status }) => {
       <img className={styles.logo_img} src="/images/logo1.png" />
 
       <h1 className={styles.title}>{ title }</h1>
+
+      <div className={styles.retutorial_button} onClick={retutorial}>
+        <FaUndo size="45" color="#FFFFFF" />
+      </div>
 
       <div className={styles.modal_button} onClick={onoffModal}>
         {modal

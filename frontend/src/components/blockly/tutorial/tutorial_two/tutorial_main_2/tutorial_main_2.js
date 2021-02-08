@@ -16,8 +16,11 @@ import Blockly from 'blockly';
 
 import TutorialNavbar2 from '../tutorial_navbar_2/tutorial_navbar_2';
 import TutorialPlayground2 from '../tutorial_playground_2/tutorial_playground_2';
-import ModalSuccess2 from '../modal_2/modal_success_2';
-import ModalFail2 from '../modal_2/modal_fail_2';
+import ModalSuccess2 from '../modal_2/modal_success_2/modal_success_2';
+import ModalFail2 from '../modal_2/modal_fail_2/modal_fail_2';
+
+import Modal2Step0 from '../modal_2/modal2_step_0/modal2_step_0';
+import Modal2Step1 from '../modal_2/modal2_step_1/modal2_step_1';
 
 const TutorialMain2 = ({ info, GoThree }) => {
   const { 
@@ -122,6 +125,24 @@ const TutorialMain2 = ({ info, GoThree }) => {
   const statusModal = () => {
     setModal(!modal)
   };
+
+
+  //==========================================
+  const [modal2_step_0, setModal2_step_0] = useState(true)
+  const [modal2_step_1, setModal2_step_1] = useState(false)
+
+  const retutorial = () => {
+    setModal2_step_1(true)
+  };
+
+  const change_modal2_step_0 = () => {
+    setModal2_step_0(false)
+    setModal2_step_1(true)
+  };
+
+  const change_modal2_step_1 = () => {
+    setModal2_step_1(false)
+  };
   //########################################
 
   function workspaceDidChange(workspace) {
@@ -130,20 +151,16 @@ const TutorialMain2 = ({ info, GoThree }) => {
 
   return (
     <div className={styles.body}>
-      <ModalSuccess2 
-        modal_success_state={modal_success_state}
-        GoThree={GoThree}
-      />
+      {modal2_step_0 && <Modal2Step0 change_modal2_step_0={change_modal2_step_0}/>}
+      {modal2_step_1 && <Modal2Step1 change_modal2_step_1={change_modal2_step_1}/>}
 
-      <ModalFail2 
-        modal_fail_state={modal_fail_state}
-        reStart={reStart}
-      />
-
+      {modal_success_state && <ModalSuccess2 GoThree={GoThree}/>}
+      {modal_fail_state && <ModalFail2 reStart={reStart}/>}
 
       <TutorialNavbar2 
         title={title}
         modal={modal} 
+        retutorial={retutorial}
         statusModal={statusModal} 
         icon_status={icon_status}
       />
