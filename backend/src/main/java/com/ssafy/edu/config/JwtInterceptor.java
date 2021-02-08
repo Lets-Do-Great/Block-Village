@@ -25,6 +25,8 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        if(request.getMethod().equals("OPTIONS")) return true;
+
         String givenToken = request.getHeader("token");
 
         response.setContentType("application/json");
@@ -41,7 +43,6 @@ public class JwtInterceptor implements HandlerInterceptor {
                 ObjectMapper objectMapper = new ObjectMapper();
                 Map<String, String> result = objectMapper.convertValue(info.get("userInfo"), Map.class);
 
-                if(request.getMethod().equals("OPTIONS")) return true;
 
                 if (result != null && userJpaRepository.findByEmail(result.get("email")).isPresent()) {
                     jwtServiceImpl.checkValid(givenToken);
