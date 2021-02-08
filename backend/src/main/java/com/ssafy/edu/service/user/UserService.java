@@ -1,5 +1,6 @@
 package com.ssafy.edu.service.user;
 
+import com.ssafy.edu.model.user.MileageRequest;
 import com.ssafy.edu.model.user.SignUpRequest;
 import com.ssafy.edu.model.user.UpdateRequest;
 import com.ssafy.edu.model.user.UserResponse;
@@ -15,5 +16,6 @@ public interface UserService {
     public void emailAuth(String email, String key);
     public ResponseEntity<UserResponse> tempPassword(String email) throws MessagingException;
     public ResponseEntity<UserResponse> signUp(SignUpRequest signUpRequest);
+    public ResponseEntity<UserResponse> mileage(MileageRequest mileageRequest);
 
 }
