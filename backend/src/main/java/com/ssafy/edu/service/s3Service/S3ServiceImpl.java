@@ -1,4 +1,4 @@
-package com.ssafy.edu.service;
+package com.ssafy.edu.service.s3Service;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -20,10 +20,11 @@ import java.io.IOException;
 
 @Service
 @NoArgsConstructor
-public class S3Service {
+public class S3ServiceImpl implements S3Service {
 
     private AmazonS3 s3Client;
 
+    // application.properties or yml 파일에서 정보를 가져옵니다.
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
 
@@ -36,6 +37,7 @@ public class S3Service {
     @Value("${cloud.aws.region.static}")
     private String region;
 
+    // 클라우드 프론트 사용을 위한 도메인 이름 지정
     public static final String CLOUD_FRONT_DOMAIN_NAME = "d2wb92nul7d5ld.cloudfront.net";
 
     @PostConstruct
@@ -48,7 +50,8 @@ public class S3Service {
                 .build();
     }
 
-    public String upload(MultipartFile file) throws IOException {
+    // 파일을 올리기 위한 메소드
+    public String upload(MultipartFile file, String keyword) throws IOException {
         String fileName = file.getOriginalFilename();
 
         byte[] bytes = IOUtils.toByteArray(file.getInputStream());
@@ -56,7 +59,7 @@ public class S3Service {
         metadata.setContentLength(bytes.length);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 
-        s3Client.putObject(new PutObjectRequest(bucket, "profile/"+fileName, byteArrayInputStream, metadata)
+        s3Client.putObject(new PutObjectRequest(bucket, keyword +"/"+fileName, byteArrayInputStream, metadata)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
 
         return fileName;
