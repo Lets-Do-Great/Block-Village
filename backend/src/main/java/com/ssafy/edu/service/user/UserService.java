@@ -9,7 +9,7 @@ import javax.mail.MessagingException;
 
 public interface UserService {
 
-    public ResponseEntity<UserResponse> findByEmailAndPassword(String email, String password);
+    public ResponseEntity<UserResponse> login(String email, String password);
     public ResponseEntity<UserResponse> updateUser(UpdateRequest updateRequest, String email);
     public ResponseEntity<UserResponse> deleteUser(String email);
     public void emailAuth(String email, String key);

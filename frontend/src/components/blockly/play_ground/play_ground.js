@@ -4,24 +4,44 @@ import styles from './play_ground.module.css';
 
 const PlayGround = ({ javascript_code }) => {
   const fieldsize = useRef();
-    const fieldchar = useRef();
-    console.log(javascript_code);
-  
-    const playGame = () => {
-      eval(javascript_code);
-      console.log(move);
-    };
+  const fieldchar = useRef();
+  console.log(javascript_code);
+
+  const playGame = () => {
+    eval(javascript_code);
+    console.log(move);
+  };
   
   
     // 함수
   /////////////////////////////////////////////////////////////////
-    var my_var = 0;  
-    const set_var = (value_variable) => {
-      my_var = value_variable;
-    }
-    const change_var = (value_variable) => {
-      my_var += value_variable;
-    }  
+  var my_var = 0;  
+  const set_var = (value_variable) => {
+    my_var = value_variable;
+  }
+  const change_var = (value_variable) => {
+    my_var += value_variable;
+  }  
+
+
+
+  useEffect(() => {
+    
+    const field = fieldsize.current;
+    const fieldRect = field.getBoundingClientRect();
+    const item = fieldchar.current;
+    item.setAttribute('className', `image`)
+    item.setAttribute('src', `/images/bug.png`)
+    item.style.position = 'absolute';
+    const x = (fieldRect.width - 0 - 50) / 2;
+    const y = (fieldRect.height - 0 - 50) / 2;
+    item.style.left = `${x}px`;
+    item.style.top = `${y}px`;
+  })
+
+
+
+
   
     // 움직임 
   /////////////////////////////////////////////////////////////////
@@ -255,19 +275,7 @@ const PlayGround = ({ javascript_code }) => {
       pen_angle += angle_angle * Math.PI / 180;
     }
   
-  useEffect(() => {
-    
-    const field = fieldsize.current;
-    const fieldRect = field.getBoundingClientRect();
-    const item = fieldchar.current;
-    item.setAttribute('className', `image`)
-    item.setAttribute('src', `/images/bug.png`)
-    item.style.position = 'absolute';
-    const x = (fieldRect.width - 0 - 50) / 2;
-    const y = (fieldRect.height - 0 - 50) / 2;
-    item.style.left = `${x}px`;
-    item.style.top = `${y}px`;
-  })
+  
 
   return (
     
