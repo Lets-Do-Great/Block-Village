@@ -20,6 +20,12 @@ repositories {
 }
 
 dependencies {
+	////////////////
+	// AWS s3
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.1.RELEASE'
+// AWS SDK
+	compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.534'
+	///////////////
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
