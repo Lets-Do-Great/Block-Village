@@ -41,6 +41,8 @@ public class JwtInterceptor implements HandlerInterceptor {
                 ObjectMapper objectMapper = new ObjectMapper();
                 Map<String, String> result = objectMapper.convertValue(info.get("userInfo"), Map.class);
 
+                if(request.getMethod().equals("OPTIONS")) return true;
+
                 if (result != null && userJpaRepository.findByEmail(result.get("email")).isPresent()) {
                     jwtServiceImpl.checkValid(givenToken);
                     return true;
