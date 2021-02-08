@@ -36,10 +36,12 @@ const ChallengeMain = ({ challengeList, setTodoChallenge }) => {
       <BlocklyNavbar />
       <div className={styles.container}>
         <div className={styles.lists}>
-          <div>챌린지 번호</div>
-          <div>챌린지 명</div>
-          <div>진행 기간</div>
-          <div>참가 수</div>
+          <div className={styles.challenge_header}>
+            <div className={styles.challenge_no}>번호</div>
+            <div className={styles.challenge_name}>챌린지 명</div>
+            <div className={styles.challenge_date}>진행 기간</div>
+            <div className={styles.challenge_people_cnt}>참가자 수</div>
+          </div>
           {
             challenges.map((challenge) => (
               <ChallengeList 

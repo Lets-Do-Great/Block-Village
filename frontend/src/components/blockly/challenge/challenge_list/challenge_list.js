@@ -9,13 +9,18 @@ const ChallengeList = ({ challenge, setTodoChallenge }) => {
 
   return (
     <div className={styles.body}>
-      <div>{ challengeId }</div>
+      <div className={styles.challenge_no}>
+        { challengeId }</div>
       <div 
-        className={styles.title}
-        onClick={() => { setDetail(!detail) }}>{challenge.title}</div>
-          
-      <div>{ startDate } - { endDate }</div>
-      <div>{ peopleCnt }</div>
+        className={styles.challenge_name}
+        onClick={() => { setDetail(!detail) }}>
+          {challenge.title}</div>
+      <div 
+        className={styles.challenge_date}>
+          { startDate } - { endDate }</div>
+      <div
+        className={styles.challenge_people_cnt}>
+          { peopleCnt }</div>
           
       { detail && 
       <ChallengeDetail 
