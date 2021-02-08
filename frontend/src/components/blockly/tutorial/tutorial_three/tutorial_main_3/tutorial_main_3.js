@@ -16,8 +16,11 @@ import Blockly from 'blockly';
 
 import TutorialNavbar3 from '../tutorial_navbar_3/tutorial_navbar_3';
 import TutorialPlayground3 from '../tutorial_playground_3/tutorial_playground_3';
-import ModalSuccess3 from '../modal_3/modal_success_3';
-import ModalFail3 from '../modal_3/modal_fail_3';
+import ModalSuccess3 from '../modal_3/modal_success_3/modal_success_3';
+import ModalFail3 from '../modal_3/modal_fail_3/modal_fail_3';
+
+import Modal3Step0 from '../modal_3/modal3_step_0/modal3_step_0';
+import Modal3Step1 from '../modal_3/modal3_step_1/modal3_step_1';
 
 const TutorialMain3 = ({ info, GoMyPage }) => {
   const { 
@@ -110,8 +113,6 @@ const TutorialMain3 = ({ info, GoMyPage }) => {
     setModal_fail_state(false)
   }
 
-
-
   const onStart = () => {
     setActiveDrags(activeDrags + 1);
   };
@@ -123,6 +124,22 @@ const TutorialMain3 = ({ info, GoMyPage }) => {
   const statusModal = () => {
     setModal(!modal)
   };
+  
+  //==========================================
+  const [modal3_step_0, setModal3_step_0] = useState(true)
+  const [modal3_step_1, setModal3_step_1] = useState(false)
+
+  const retutorial = () => {
+    setModal3_step_1(true)
+  };
+
+  const change_modal3_step_0 = () => {
+    setModal3_step_0(false)
+    setModal3_step_1(true)
+  }
+  const change_modal3_step_1 = () => {
+    setModal3_step_1(false)
+  }
   //########################################
 
   function workspaceDidChange(workspace) {
@@ -131,20 +148,18 @@ const TutorialMain3 = ({ info, GoMyPage }) => {
 
   return (
     <div className={styles.body}>
-      <ModalSuccess3 
-        modal_success_state={modal_success_state}
-        GoMyPage={GoMyPage}
-      />
+      {modal3_step_0 && <Modal3Step0 change_modal3_step_0={change_modal3_step_0}/>}
+      {modal3_step_1 && <Modal3Step1 change_modal3_step_1={change_modal3_step_1}/>}
 
-      <ModalFail3 
-        modal_fail_state={modal_fail_state}
-        reStart={reStart}
-      />
+
+      {modal_success_state && <ModalSuccess3 GoMyPage={GoMyPage}/>}
+      {modal_fail_state && <ModalFail3 reStart={reStart}/>}
 
 
       <TutorialNavbar3 
         title={title}
         modal={modal} 
+        retutorial={retutorial}
         statusModal={statusModal} 
         icon_status={icon_status}
       />
