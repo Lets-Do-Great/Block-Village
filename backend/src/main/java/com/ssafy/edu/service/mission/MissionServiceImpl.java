@@ -41,6 +41,9 @@ public class MissionServiceImpl implements MissionService {
     @Autowired
     UserJpaRepository userJpaRepository;
 
+    @Autowired
+    S3ServiceImpl s3Service;
+
     @Override
     public ResponseEntity<MissionPageResponse> findAll(MissionSearchTypeRequest missionSearchTypeRequest) {
         ResponseEntity response;
@@ -527,7 +530,7 @@ public class MissionServiceImpl implements MissionService {
         if (missionOptional.isPresent()) {
 
             Mission mission = missionOptional.get();
-            mission.setMissionImg("https://" + S3ServiceImpl.CLOUD_FRONT_DOMAIN_NAME + "/" + imagePath);
+            mission.setMissionImg("https://" + s3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + imagePath);
 
             missionJpaRepository.save(mission);
 
