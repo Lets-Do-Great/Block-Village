@@ -55,7 +55,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             }
         }
 
-        obj.put("status", "false");
+        obj.put("status", false);
         response.getWriter().print(obj.toString());
         response.getWriter().flush();
         return false;
