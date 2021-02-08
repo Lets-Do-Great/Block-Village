@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './modal_success_1.module.css'
 import { BsCheckCircle } from 'react-icons/bs';
 import { FaRegSmileBeam } from 'react-icons/fa';
-import swal from 'sweetalert';
 
 const ModalSuccess1 = ({ GoTwo }) => {
   return (
