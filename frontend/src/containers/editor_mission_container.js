@@ -30,7 +30,7 @@ const EditorMissionContainer = ( { type }) => {
       endPositionY: e.endPosition[1],
       difficulty: e.difficulty,
     }
-    setCreateInfo(newState)
+    setCreateInfo(newState);
   };
 
   const userInfo = useSelector(state => state.user.userInfo);

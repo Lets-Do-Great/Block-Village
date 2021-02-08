@@ -17,7 +17,8 @@ const MissionCreateModal = ({ formInfo, onChangeModal, updateState, title, onCha
       content: contentRef.current.value || '',
     };
     formRef.current.reset();
-    onChangeTC(titleContent)
+    // onChangeTC(titleContent)
+    onChangeTC();
   };
 
   const onChange = event => {
@@ -31,9 +32,9 @@ const MissionCreateModal = ({ formInfo, onChangeModal, updateState, title, onCha
     })
   };
   
-  useEffect(() => {
-    title && setButtonName('미션 수정 완료')
-  })
+  // useEffect(() => {
+  //   title && setButtonName('미션 수정 완료')
+  // })
 
   return (
     <>
