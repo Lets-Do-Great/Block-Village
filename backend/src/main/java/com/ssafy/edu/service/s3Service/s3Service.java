@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface s3Service {
     public void setS3Client();
-    public String upload(MultipartFile file) throws IOException;
+    public String upload(MultipartFile file, String keyword) throws IOException;
 }

@@ -51,7 +51,7 @@ public class s3ServiceImpl implements s3Service{
     }
 
     // 파일을 올리기 위한 메소드
-    public String upload(MultipartFile file) throws IOException {
+    public String upload(MultipartFile file, String keyword) throws IOException {
         String fileName = file.getOriginalFilename();
 
         byte[] bytes = IOUtils.toByteArray(file.getInputStream());
@@ -59,7 +59,7 @@ public class s3ServiceImpl implements s3Service{
         metadata.setContentLength(bytes.length);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 
-        s3Client.putObject(new PutObjectRequest(bucket, fileName, byteArrayInputStream, metadata)
+        s3Client.putObject(new PutObjectRequest(bucket, keyword +"/"+fileName, byteArrayInputStream, metadata)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
 
         return fileName;
