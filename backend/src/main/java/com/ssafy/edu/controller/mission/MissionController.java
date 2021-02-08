@@ -19,7 +19,7 @@ import java.io.IOException;
         @ApiResponse(code = 404, message = "Not Found", response = MissionResponse.class),
         @ApiResponse(code = 500, message = "Failure", response = MissionResponse.class)})
 
-@CrossOrigin(origins = {"http://i4b205.p.ssafy.io:3000", "http://localhost:3000"})
+//@CrossOrigin(origins = {"http://i4b205.p.ssafy.io:3000", "http://localhost:3000"})
 @RestController
 @RequestMapping("/mission")
 public class MissionController {
