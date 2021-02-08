@@ -61,15 +61,19 @@ public class User {
 
     private String introduction;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<Board> boardList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     List<BoardComment> boardCommentList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     List<BlockUsers> blockUsersList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     List<ChallengeUser> challengeUserList = new ArrayList<>();
 
