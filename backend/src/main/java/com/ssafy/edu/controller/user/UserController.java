@@ -5,6 +5,7 @@ import com.ssafy.edu.model.user.SignUpRequest;
 import com.ssafy.edu.model.user.UpdateRequest;
 import com.ssafy.edu.model.user.UserResponse;
 import com.ssafy.edu.service.S3Service;
+import com.ssafy.edu.service.S3ServiceImpl;
 import com.ssafy.edu.service.user.UserServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -68,7 +69,7 @@ public class UserController {
     @PutMapping("/file/{email}")
     @ResponseBody
     public void uploadFile(@RequestParam MultipartFile file, @PathVariable("email") String email) throws IOException {
-        String imagePath = s3Service.upload(file);
+        String imagePath = s3Service.upload(file, "profile");
         userService.updateFile(email, imagePath);
     }
 

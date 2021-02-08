@@ -20,7 +20,7 @@ import java.io.IOException;
 
 @Service
 @NoArgsConstructor
-public class S3Service {
+public class S3ServiceImpl {
 
     private AmazonS3 s3Client;
 
@@ -48,7 +48,7 @@ public class S3Service {
                 .build();
     }
 
-    public String upload(MultipartFile file) throws IOException {
+    public String upload(MultipartFile file, String keyword) throws IOException {
         String fileName = file.getOriginalFilename();
 
         byte[] bytes = IOUtils.toByteArray(file.getInputStream());
@@ -56,7 +56,7 @@ public class S3Service {
         metadata.setContentLength(bytes.length);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 
-        s3Client.putObject(new PutObjectRequest(bucket, "profile/"+fileName, byteArrayInputStream, metadata)
+        s3Client.putObject(new PutObjectRequest(bucket, keyword+"/"+fileName, byteArrayInputStream, metadata)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
 
         return fileName;
