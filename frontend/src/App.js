@@ -88,7 +88,7 @@ function App() {
           <MissionContainer />
         </Route>
         <Route exact path="/main/mission/create">
-          <EditorMissionContainer />
+          <EditorMissionContainer type="create" />
         </Route>
         <Route exact path="/main/mission/update">
 

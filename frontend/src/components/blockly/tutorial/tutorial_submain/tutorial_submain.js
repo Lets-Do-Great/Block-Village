@@ -6,7 +6,7 @@ import TutorialMain3 from '../tutorial_three/tutorial_main_3/tutorial_main_3';
 
 const TutorialSubmain = (props) => {
   // state
-  const [stage, setStage] = useState(3);
+  const [stage, setStage] = useState(1);
 
   const tutorial_one = {
     id: 1,
