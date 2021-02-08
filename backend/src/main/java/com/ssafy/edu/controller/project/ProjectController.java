@@ -6,7 +6,7 @@ import com.ssafy.edu.model.project.Response.ProjectFavoriteResponse;
 import com.ssafy.edu.model.project.Response.ProjectPageResponse;
 import com.ssafy.edu.model.project.Response.ProjectResponse;
 import com.ssafy.edu.service.project.ProjectService;
-import com.ssafy.edu.service.s3Service.s3Service;
+import com.ssafy.edu.service.s3Service.S3Service;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -22,7 +22,7 @@ import java.io.IOException;
         @ApiResponse(code = 404, message = "Not Found", response = ProjectResponse.class),
         @ApiResponse(code = 500, message = "Failure", response = ProjectResponse.class)})
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://i4b205.p.ssafy.io:3000"})
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
@@ -30,7 +30,7 @@ public class ProjectController {
     ProjectService projectService;
 
     @Autowired
-    s3Service s3Service;
+    S3Service s3Service;
 
     @ApiOperation(value = "전체 작품 조회", notes = "")
     @PostMapping()
@@ -91,7 +91,7 @@ public class ProjectController {
     @ApiOperation(value = "작품 이미지 저장", notes = "작품의 이미지를 저장합니다.")
     @PostMapping("/img/{userEmail}/{projectId}")
     public ResponseEntity<ProjectResponse> uploadProjectImage(@RequestParam MultipartFile file, @PathVariable("userEmail") String userEmail, @PathVariable("projectId") Long projectId) throws IOException {
-        String imagePath = s3Service.upload(file);
+        String imagePath = s3Service.upload(file, "project");
         return projectService.uploadMissionImage(userEmail, projectId, imagePath);
     }
 }

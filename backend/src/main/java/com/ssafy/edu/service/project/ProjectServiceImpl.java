@@ -17,7 +17,7 @@ import com.ssafy.edu.repository.UserJpaRepository;
 import com.ssafy.edu.repository.project.ProjectCommentJpaRepository;
 import com.ssafy.edu.repository.project.ProjectFavoriteJpaRepository;
 import com.ssafy.edu.repository.project.ProjectJpaRepository;
-import com.ssafy.edu.service.s3Service.s3ServiceImpl;
+import com.ssafy.edu.service.s3Service.S3ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,6 +42,9 @@ public class ProjectServiceImpl implements ProjectService{
     ProjectFavoriteJpaRepository projectFavoriteJpaRepository;
     @Autowired
     ProjectCommentJpaRepository projectCommentJpaRepository;
+    @Autowired
+    S3ServiceImpl s3Service;
+
     @Override
     public ResponseEntity<ProjectPageResponse> findAll(ProjectSearchTypeRequest projectSearchTypeRequest) {
         ResponseEntity response;
@@ -455,7 +458,7 @@ public class ProjectServiceImpl implements ProjectService{
 
         if(projectOptional.isPresent()){
             Project project = projectOptional.get();
-            project.setProjectImg("https://" + s3ServiceImpl.CLOUD_FRONT_DOMAIN_NAME + "/" + imagePath);
+            project.setProjectImg("https://" + s3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + imagePath);
 
             projectJpaRepository.save(project);
             result.status = true;
