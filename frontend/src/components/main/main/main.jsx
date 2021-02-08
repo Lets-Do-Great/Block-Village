@@ -8,7 +8,8 @@ import Navbar from '../navbar/navbar';
 import ScrollContainer from 'react-indiana-drag-scroll'
 
 import * as UserAction from '../../../modules/user';
-import { useDispatch } from 'react-redux';
+import * as BlockAction from '../../../modules/block';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Main = (props) => {
   const history = useHistory();
@@ -103,8 +104,7 @@ const Main = (props) => {
   }
 
 
-  // 온 클릭 def ===============================
-
+  // 온 클릭 def ==========================================
   const goChalenge = () => history.push("/main/challenge");
   const gomakeMission = () => history.push("/main/mission/create");
   const goparticipateMission = () => history.push("/main/mission");
@@ -117,9 +117,16 @@ const Main = (props) => {
   const goboard = () => history.push("/");
   const goservice = () => history.push("/");
   const gostore = () => history.push("/main/block_store");
+  //=======================================================
 
-  //============================================
+ 
+  //main api 모음=====myblock 불러오기=======================
+  const userInfo = useSelector(state => state.user.userInfo);
 
+  useEffect(() => {
+    dispatch(BlockAction.getMyBlocks({email: userInfo.email}));
+  })
+  //============================================================
 
   return (
     <div className={styles.body} ref={back_back} onClick={changeSize}>

@@ -9,6 +9,8 @@
   display: flex;
   flex: 1;
   padding: 0.8em;
+  background: url(../../../../images/block_store/block_store_concept_1.png);
+  background-size: 100% 100%;
 }
 
 .cart__bill {

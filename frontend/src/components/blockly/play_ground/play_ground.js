@@ -81,6 +81,24 @@ const PlayGround = ({ javascript_code }) => {
     const turn_angle = (angle) => {
       cur_angle += angle * Math.PI / 180;
     }
+
+
+
+
+    const turn_right = () => {
+      cur_angle -= 90 * Math.PI / 180;
+    }
+
+    const turn_left = () => {
+      cur_angle += 90 * Math.PI / 180;
+    }
+    const turn_back = () => {
+      cur_angle += 180 * Math.PI / 180;
+    }
+
+
+
+
   
     const set_angle = (angle) => {
       cur_angle = angle * Math.PI / 180;

@@ -74,12 +74,12 @@ const MissionOnMain = ({ formInfo, onChangeJavascript, onChangeXml, onChangeSucc
     },
     'componentStyles' : {
       // 'workspaceBackgroundColour': '#1e1e1e',
-      'toolboxBackgroundColour': '#F7C469',
+      'toolboxBackgroundColour': '#C9CACA',
       'toolboxForegroundColour': '#FFFFFF',
-      'flyoutBackgroundColour': '#FFDEA4',
+      'flyoutBackgroundColour': '#EFEFEF',
       'flyoutForegroundColour': '#1e1e1e',
       'flyoutOpacity': '#1e1e1e',
-      'scrollbarColour': '#EFA420',
+      'scrollbarColour': '#EFEFEF',
       'scrollbarOpacity': 0.5,
       // 'insertionMarkerColour': '#1e1e1e',
       // 'insertionMarkerOpacity': '#1e1e1e',
@@ -146,7 +146,7 @@ const MissionOnMain = ({ formInfo, onChangeJavascript, onChangeXml, onChangeSucc
                 grid: {
                   spacing: 20,
                   length: 2,
-                  colour: '#FFDEA4',
+                  colour: '#EFEFEF',
                   snap: true,
                 },
                 move:{

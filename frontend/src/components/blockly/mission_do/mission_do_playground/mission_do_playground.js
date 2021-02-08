@@ -71,53 +71,64 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
   // 움직임 
 /////////////////////////////////////////////////////////////////
   
+  const turn_right = () => {
+    cur_angle -= 90 * Math.PI / 180;
+  };
+
+  const turn_left = () => {
+    cur_angle += 90 * Math.PI / 180;
+  };
+
+  const turn_back = () => {
+    cur_angle += 180 * Math.PI / 180;
+  };
 
   const move_x = (x_distance) => {
     x += x_distance;
     move.push([x, y]);
-  }
+  };
 
   const move_y = (y_distance) => {
     y += y_distance;
     move.push([x, y]);
-  }
+  };
 
   const point_x = (x_point) => {
     x = x_point;
     move.push([x, y]);
-  }
+  };
 
   const point_y = (y_point) => {
     y = y_point;
     move.push([x,y]);
-  }
+  };
 
   const point_x_y = (x_point, y_point) => {
     x = x_point;
     y = y_point;
     move.push([x, y]);
-  }
+  };
 
   const turn_angle = (angle) => {
     cur_angle += angle * Math.PI / 180;
-  }
+  };
 
   const set_angle = (angle) => {
     cur_angle = angle * Math.PI / 180;
-  }
+  };
 
   const set_angle_move = (angle, distance) => {
     var new_angle = angle * Math.PI / 180;
     x += distance * Math.cos(new_angle);
     y += distance * Math.sin(new_angle);
     move.push([x, y]);
-  }
+  };
 
   const move_forward = (text_distance) => {
     x += text_distance * Math.cos(cur_angle);
     y += text_distance * Math.sin(cur_angle);
     move.push([x, y]);
-  }
+  };
 
   // 판단
   /////////////////////////////////////////////////////////////////

@@ -84,7 +84,17 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
 
   // 움직임 
 /////////////////////////////////////////////////////////////////
-  
+  const turn_right = () => {
+    cur_angle -= 90 * Math.PI / 180;
+  }
+
+  const turn_left = () => {
+    cur_angle += 90 * Math.PI / 180;
+  }
+  const turn_back = () => {
+    cur_angle += 180 * Math.PI / 180;
+  }
+  /////////////////////
 
   const move_x = (x_distance) => {
     x += x_distance;

@@ -42,7 +42,7 @@ const TutorialSubmain = (props) => {
     title: '튜토리얼 2',
     initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml">' +
                 '<Block type="start_button" x="70" y="30"></Block>' +
-                '<Block type="turn_angle" x="70" y="170"></Block>' +
+                '<Block type="turn_left" x="70" y="170"></Block>' +
                 '</xml>',
     toolboxCategories: [
       {
@@ -57,7 +57,7 @@ const TutorialSubmain = (props) => {
         colour: '#8FC31F',
         blocks: [
           {type: 'move_forward_1'},
-          {type: 'turn_angle'},
+          {type: 'turn_left'},
         ],
       },
     ],
@@ -71,9 +71,8 @@ const TutorialSubmain = (props) => {
     title: '튜토리얼 3',
     initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml">' +
                 '<Block type="start_button" x="70" y="30"></Block>' +
-                '<Block type="turn_angle" x="70" y="170"></Block>' +
-                '<Block type="number" x="10" y="320"></Block>' +
-                '<Block type="repeat_times" x="70" y="320"></Block>' +
+                '<Block type="number" x="10" y="170"></Block>' +
+                '<Block type="repeat_times" x="70" y="170"></Block>' +
                 '</xml>',
     toolboxCategories: [
       {
@@ -89,7 +88,8 @@ const TutorialSubmain = (props) => {
         colour: '#8FC31F',
         blocks: [
           {type: 'move_forward_1'},
-          {type: 'turn_angle'},
+          {type: 'turn_right'},
+          {type: 'turn_left'},
         ],
       },
       {

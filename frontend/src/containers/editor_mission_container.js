@@ -35,6 +35,7 @@ const EditorMissionContainer = ( { type }) => {
 
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
+  const myBlocksInfo = useSelector(state => state.block.myBlocksInfo);
   const dispatch = useDispatch();
 
 
@@ -66,6 +67,7 @@ const EditorMissionContainer = ( { type }) => {
     <>
     { type === 'create' && 
       <MissionCreateSubmain 
+        myBlocksInfo={myBlocksInfo}
         onChangeState={onChangeState}
         onSetMission={onSetMission}
       />

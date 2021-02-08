@@ -64,7 +64,7 @@ Blockly.Blocks['block_judgment_notequal'] = {
     this.appendValueInput("e1")
         .setCheck("Number");
     this.appendDummyInput()
-        .appendField("<");
+        .appendField("!=");
     this.appendValueInput("e2")
         .setCheck("Number");
     this.setInputsInline(true);
@@ -81,7 +81,7 @@ Blockly.Blocks['block_judgment_strictinequality_leftequal'] = {
     this.appendValueInput("e1")
         .setCheck("Number");
     this.appendDummyInput()
-        .appendField("<");
+        .appendField(">=");
     this.appendValueInput("e2")
         .setCheck("Number");
     this.setInputsInline(true);
@@ -100,7 +100,7 @@ Blockly.Blocks['block_judgment_strictinequality_rightequal'] = {
     this.appendValueInput("e1")
         .setCheck("Number");
     this.appendDummyInput()
-        .appendField("<");
+        .appendField("<=");
     this.appendValueInput("e2")
         .setCheck("Number");
     this.setInputsInline(true);
