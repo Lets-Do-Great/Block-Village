@@ -2,7 +2,6 @@ package com.ssafy.edu.service.user;
 
 import com.ssafy.edu.model.user.*;
 import com.ssafy.edu.repository.UserJpaRepository;
-import com.ssafy.edu.service.s3Service.S3Service;
 import com.ssafy.edu.service.s3Service.S3ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
