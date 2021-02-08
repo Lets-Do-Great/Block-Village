@@ -15,8 +15,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/**") // 기본 적용 경로 - contextPath가 되어야함.
-                .excludePathPatterns("/users/do/**", "/users/file/**", "/swagger-ui.html"); // 적용 제외 경로
+                .addPathPatterns("**") // 기본 적용 경로
+                .excludePathPatterns("api/users/do/**", "api/users/file/**", "api/swagger-ui.html"); // 적용 제외 경로
     }
 
     // Interceptor를 이용해서 처리하므로 전역의 Cors Origin 처리를 해준다.
