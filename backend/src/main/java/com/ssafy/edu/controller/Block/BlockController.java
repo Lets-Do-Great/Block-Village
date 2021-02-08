@@ -1,4 +1,4 @@
-package com.ssafy.edu.controller.user;
+package com.ssafy.edu.controller.Block;
 
 
 import com.ssafy.edu.model.block.BlockBuyRequest;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
-@RequestMapping("/blocks")
+@RequestMapping("blocks")
 public class BlockController {
 
     @Autowired

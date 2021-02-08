@@ -3,9 +3,8 @@ package com.ssafy.edu.service.user;
 import java.util.Date;
 import java.util.Map;
 
+import com.ssafy.edu.model.user.LoginResponse;
 import io.jsonwebtoken.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,16 +15,16 @@ public class JwtServiceImpl implements JwtService{
     @Value("${JWT.SECRET}")
     private String SECRET;
 
-    private Long expireMin = 5L;
+    private Long expireMin = 24L;
 
     @Override
-    public String createToken(String email) {
+    public String createToken(LoginResponse loginResponse) {
         JwtBuilder jwtBuilder = Jwts.builder();
 
         jwtBuilder.setHeaderParam("typ", "JWT")
                 .setSubject("Login Token")
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * expireMin))
-                .claim("email", email)
+                .claim("userInfo", loginResponse)
                 .signWith(SignatureAlgorithm.HS256, SECRET.getBytes());
 
         String jwt = jwtBuilder.compact();
@@ -40,14 +39,8 @@ public class JwtServiceImpl implements JwtService{
     }
 
     //	JWT Token을 분석해서 필요한 정보를 반환.
-    public Map<String, Object> getInfo(String jwt) {
-        Jws<Claims> claims = null;
-        try {
-            claims = Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(jwt);
-        } catch (final Exception e) {
-            throw new RuntimeException();
-        }
+    public Map<String, Object> getInfo(String jwt) throws Exception {
+        Jws<Claims> claims = Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(jwt);
         return claims.getBody();
     }
-
 }

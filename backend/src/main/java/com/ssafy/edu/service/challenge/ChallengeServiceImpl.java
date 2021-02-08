@@ -27,23 +27,26 @@ public class ChallengeServiceImpl implements ChallengeService{
     private ChallengeUsersJpaRepository challengeUsersJpaRepository;
 
     @Override
-    public ResponseEntity<ChallengeResponse> getChallengeList(){
+    public ResponseEntity<ChallengeResponse> getChallengeList(String email){
+        Optional<User> userOpt = userJpaRepository.findByEmail(email);
         ChallengeResponse result = new ChallengeResponse();
         List<Challenge> challengeList = challengeJpaRepository.findAll();
         if(!challengeList.isEmpty()){
-            List<ChallengeListForm> challengeListFormList = new ArrayList<>();
+            List<ChallengeForm> challengeFormList = new ArrayList<>();
             for(Challenge ch: challengeList){
-                ChallengeListForm tmp_form = ChallengeListForm.builder()
+                Optional<ChallengeUser> tmp_challengeuser = challengeUsersJpaRepository.findByUserAndChallenge(userOpt.get(), ch);
+                ChallengeForm tmp_form = ChallengeForm.builder()
                         .challengeId(ch.getId())
                         .title(ch.getTitle())
-                        .Image(ch.getImage())
-                        .StartDate(ch.getStartDate())
-                        .EndDate(ch.getEndDate())
+                        .image(ch.getImage())
+                        .startDate(ch.getStartDate())
+                        .endDate(ch.getEndDate())
                         .peopleCnt(ch.getPeopleCnt())
+                        .todo(tmp_challengeuser.get().getDone())
                         .build();
-                challengeListFormList.add(tmp_form);
+                challengeFormList.add(tmp_form);
             }
-            result.data = challengeListFormList;
+            result.data = challengeFormList;
             result.status = true;
         }else {
             result.status = false;
@@ -63,9 +66,9 @@ public class ChallengeServiceImpl implements ChallengeService{
                 ChallengeListForm tmp_form = ChallengeListForm.builder()
                         .challengeId(tmp_challenge.getId())
                         .title(tmp_challenge.getTitle())
-                        .Image(tmp_challenge.getImage())
-                        .StartDate(tmp_challenge.getStartDate())
-                        .EndDate(tmp_challenge.getEndDate())
+                        .image(tmp_challenge.getImage())
+                        .startDate(tmp_challenge.getStartDate())
+                        .endDate(tmp_challenge.getEndDate())
                         .peopleCnt(tmp_challenge.getPeopleCnt())
                         .build();
                 challengeListFormList.add(tmp_form);
@@ -94,9 +97,9 @@ public class ChallengeServiceImpl implements ChallengeService{
             ChallengeListForm tmp_form = ChallengeListForm.builder()
                     .challengeId(challengeOpt.get().getId())
                     .title(challengeOpt.get().getTitle())
-                    .Image(challengeOpt.get().getImage())
-                    .StartDate(challengeOpt.get().getStartDate())
-                    .EndDate(challengeOpt.get().getEndDate())
+                    .image(challengeOpt.get().getImage())
+                    .startDate(challengeOpt.get().getStartDate())
+                    .endDate(challengeOpt.get().getEndDate())
                     .peopleCnt(challengeOpt.get().getPeopleCnt())
                     .build();
             if(challengeUserRequest.getTodo() == "done") {

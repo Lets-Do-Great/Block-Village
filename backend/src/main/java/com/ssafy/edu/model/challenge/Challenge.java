@@ -34,6 +34,7 @@ public class Challenge{
 
     private Long peopleCnt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "challenge")
     List<ChallengeUser> challengeUsers = new ArrayList<>();
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8d00230f-4904-4c74-9ec2-46cf52aa13cc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/my_page/my_page_main/my_page_main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my_page/my_page_main/my_page_main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/mission_container.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/mission_container.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/my_mission_container.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/my_mission_container.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/my_page_container.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1nwynqcuXlNyaOvxQ5q2JXbZYKk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8d00230f-4904-4c74-9ec2-46cf52aa13cc" name="Default Changelist" comment="" />
+      <created>1612315620547</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1612315620547</updated>
+      <workItem from="1612315622756" duration="15000" />
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

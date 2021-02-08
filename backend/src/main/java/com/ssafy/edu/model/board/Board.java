@@ -47,6 +47,7 @@ public class Board extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Builder.Default
     @OneToMany(mappedBy = "board")
     @JsonManagedReference
     List<BoardComment> boardCommentList = new ArrayList<>();

@@ -1,11 +1,10 @@
-package com.ssafy.edu.controller.user;
+package com.ssafy.edu.controller.Challenge;
 
 
 import com.ssafy.edu.model.board.BoardResponse;
 import com.ssafy.edu.model.challenge.ChallengeResponse;
 import com.ssafy.edu.model.challenge.ChallengeUserRequest;
 import com.ssafy.edu.service.challenge.ChallengeServiceImpl;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -20,16 +19,16 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
-@RequestMapping("/challenges")
+@RequestMapping("challenges")
 public class ChallengeController {
 
     @Autowired
     private ChallengeServiceImpl challengeService;
 
     @ApiOperation(value = "전체 챌린지 목록 불러오기")
-    @GetMapping("")
-    public ResponseEntity<ChallengeResponse> getChallengeList(){
-        return challengeService.getChallengeList();
+    @GetMapping("/{email}")
+    public ResponseEntity<ChallengeResponse> getChallengeList(@PathVariable("email")String email){
+        return challengeService.getChallengeList(email);
     }
 
     @ApiOperation(value = "특정 유저가 참가한 챌린지 목록 불러오기")

@@ -35,6 +35,7 @@ public class Block {
 
     private int price;
 
+    @Builder.Default
     @OneToMany(mappedBy = "block")
     List<BlockUsers> blockUsers = new ArrayList<>();
 

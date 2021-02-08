@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ListForm from '../components/list/list_form/list_form';
 import ComponentDetailCardForm from '../components/list/component_detail_card_form/component_detail_card_form';
-import CommentForm from '../components/comment_form/comment_form';
+import CommentContainer from '../containers/comment_container';
 import * as AnswerAction from '../modules/answer';
 
 const AnswerContainer = ({ match }) => {
@@ -26,6 +26,10 @@ const AnswerContainer = ({ match }) => {
             getAnswerCommentList();
         }
     }, [ selectedAnswer ]);
+
+    const closeDetail = () => {
+        setDetail(false);
+    }
 
     /*
     api 요청 보내는 함수
@@ -137,14 +141,12 @@ const AnswerContainer = ({ match }) => {
                 setLike={likeAnswer}
                 setDislike={dislikeAnswer}
                 userInfo={userInfo.email}
-                setOpenDetail={setDetail}
+                closeDetail={closeDetail}
                 onDelete={deleteAnswer}/>
-            <CommentForm
+            <CommentContainer
                 userInfo={userInfo.email}
-                commentList={commentList}
-                setComment={setAnswerComment}
-                modifyComment={modifyAnswerComment}
-                deleteComment={deleteAnswerComment}/>
+                type="answer"
+                selectedId={selectedAnswer.id}/>
             </>
         : <ListForm
             type="answer"

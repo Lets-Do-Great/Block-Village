@@ -123,12 +123,10 @@ const MissionContainer = () => {
                 onChangeSearch={onChangeSearch}
                 onChangeSearchType={onChangeSearchType}
                 onClickEnter={onClickEnter}
-                search={search}
-            /> 
+                search={search}/> 
 
             <SearchType
-                onChangeSearchType={onChangeSearchType}
-            />
+                onChangeSearchType={onChangeSearchType}/>
 
             <ListForm
                 type="mission"

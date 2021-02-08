@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const CommentInputForm = ({ setComment }) => {
     const [ setInput, setSetInput ] = useState('');
@@ -28,7 +28,7 @@ const CommentListForm = ({ userInfo, commentList,
                 id={comment.id}
                 userInfo={userInfo}
                 email={comment.email}
-                nickname={comment.id}
+                nickname={comment.nickname}
                 comment={comment.comment}
                 date={comment.updated_at}
                 modifyComment={modifyComment}

@@ -3,14 +3,10 @@ import styles from './component_detail_card_form.module.css';
 import * as Icon from 'react-icons/md';
 
 const ComponentDetailCardForm = ({ detail, setLike, setDislike, 
-                            userInfo, setOpenDetail, onDelete }) => {
+                            userInfo, closeDetail, onModify, onDelete }) => {
 
     const {email, nickName, title, created_at, updated_at, favorite,
         content, difficulty, likeCnt, readCnt } = detail;
-
-    const goBack = () => {
-        setOpenDetail(false);
-    }
 
     const changeLike = () => {
         if(favorite){
@@ -23,14 +19,14 @@ const ComponentDetailCardForm = ({ detail, setLike, setDislike,
     const onSubmitDelete = () => {
         try{ 
             onDelete();
-            goBack();
+            closeDetail();
         } catch(e) {
             console.log(e);
         }
     }
 
     return (<>
-        <button onClick={goBack}>뒤로가기</button>
+        <button onClick={closeDetail}>뒤로가기</button>
 
         <div className={styles.title}>{ title }</div>
         <div 
@@ -60,7 +56,7 @@ const ComponentDetailCardForm = ({ detail, setLike, setDislike,
         <div className={styles.content}>{ content }</div>
 
         { userInfo === email && (<>
-            <button>수정하기</button>
+            <button onClick={onModify}>수정하기</button>
             <button onClick={onSubmitDelete}>삭제하기</button>
         </>)}
     </>);
