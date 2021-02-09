@@ -16,6 +16,7 @@ public class BoardCommentResponse {
     Long commentId;
     String content;
     String email;
+    String nickname;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 

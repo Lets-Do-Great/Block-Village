@@ -41,7 +41,7 @@ public class BoardController {
         return boardService.getBoardList(pageable);
     }
 
-    @ApiOperation(value = "공지사항 조회", notes = "{boardId}번 게시글과 댓글들을 불러옵니다.", authorizations = { @Authorization(value="jwtToken") })
+    @ApiOperation(value = "공지사항 조회", notes = "{boardId}번 게시글을 불러옵니다.", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping("/{boardId}")
     public ResponseEntity<BoardBasicResponse> getBoard(@PathVariable("boardId") Long id){
         return boardService.getBoard(id);
@@ -63,6 +63,12 @@ public class BoardController {
     @DeleteMapping("/{boardId}")
     public ResponseEntity<BoardBasicResponse> deleteBoard(@PathVariable("boardId") Long id){
         return boardService.deleteBoard(id);
+    }
+
+    @ApiOperation(value = "공지사항 댓글 조회", notes = "{boardId}번째 게시글에 있는 댓글들을 조회합니다.", authorizations = { @Authorization(value="jwtToken") })
+    @GetMapping("/{boardId}/comments")
+    public ResponseEntity<BoardBasicResponse> getCommentList(@PathVariable("boardId") Long id){
+        return boardCommentService.getCommentList(id);
     }
 
     @ApiOperation(value = "댓글 작성", notes = "{boardId}번째 게시글에 댓글을 작성합니다.", authorizations = { @Authorization(value="jwtToken") })
