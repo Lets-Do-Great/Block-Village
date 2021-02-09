@@ -1,6 +1,7 @@
 import React from 'react';
 import MyInfoForm from '../my_info_form/my_info_form';
 import styles from './my_info_read.module.css';
+import * as Icon from 'react-icons/md';
 
 const MyPageRead = ({ userInfo, setType, deleteInfo, closeModal }) => {
 
@@ -9,10 +10,10 @@ const MyPageRead = ({ userInfo, setType, deleteInfo, closeModal }) => {
   }
 
   return (
-  <>
-    <button 
+  <div className={styles.my_info_read}>
+    <div 
       className={styles.close}
-      onClick={closeModal}>닫기</button>
+      onClick={closeModal}><Icon.MdHighlightOff/></div>
     <MyInfoForm
       userInfo={userInfo}/>
     <div className={styles.btn_my_info_form}>
@@ -23,7 +24,7 @@ const MyPageRead = ({ userInfo, setType, deleteInfo, closeModal }) => {
         className={styles.btn_delete}
         onClick={deleteInfo}>탈퇴하기</button>
     </div>
-  </>
+  </div>
   );
 };
 

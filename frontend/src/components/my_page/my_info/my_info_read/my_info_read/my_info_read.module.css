@@ -3,6 +3,10 @@
     clear: both;
 }
 
+.my_info_read{
+    position: relative;
+}
+
 .btn_modify{
     width: 35%;
     height: 45px;
@@ -29,4 +33,17 @@
     display: inline-block;
     margin: 2%;
     margin-left: 2%;
+}
+
+.close {
+    top: -4px;
+    right: 0px;
+    position: absolute;
+    font-size: 40px;
+    color: darkgray;
+    z-index: 1;
+}
+
+.close:hover{
+    color: red;
 }
