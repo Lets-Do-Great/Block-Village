@@ -84,7 +84,7 @@ public class UserController {
         return "authentication";
     }
 
-    @ApiOperation(value = "마일리지")
+    @ApiOperation(value = "마일리지", authorizations = { @Authorization(value="jwtToken") })
     @PostMapping("/do/mileage")
     @ResponseBody
     public ResponseEntity<UserResponse> mileage(@RequestBody MileageRequest mileageRequest){
