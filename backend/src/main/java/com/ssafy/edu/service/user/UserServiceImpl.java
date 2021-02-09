@@ -243,5 +243,28 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public ResponseEntity<UserResponse> mileage(MileageRequest mileageRequest){
+        UserResponse result= new UserResponse();
+        Optional<User> userOpt = userJpaRepository.findByEmail(mileageRequest.getEmail());
+        if(userOpt.isPresent()) {
+            LoginResponse loginResponse = LoginResponse.builder()
+                    .email(userOpt.get().getEmail())
+                    .nickname(userOpt.get().getNickname())
+                    .mileage(userOpt.get().getMileage() + mileageRequest.getMileage())
+                    .introduction(userOpt.get().getIntroduction())
+                    .admin(userOpt.get().isAdmin())
+                    .profileImage(userOpt.get().getProfileImage())
+                    .build();
+            userOpt.get().setMileage(userOpt.get().getMileage() + mileageRequest.getMileage());
+            User save = userJpaRepository.save(userOpt.get());
+            result.data = loginResponse;
+            result.status = true;
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        result.status = false;
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 
 }
