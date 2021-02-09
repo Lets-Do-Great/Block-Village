@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BlocklyNavbar from '../../blockly_navbar/blockly_navbar';
 import ChallengeList from '../challenge_list/challenge_list';
 import styles from './challenge_main.module.css'
 
 const ChallengeMain = ({ challengeList, setTodoChallenge }) => {
-  const [challenges, setChallenges] = useState([
-    {
-      challengeId: 1,
-      title: '챌린지1 제목',
-      startDate: '2021.01.15',
-      endDate: '2021.02.10',
-      peopleCnt: 1,
-      image: '../../../../images/bug.png',
-    },
-    {
-      challengeId: 2,
-      title: '챌린지2 제목',
-      startDate: '2021.03.15',
-      endDate: '2021.08.10',
-      peopleCnt: 2,
-      image: '../../../../images/bug.png',
-    },
-    {
-      challengeId: 3,
-      title: '챌린지3 제목',
-      startDate: '2021.05.15',
-      endDate: '2021.10.10',
-      peopleCnt: 3,
-      image: '../../../../images/bug.png',
-    },
-  ]);
+  // const [challenges, setChallenges] = useState(
+  //   {
+  //     challengeId: 1,
+  //     title: '챌린지1 제목',
+  //     startDate: '2021.01.15',
+  //     endDate: '2021.02.10',
+  //     peopleCnt: 1,
+  //     image: '../../../../images/bug.png',
+  //   },
+  //   {
+  //     challengeId: 2,
+  //     title: '챌린지2 제목',
+  //     startDate: '2021.03.15',
+  //     endDate: '2021.08.10',
+  //     peopleCnt: 2,
+  //     image: '../../../../images/bug.png',
+  //   },
+  //   {
+  //     challengeId: 3,
+  //     title: '챌린지3 제목',
+  //     startDate: '2021.05.15',
+  //     endDate: '2021.10.10',
+  //     peopleCnt: 3,
+  //     image: '../../../../images/bug.png',
+  //   },
+  // );
 
   return (
     <div className={styles.body}>
@@ -43,9 +43,9 @@ const ChallengeMain = ({ challengeList, setTodoChallenge }) => {
             <div className={styles.challenge_people_cnt}>참가자 수</div>
           </div>
           {
-            challenges.map((challenge) => (
+            challengeList.map((challenge) => (
               <ChallengeList 
-                key={challenge.c_num}
+                key={challenge.challengeId}
                 challenge={challenge}
                 setTodoChallenge={setTodoChallenge}
               />

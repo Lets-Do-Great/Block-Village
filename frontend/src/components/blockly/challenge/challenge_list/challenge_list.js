@@ -4,8 +4,12 @@ import styles from './challenge_list.module.css'
 
 const ChallengeList = ({ challenge, setTodoChallenge }) => {
   const [detail, setDetail] = useState(false);
+
+  const onClick = () => {
+    setDetail(!detail);
+  }
   
-  const { challengeId, startDate, endDate, peopleCnt, img, todo } = challenge;
+  const { challengeId, title, startDate, endDate, peopleCnt, image, todo } = challenge;
 
   return (
     <div className={styles.body}>
@@ -13,8 +17,8 @@ const ChallengeList = ({ challenge, setTodoChallenge }) => {
         { challengeId }</div>
       <div 
         className={styles.challenge_name}
-        onClick={() => { setDetail(!detail) }}>
-          {challenge.title}</div>
+        onClick={onClick}>
+          {title}</div>
       <div 
         className={styles.challenge_date}>
           { startDate } - { endDate }</div>
@@ -25,7 +29,7 @@ const ChallengeList = ({ challenge, setTodoChallenge }) => {
       { detail && 
       <ChallengeDetail 
           id={challengeId}
-          img={img}
+          image={image}
           setTodoChallenge={setTodoChallenge}
           todo={todo}
       />}
