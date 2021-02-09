@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MissionCreateSubmain from '../components/blockly/mission_create/mission_create_submain/mission_create_submain';
 import MissionModifyForm from '../components/blockly/mission_modify_form/mission_modify_form';
 import * as MissionAction from '../modules/mission';
+import * as BlockAction from '../modules/block';
 
 const EditorMissionContainer = ( { type }) => {
   const [createInfo, setCreateInfo] = useState({
@@ -62,6 +63,11 @@ const EditorMissionContainer = ( { type }) => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    console.log(localStorage.getItem('token'));
+    dispatch(BlockAction.getMyBlocks({email: userInfo.email}));
+  }, [])
 
   return (
     <>

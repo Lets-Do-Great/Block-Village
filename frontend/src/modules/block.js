@@ -118,21 +118,18 @@ export default applyPenders(blcokReducer, [
     type: GET_MY_BLOCKS,
     onSuccess: (state, action) => {
       const response = action.payload;
-      console.log(response);
-
       if(response.status === 200){
         if(response.data.status){
-            // return updateObject(state, {
-            //     ...state,
-            //     missionList: response.data.data[0],
-            //     pageInfo: response.data.data[1],
-            // });
+          return updateObject(state, {
+            ...state,
+            myBlocksInfo: response.data.data,
+          });
         } else{
-            alert("내 블럭을 불러오는데 문제가 발생했습니다.");
+          alert("내 블럭을 불러오는데 문제가 발생했습니다.");
         }
       } else { // 에러 발생
-          alert("블럭을 불러오는데 불러오는데 문제가 발생했습니다.");
-          console.log(action.payload.status);
+        alert("블럭을 불러오는데 불러오는데 문제가 발생했습니다.");
+        console.log(action.payload.status);
       }
       return updateObject(state, state);
     },
@@ -180,11 +177,11 @@ export default applyPenders(blcokReducer, [
             //     pageInfo: response.data.data[1],
             // });
         } else{
-            alert("블럭을 사는데 문제가 발생했습니다.");
+          alert("블럭을 사는데 문제가 발생했습니다.");
         }
       } else { // 에러 발생
-          alert("ㅇ블럭을 사는데 문제가 발생했습니다.");
-          console.log(action.payload.status);
+        alert("ㅇ블럭을 사는데 문제가 발생했습니다.");
+        console.log(action.payload.status);
       }
       return updateObject(state, state);
     },

@@ -10,9 +10,9 @@ export const getAllBlocks = ({ email }) => {
 
 // 내 블럭 불러오기
 export const getMyBlocks = ({ email }) => {
-  console.log(email);
+  console.log(client.defaults);
   return client({
-    url: `blocks /myblocks/${email}`,
+    url: `blocks/myblocks/${email}`,
     method: 'get',
   });
 };
@@ -22,6 +22,6 @@ export const buyBlocks = ({ email, blockId }) => {
   return client({
     url: `blocks/buy/${email}`,
     method: 'post',
-    data: { blockId }
+    data: { blockId },
   });
 };

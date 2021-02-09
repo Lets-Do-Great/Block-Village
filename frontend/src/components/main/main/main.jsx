@@ -8,8 +8,8 @@ import Navbar from '../navbar/navbar';
 import ScrollContainer from 'react-indiana-drag-scroll'
 
 import * as UserAction from '../../../modules/user';
-import * as BlockAction from '../../../modules/block';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 
 const Main = (props) => {
   const history = useHistory();
@@ -121,12 +121,7 @@ const Main = (props) => {
 
  
   //main api 모음=====myblock 불러오기=======================
-  const userInfo = useSelector(state => state.user.userInfo);
-
-  useEffect(() => {
-    console.log(userInfo);
-    dispatch(BlockAction.getMyBlocks({email: userInfo.email}));
-  }, [])
+  
   //============================================================
 
   return (
