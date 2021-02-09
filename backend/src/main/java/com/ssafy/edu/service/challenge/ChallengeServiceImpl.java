@@ -42,16 +42,18 @@ public class ChallengeServiceImpl implements ChallengeService{
                         .startDate(ch.getStartDate())
                         .endDate(ch.getEndDate())
                         .peopleCnt(ch.getPeopleCnt())
+                        .finish(ch.getFinish())
                         .todo(tmp_challengeuser.get().getDone())
                         .build();
                 challengeFormList.add(tmp_form);
             }
             result.data = challengeFormList;
             result.status = true;
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Override
@@ -70,6 +72,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                         .startDate(tmp_challenge.getStartDate())
                         .endDate(tmp_challenge.getEndDate())
                         .peopleCnt(tmp_challenge.getPeopleCnt())
+                        .finish(tmp_challenge.getFinish())
                         .build();
                 challengeListFormList.add(tmp_form);
             }
@@ -86,7 +89,7 @@ public class ChallengeServiceImpl implements ChallengeService{
         ChallengeResponse result = new ChallengeResponse();
         Optional<User> userOpt = userJpaRepository.findByEmail(challengeUserRequest.getEmail());
         Optional<Challenge> challengeOpt = challengeJpaRepository.findById(challengeId);
-        if(userOpt.isPresent()){
+        if(userOpt.isPresent() && !challengeOpt.get().getFinish()){
             ChallengeUser challengeUser = ChallengeUser.builder()
                     .user(userOpt.get())
                     .challenge(challengeOpt.get())
@@ -101,6 +104,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                     .startDate(challengeOpt.get().getStartDate())
                     .endDate(challengeOpt.get().getEndDate())
                     .peopleCnt(challengeOpt.get().getPeopleCnt())
+                    .finish(challengeOpt.get().getFinish())
                     .build();
             if(challengeUserRequest.getTodo() == "done") {
                 Long tmp_people = tmp_form.getPeopleCnt();
