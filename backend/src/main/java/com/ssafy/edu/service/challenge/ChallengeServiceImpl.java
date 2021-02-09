@@ -49,10 +49,11 @@ public class ChallengeServiceImpl implements ChallengeService{
             }
             result.data = challengeFormList;
             result.status = true;
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Override
