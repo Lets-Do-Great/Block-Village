@@ -31,7 +31,7 @@ public class ChallengeServiceImpl implements ChallengeService{
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
         ChallengeResponse result = new ChallengeResponse();
         List<Challenge> challengeList = challengeJpaRepository.findAll();
-        if(!challengeList.isEmpty()){
+        if(!challengeList.isEmpty() && userOpt.isPresent()){
             List<ChallengeForm> challengeFormList = new ArrayList<>();
             for(Challenge ch: challengeList){
                 Optional<ChallengeUser> tmp_challengeuser = challengeUsersJpaRepository.findByUserAndChallenge(userOpt.get(), ch);
@@ -50,10 +50,9 @@ public class ChallengeServiceImpl implements ChallengeService{
             result.data = challengeFormList;
             result.status = true;
             return new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
-            result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.OK);
         }
+        result.status = false;
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Override
