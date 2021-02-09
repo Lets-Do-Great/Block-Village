@@ -88,7 +88,7 @@ public class ChallengeServiceImpl implements ChallengeService{
         ChallengeResponse result = new ChallengeResponse();
         Optional<User> userOpt = userJpaRepository.findByEmail(challengeUserRequest.getEmail());
         Optional<Challenge> challengeOpt = challengeJpaRepository.findById(challengeId);
-        if(userOpt.isPresent() && challengeOpt.get().getFinish()){
+        if(userOpt.isPresent() && !challengeOpt.get().getFinish()){
             ChallengeUser challengeUser = ChallengeUser.builder()
                     .user(userOpt.get())
                     .challenge(challengeOpt.get())
