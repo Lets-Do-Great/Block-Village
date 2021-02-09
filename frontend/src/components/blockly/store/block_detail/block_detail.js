@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './block_detail.module.css'
 
-const BlockDetail = (props) => {
+const BlockDetail = ({ block, addBillList }) => {
   return (
-    <div className={styles.body}>
+    <div className={styles.body} onClick={() => addBillList(block)}>
       <div className={styles.container}>
 
         <div className={styles.image_box}>
@@ -11,7 +11,7 @@ const BlockDetail = (props) => {
         </div>
 
         <div className={styles.price_box}>
-          <h3>1,000 G</h3>
+          <h3>{block.price}</h3>
         </div>
         
       </div>

@@ -5,6 +5,7 @@ import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
 
 const EditorAnswerContainer = (props) => {
+  const dispatch = useDispatch();
   const [todo, setTodo] = useState('todo');
   const [useDifficulty, setUseDifficulty] = useState(0);
   const [useContent, setUseContent] = useState('');
@@ -74,12 +75,26 @@ const EditorAnswerContainer = (props) => {
     } catch(e) {
       console.log(e);
     }
+  };
+
+  const onGetMyBlocks = async (e) => {
+    try {
+      await dispatch(BlockAction.getMyBlocks({
+        email: userInfo.email
+      }))
+    } catch(e) {
+      console.log(e);
+    }
   }
+
+  useEffect(() => {
+    // console.log(localStorage.getItem('token'));
+    onGetMyBlocks();
+  }, [])
 
   return (
     <>
       <MissionDoSubmain
-        myBlocksInfo={myBlocksInfo}
         missionInfo={selectedMission}
         setUseDifficulty={setUseDifficulty}
         setUseContent={setUseContent}

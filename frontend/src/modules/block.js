@@ -40,8 +40,8 @@ const initialState = {
       name: '시작',
       colour: '#C30D23',
       blocks: [
-        {type: 'start_button',},
-        {type: 'end_button',},
+        // {type: 'start_button',},
+        // {type: 'end_button',},
       ],
     },
     {
@@ -93,23 +93,7 @@ const initialState = {
 }
 
 const blcokReducer = handleActions({
-  // [GET_MY_BLOCKS]: (state, action) => {
-  //   let myNewBlocksInfo = [];
-  //   for (const value of action.payload) {
-  //     myNewBlocksInfo.push(value)
-  //   }
-  //   return updateObject(state, {
-  //     ...initialState,
-  //     myBlocksInfo: myNewBlocksInfo,
-  //   })
-  // },
-
-  // [GET_ALL_BLOCKS]: (state, action) => {
-  //   return updateObject(state, {
-  //     ...initialState,
-  //     allBlcoksInfo: {...action.payload}
-  //   })
-  // },
+  
 }, initialState);
 
 
@@ -118,11 +102,17 @@ export default applyPenders(blcokReducer, [
     type: GET_MY_BLOCKS,
     onSuccess: (state, action) => {
       const response = action.payload;
+      // console.log(response.data.data);
       if(response.status === 200){
         if(response.data.status){
+          let myNewBlocksInfo = [];
+          for (const value of response.data.status) {
+            myNewBlocksInfo.push(value)
+          }
+          console.log(myNewBlocksInfo);
           return updateObject(state, {
             ...state,
-            myBlocksInfo: response.data.data,
+            myBlocksInfo: myNewBlocksInfo,
           });
         } else{
           alert("내 블럭을 불러오는데 문제가 발생했습니다.");
@@ -141,15 +131,14 @@ export default applyPenders(blcokReducer, [
     type: GET_ALL_BLOCKS,
     onSuccess: (state, action) => {
       const response = action.payload;
-      console.log(response);
+      // console.log(response);
 
       if(response.status === 200){
         if(response.data.status){
-            // return updateObject(state, {
-            //     ...state,
-            //     missionList: response.data.data[0],
-            //     pageInfo: response.data.data[1],
-            // });
+          return updateObject(state, {
+            ...state,
+            allBlcoksInfo: response.data.data,
+          });
         } else{
             alert("모든 블럭을 불러오는데 문제가 발생했습니다.");
         }
@@ -171,11 +160,9 @@ export default applyPenders(blcokReducer, [
 
       if(response.status === 200){
         if(response.data.status){
-            // return updateObject(state, {
-            //     ...state,
-            //     missionList: response.data.data[0],
-            //     pageInfo: response.data.data[1],
-            // });
+          return updateObject(state, {
+            ...state,
+          });
         } else{
           alert("블럭을 사는데 문제가 발생했습니다.");
         }

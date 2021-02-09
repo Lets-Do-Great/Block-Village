@@ -65,38 +65,38 @@
     blocks: [
       37{type: 'number'}, -- 0
       38{type: 'addition'}, -- 0
-      39{type: 'subtraction'}, -- 0
-      40{type: 'multiplication'},
-      41{type: 'division'},
-      42{type: 'random_num'},
-      43{type: 'quotient'},
-      44{type: 'remainder'},
-      45{type: 'square'},
-      46{type: 'sqrt'},
-      47{type: 'integer'},
-      48{type: 'roundup'},
-      49{type: 'round'},
-      50{type: 'abs_val'},
+      40{type: 'subtraction'}, -- 0
+      41{type: 'multiplication'},
+      42{type: 'division'},
+      43{type: 'random_num'},
+      44{type: 'quotient'},
+      45{type: 'remainder'},
+      46{type: 'square'},
+      47{type: 'sqrt'},
+      48{type: 'integer'},
+      49{type: 'roundup'},
+      50{type: 'round'},
+      51{type: 'abs_val'},
     ]
   },
   {
     name: '그리기',
     colour: '#7D10C4',
     blocks: [
-      51{type: 'pen_down'},
-      52{type: 'pen_up'},
-      53{type: 'draw_line'},
-      54{type: 'rotate_pen'},
-      55{type: 'change_colour'},
+      52{type: 'pen_down'},
+      53{type: 'pen_up'},
+      54{type: 'draw_line'},
+      55{type: 'rotate_pen'},
+      56{type: 'change_colour'},
     ]
   },
   {
     name: '함수',
     colour: '#CC6666',
     blocks: [
-      56{type: 'variable'},
-      57{type: 'set_variable'},
-      58{type: 'change_variable'},        
+      57{type: 'variable'},
+      58{type: 'set_variable'},
+      59{type: 'change_variable'},        
     ]
   },
 ]

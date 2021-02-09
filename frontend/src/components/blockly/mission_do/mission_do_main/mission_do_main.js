@@ -28,6 +28,7 @@ const MissionOnMain = ({ formInfo, onChangeJavascript, onChangeXml, onChangeSucc
     difficulty,
     javascript,
   } = formInfo;
+  console.log(toolboxCategories);
 
   const [activeDrags, setActiveDrags] = useState(0);
   const [modal, setModal] = useState(true);

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import MissionCreateMain from '../mission_create_main/mission_create_main';
 import MissionCreateModal from '../mission_create_modal/mission_create_modal';
 import styles from './mission_create_submain.module.css';
 
-const MissionCreateSubmain = ({ myBlocksInfo, onChangeState, onSetMission }) => {
+const MissionCreateSubmain = ({ onChangeState, onSetMission }) => {
   const history = useHistory();
+  const myBlocksInfo = useSelector(state => state.block.myBlocksInfo);
 
   const [TCmodal, setTCmodal] = useState(false);
   const [formInfo, setFormInfo] = useState({

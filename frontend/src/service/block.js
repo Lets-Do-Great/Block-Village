@@ -10,7 +10,7 @@ export const getAllBlocks = ({ email }) => {
 
 // 내 블럭 불러오기
 export const getMyBlocks = ({ email }) => {
-  console.log(client.defaults);
+  // console.log(client.defaults);
   return client({
     url: `blocks/myblocks/${email}`,
     method: 'get',

@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import BlockStore from '../components/blockly/store/block_store/block_store';
 import * as BlockAction from '../modules/block';
 
 const BlockStoreContainer = () => {
-  const userInfo = useSelector(state => state.user.userInfo);
-  const allBlcoksInfo = useSelector(state => state.block.allBlcoksInfo);
-  // const myBlocksInfo = useSelector(state => state.block.myBlocksInfo);
   const dispatch = useDispatch();
+  const userInfo = useSelector(state => state.user.userInfo);
 
   // const onGetMyBlocks = async () => {
   //   try {
@@ -19,9 +17,15 @@ const BlockStoreContainer = () => {
   //   }
   // }
 
-  // const getAllBlocks = async () => {
-  //   dispatch(BlockAction.getAllBlocks());
-  // }
+  const getAllBlocks = async () => {
+    try {
+      await dispatch(BlockAction.getAllBlocks({
+        email: userInfo.email
+      }));
+   } catch (error) {
+     console.log(error);
+   }
+  }
 
   const onBuyBlocks = async (e) => {
     // 불확실
@@ -34,15 +38,17 @@ const BlockStoreContainer = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  useEffect(() => {
+    // onGetMyBlocks();
+    getAllBlocks();
+  })
 
   return (
     <>
       <BlockStore 
-        allBlcoksInfo={allBlcoksInfo}
-        // myBlocksInfo={myBlocksInfo}
         onBuyBlocks={onBuyBlocks}
-        // onGetMyBlocks={onGetMyBlocks}
       />
     </>
   );

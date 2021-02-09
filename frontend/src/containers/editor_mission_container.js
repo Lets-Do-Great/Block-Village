@@ -6,6 +6,7 @@ import * as MissionAction from '../modules/mission';
 import * as BlockAction from '../modules/block';
 
 const EditorMissionContainer = ( { type }) => {
+  const dispatch = useDispatch();
   const [createInfo, setCreateInfo] = useState({
     email: '',
     title: '',
@@ -36,8 +37,7 @@ const EditorMissionContainer = ( { type }) => {
 
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
-  const myBlocksInfo = useSelector(state => state.block.myBlocksInfo);
-  const dispatch = useDispatch();
+  
 
 
   const onSetMission = async () => {
@@ -64,16 +64,25 @@ const EditorMissionContainer = ( { type }) => {
     }
   };
 
+  const onGetMyBlocks = async (e) => {
+    try {
+      await dispatch(BlockAction.getMyBlocks({
+        email: userInfo.email
+      }))
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
-    console.log(localStorage.getItem('token'));
-    dispatch(BlockAction.getMyBlocks({email: userInfo.email}));
+    // console.log(localStorage.getItem('token'));
+    onGetMyBlocks();
   }, [])
 
   return (
     <>
     { type === 'create' && 
       <MissionCreateSubmain 
-        myBlocksInfo={myBlocksInfo}
         onChangeState={onChangeState}
         onSetMission={onSetMission}
       />
