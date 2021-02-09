@@ -25,22 +25,22 @@ function App() {
   const [ userInfoFromToken, setUserInfoFromToken ] = useState({});
   const [ callAction, setCallAction ] = useState(false);
 
-  // useEffect(() => {    
-  //   const token = localStorage.getItem('token');
+  useEffect(() => {    
+    const token = localStorage.getItem('token');
 
-  //   if(token){
-  //     const tokenDecode = jwt_decode(token);
-  //     const { exp, userInfo } = tokenDecode;
+    if(token){
+      const tokenDecode = jwt_decode(token);
+      const { exp, userInfo } = tokenDecode;
 
-  //     if( exp > new Date().getTime() / 1000 ) {
-  //       setUserInfoFromToken(userInfo);
-  //     } else {
-  //       history.push('/');
-  //     }
-  //   } else{
-  //     history.push('/');
-  //   }
-  // }, []);
+      if( exp > new Date().getTime() / 1000 ) {
+        setUserInfoFromToken(userInfo);
+      } else {
+        history.push('/');
+      }
+    } else{
+      history.push('/');
+    }
+  }, []);
 
   useEffect(() => {
     setCallAction(true);

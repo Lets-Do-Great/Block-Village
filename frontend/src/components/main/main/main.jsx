@@ -124,8 +124,9 @@ const Main = (props) => {
   const userInfo = useSelector(state => state.user.userInfo);
 
   useEffect(() => {
+    console.log(userInfo);
     dispatch(BlockAction.getMyBlocks({email: userInfo.email}));
-  })
+  }, [])
   //============================================================
 
   return (
