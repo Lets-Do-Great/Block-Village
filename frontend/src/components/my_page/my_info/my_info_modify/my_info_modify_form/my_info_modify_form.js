@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import styles from './my_info_modify_form.module.css'
 
 const MyInfoModifyLeft = ({ modifyInput, onChangeModify }) => {
     const { profile } = modifyInput;
 
     return (
-    <>
-        <img src={ profile } alt="프로필 이미지"/>
-        <div>프로필 이미지 편집</div>
-    </>
+    <div className={styles.my_info_left}>
+        <div className={styles.profile_img}></div>
+        <div className={styles.edit}>프로필 이미지 편집</div>
+    </div>
     );
 };
 
@@ -66,32 +67,37 @@ const MyInfoModifyRight = ({ modifyInput, onChangeModify, setPWConfirm }) => {
     }
 
     return (
-    <>
+    <div className={styles.my_info_right}>
         <input 
+            className={styles.input}
             type="text"
             name="nickname"
             value={nickname}
             onChange={onChangeModify}
             placeholder="닉네임"/><br/>
         <input 
+            className={styles.input}
             type="text"
             name="introduction"
             value={introduction}
             onChange={onChangeModify}
             placeholder="자기소개"/><br/>
         <input 
+            className={styles.input}
             type="password"
             name="prevPassword"
             value={prevPassword}
             onChange={onChangeModify}
             placeholder="현재 비밀번호"/><br/>
         <input 
+            className={styles.input}
             type="password"
             name="newPassword"
             value={newPassword}
             onChange={onChangeModify}
             placeholder="새로운 비밀번호"/><br/>
         <input 
+            className={styles.input}
             type="password"
             name="PWConfirmInput"
             value={PWConfirmInput.PW}
@@ -105,13 +111,13 @@ const MyInfoModifyRight = ({ modifyInput, onChangeModify, setPWConfirm }) => {
                 ? <p>비밀번호가 일치합니다.</p>
                 : <p>비밀번호가 일치하지 않습니다.</p>)
         }<br/>
-    </>
+    </div>
     );
 };
 
 const MyInfoModifyForm = ({ modifyInput, onChangeModify, setPWConfirm }) => {
     return (
-    <>
+    <div className={styles.my_info_form}>
         <MyInfoModifyLeft
             modifyInput={modifyInput}
             onChangeModify={onChangeModify}/>
@@ -119,7 +125,7 @@ const MyInfoModifyForm = ({ modifyInput, onChangeModify, setPWConfirm }) => {
             modifyInput={modifyInput}
             onChangeModify={onChangeModify}
             setPWConfirm={setPWConfirm}/>
-    </>
+    </div>
     );
 };
 
