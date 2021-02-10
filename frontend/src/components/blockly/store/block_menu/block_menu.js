@@ -2,20 +2,20 @@ import React from 'react';
 import BlockDetail from '../block_detail/block_detail';
 import styles from './block_menu.module.css'
 
-const BlockMenu = (props) => {
+const BlockMenu = ({ selectedCategory, addBillList }) => {
   return (
     <div className={styles.body}>
-      <BlockDetail />
-      <BlockDetail />
-      <BlockDetail />
-      <BlockDetail />
-      <BlockDetail />
-      <BlockDetail />
-      <BlockDetail />
-      <BlockDetail />
-      <BlockDetail />
-      <BlockDetail />
-      <BlockDetail />
+      {
+        selectedCategory.map((block) => (
+          block.userHave ||
+          <BlockDetail 
+            key={block.id} 
+            block={block} 
+            addBillList={addBillList}
+          />
+        ))
+      }
+      
     </div>
   )
 };

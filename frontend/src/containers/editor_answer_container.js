@@ -5,6 +5,7 @@ import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
 
 const EditorAnswerContainer = (props) => {
+  const dispatch = useDispatch();
   const [todo, setTodo] = useState('todo');
   const [useDifficulty, setUseDifficulty] = useState(0);
   const [useContent, setUseContent] = useState('');
@@ -34,6 +35,7 @@ const EditorAnswerContainer = (props) => {
   // 정답에 대한 info는 pros로 가져올 것.
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
+  const myBlocksInfo = useSelector(state => state.block.myBlocksInfo);
   const dispatch = useDispatch();
 
   const onSetTodoMission = async () => {
@@ -73,7 +75,22 @@ const EditorAnswerContainer = (props) => {
     } catch(e) {
       console.log(e);
     }
+  };
+
+  const onGetMyBlocks = async (e) => {
+    try {
+      await dispatch(BlockAction.getMyBlocks({
+        email: userInfo.email
+      }))
+    } catch(e) {
+      console.log(e);
+    }
   }
+
+  useEffect(() => {
+    // console.log(localStorage.getItem('token'));
+    onGetMyBlocks();
+  }, [])
 
   return (
     <>

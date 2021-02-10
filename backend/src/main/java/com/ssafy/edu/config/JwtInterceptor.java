@@ -10,9 +10,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Map;
 
+@EnableSwagger2
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
 
@@ -36,7 +38,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         JSONObject obj = new JSONObject();
 
-        if(!givenToken.equals("null") && givenToken.length()>0){
+        if(givenToken!=null && !givenToken.equals("null") && givenToken.length()>0){
 
             try {
 

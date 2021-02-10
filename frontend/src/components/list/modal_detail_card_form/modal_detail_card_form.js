@@ -45,6 +45,10 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
         history.push(`/main/answer/${id}`);
     }
 
+    const goToAnswer = () => {
+        history.push(`/main/mission/answer`);
+    }
+
     return (
     <div className={styles.detail_form}>
         <div 
@@ -108,7 +112,7 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
                     className={styles.participate_button}>미션 참여하기</button> }
               { todo === 'todo' &&
                 <button 
-                    className={styles.participating_button}>미션 참여중</button> }
+                    className={styles.participating_button} onClick={goToAnswer}>미션 참여중</button> }
               { todo === 'done' &&
                 <button
                     onClick={goToAnswerList}

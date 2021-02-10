@@ -13,6 +13,7 @@ import com.ssafy.edu.service.block.BlockServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,24 +34,24 @@ public class BlockController {
     @Autowired
     private BlockServiceImpl blockService;
 
-    @ApiOperation(value = "블록 구입하기")
+    @ApiOperation(value = "블록 구입하기", authorizations = { @Authorization(value="jwtToken") })
     @PostMapping("/buy/{email}")
     public ResponseEntity<BlockResponse> buyBlock(@PathVariable("email") String email, @RequestBody BlockBuyRequest blockBuyRequest){
         return blockBuyService.buyBlock(blockBuyRequest, email);
     }
 
-    @ApiOperation(value = "상점에서 파는 블록 목록 조회")
+    @ApiOperation(value = "상점에서 파는 블록 목록 조회", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping("{email}")
     public ResponseEntity<BlockResponse> getBlockList(@PathVariable("email") String email){
         return blockService.getBlockList(email);
     }
 
-    @ApiOperation(value = "내가 소유한 블록 목록 조회")
+    @ApiOperation(value = "내가 소유한 블록 목록 조회", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping("/myblocks/{email}")
     public ResponseEntity<BlockResponse> getMyBlocks(@PathVariable("email") String email){
         return blockService.getMyBlockList(email);
     }
-    @ApiOperation(value = "내가 소유한 블록 목록 조회")
+    @ApiOperation(value = "내가 소유한 블록 목록 조회", authorizations = { @Authorization(value="jwtToken") })
     @PostMapping("/test")
     public ResponseEntity<BlockResponse> signUpBlocks(@RequestBody BlocksignUpTest blocksignUpTest){
         return blockService.signUpBlocks(blocksignUpTest);

@@ -3,6 +3,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .container {
@@ -11,8 +12,48 @@
 }
 
 .lists {
-  position: relative;
+  display:block;
   flex-basis: 100%;
-  border: 3px solid rebeccapurple;
   padding: 2em 3em;
+  height: 100%;
+}
+
+.challenge_header{
+  /* border-bottom: 2px solid darkgray; */
+}
+
+.challenge_no{
+  display: inline-block;
+  width: 10%;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  height: 30px;
+}
+
+.challenge_name{
+  display: inline-block;
+  width: 50%;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  height: 30px;
+}
+
+.challenge_date{
+  display: inline-block;
+  width: 27%;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  height: 30px;
+}
+
+.challenge_people_cnt{
+  display: inline-block;
+  width: 13%;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  height: 30px;
 }
