@@ -126,15 +126,13 @@ public class ChallengeServiceImpl implements ChallengeService{
                         .image(challengeOpt.get().getImage())
                         .startDate(challengeOpt.get().getStartDate())
                         .endDate(challengeOpt.get().getEndDate())
-                        .peopleCnt(challengeOpt.get().getPeopleCnt())
+                        .peopleCnt(challengeOpt.get().getPeopleCnt() + 1)
                         .finish(challengeOpt.get().getFinish())
                         .build();
-                if (challengeUserRequest.getTodo().equals("done")) {
-                    Long tmpPeople = tmpForm.getPeopleCnt();
-                    tmpForm.setPeopleCnt(tmpPeople + 1);
-                    challengeOpt.get().setPeopleCnt(tmpPeople + 1);
-                    challengeJpaRepository.save(challengeOpt.get());
-                }
+
+                challengeOpt.get().setPeopleCnt(tmpForm.getPeopleCnt());
+                challengeJpaRepository.save(challengeOpt.get());
+
 
                 result.data = tmpForm;
                 result.status = true;
@@ -147,7 +145,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                     challengeUserOpt.get().setDone(challengeUserRequest.getTodo());
                     ChallengeUser save = challengeUsersJpaRepository.save(challengeUserOpt.get());
 
-                    ChallengeListForm tmpForm = ChallengeListForm.builder()
+                    result.data = ChallengeListForm.builder()
                             .challengeId(challengeOpt.get().getId())
                             .title(challengeOpt.get().getTitle())
                             .image(challengeOpt.get().getImage())
@@ -156,12 +154,6 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .peopleCnt(challengeOpt.get().getPeopleCnt())
                             .finish(challengeOpt.get().getFinish())
                             .build();
-                    if(challengeUserRequest.getTodo().equals("done")){
-                        tmpForm.setPeopleCnt(challengeOpt.get().getPeopleCnt() + 1);
-                        challengeOpt.get().setPeopleCnt(challengeOpt.get().getPeopleCnt() + 1);
-                        challengeJpaRepository.save(challengeOpt.get());
-                    }
-                    result.data = tmpForm;
                     result.status = true;
                 }
             }
