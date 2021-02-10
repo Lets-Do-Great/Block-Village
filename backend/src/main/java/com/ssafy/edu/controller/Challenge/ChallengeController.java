@@ -39,7 +39,7 @@ public class ChallengeController {
     }
 
     @ApiOperation(value = "현재 로그인한 유저가 챌린지 참여하기", authorizations = { @Authorization(value="jwtToken") })
-    @PostMapping("/joinchallenge/")
+    @PostMapping("/joinchallenge")
     public ResponseEntity<ChallengeResponse> joinChallenge(@RequestBody ChallengeUserRequest challengeUserRequest){
         return challengeService.joinChallenge(challengeUserRequest);
     }
