@@ -10,9 +10,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Map;
 
+@EnableSwagger2
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
 
@@ -25,6 +27,10 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        if(request.getMethod().equals("OPTIONS")) {
+            return true;
+        }
+
         String givenToken = request.getHeader("token");
 
         response.setContentType("application/json");
@@ -32,7 +38,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         JSONObject obj = new JSONObject();
 
-        if(givenToken != null && givenToken.length()>0){
+        if(givenToken!=null && !givenToken.equals("null") && givenToken.length()>0){
 
             try {
 
@@ -40,6 +46,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
                 ObjectMapper objectMapper = new ObjectMapper();
                 Map<String, String> result = objectMapper.convertValue(info.get("userInfo"), Map.class);
+
 
                 if (result != null && userJpaRepository.findByEmail(result.get("email")).isPresent()) {
                     jwtServiceImpl.checkValid(givenToken);
@@ -55,7 +62,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             }
         }
 
-        obj.put("status", "false");
+        obj.put("status", false);
         response.getWriter().print(obj.toString());
         response.getWriter().flush();
         return false;

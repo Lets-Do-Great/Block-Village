@@ -1,9 +1,6 @@
 package com.ssafy.edu.controller.user;
 
-import com.ssafy.edu.model.user.LoginRequest;
-import com.ssafy.edu.model.user.SignUpRequest;
-import com.ssafy.edu.model.user.UpdateRequest;
-import com.ssafy.edu.model.user.UserResponse;
+import com.ssafy.edu.model.user.*;
 import com.ssafy.edu.service.s3Service.S3Service;
 import com.ssafy.edu.service.user.UserServiceImpl;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +22,7 @@ import java.io.IOException;
         @ApiResponse(code = 404, message = "Not Found", response = UserResponse.class),
         @ApiResponse(code = 500, message = "Failure", response = UserResponse.class)})
 
-@CrossOrigin(origins = {"http://i4b205.p.ssafy.io:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @Controller
 @RequestMapping("users")
 public class UserController {
@@ -85,6 +82,13 @@ public class UserController {
         userService.emailAuth(email, key);
         model.addAttribute("email", email);
         return "authentication";
+    }
+
+    @ApiOperation(value = "마일리지", authorizations = { @Authorization(value="jwtToken") })
+    @PostMapping("/do/mileage")
+    @ResponseBody
+    public ResponseEntity<UserResponse> mileage(@RequestBody MileageRequest mileageRequest){
+        return userService.mileage(mileageRequest);
     }
 
 }
