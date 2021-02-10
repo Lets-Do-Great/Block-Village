@@ -4,7 +4,7 @@ import styles from './block_bill_footer.module.css'
 const BlockBillFooter = ({ usermil, billList, buyBlocks }) => {
   const [priceSum, setPriceSum] = useState(0);
   const [priceMil, setPriceMil] = useState(0);
-  const [buyStauts, setBuyStatus] = useState(false);
+  // const [buyStauts, setBuyStatus] = useState(false);
   const resultMil = useRef();
 
   useEffect(() => {
@@ -16,7 +16,6 @@ const BlockBillFooter = ({ usermil, billList, buyBlocks }) => {
     setPriceMil(usermil - sum)
 
     if ((usermil - sum) < 0) {
-      console.log('asf');
       resultMil.current.style.color = `#ff0000`
     } else {
       resultMil.current.style.color = `#0A0`

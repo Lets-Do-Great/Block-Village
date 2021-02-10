@@ -13,12 +13,12 @@ const BlockStore = ({ onBuyBlocks }) => {
   const allBlcoksInfo = useSelector(state => state.block.allBlcoksInfo);
   const [billList, setBillList] = useState([
     { 
-      cata: '시작',
+      category: '시작',
       id: 1,
       price: 1000,
     },
     { 
-      cata: '시작',
+      category: '시작',
       id: 2,
       price: 2000,
     },
@@ -30,7 +30,8 @@ const BlockStore = ({ onBuyBlocks }) => {
     billList.map((item) => (
       buyList.push(item.id)
     ))
-    onBuyBlocks(buyList)
+    console.log(buyList);
+    // onBuyBlocks(buyList)
     setBillList([])
   };
 
@@ -132,6 +133,12 @@ const BlockStore = ({ onBuyBlocks }) => {
   };
 
   const addBillList = (bill) => {
+    for (let i = 0; i < billList.length; i++) {
+      if (billList[i].id == bill.id) {
+        alert('이미 리스트에 있습니다.')
+        return
+      }
+    }
     const oldBillList = [...billList, bill];
     setBillList(oldBillList)
   }

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './mission_do_playground.module.css';
+import { FaRegPlayCircle } from 'react-icons/fa';
 
 const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onChangeSuccess, onChangeFail }) => {
   var x = 0;
@@ -314,11 +315,12 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
         <img ref={fieldchar}></img>
       </section>
       <footer className={styles.footer}>
-        <button 
+        <div 
           onClick={playGame}
           className={styles.game__button}
-        >시작하기
-        </button>
+        >
+          <FaRegPlayCircle size="60" color="#c30d23"/>
+        </div>
       </footer>
     </div>
   )

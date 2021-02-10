@@ -183,8 +183,8 @@ const MissionCreateMain = ({ formInfo, onChangeModal, onChangeXml, onChangeStep 
       'toolboxBackgroundColour': '#7844AA',
       'toolboxForegroundColour': '#FFFFFF',
       'flyoutBackgroundColour': '#e3c0ff',
-      'flyoutForegroundColour': '#1e1e1e',
-      'flyoutOpacity': '#1e1e1e',
+      'flyoutForegroundColour': '#e3c0ff',
+      'flyoutOpacity': '#e3c0ff',
       'scrollbarColour': '#e3c0ff',
       'scrollbarOpacity': 0.5,
       // 'insertionMarkerColour': '#1e1e1e',
@@ -263,12 +263,12 @@ const MissionCreateMain = ({ formInfo, onChangeModal, onChangeXml, onChangeStep 
               initialXml={xmlCode}
               wrapperDivClassName={styles.fill_height}
               workspaceConfiguration={{
-                // grid: {
-                //   spacing: 20,
-                //   length: 2,
-                //   colour: '#e3c0ff',
-                //   snap: true,
-                // },
+                grid: {
+                  spacing: 20,
+                  length: 2,
+                  colour: '#e3c0ff',
+                  snap: true,
+                },
                 move:{
                   scrollbars: true,
                   drag: true,

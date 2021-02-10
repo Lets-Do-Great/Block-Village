@@ -16,7 +16,7 @@ const BlockBill = ({ blist, onDeleteBillList }) => {
       <div className={styles.img} ref={img_ref}></div>
 
       <div className={styles.cata}>
-        <p>{blist.cata}</p>
+        <p>{blist.category}</p>
       </div>
 
       <div className={styles.price}>
