@@ -64,7 +64,8 @@ const EditorMissionContainer = ( { type }) => {
     }
   };
 
-  const onGetMyBlocks = async (e) => {
+  const onGetMyBlocks = async () => {
+    console.log('container');
     try {
       await dispatch(BlockAction.getMyBlocks({
         email: userInfo.email
@@ -75,7 +76,7 @@ const EditorMissionContainer = ( { type }) => {
   }
 
   useEffect(() => {
-    // console.log(localStorage.getItem('token'));
+    console.log(localStorage.getItem('token'));
     onGetMyBlocks();
   }, [])
 
