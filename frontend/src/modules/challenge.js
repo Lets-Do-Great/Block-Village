@@ -38,7 +38,8 @@ export default applyPenders(challengeReducer, [
       if(response.status === 200){
         if(response.data.status){
           return updateObject(state, { 
-            ...state 
+            ...state,
+            challengeList: response.data.data,
           });
         } else{
           alert("리스트를 불러오는데 문제가 발생했습니다.");
