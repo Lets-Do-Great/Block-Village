@@ -11,4 +11,5 @@ public class BlockResult {
     Long id;
     int price;
     boolean userHave;
+    String category;
 }
