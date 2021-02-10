@@ -12,6 +12,7 @@ const ChallengeContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("두고봐");
     getChallengeList();
   }, []);
 
@@ -21,7 +22,7 @@ const ChallengeContainer = () => {
   // 전체 챌린지 목록 불러오기 ( 최신순 )
   const getChallengeList = async () => {
     try{
-      dispatch(ChallengeAction.getChallengeList());
+      dispatch(ChallengeAction.getChallengeList({ email: userInfo.email }));
     } catch(e) {
       console.log(e);
     }
@@ -64,7 +65,7 @@ const ChallengeContainer = () => {
   return (
     <>
       <ChallengeMain 
-        challenges={challengeList}
+        challengeList={challengeList}
         setTodoChallenge={setTodoChallenge}
       />
     </>

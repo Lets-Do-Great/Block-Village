@@ -7,9 +7,10 @@
 import client from './client';
 
 // 전체 챌린지 목록 불러오기 ( 최신순 )
-export const getChallengeList = () => {
+export const getChallengeList = ({ email }) => {
+  console.log("두고봐2");
   return client({
-    url: `challenges/`,
+    url: `challenges/${email}`,
     method: 'get',
   });
 };
