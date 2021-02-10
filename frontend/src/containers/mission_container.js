@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ListForm from '../components/list/list_form/list_form';
 import SearchForm from '../components/list/search_form/search_form';
 import SearchType from '../components/list/search_type/search_type';
+import Nav from '../components/nav/nav';
 import * as MissionAction from '../modules/mission';
 
 const MissionContainer = () => {
@@ -131,6 +132,7 @@ const MissionContainer = () => {
 
     return (
         <>  
+            <Nav type="mission"/>
             <SearchForm
                 onChangeSearch={onChangeSearch}
                 onChangeSearchType={onChangeSearchType}

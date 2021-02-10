@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ListCardForm from '../list_card_form/list_card_form';
 import ModalDetailCardForm from '../modal_detail_card_form/modal_detail_card_form';
-import Nav from '../../nav/nav';
 import styles from './list_form.module.css';
 
 // type : mission, answer, project
@@ -23,7 +22,6 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
 
     return (
     <>  
-        <Nav type/>
         { type === 'mission' && 
             <>
             <select name="sortType" className={styles.select} onChange={onChangeSearchType}>
