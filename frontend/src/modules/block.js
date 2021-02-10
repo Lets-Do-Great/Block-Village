@@ -25,80 +25,155 @@ export const buyBlocks = createAction(
 
 
 const initialState = {
-  allBlcoksInfo: [
-    {
-      block_id: null,
-      name: '',
-      type: '',
-      colour: '',
-      image: null,
-      price: 0,
-    },
-  ],
+  allBlcoksInfo: {
+    '시작':  [],
+    '판단':  [],
+    '움직임':  [],
+    '흐름':  [],
+    '계산':  [],
+    '그리기':  [],
+    '함수':  [],
+  },
+
   myBlocksInfo: [
     {
       name: '시작',
-      colour: '#5C81A6',
+      colour: '#C30D23',
       blocks: [
-      ]
+        // {type: 'start_button',},
+        // {type: 'end_button',},
+      ],
+    },
+    {
+      name: '판단',
+      colour: '#FFA31D',
+      blocks: [
+        {type: 'number'},
+        {type: 'block_judgment_equals',},
+        {type: 'block_judgment_strictinequality_left',},
+        {type: 'block_judgment_strictinequality_right',},
+      ],
     },
     {
       name: '움직임',
-      colour: '#5CA699',
+      colour: '#8FC31F',
       blocks: [
+        {type: 'move_forward_1'},
+        {type: 'turn_right'},
+        {type: 'turn_left'},
+      ],
+    },
+    {
+      name: '흐름',
+      colour: '#55CFFF',
+      blocks: [
+        {type: 'input',},
       ]
-    }
+    },
+    {
+      name: '계산',
+      colour: '#1060FF',
+      blocks: [
+        {type: 'number'},
+        {type: 'addition'},
+        {type: 'subtraction'},
+      ]
+    },
+    {
+      name: '그리기',
+      colour: '#7D10C4',
+      blocks: []
+    },
+    {
+      name: '함수',
+      colour: '#CC6666',
+      blocks: []
+    },
   ],
 }
 
-const userReducer = handleActions({
-  [GET_MY_BLOCKS]: (state, action) => ({
-  }),
-
-  [GET_ALL_BLOCKS]: (state, action) => ({
-  }),
-
-  [BUY_BLOCKS]: (state, action) => ({
-  }),
-
+const blcokReducer = handleActions({
+  
 }, initialState);
 
 
-export default applyPenders(userReducer, [
+export default applyPenders(blcokReducer, [
   {
     type: GET_MY_BLOCKS,
     onSuccess: (state, action) => {
-      console.log(action.payload);
-      return updateObject(state, [
-        // data 맞춰야함.
-      ])
+      const response = action.payload;
+      // console.log(response.data.data);
+      if(response.status === 200){
+        if(response.data.status){
+          let myNewBlocksInfo = [];
+          for (const value of response.data.status) {
+            myNewBlocksInfo.push(value)
+          }
+          console.log(myNewBlocksInfo);
+          return updateObject(state, {
+            ...state,
+            myBlocksInfo: myNewBlocksInfo,
+          });
+        } else{
+          alert("내 블럭을 불러오는데 문제가 발생했습니다.");
+        }
+      } else { // 에러 발생
+        alert("블럭을 불러오는데 불러오는데 문제가 발생했습니다.");
+        console.log(action.payload.status);
+      }
+      return updateObject(state, state);
     },
     onFailure: (state, action) => {
-      return updateObject(state, []);
+      return updateObject(state, state);
     }
   },
   {
     type: GET_ALL_BLOCKS,
     onSuccess: (state, action) => {
-      console.log(action.payload);
-      return updateObject(state, [
-        // data 맞춰야함.
-      ])
+      const response = action.payload;
+      // console.log(response);
+
+      if(response.status === 200){
+        if(response.data.status){
+          return updateObject(state, {
+            ...state,
+            allBlcoksInfo: response.data.data,
+          });
+        } else{
+            alert("모든 블럭을 불러오는데 문제가 발생했습니다.");
+        }
+      } else { // 에러 발생
+          alert("모 불러오는데 불러오는데 문제가 발생했습니다.");
+          console.log(action.payload.status);
+      }
+      return updateObject(state, state);
     },
     onFailure: (state, action) => {
-      return updateObject(state, []);
+      return updateObject(state, state);
     }
   },
   {
     type: BUY_BLOCKS,
     onSuccess: (state, action) => {
-      console.log(action.payload);
-      return updateObject(state, [
-        // data 맞춰야함.
-      ])
+      const response = action.payload;
+      console.log(response);
+
+      if(response.status === 200){
+        if(response.data.status){
+          return updateObject(state, {
+            ...state,
+          });
+        } else{
+          alert("블럭을 사는데 문제가 발생했습니다.");
+        }
+      } else { // 에러 발생
+        alert("ㅇ블럭을 사는데 문제가 발생했습니다.");
+        console.log(action.payload.status);
+      }
+      return updateObject(state, state);
     },
     onFailure: (state, action) => {
-      return updateObject(state, []);
+      return updateObject(state, state);
     }
   },
 ])

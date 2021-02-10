@@ -151,11 +151,58 @@ Blockly.JavaScript['turn_angle'] = function(block) {
   return code;
 };
 
-Blockly.Python['turn_angle'] = function(block) {
-  var angle = block.getFieldValue('angle');
-  var code = '...\n';
+Blockly.Blocks['turn_right'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("방향을")
+        .appendField("오른쪽으로 돌기");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setStyle('movement-blocks');
+  }
+};
+
+Blockly.JavaScript['turn_right'] = function(block) {
+  var code = `turn_right();`;
   return code;
 };
+
+Blockly.Blocks['turn_left'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("방향을")
+        .appendField("왼쪽으로 돌기");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setStyle('movement-blocks');
+  }
+};
+
+Blockly.JavaScript['turn_left'] = function(block) {
+  var code = `turn_left();`;
+  return code;
+};
+
+Blockly.Blocks['turn_back'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("방향을")
+        .appendField("뒤로 돌기");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setStyle('movement-blocks');
+  }
+};
+
+Blockly.JavaScript['turn_back'] = function(block) {
+  var code = `turn_back();`;
+  return code;
+};
+
+
 
 // 각도 Custom -방향을 [ ]도로 정하기
 Blockly.Blocks['set_angle'] = {

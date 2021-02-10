@@ -2,11 +2,12 @@
   width: 100%;
   text-align: center;
   padding: 0.5em;
-  background-color: #efa420;
+  background-color: #ef8ebe;
   position: relative;
 }
 
 .title {
+  padding: 0;
   font-size: 40px;
   margin: 0;
   color: white;
