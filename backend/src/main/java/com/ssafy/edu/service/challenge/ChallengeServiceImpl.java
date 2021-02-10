@@ -82,10 +82,10 @@ public class ChallengeServiceImpl implements ChallengeService{
     }
 
     @Override
-    public ResponseEntity<ChallengeResponse> joinChallenge(ChallengeUserRequest challengeUserRequest, Long challengeId) {
+    public ResponseEntity<ChallengeResponse> joinChallenge(ChallengeUserRequest challengeUserRequest) {
         ChallengeResponse result = new ChallengeResponse();
         Optional<User> userOpt = userJpaRepository.findByEmail(challengeUserRequest.getEmail());
-        Optional<Challenge> challengeOpt = challengeJpaRepository.findById(challengeId);
+        Optional<Challenge> challengeOpt = challengeJpaRepository.findById(challengeUserRequest.getChallengeId());
         if(userOpt.isPresent()){
             ChallengeUser challengeUser = ChallengeUser.builder()
                     .user(userOpt.get())

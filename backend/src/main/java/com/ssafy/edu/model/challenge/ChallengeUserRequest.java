@@ -20,5 +20,9 @@ public class ChallengeUserRequest {
 
     @ApiModelProperty(required = true)
     @NotEmpty
+    Long challengeId;
+
+    @ApiModelProperty(required = true)
+    @NotEmpty
     String todo;
 }
