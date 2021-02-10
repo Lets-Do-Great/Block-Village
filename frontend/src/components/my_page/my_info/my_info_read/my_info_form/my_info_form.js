@@ -1,24 +1,29 @@
 import React from 'react';
+import styles from './my_info_form.module.css';
+import { GrMoney } from "react-icons/gr";
 
 const MyInfoLeft = ({ profile, mileage }) => {
     return (
-    <>
-        <img src={profile} alt="프로필 이미지"/>
-        <p>{mileage}</p>
-    </>
+    <div className={styles.my_info_left}>
+        <div className={styles.profile_img}></div>
+        <div className={styles.icons}>
+            <div className={styles.icon}><GrMoney/></div>
+            <div className={styles.text_mileage}>{mileage}</div>
+        </div>
+    </div>
     );
 }
 
 const MyInfoRight = ({ nickname, email, 
                     follower, following, introduction }) => {
     return (
-    <>
-        <p>{ nickname }</p>
-        <p>{ email }</p>
-        <p>{ follower }</p>
-        <p>{ following }</p>
-        <p>{ introduction }</p>
-    </>
+    <div className={styles.my_info_right}>
+        <div className={styles.text}>{ nickname }</div>
+        <div className={styles.text}>{ email }</div>
+        <div className={styles.text}>{ follower }</div>
+        <div className={styles.text}>{ following }</div>
+        <div className={styles.text_introduction}>{ introduction }</div>
+    </div>
     );
 }
 
@@ -27,7 +32,7 @@ const MyInfoForm = ({ userInfo }) => {
         email, follower, following, introduction } = userInfo;
 
     return (
-    <>
+    <div className={styles.my_info_form}>
         <MyInfoLeft
             profile={profile}
             mileage={mileage}
@@ -39,7 +44,7 @@ const MyInfoForm = ({ userInfo }) => {
             following={following}
             introduction={introduction}
         />        
-    </>    
+    </div>    
     );
 }
 

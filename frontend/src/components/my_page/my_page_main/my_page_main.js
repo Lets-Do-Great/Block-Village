@@ -4,6 +4,7 @@ import MyBlockContainer from '../../../containers/my_block_container';
 import styles from './my_page_main.module.css';
 import MyMissionContainer from '../../../containers/my_mission_container';
 import MyProjectContainer from '../../../containers/my_project_container';
+import MyPageNav from '../my_page_nav/my_page_nav';
 
 const MyPageMain = () => {
     const [ openType, setOpenType ] = useState('');
@@ -22,7 +23,9 @@ const MyPageMain = () => {
     }
 
     return (
-        <>
+        <div className={styles.my_page_main_img}>
+            <MyPageNav
+                />
             <div>
                 <button onClick={openCard} value="info">내 정보 조회</button> 
                 <button onClick={openCard} value="block">내 블록 목록 조회</button> 
@@ -65,7 +68,7 @@ const MyPageMain = () => {
                     </div>
                 </div>
             }
-        </>
+        </div>
     );
 };
 

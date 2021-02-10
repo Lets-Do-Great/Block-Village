@@ -1,0 +1,83 @@
+.my_info_form{
+    position: relative;
+    display: flex;
+    display: block;
+    height: 75%;
+    flex: 1;
+}
+
+.my_info_left{
+    flex-basis: 50%;
+    position: relative;
+    margin: 0%;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    float: left;
+    padding-top: 60px;
+    padding-left: 80px;
+}
+
+.my_info_right{
+    flex-basis: 50%;
+    position: relative;
+    margin: 0%;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    float: left;
+    padding-top: 80px;
+    padding-right: 80px;
+}
+
+.profile_img{
+    display: inline-block;
+    width: 245px;
+    height: 245px;
+    background-color: aquamarine;
+    border-radius: 50%;
+}
+
+.text{
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.text_introduction{
+    font-size: 18px;
+    margin: 10px;
+}
+
+.icons {
+    margin: 20px;
+}
+
+.icon{
+    display: inline;
+}
+
+.text_mileage{
+    display: inline;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.input_box {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.input {
+    display: inline-block;
+    height: 40px;
+    width: 250px;
+    margin: 5px;
+}
+
+.edit{
+    margin: 10px;
+    font-size: 10px;
+}
