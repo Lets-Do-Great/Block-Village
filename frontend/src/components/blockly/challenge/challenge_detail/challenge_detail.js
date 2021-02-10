@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './challenge_detail.module.css';
 
-const ChallengeDetail = ({ challengeId, img, setTodoChallenge, todo }) => {
+const ChallengeDetail = ({ id, img, setTodoChallenge, todo }) => {
 
   const onSetTodoChallenge = () => {
-    setTodoChallenge(challengeId);
+    setTodoChallenge(id);
   };
 
   return (
@@ -13,16 +13,14 @@ const ChallengeDetail = ({ challengeId, img, setTodoChallenge, todo }) => {
       <div>
       { todo === 'todo' && 
       <button 
-        className={styles.participating_button}
-        className={styles.button}>
+        className={styles.participating_button}>
           참여중</button> 
         // 내가 제작중인 답안으로 가게하기
       } 
 
       { todo === 'done' && 
         <button
-          className={styles.participated_button} 
-          className={styles.button}>
+          className={styles.participated_button} >
             참여완료!</button> 
         // 다른 사람들의 답안 보러 가기..?
       }

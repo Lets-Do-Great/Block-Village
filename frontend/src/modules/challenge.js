@@ -48,10 +48,10 @@ export default applyPenders(challengeReducer, [
         alert("리스트를 불러오는데 문제가 발생했습니다.");
         console.log(action.payload.status);
       }
-      return updateObject(state, initialState);
+      return updateObject(state, state);
     },
     onFailure: (state, action) => {
-      return updateObject(state, initialState);
+      return updateObject(state, state);
     }
   },
   {
@@ -72,10 +72,10 @@ export default applyPenders(challengeReducer, [
         alert("리스트를 불러오는데 문제가 발생했습니다.");
         console.log(action.payload.status);
       }
-      return updateObject(state, initialState);
+      return updateObject(state, state);
     },
     onFailure: (state, action) => {
-      return updateObject(state, initialState);
+      return updateObject(state, state);
     }
   },
   {
@@ -96,10 +96,10 @@ export default applyPenders(challengeReducer, [
         alert("챌린지에 참가하는데 문제가 발생했습니다.");
         console.log(action.payload.status);
       }
-      return updateObject(state, initialState);
+      return updateObject(state, state);
     },
     onFailure: (state, action) => {
-      return updateObject(state, initialState);
+      return updateObject(state, state);
     }
   },
 ])
