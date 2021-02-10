@@ -12,7 +12,6 @@ const ChallengeContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("두고봐");
     getChallengeList();
   }, []);
 
