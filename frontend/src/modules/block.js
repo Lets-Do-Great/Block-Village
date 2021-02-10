@@ -102,11 +102,11 @@ export default applyPenders(blcokReducer, [
     type: GET_MY_BLOCKS,
     onSuccess: (state, action) => {
       const response = action.payload;
-      // console.log(response.data.data);
       if(response.status === 200){
         if(response.data.status){
+          console.log(response.data.data);
           let myNewBlocksInfo = [];
-          for (const value of response.data.status) {
+          for (const value of Object.values(response.data.data)) {
             myNewBlocksInfo.push(value)
           }
           console.log(myNewBlocksInfo);
