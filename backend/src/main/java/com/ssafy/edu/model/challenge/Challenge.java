@@ -28,11 +28,13 @@ public class Challenge{
 
     private String image;
 
-    private String StartDate;
+    private String startDate;
 
-    private String EndDate;
+    private String endDate;
 
     private Long peopleCnt;
+
+    private Boolean finish;
 
     @Builder.Default
     @OneToMany(mappedBy = "challenge")

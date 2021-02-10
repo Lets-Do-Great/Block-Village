@@ -106,6 +106,16 @@ const MissionContainer = () => {
         }
     }
 
+    // 미션 수정 요청
+    const onModifyMission = async () => {
+        try{
+            await dispatch(MissionAction.modifyMission(
+                { email: userInfo.email, missionId:selectedMission.id }));
+        } catch(e){
+            console.log(e);
+        }
+    }
+
     // 미션 삭제 요청
     const onDeleteMission = async () => {
         try{
@@ -137,6 +147,7 @@ const MissionContainer = () => {
                 setLike={likeMission}
                 setDislike={dislikeMission}
                 onChangeSearchType={onChangeSearchType}
+                onModify={onModifyMission}
                 onDelete={onDeleteMission}
                 onParticipateMission={onParticipateMission}
                 openDetail={modal}

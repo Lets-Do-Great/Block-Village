@@ -106,6 +106,17 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
   // 움직임 
 /////////////////////////////////////////////////////////////////
   
+  const turn_right = () => {
+    cur_angle -= 90 * Math.PI / 180;
+  }
+
+  const turn_left = () => {
+    cur_angle += 90 * Math.PI / 180;
+  }
+  
+  const turn_back = () => {
+    cur_angle += 180 * Math.PI / 180;
+  }
 
   const move_x = (x_distance) => {
     x += x_distance;

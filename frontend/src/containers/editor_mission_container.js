@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MissionCreateSubmain from '../components/blockly/mission_create/mission_create_submain/mission_create_submain';
-import MissionModifyForm from '../components/blockly/mission_modify_form/mission_modify_form';
+import MissionModify from '../components/blockly/mission_modify/mission_modify';
 import * as MissionAction from '../modules/mission';
+import * as BlockAction from '../modules/block';
 
 const EditorMissionContainer = ( { type }) => {
+  const dispatch = useDispatch();
   const [createInfo, setCreateInfo] = useState({
     email: '',
     title: '',
@@ -30,12 +32,12 @@ const EditorMissionContainer = ( { type }) => {
       endPositionY: e.endPosition[1],
       difficulty: e.difficulty,
     }
-    setCreateInfo(newState)
+    setCreateInfo(newState);
   };
 
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
-  const dispatch = useDispatch();
+  
 
 
   const onSetMission = async () => {
@@ -62,6 +64,22 @@ const EditorMissionContainer = ( { type }) => {
     }
   };
 
+  const onGetMyBlocks = async () => {
+    console.log('container');
+    try {
+      await dispatch(BlockAction.getMyBlocks({
+        email: userInfo.email
+      }))
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    console.log(localStorage.getItem('token'));
+    onGetMyBlocks();
+  }, [])
+
   return (
     <>
     { type === 'create' && 
@@ -71,7 +89,7 @@ const EditorMissionContainer = ( { type }) => {
       />
     }
     {type === 'modify' && 
-      <MissionModifyForm
+      <MissionModify
         title={selectedMission.title}
         content={selectedMission.content}
         onModifyMission={onModifyMission}

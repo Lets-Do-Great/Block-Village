@@ -7,8 +7,6 @@ const MissionCreateModal = ({ formInfo, onChangeModal, updateState, title, onCha
   const difficultyRef = useRef();
   const contentRef = useRef();
 
-  const [buttonName, setButtonName] = useState('미션 제작 완료');
-
   const onSubmit = (event) => {
     event.preventDefault();
     const titleContent = {
@@ -17,7 +15,7 @@ const MissionCreateModal = ({ formInfo, onChangeModal, updateState, title, onCha
       content: contentRef.current.value || '',
     };
     formRef.current.reset();
-    onChangeTC(titleContent)
+    onChangeTC();
   };
 
   const onChange = event => {
@@ -30,10 +28,6 @@ const MissionCreateModal = ({ formInfo, onChangeModal, updateState, title, onCha
       [event.currentTarget.name]: event.currentTarget.value,
     })
   };
-  
-  useEffect(() => {
-    title && setButtonName('미션 수정 완료')
-  })
 
   return (
     <>
@@ -64,7 +58,7 @@ const MissionCreateModal = ({ formInfo, onChangeModal, updateState, title, onCha
             onChange={onChange}
           /><br/>
 
-          <button onClick={onSubmit}>{buttonName}</button>
+          <button onClick={onSubmit}>미션 제작 완료</button>
         </form>
         <button onClick={onChangeModal}>이전</button>
       </div>

@@ -5,7 +5,7 @@ import styles from './list_form.module.css';
 
 // type : mission, answer, project
 const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike, 
-                    onDelete, onChangeSearchType, userInfo, onParticipateMission,
+                    onModify, onDelete, onChangeSearchType, userInfo, onParticipateMission,
                     openDetail, setOpenDetail }) => {
 
     // 디테일 모달 열기
@@ -38,6 +38,7 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
                         closeModal={closeModal}
                         userInfo={userInfo}
                         onParticipateMission={onParticipateMission}
+                        onModify={onModify}
                         onDelete={onDelete}
                     />
                 </div> }

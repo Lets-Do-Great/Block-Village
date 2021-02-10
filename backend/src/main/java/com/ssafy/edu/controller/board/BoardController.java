@@ -7,6 +7,7 @@ import com.ssafy.edu.service.board.BoardServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -29,7 +30,7 @@ public class BoardController {
     @Autowired
     private BoardCommentServiceImpl boardCommentService;
 
-    @ApiOperation(value = "공지사항 전체 조회", notes = "데이터베이스에 저장된 모든 게시글을 불러옵니다.")
+    @ApiOperation(value = "공지사항 전체 조회", notes = "데이터베이스에 저장된 모든 게시글을 불러옵니다.", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping
     public ResponseEntity<BoardBasicResponse> getBoardList(@PageableDefault(size=5, sort="createdDate") final Pageable pageable,
                                                            @RequestParam(value = "keywordType", required = false) String keywordType,
@@ -40,43 +41,43 @@ public class BoardController {
         return boardService.getBoardList(pageable);
     }
 
-    @ApiOperation(value = "공지사항 조회", notes = "{boardId}번 게시글과 댓글들을 불러옵니다.")
+    @ApiOperation(value = "공지사항 조회", notes = "{boardId}번 게시글과 댓글들을 불러옵니다.", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping("/{boardId}")
     public ResponseEntity<BoardBasicResponse> getBoard(@PathVariable("boardId") Long id){
         return boardService.getBoard(id);
     }
 
-    @ApiOperation(value = "공지사항 등록", notes = "작성한 게시글이 데이터베이스에 저장됩니다.")
+    @ApiOperation(value = "공지사항 등록", notes = "작성한 게시글이 데이터베이스에 저장됩니다.", authorizations = { @Authorization(value="jwtToken") })
     @PostMapping
     public ResponseEntity<BoardBasicResponse> insertBoard(@RequestBody BoardRequest boardInsertRequest){
         return boardService.insertBoard(boardInsertRequest);
     }
 
-    @ApiOperation(value = "공지사항 수정", notes = "{boardId}번째 게시글을 수정합니다.")
+    @ApiOperation(value = "공지사항 수정", notes = "{boardId}번째 게시글을 수정합니다.", authorizations = { @Authorization(value="jwtToken") })
     @PutMapping("/{boardId}")
     public ResponseEntity<BoardBasicResponse> updateBoard(@PathVariable("boardId") Long id, @RequestBody BoardUpdateRequest boardUpdateRequest){
         return boardService.updateBoard(id, boardUpdateRequest);
     }
 
-    @ApiOperation(value = "공지사항 삭제", notes = "{boardId}번째 게시글을 삭제합니다.")
+    @ApiOperation(value = "공지사항 삭제", notes = "{boardId}번째 게시글을 삭제합니다.", authorizations = { @Authorization(value="jwtToken") })
     @DeleteMapping("/{boardId}")
     public ResponseEntity<BoardBasicResponse> deleteBoard(@PathVariable("boardId") Long id){
         return boardService.deleteBoard(id);
     }
 
-    @ApiOperation(value = "댓글 작성", notes = "{boardId}번째 게시글에 댓글을 작성합니다.")
+    @ApiOperation(value = "댓글 작성", notes = "{boardId}번째 게시글에 댓글을 작성합니다.", authorizations = { @Authorization(value="jwtToken") })
     @PostMapping("/{boardId}/comments")
     public ResponseEntity<BasicResponse> insertComment(@PathVariable("boardId") Long id, @RequestBody BoardCommentRequest boardCommentRequest){
         return boardCommentService.insertComment(id, boardCommentRequest);
     }
 
-    @ApiOperation(value = "댓글 수정", notes = "{boardId}번째 게시글에 있는 {commentId}번 댓글을 수정합니다.")
+    @ApiOperation(value = "댓글 수정", notes = "{boardId}번째 게시글에 있는 {commentId}번 댓글을 수정합니다.", authorizations = { @Authorization(value="jwtToken") })
     @PutMapping("/{boardId}/comments/{commentId}")
     public ResponseEntity<BasicResponse> updateComment(@PathVariable("boardId") Long id,@PathVariable("commentId") Long cid, @RequestBody String content){
         return boardCommentService.updateComment(id, cid, content);
     }
 
-    @ApiOperation(value = "댓글 삭제", notes = "{boardId}번째 게시글에 있는 {commentId}번 댓글을 삭제합니다.")
+    @ApiOperation(value = "댓글 삭제", notes = "{boardId}번째 게시글에 있는 {commentId}번 댓글을 삭제합니다.", authorizations = { @Authorization(value="jwtToken") })
     @DeleteMapping("/{boardId}/comments/{commentId}")
     public ResponseEntity<BasicResponse> deleteComment(@PathVariable("boardId") Long id,@PathVariable("commentId") Long cid){
         return boardCommentService.deleteComment(id, cid);

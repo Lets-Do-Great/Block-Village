@@ -14,4 +14,5 @@ public class ChallengeListForm {
     String startDate;
     String endDate;
     Long peopleCnt;
+    Boolean finish;
 }

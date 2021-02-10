@@ -1,0 +1,121 @@
+.body {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding-left: 1.5em;
+}
+
+.dumy1 {
+  width: 100%;
+  height: 15%;
+}
+
+.cata__judgement {
+  width: 100%;
+  height: 10%;
+  /* text-align: center;
+  vertical-align: text-bottom; */
+}
+
+.cata__judgement:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__judgement > div {
+  padding: 1em 0.5em;
+  padding-left: 3em;
+  font-size: 23px;
+  font-weight: 550;
+  color: #fff;
+}
+
+.cata__movement {
+  width: 100%;
+  height: 10%;
+}
+
+.cata__movement:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__movement > div {
+  padding: 1em 0.5em;
+  padding-left: 2.8em;
+  font-size: 23px;
+  font-weight: 550;
+  color: #fff;
+}
+
+.cata__flow {
+  width: 100%;
+  height: 10%;
+}
+
+.cata__flow:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__flow > div {
+  padding: 1em 0.5em;
+  padding-left: 3em;
+  font-size: 23px;
+  font-weight: 550;
+  color: #fff;
+}
+
+.cata__calculation {
+  width: 100%;
+  height: 10%;
+}
+
+.cata__calculation:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__calculation > div {
+  padding: 1em 0.5em;
+  padding-left: 3em;
+  font-size: 23px;
+  font-weight: 550;
+  color: #fff;
+}
+
+.cata__drawing {
+  width: 100%;
+  height: 10%;
+}
+
+.cata__drawing:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__drawing > div {
+  padding: 1em 0.5em;
+  padding-left: 2.8em;
+  font-size: 23px;
+  font-weight: 550;
+  color: #fff;
+}
+
+.cata__function {
+  width: 100%;
+  height: 10%;
+}
+
+.cata__function:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__function > div {
+  padding: 1em 0.5em;
+  padding-left: 3em;
+  font-size: 23px;
+  font-weight: 550;
+  color: #fff;
+}
