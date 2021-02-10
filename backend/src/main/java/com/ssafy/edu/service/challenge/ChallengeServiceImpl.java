@@ -50,6 +50,19 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .build();
                     challengeFormList.add(tmp_form);
                 }
+                else{
+                    ChallengeForm tmp_form = ChallengeForm.builder()
+                            .challengeId(ch.getId())
+                            .title(ch.getTitle())
+                            .image(ch.getImage())
+                            .startDate(ch.getStartDate())
+                            .endDate(ch.getEndDate())
+                            .peopleCnt(ch.getPeopleCnt())
+                            .finish(ch.getFinish())
+                            .todo("")
+                            .build();
+                    challengeFormList.add(tmp_form);
+                }
             }
             result.data = challengeFormList;
             result.status = true;
@@ -120,6 +133,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                     Long tmpPeople = tmpForm.getPeopleCnt();
                     tmpForm.setPeopleCnt(tmpPeople + 1);
                     challengeOpt.get().setPeopleCnt(tmpPeople + 1);
+                    challengeJpaRepository.save(challengeOpt.get());
                 }
 
                 result.data = tmpForm;
@@ -143,8 +157,9 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .finish(challengeOpt.get().getFinish())
                             .build();
                     if(challengeUserRequest.getTodo().equals("done")){
-                        tmpForm.setPeopleCnt(tmpForm.getPeopleCnt() + 1);
-                        challengeOpt.get().setPeopleCnt(tmpForm.getPeopleCnt() + 1);
+                        tmpForm.setPeopleCnt(challengeOpt.get().getPeopleCnt() + 1);
+                        challengeOpt.get().setPeopleCnt(challengeOpt.get().getPeopleCnt() + 1);
+                        challengeJpaRepository.save(challengeOpt.get());
                     }
                     result.data = tmpForm;
                     result.status = true;
