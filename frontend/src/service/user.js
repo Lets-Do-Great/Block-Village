@@ -8,55 +8,69 @@ import client from './client';
 
 // 로그인 정보 확인
 export const logIn = ({ email, password }) => {
-    return client({
-        url: `users/do/login`,
-        method: 'post',
-        data: { email, password },
-    });
-}
+  return client({
+    url: `users/do/login`,
+    method: 'post',
+    data: { email, password },
+  });
+};
 
 // 회원 가입 하기
-export const setUserInfo = (
-    { emailId, emailSite, nickname, password }) => {    
-        return client({
-            url: `users/do`,
-            method: 'post',
-            data: { emailId, emailSite, nickname, password },
-        }
-    );
-}
+export const setUserInfo = ({ emailId, emailSite, nickname, password }) => {
+  return client({
+    url: `users/do`,
+    method: 'post',
+    data: { emailId, emailSite, nickname, password },
+  });
+};
 
 // 회원 정보 조회
-export const getUserInfo = ( email, token ) => {
-    return client({
-       url: `users/${email}`,
-       method: 'get', 
-    });
-}
+export const getUserInfo = (email, token) => {
+  return client({
+    url: `users/${email}`,
+    method: 'get',
+  });
+};
 
 // 회원 정보 수정
-export const modifyUserInfo = (
-    { email, nickname, prevPassword, newPassword, introduction }) => {
-        return client({
-            url: `users/${email}`,
-            method: 'put',
-            data: { nickname, prevPassword, newPassword, introduction },
-        }
-    )
-}
+export const modifyUserInfo = ({
+  email,
+  nickname,
+  prevPassword,
+  newPassword,
+  introduction,
+}) => {
+  return client({
+    url: `users/${email}`,
+    method: 'put',
+    data: { nickname, prevPassword, newPassword, introduction },
+  });
+};
 
 // 회원 탈퇴 하기
-export const deleteUserInfo = ( email ) => {
-    return client({
-       url: `users/${email}`,
-       method: 'delete', 
-    });
-}
+export const deleteUserInfo = (email) => {
+  return client({
+    url: `users/${email}`,
+    method: 'delete',
+  });
+};
 
 // 비밀번호 찾기
-export const findPW = ( email ) => {
-    return client({
-        url: `users/do/${email}`,
-        method: 'post',
-    })
-}
+export const findPW = (email) => {
+  return client({
+    url: `users/do/${email}`,
+    method: 'post',
+  });
+};
+
+// 이미지 수정
+// 요기에 이미지 수정하는 api 함수 요청 적으면 되욤 axios 함수이름 modifyImage
+
+export const modifyImage = ({ email, file }) => {
+  client.defaults.headers.common['content-type'] = 'multipart/form-data';
+  return client({
+    url: `users/file/${email}`,
+    method: 'put',
+    data: { email, file },
+  });
+};
