@@ -97,7 +97,6 @@ const MissionContainer = () => {
 
     // 미션 참여 시작 요청
     const onParticipateMission = async () => {
-        console.log(selectedMission);
         try{
             await dispatch(MissionAction.setTodoMission(
                 { email: userInfo.email, missionId:selectedMission.id, todo:'todo' }));
