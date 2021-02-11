@@ -5,9 +5,8 @@ import * as Icon from 'react-icons/md';
 
 const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, onModify, onDelete}) => {
 
-  const { nickname, title, content, updatedDate, views } = selectedBoard;
-  const date = updatedDate.split("T");
-  const time = date[1].split(".");
+  const { nickname, title, content, createdDate, views } = detail;
+  const date = createdDate.split("T");
 
   const onClick = () => {
     closeDetail();
@@ -27,7 +26,7 @@ const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, onModify, o
       <div className={styles.title}>{title}</div>
       <div className={styles.info}>
         <Icon.MdAccountCircle/> <div className={styles.info_text}>{nickname}</div>
-        <Icon.MdEdit/> <div className={styles.info_text}>{date[0]} {time[0]}</div>
+        <Icon.MdEdit/> <div className={styles.info_text}>{date[0]} {date[1]}</div>
         <Icon.MdFace/> <div className={styles.info_text}>{views}</div>
       </div>
       <div className={styles.content}>{content}</div>
