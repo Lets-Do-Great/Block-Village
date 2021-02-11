@@ -1,9 +1,7 @@
 package com.ssafy.edu.service.board;
 
 import com.ssafy.edu.model.BasicResponse;
-import com.ssafy.edu.model.board.Board;
-import com.ssafy.edu.model.board.BoardComment;
-import com.ssafy.edu.model.board.BoardCommentRequest;
+import com.ssafy.edu.model.board.*;
 import com.ssafy.edu.model.user.User;
 import com.ssafy.edu.repository.BoardCommentJpaRepository;
 import com.ssafy.edu.repository.BoardJpaRepository;
@@ -13,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,7 +39,7 @@ public class BoardCommentServiceImpl implements BoardCommentService{
         if(userOptional.isPresent() && boardOptional.isPresent()){
 
             BoardComment boardComment = BoardComment.builder()
-                    .content(boardCommentRequest.getContent())
+                    .content(boardCommentRequest.getComment())
                     .board(boardOptional.get())
                     .user(userOptional.get())
                     .build();
@@ -104,6 +104,41 @@ public class BoardCommentServiceImpl implements BoardCommentService{
 
         result.status = false;
         return new ResponseEntity<>(result, HttpStatus.OK);
+
+    }
+
+    /* 특정 공지사항 댓글들 불러오기 */
+    @Override
+    public ResponseEntity<BoardBasicResponse> getCommentList(Long id) {
+
+        BoardBasicResponse result = new BoardBasicResponse();
+        Optional<Board> boardOptional = boardJpaRepository.findById(id);
+
+        if(boardOptional.isPresent()){
+
+            List<BoardCommentResponse> bCommentList = new ArrayList<>();
+            Board board = boardOptional.get();
+
+            for(BoardComment c : board.getBoardCommentList()){
+                BoardCommentResponse bc = BoardCommentResponse.builder()
+                        .id(c.getCommentId())
+                        .comment(c.getContent())
+                        .email(c.getUser().getEmail())
+                        .nickname(c.getUser().getNickname())
+                        .created_at(c.getCreatedDate())
+                        .updated_at(c.getModifiedDate())
+                        .build();
+                bCommentList.add(bc);
+            }
+
+            result.status = true;
+            result.data = bCommentList;
+            return new ResponseEntity(result, HttpStatus.OK);
+
+        }
+
+        result.status = false;
+        return new ResponseEntity(result, HttpStatus.OK);
 
     }
 
