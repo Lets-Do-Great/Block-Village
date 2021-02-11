@@ -49,22 +49,22 @@
       26{type: 'repeat_times'},
       27{type: 'repeat'},
       28{type: 'do_while'},
-      29{type: 'while_not'},
-      30{type: 'break'},
-      31{type: 'condition'},
-      32{type: 'if_else'},
-      33{type: 'if_else_double'},
-      34{type: 'if_else_triple'},
-      35{type: 'switch_input'},
-      36{type: 'input_value'},
+      30{type: 'while_not'},
+      31{type: 'break'},
+      32{type: 'condition'},
+      33{type: 'if_else'},
+      34{type: 'if_else_double'},
+      35{type: 'if_else_triple'},
+      36{type: 'switch_input'},
+      37{type: 'input_value'},
     ]
   },
   {
     name: '계산',
     colour: '#1060FF',
     blocks: [
-      37{type: 'number'}, -- 0
-      38{type: 'addition'}, -- 0
+      38{type: 'number'}, -- 0
+      39{type: 'addition'}, -- 0
       40{type: 'subtraction'}, -- 0
       41{type: 'multiplication'},
       42{type: 'division'},
