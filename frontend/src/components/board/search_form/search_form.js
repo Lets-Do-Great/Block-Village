@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './search_form.module.css';
 
 const SearchForm = ({ onChangeSearch, onChangeSearchType, onClickEnter, search }) => {
-    return (<div>
+    return (
+    <div className={styles.search_form}>
         <select name="keywordType" className={styles.select} onChange={onChangeSearchType}>
             <option 
                 className={styles.option}
