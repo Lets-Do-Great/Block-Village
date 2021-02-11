@@ -114,7 +114,7 @@ const Main = (props) => {
     dispatch(UserAction.logOut());
     history.push('/');
   }
-  const goboard = () => history.push("/");
+  const goboard = () => history.push("/main/board");
   const goservice = () => history.push("/");
   const gostore = () => history.push("/main/block_store");
   //=======================================================
