@@ -20,31 +20,43 @@ const EditorMissionContainer = ( { type }) => {
     difficulty: 0,
   });
 
-  const onChangeState = (e) => {
-    const newState = {
-      title: e.title,
-      content: e.content, 
-      image: '',
-      xmlCode: e.xmlCode, 
-      startPositionX: e.startPosition[0],
-      startPositionY: e.startPosition[1],
-      endPositionX: e.endPosition[0],
-      endPositionY: e.endPosition[1],
-      difficulty: e.difficulty,
-    }
-    setCreateInfo(newState);
-  };
+  // const onChangeState = (e) => {
+  //   const newState = {
+  //     title: e.title,
+  //     content: e.content, 
+  //     image: '',
+  //     xmlCode: e.xmlCode, 
+  //     startPositionX: e.startPosition[0],
+  //     startPositionY: e.startPosition[1],
+  //     endPositionX: e.endPosition[0],
+  //     endPositionY: e.endPosition[1],
+  //     difficulty: e.difficulty,
+  //   }
+  //   setCreateInfo(newState);
+  // };
 
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
   
 
 
-  const onSetMission = async () => {
-    const newXml = createInfo.xmlCode.replace(/"/gi, '\\"')
+  const onSetMission = async (e) => {
+    console.log(e);
+    const newXml = e.xmlCode.replace(/"/gi, '\\"')
+    console.log(newXml);
+    const newInfo = {
+      title: e.title,
+      content: e.content,
+      image: '',
+      startPositionX: e.startPosition[0],
+      startPositionY: e.startPosition[1],
+      endPositionX: e.endPosition[0],
+	    endPositionY: e.endPosition[1],
+      difficulty: e.difficulty * 1.0,
+    }
     try {
       await dispatch(MissionAction.setMission({
-        ...createInfo,
+        ...newInfo,
         email: userInfo.email,
         xmlCode: newXml
       }))
@@ -65,7 +77,6 @@ const EditorMissionContainer = ( { type }) => {
   };
 
   const onGetMyBlocks = async () => {
-    console.log('container');
     try {
       await dispatch(BlockAction.getMyBlocks({
         email: userInfo.email
@@ -76,7 +87,6 @@ const EditorMissionContainer = ( { type }) => {
   }
 
   useEffect(() => {
-    console.log(localStorage.getItem('token'));
     onGetMyBlocks();
   }, [])
 
@@ -84,7 +94,7 @@ const EditorMissionContainer = ( { type }) => {
     <>
     { type === 'create' && 
       <MissionCreateSubmain 
-        onChangeState={onChangeState}
+        // onChangeState={onChangeState}
         onSetMission={onSetMission}
       />
     }
