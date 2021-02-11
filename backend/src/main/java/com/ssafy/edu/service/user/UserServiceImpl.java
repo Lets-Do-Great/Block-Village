@@ -82,7 +82,9 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> userOptional = userJpaRepository.findByEmail(email);
         if(userOptional.isPresent()){
-            userJpaRepository.delete(userOptional.get());
+            // update로 변경 
+            userOptional.get().setEmail("나무늘보");
+            userJpaRepository.save(userOptional.get());
             result.status = true;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
