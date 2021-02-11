@@ -1,0 +1,55 @@
+.my_list_category{
+    position: relative;
+}
+
+.close {
+    top: -4px;
+    right: 0px;
+    position: absolute;
+    font-size: 40px;
+    color: darkgray;
+    z-index: 1;
+}
+
+.close:hover{
+    color: red;
+}
+
+.tab_menus {
+    width: 100%;
+    padding: 1em;
+    padding-bottom: 0em;
+}
+
+.tabs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    border-bottom: 2px solid #ff8896;
+    text-align: center;
+}
+
+.tabs > li {
+    display: block;
+    width: 30%;
+    height: 100%;
+    padding: 0.5em 1em;
+    margin: 0 1em;
+    font-weight: bold;
+    font-size: 15px;
+    color: darkgray;
+}
+
+.tabs > .current {
+    display: border;
+    background: white;
+    color: #ff8896;
+    border: 2px solid #ff8896;
+    border-bottom: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+    top: 2px;
+}
+  

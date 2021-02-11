@@ -20,5 +20,4 @@ public class BoardResult {
     Long views;
     LocalDateTime createdDate;
     LocalDateTime updatedDate;
-    List<BoardCommentResponse> boardCommentList;
 }

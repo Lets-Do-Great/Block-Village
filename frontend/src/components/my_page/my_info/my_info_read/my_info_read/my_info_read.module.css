@@ -1,0 +1,49 @@
+.btn_my_info_form{
+    text-align: center;
+    clear: both;
+}
+
+.my_info_read{
+    position: relative;
+}
+
+.btn_modify{
+    width: 35%;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #88e7ff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    margin: 2%;
+    margin-right: 2%;
+}
+
+.btn_delete{
+    width: 35%;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #fff788;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    margin: 2%;
+    margin-left: 2%;
+}
+
+.close {
+    top: -4px;
+    right: 0px;
+    position: absolute;
+    font-size: 40px;
+    color: darkgray;
+    z-index: 1;
+}
+
+.close:hover{
+    color: red;
+}

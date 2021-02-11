@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './main.module.css'
 
 import { useHistory } from 'react-router-dom';
-import Navbar from '../navbar/navbar';
+import Nav from '../../nav/nav';
 
 import ScrollContainer from 'react-indiana-drag-scroll'
 
@@ -127,7 +127,7 @@ const Main = (props) => {
   return (
     <div className={styles.body} ref={back_back} onClick={changeSize}>
 
-      <Navbar />
+      <Nav type="main" />
 
         <ScrollContainer
           className="scroll-container"

@@ -24,6 +24,6 @@ public class BoardCommentRequest {
 
     @ApiModelProperty(required = true)
     @NotEmpty
-    String content;
+    String comment;
 
 }

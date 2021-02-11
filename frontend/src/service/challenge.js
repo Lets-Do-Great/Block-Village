@@ -6,11 +6,27 @@
 
 import client from './client';
 
-// 모든 챌린지 조회
-export const getAllChallenge = () => {
+// 전체 챌린지 목록 불러오기 ( 최신순 )
+export const getChallengeList = ({ email }) => {
   return client({
-    url: ``,
+    url: `challenges/${email}`,
     method: 'get',
   });
 };
 
+// 특정 유저가 참가한 챌린지 목록 불러오기
+export const getMyChallengeList = ({ email, todo }) => {
+  return client({
+    url: `challenges/${email}/${todo}`,
+    method: 'get',
+  });
+};
+
+// 현재 로그인한 유저가 챌린지 참여하기
+export const setTodoChallenge = ({ email, todo, challengeId }) => {
+  return client({
+    url: `challenges/${challengeId}/joinchallenge`,
+    method: 'post',
+    data: { email, todo }
+  });
+};

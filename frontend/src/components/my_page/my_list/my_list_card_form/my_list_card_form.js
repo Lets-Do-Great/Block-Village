@@ -4,10 +4,13 @@ import * as Icon from "react-icons/md";
 
 const MyListCardForm = ({ type, id, title, difficulty, commentCnt,
                         likeCnt, peopleCnt, clickCard, readCnt }) => {
-    return (<>
-        <div id={id}
-            onClick={clickCard}>{ title }</div>
-
+    return (<div className={styles.card_form}>
+        <div className={styles.title_form}>
+            <div id={id}
+                className={styles.title}
+                onClick={clickCard}>{ title }</div>
+            <div className={styles.img}></div>
+        </div>
         <div className={styles.icon_box}>
             <div className={styles.icon}>
                 { type !== 'myAnswer' && <>
@@ -29,7 +32,7 @@ const MyListCardForm = ({ type, id, title, difficulty, commentCnt,
                 <Icon.MdFavorite/> { likeCnt } <p/>
             </div>
         </div>
-    </>);
+    </div>);
 };
 
 export default MyListCardForm;

@@ -19,11 +19,11 @@ public class BoardOneResult {
 
     Long boardId;
     String email;
+    String nickname;
     String title;
     String content;
     Long views;
     LocalDateTime createdDate;
     LocalDateTime updatedDate;
-    List<BoardCommentResponse> comments;
 
 }

@@ -1,50 +1,26 @@
-import React, { useState } from 'react';
-import BlocklyNavbar from '../../blockly_navbar/blockly_navbar';
+import React, { useEffect, useState } from 'react';
+import Nav from '../../../nav/nav';
 import ChallengeList from '../challenge_list/challenge_list';
 import styles from './challenge_main.module.css'
 
-const ChallengeMain = (props) => {
-  const [challenges, setChallenges] = useState([
-    {
-      c_num: 1,
-      title: 'dum_data1',
-      start_date: '2021-01-15',
-      end_date: '2021-02-10',
-      p_cnt: 564893,
-      image: '이미지',
-      content: '설명',
-    },
-    {
-      c_num: 2,
-      title: 'dum_data2',
-      start_date: '2021-03-15',
-      end_date: '2021-08-10',
-      p_cnt: 564893,
-      image: '이미지',
-      content: '설명',
-    },
-    {
-      c_num: 3,
-      title: 'dum_data3',
-      start_date: '2021-05-15',
-      end_date: '2021-10-10',
-      p_cnt: 564893,
-      image: '이미지',
-      content: '설명',
-    },
-  ]);
-
+const ChallengeMain = ({ challengeList, setTodoChallenge }) => {
   return (
     <div className={styles.body}>
-      <BlocklyNavbar />
+      <Nav type="challenge"/>
       <div className={styles.container}>
         <div className={styles.lists}>
+          <div className={styles.challenge_header}>
+            <div className={styles.challenge_no}>번호</div>
+            <div className={styles.challenge_name}>챌린지 명</div>
+            <div className={styles.challenge_date}>진행 기간</div>
+            <div className={styles.challenge_people_cnt}>참가자 수</div>
+          </div>
           {
-            challenges.map((challenge) => (
+            challengeList.map((challenge) => (
               <ChallengeList 
-                key={challenge.c_num}
+                key={challenge.challengeId}
                 challenge={challenge}
-              />
+                setTodoChallenge={setTodoChallenge}/>
             ))
           }
         </div>
