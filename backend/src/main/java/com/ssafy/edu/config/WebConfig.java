@@ -20,6 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**") // 기본 적용 경로
+                .excludePathPatterns("/img/**")
                 .excludePathPatterns("/users/do/**")
                 .excludePathPatterns("/users/file/**")
                 .excludePathPatterns("/resources/**")
@@ -41,13 +42,13 @@ public class WebConfig implements WebMvcConfigurer {
                 .exposedHeaders("token");
     }
 
-    @Override public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("/static/");
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**").
-                addResourceLocations("classpath:/META-INF/resources/webjars/");
-    }
+//    @Override public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/img/**")
+//                .addResourceLocations("classpath:/META-INF/resources/static/img/");
+//        registry.addResourceHandler("swagger-ui.html")
+//                .addResourceLocations("classpath:/META-INF/resources/");
+//        registry.addResourceHandler("/webjars/**").
+//                addResourceLocations("classpath:/META-INF/resources/webjars/");
+//    }
 
 }
