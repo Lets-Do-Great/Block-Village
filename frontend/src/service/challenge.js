@@ -8,7 +8,6 @@ import client from './client';
 
 // 전체 챌린지 목록 불러오기 ( 최신순 )
 export const getChallengeList = ({ email }) => {
-  console.log("두고봐2");
   return client({
     url: `challenges/${email}`,
     method: 'get',
@@ -28,8 +27,6 @@ export const setTodoChallenge = ({ email, todo, challengeId }) => {
   return client({
     url: `challenges/${challengeId}/joinchallenge`,
     method: 'post',
-    data: {
-      email, todo: todo,
-    }
+    data: { email, todo }
   });
 };
