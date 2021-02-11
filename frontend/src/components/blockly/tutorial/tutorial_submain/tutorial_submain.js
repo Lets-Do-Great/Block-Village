@@ -72,6 +72,7 @@ const TutorialSubmain = (props) => {
         colour: '#C30D23',
         blocks: [
           {type: 'start_button',},
+          {type: 'end_button',},
         ],
       },
       {

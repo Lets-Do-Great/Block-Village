@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 
@@ -9,102 +9,39 @@ import BlockMenu from '../block_menu/block_menu';
 import StoreNavbar from '../store_navbar/store_navbar';
 import styles from './block_store.module.css'
 
-const BlockStore = ({ onBuyBlocks }) => {
-  const allBlcoksInfo = useSelector(state => state.block.allBlcoksInfo);
-  const [billList, setBillList] = useState([
-    { 
-      category: '시작',
-      id: 1,
-      price: 1000,
-    },
-    { 
-      category: '시작',
-      id: 2,
-      price: 2000,
-    },
-  ]);
-  const [usermil, setUsermil] = useState(5000);
-
+const BlockStore = ({ onBuyBlocks, usermil }) => {
+  const [billList, setBillList] = useState([]);
+  
   const buyBlocks = () => {
     const buyList = []
     billList.map((item) => (
       buyList.push(item.id)
     ))
-    console.log(buyList);
-    // onBuyBlocks(buyList)
+    onBuyBlocks(buyList)
+    // 마일리지 없애기 추가
+    // let sumMileage = 0;
+    // billList.map((item) => (
+    //   sumMileage += item.price
+    // ))
+
     setBillList([])
   };
-
+    
   //==== 아래 데이터는 allblock 불러오는 예제 데이터 나중에 바꿔야함
-  const allBlocks = {
-    '시작': [
-      {
-        id: 1,
-        price: 0,
-        useHave: true,
-      },
-      {
-        id: 2,
-        price: 0,
-        useHave: true,
-      },
-    ],
-    '판단': [
-      {
-        id: 3,
-        price: 1000,
-        userHave: false,
-      },
-      {
-        id: 4,
-        price: 500,
-        userHave: false,
-      },
-      {
-        id: 5,
-        price: 700,
-        userHave: true,
-      },
-    ],
-    '움직임': [
-      {
-        id: 6,
-        price: 3000,
-        userHave: false,
-      },
-      {
-        id: 7,
-        price: 2700,
-        userHave: false,
-      },
-    ],
-  }
+  const allBlcoksInfo = useSelector(state => state.block.allBlcoksInfo);
+  useEffect(() => {
+    setSelectedCategory(allBlcoksInfo["판단"])
+  }, [])
   //=========================================================
 
   const [categoryStatus, setCategoryStatus] = useState([
     true, false, false, false, false, false,
   ]);
 
-  const [selectedCategory, setSelectedCategory] = useState([
-    {
-      id: 3,
-      price: 1000,
-      userHave: false,
-    },
-    {
-      id: 4,
-      price: 500,
-      userHave: false,
-    },
-    {
-      id: 5,
-      price: 700,
-      userHave: true,
-    },
-  ])
+  const [selectedCategory, setSelectedCategory] = useState([])
 
   const onChangeSelectedCategory = (name) => {
-    setSelectedCategory(allBlocks[`${name}`])
+    setSelectedCategory(allBlcoksInfo[`${name}`])
     if (name === '판단') {
       setCategoryStatus([true, false, false, false, false, false,])
     }

@@ -12,7 +12,7 @@ const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, on
 
   const [formInfo, setFormInfo] = useState({
     initialXml: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
-    toolboxCategories: myBlocksInfo,
+    toolboxCategories: [],
     startPosition: [selectedMission.startPositionX, selectedMission.startPositionY],
     stepPosition: [],
     endPosition: [selectedMission.endPositionX, selectedMission.endPositionY],
@@ -68,6 +68,7 @@ const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, on
       }
       <MissionDoMain 
         formInfo={formInfo}
+        myBlocksInfo={myBlocksInfo}
         onChangeJavascript={onChangeJavascript}
         onChangeXml={onChangeXml}
         onChangeSuccess={onChangeSuccess}

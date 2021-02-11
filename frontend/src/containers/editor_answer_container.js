@@ -35,7 +35,6 @@ const EditorAnswerContainer = (props) => {
   // 정답에 대한 info는 pros로 가져올 것.
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
-  const myBlocksInfo = useSelector(state => state.block.myBlocksInfo);
   const dispatch = useDispatch();
 
   const onSetTodoMission = async () => {
@@ -63,6 +62,7 @@ const EditorAnswerContainer = (props) => {
   };
 
   const onSetAnswer = async () => {
+    const newXml = answerInfo.xmlCode.replace(/"/gi, '\"')
     try {
       await dispatch(AnswerAction.setAnswer({
         email: userInfo.email,
@@ -70,7 +70,7 @@ const EditorAnswerContainer = (props) => {
         missionId: selectedMission.id,
         title: `${userIfno.nickname}님의 ${selectedMission.id}번 미션 답안`,
         javascriptCode: answerInfo.javascriptCode,
-        xmlCode: answerInfo.xmlCode,
+        xmlCode: newXml,
       }))
     } catch(e) {
       console.log(e);
