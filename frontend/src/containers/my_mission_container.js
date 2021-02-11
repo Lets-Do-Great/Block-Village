@@ -9,7 +9,7 @@ import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
 import ModalDetailCardForm from '../components/list/modal_detail_card_form/modal_detail_card_form';
 
-const MyMissionContainer = () => {
+const MyMissionContainer = ({ closeModal }) => {
     const [ category, setCategory ] = useState('myMission');
     const [ detailComponent, setDetailComponent ] = useState(false);
 
@@ -37,7 +37,7 @@ const MyMissionContainer = () => {
     }, [ category ]);
 
     const onChangeCategory = (e) => {
-        setCategory(e.target.value);
+        setCategory(e.target.attributes[1].nodeValue);
     }
 
     const onOpenDetail = () => {
@@ -215,7 +215,9 @@ const MyMissionContainer = () => {
             </> )
             : (<> 
                 <MyListCategory
-                    onChangeCategory={onChangeCategory}/>
+                    category={category}
+                    onChangeCategory={onChangeCategory}
+                    closeModal={closeModal}/>
                 
                 { category !== 'myAnswer' &&
                     <MyListForm
