@@ -37,7 +37,6 @@ const MyMissionContainer = ({ closeModal }) => {
     }, [ category ]);
 
     const onChangeCategory = (e) => {
-        console.log(e);
         setCategory(e.target.attributes[1].nodeValue);
     }
 
