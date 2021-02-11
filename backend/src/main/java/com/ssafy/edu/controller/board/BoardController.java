@@ -32,7 +32,7 @@ public class BoardController {
 
     @ApiOperation(value = "공지사항 전체 조회", notes = "데이터베이스에 저장된 모든 게시글을 불러옵니다.", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping
-    public ResponseEntity<BoardBasicResponse> getBoardList(@PageableDefault(size=5, sort="createdDate") final Pageable pageable,
+    public ResponseEntity<BoardBasicResponse> getBoardList(@PageableDefault(size=10, sort="createdDate") final Pageable pageable,
                                                            @RequestParam(value = "keywordType", required = false) String keywordType,
                                                            @RequestParam(value = "keyword", required = false) String keyword){
         if(keywordType!=null && keyword!=null){
@@ -79,8 +79,8 @@ public class BoardController {
 
     @ApiOperation(value = "댓글 수정", notes = "{boardId}번째 게시글에 있는 {commentId}번 댓글을 수정합니다.", authorizations = { @Authorization(value="jwtToken") })
     @PutMapping("/{boardId}/comments/{commentId}")
-    public ResponseEntity<BasicResponse> updateComment(@PathVariable("boardId") Long id,@PathVariable("commentId") Long cid, @RequestBody String content){
-        return boardCommentService.updateComment(id, cid, content);
+    public ResponseEntity<BasicResponse> updateComment(@PathVariable("boardId") Long id,@PathVariable("commentId") Long cid, @RequestBody BoardCommentRequest boardCommentRequest){
+        return boardCommentService.updateComment(id, cid, boardCommentRequest.getComment());
     }
 
     @ApiOperation(value = "댓글 삭제", notes = "{boardId}번째 게시글에 있는 {commentId}번 댓글을 삭제합니다.", authorizations = { @Authorization(value="jwtToken") })

@@ -39,7 +39,7 @@ public class BoardCommentServiceImpl implements BoardCommentService{
         if(userOptional.isPresent() && boardOptional.isPresent()){
 
             BoardComment boardComment = BoardComment.builder()
-                    .content(boardCommentRequest.getContent())
+                    .content(boardCommentRequest.getComment())
                     .board(boardOptional.get())
                     .user(userOptional.get())
                     .build();
@@ -121,12 +121,12 @@ public class BoardCommentServiceImpl implements BoardCommentService{
 
             for(BoardComment c : board.getBoardCommentList()){
                 BoardCommentResponse bc = BoardCommentResponse.builder()
-                        .commentId(c.getCommentId())
-                        .content(c.getContent())
+                        .id(c.getCommentId())
+                        .comment(c.getContent())
                         .email(c.getUser().getEmail())
                         .nickname(c.getUser().getNickname())
-                        .createdAt(c.getCreatedDate())
-                        .updatedAt(c.getModifiedDate())
+                        .created_at(c.getCreatedDate())
+                        .updated_at(c.getModifiedDate())
                         .build();
                 bCommentList.add(bc);
             }
