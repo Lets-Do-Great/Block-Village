@@ -217,6 +217,7 @@ public class MissionServiceImpl implements MissionService {
                     .updatedAt(now)
                     .difficulty(missionSignUpRequest.getDifficulty())
                     .user(userOptional.get())
+                    .missionImg(missionSignUpRequest.getImage())
                     .favorite(0)
                     .people(0)
                     .build();
