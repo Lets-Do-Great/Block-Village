@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './search_type.module.css';
 
 // select로 바꾸기
-const SearchType = ({ onChangeSearchType }) => {
+const SearchType = ({ onChangeSortType }) => {
     return (
-        <select name="sortType" className={styles.select} onChange={onChangeSearchType}>
+        <select name="sortType" className={styles.select} onChange={onChangeSortType}>
             <option 
                 className={styles.option}
                 value="createdDate,desc">최신순</option>

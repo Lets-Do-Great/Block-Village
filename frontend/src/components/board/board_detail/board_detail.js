@@ -5,10 +5,6 @@ import * as Icon from 'react-icons/md';
 
 const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, onModify, onDelete}) => {
 
-  useEffect(()=>{
-    console.log(selectedBoard);
-  }, []);
-
   const { nickname, title, content, createdDate, views } = selectedBoard;
   const date = createdDate.split("T");
 
