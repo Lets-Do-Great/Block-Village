@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './mission_create_playground.module.css';
+import { FaRegPlayCircle, FaRedoAlt } from 'react-icons/fa';
 
 var x = 0;
 var y = 0;
@@ -84,7 +85,17 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
 
   // 움직임 
 /////////////////////////////////////////////////////////////////
-  
+  const turn_right = () => {
+    cur_angle -= 90 * Math.PI / 180;
+  }
+
+  const turn_left = () => {
+    cur_angle += 90 * Math.PI / 180;
+  }
+  const turn_back = () => {
+    cur_angle += 180 * Math.PI / 180;
+  }
+  /////////////////////
 
   const move_x = (x_distance) => {
     x += x_distance;
@@ -317,12 +328,18 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
         <img ref={fieldchar}></img>
       </section>
       <footer className={styles.footer}>
-        <button 
+        <div 
           onClick={playGame}
           className={styles.game__button}
-        >시작하기
-        </button>
-        <button onClick={setfirstPosition}>제자리로</button>
+        >
+          <FaRegPlayCircle size="60" color="#c30d23"/>
+        </div>
+        <div 
+          onClick={setfirstPosition}
+          className={styles.return__button}
+        >
+          <FaRedoAlt size="55" color="#1060FF"/>
+        </div>
       </footer>
     </div>
   )

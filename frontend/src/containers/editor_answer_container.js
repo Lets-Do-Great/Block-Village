@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MissionDoSubmain from '../components/blockly/mission_do/mission_do_submain/mission_do_submain';
 import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
+import * as BlockAction from '../modules/block';
 
 const EditorAnswerContainer = (props) => {
   const [todo, setTodo] = useState('todo');
@@ -61,24 +62,40 @@ const EditorAnswerContainer = (props) => {
   };
 
   const onSetAnswer = async () => {
+    const newXml = answerInfo.xmlCode.replace(/"/gi, '\"')
     try {
       await dispatch(AnswerAction.setAnswer({
         email: userInfo.email,
         content: useContent,
         missionId: selectedMission.id,
-        title: `${userIfno.nickname}님의 ${selectedMission.id}번 미션 답안`,
+        title: `${userInfo.nickname}님의 ${selectedMission.id}번 미션 답안`,
         javascriptCode: answerInfo.javascriptCode,
-        xmlCode: answerInfo.xmlCode,
+        xmlCode: newXml,
+      }))
+    } catch(e) {
+      console.log(e);
+    }
+  };
+
+  const onGetMyBlocks = async (e) => {
+    try {
+      await dispatch(BlockAction.getMyBlocks({
+        email: userInfo.email
       }))
     } catch(e) {
       console.log(e);
     }
   }
 
+  useEffect(() => {
+    // console.log(localStorage.getItem('token'));
+    onGetMyBlocks();
+  }, [])
+
   return (
     <>
       <MissionDoSubmain
-        missionInfo={selectedMission}
+        selectedMission={selectedMission}
         setUseDifficulty={setUseDifficulty}
         setUseContent={setUseContent}
         onChangeTodo={onChangeTodo}

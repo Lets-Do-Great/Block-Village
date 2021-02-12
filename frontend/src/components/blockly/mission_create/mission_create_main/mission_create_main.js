@@ -17,16 +17,16 @@ import Blockly from 'blockly';
 import MissionCreateNavbar from '../mission_create_navbar/mission_create_navbar';
 import MissionCreatePlayground from '../mission_create_playground/mission_create_playground';
 
-const MissionCreateMain = ({ formInfo, onChangeModal, onChangeXml, onChangeStep }) => {
+const MissionCreateMain = ({ formInfo, myBlocksInfo, onChangeModal, onChangeXml, onChangeStep }) => {
   const [moveStep, setMoveStep] = useState([]);
   const { 
     xmlCode, 
-    toolboxCategories,
     startPosition,
     stepPosition,
     endPosition,
     type,
   } = formInfo;
+  const toolboxCategories = myBlocksInfo
 
   const [activeDrags, setActiveDrags] = useState(0);
   const [modal, setModal] = useState(true);
@@ -74,12 +74,12 @@ const MissionCreateMain = ({ formInfo, onChangeModal, onChangeXml, onChangeStep 
     },
     'componentStyles' : {
       // 'workspaceBackgroundColour': '#1e1e1e',
-      'toolboxBackgroundColour': '#F7C469',
+      'toolboxBackgroundColour': '#7844AA',
       'toolboxForegroundColour': '#FFFFFF',
-      'flyoutBackgroundColour': '#FFDEA4',
-      'flyoutForegroundColour': '#1e1e1e',
-      'flyoutOpacity': '#1e1e1e',
-      'scrollbarColour': '#EFA420',
+      'flyoutBackgroundColour': '#e3c0ff',
+      'flyoutForegroundColour': '#e3c0ff',
+      'flyoutOpacity': '#e3c0ff',
+      'scrollbarColour': '#e3c0ff',
       'scrollbarOpacity': 0.5,
       // 'insertionMarkerColour': '#1e1e1e',
       // 'insertionMarkerOpacity': '#1e1e1e',
@@ -160,7 +160,7 @@ const MissionCreateMain = ({ formInfo, onChangeModal, onChangeXml, onChangeStep 
                 grid: {
                   spacing: 20,
                   length: 2,
-                  colour: '#FFDEA4',
+                  colour: '#e3c0ff',
                   snap: true,
                 },
                 move:{

@@ -9,11 +9,6 @@ const MyBlockContainer = ({ closeModal }) => {
     const myBlockList = useSelector(state => state.block.myBlocksInfo);
     const dispatch = useDispatch();
 
-    // 처음에 렌더할 때 내 블록 불러오는 요청
-    useEffect(() => {
-        dispatch(BlockAction.getMyBlocks(userInfo.email));
-    }, []);
-
     return (
     <>
         <MyBlockCategory

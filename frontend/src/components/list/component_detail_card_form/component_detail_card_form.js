@@ -5,7 +5,7 @@ import * as Icon from 'react-icons/md';
 const ComponentDetailCardForm = ({ detail, setLike, setDislike, 
                             userInfo, closeDetail, onModify, onDelete }) => {
 
-    const {email, nickName, title, created_at, updated_at, favorite,
+    const {email, nickname, title, created_at, updated_at, favorite,
         content, difficulty, likeCnt, readCnt } = detail;
 
     const changeLike = () => {
@@ -38,7 +38,7 @@ const ComponentDetailCardForm = ({ detail, setLike, setDislike,
         </div>
 
         <div>
-            <Icon.MdAccountCircle/>{ nickName }
+            <Icon.MdAccountCircle/>{ nickname }
         </div>
         <div>
             <Icon.MdEdit/>{ created_at } / { updated_at }

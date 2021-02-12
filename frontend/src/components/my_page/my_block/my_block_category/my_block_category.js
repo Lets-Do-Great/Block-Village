@@ -1,7 +1,9 @@
 import { CONTROLS_FLOW_STATEMENTS_WARNING } from 'blockly/msg/en';
 import React, { useEffect, useState } from 'react';
 import * as Icons from "react-icons/ti";
+import * as Icon from 'react-icons/md';
 import MyBlockListForm from '../my_block_list_form/my_block_list_form';
+import styles from './my_block_category.module.css';
 
 const MyBlockCategory = ({ myBlockList, closeModal }) => {
     
@@ -37,13 +39,26 @@ const MyBlockCategory = ({ myBlockList, closeModal }) => {
     };
     
     return (
-        <div>
-            <button onClick={closeModal}>닫기</button>
-            <Icons.TiArrowLeftOutline onClick={onChangeCategoryPrev}/>
-            <MyBlockListForm
-                categoryBlockList={categoryBlockList}
-            />
-            <Icons.TiArrowRightOutline onClick={onChangeCategoryNext}/>
+        <div className={styles.my_block_category}>
+            <div 
+                className={styles.close}
+                onClick={closeModal}><Icon.MdHighlightOff/></div>
+            <div className={styles.category_name}>{categoryList[category]}</div>
+            <div className={styles.block_list_form}>
+                <div 
+                    className={styles.btn_icon_left}
+                    onClick={onChangeCategoryPrev}>
+                        <Icons.TiArrowLeftOutline/>
+                </div>
+                <MyBlockListForm
+                    categoryBlockList={categoryBlockList}
+                />
+                <div 
+                    className={styles.btn_icon_right}
+                    onClick={onChangeCategoryNext}>
+                        <Icons.TiArrowRightOutline/>
+                </div>
+            </div>
         </div>
     );
 }

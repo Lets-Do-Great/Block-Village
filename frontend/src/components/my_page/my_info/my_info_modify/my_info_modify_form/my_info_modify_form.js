@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styles from './my_info_modify_form.module.css'
 
 const MyInfoModifyLeft = ({ modifyInput, onSubmitImage }) => {
   const { profileImage } = modifyInput;
@@ -13,13 +14,18 @@ const MyInfoModifyLeft = ({ modifyInput, onSubmitImage }) => {
     onSubmitImage(formData);
   };
   return (
-    <>
-      <img src={profileImage} alt="프로필 이미지" />
+    <div className={styles.my_info_left}>
+      <img 
+        className={styles.profile_img} 
+        src={profileImage} 
+        alt="프로필 이미지" />
       {profileImage}
       <input type="file" multiple onChange={onChangeProfileImage} />
-      <button onClick={onSubmit}> 프로필 이미지 편집 </button>
-    </>
-  );
+      <div 
+        className={styles.edit}
+        onClick={onSubmit}> 프로필 이미지 편집 </div>
+    </div>
+    );
 };
 
 const MyInfoModifyRight = ({ modifyInput, onChangeModify, setPWConfirm }) => {
@@ -78,81 +84,67 @@ const MyInfoModifyRight = ({ modifyInput, onChangeModify, setPWConfirm }) => {
     }
   };
 
-  return (
-    <>
-      <input
-        type="text"
-        name="nickname"
-        value={nickname}
-        onChange={onChangeModify}
-        placeholder="닉네임"
-      />
-      <br />
-      <input
-        type="text"
-        name="introduction"
-        value={introduction}
-        onChange={onChangeModify}
-        placeholder="자기소개"
-      />
-      <br />
-      <input
-        type="password"
-        name="prevPassword"
-        value={prevPassword}
-        onChange={onChangeModify}
-        placeholder="현재 비밀번호"
-      />
-      <br />
-      <input
-        type="password"
-        name="newPassword"
-        value={newPassword}
-        onChange={onChangeModify}
-        placeholder="새로운 비밀번호"
-      />
-      <br />
-      <input
-        type="password"
-        name="PWConfirmInput"
-        value={PWConfirmInput.PW}
-        onChange={onChange}
-        placeholder="비밀번호 확인"
-      />
-      <br />
+    return (
+    <div className={styles.my_info_right}>
+        <input 
+            className={styles.input}
+            type="text"
+            name="nickname"
+            value={nickname}
+            onChange={onChangeModify}
+            placeholder="닉네임"/><br/>
+        <input 
+            className={styles.input}
+            type="text"
+            name="introduction"
+            value={introduction}
+            onChange={onChangeModify}
+            placeholder="자기소개"/><br/>
+        <input 
+            className={styles.input}
+            type="password"
+            name="prevPassword"
+            value={prevPassword}
+            onChange={onChangeModify}
+            placeholder="현재 비밀번호"/><br/>
+        <input 
+            className={styles.input}
+            type="password"
+            name="newPassword"
+            value={newPassword}
+            onChange={onChangeModify}
+            placeholder="새로운 비밀번호"/><br/>
+        <input 
+            className={styles.input}
+            type="password"
+            name="PWConfirmInput"
+            value={PWConfirmInput.PW}
+            onChange={onChange}
+            placeholder="비밀번호 확인"/><br/>
 
-      {newPassword === '' ? (
-        <p></p>
-      ) : PWConfirmInput.check ? (
-        <p>비밀번호가 일치합니다.</p>
-      ) : (
-        <p>비밀번호가 일치하지 않습니다.</p>
-      )}
-      <br />
-    </>
-  );
+        {
+            newPassword === '' 
+            ? ( <p></p> )
+            : ( PWConfirmInput.check 
+                ? <p>비밀번호가 일치합니다.</p>
+                : <p>비밀번호가 일치하지 않습니다.</p>)
+        }<br/>
+    </div>
+    );
 };
 
-const MyInfoModifyForm = ({
-  modifyInput,
-  onChangeModify,
-  setPWConfirm,
-  onSubmitImage,
-}) => {
-  return (
-    <>
-      <MyInfoModifyLeft
-        modifyInput={modifyInput}
-        onChangeModify={onChangeModify}
-        onSubmitImage={onSubmitImage}
-      />
-      <MyInfoModifyRight
-        modifyInput={modifyInput}
-        onChangeModify={onChangeModify}
-        setPWConfirm={setPWConfirm}
-      />
-    </>
-  );
+const MyInfoModifyForm = ({ modifyInput, onChangeModify, setPWConfirm }) => {
+    return (
+    <div className={styles.my_info_form}>
+        <MyInfoModifyLeft
+            modifyInput={modifyInput}
+            onChangeModify={onChangeModify}/>
+        <MyInfoModifyRight
+            modifyInput={modifyInput}
+            onChangeModify={onChangeModify}
+            setPWConfirm={setPWConfirm}/>
+    </div>
+    );
 };
 
 export default MyInfoModifyForm;

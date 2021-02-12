@@ -56,6 +56,7 @@ public class BlockServiceImpl implements BlockService {
                         blockResult.setId(b.getId());
                         blockResult.setPrice(b.getPrice());
                         blockResult.setUserHave(false);
+                        blockResult.setCategory("계산");
                         for(BlockUsers blockUsers : blockUsersList){
                             if (blockUsers.getBlock().equals(b)){
                                 blockResult.setUserHave(true);
@@ -67,6 +68,7 @@ public class BlockServiceImpl implements BlockService {
                         blockResult.setId(b.getId());
                         blockResult.setPrice(b.getPrice());
                         blockResult.setUserHave(false);
+                        blockResult.setCategory("그리기");
                         for(BlockUsers blockUsers : blockUsersList){
                             if (blockUsers.getBlock().equals(b)){
                                 blockResult.setUserHave(true);
@@ -78,6 +80,7 @@ public class BlockServiceImpl implements BlockService {
                         blockResult.setId(b.getId());
                         blockResult.setPrice(b.getPrice());
                         blockResult.setUserHave(false);
+                        blockResult.setCategory("흐름");
                         for(BlockUsers blockUsers : blockUsersList){
                             if (blockUsers.getBlock().equals(b)){
                                 blockResult.setUserHave(true);
@@ -89,6 +92,7 @@ public class BlockServiceImpl implements BlockService {
                         blockResult.setId(b.getId());
                         blockResult.setPrice(b.getPrice());
                         blockResult.setUserHave(false);
+                        blockResult.setCategory("함수");
                         for(BlockUsers blockUsers : blockUsersList){
                             if (blockUsers.getBlock().equals(b)){
                                 blockResult.setUserHave(true);
@@ -100,6 +104,7 @@ public class BlockServiceImpl implements BlockService {
                         blockResult.setId(b.getId());
                         blockResult.setPrice(b.getPrice());
                         blockResult.setUserHave(false);
+                        blockResult.setCategory("판단");
                         for(BlockUsers blockUsers : blockUsersList){
                             if (blockUsers.getBlock().equals(b)){
                                 blockResult.setUserHave(true);
@@ -111,6 +116,7 @@ public class BlockServiceImpl implements BlockService {
                         blockResult.setId(b.getId());
                         blockResult.setPrice(b.getPrice());
                         blockResult.setUserHave(false);
+                        blockResult.setCategory("움직임");
                         for(BlockUsers blockUsers : blockUsersList){
                             if (blockUsers.getBlock().equals(b)){
                                 blockResult.setUserHave(true);
@@ -122,6 +128,7 @@ public class BlockServiceImpl implements BlockService {
                         blockResult.setId(b.getId());
                         blockResult.setPrice(b.getPrice());
                         blockResult.setUserHave(false);
+                        blockResult.setCategory("시작");
                         for(BlockUsers blockUsers : blockUsersList){
                             if (blockUsers.getBlock().equals(b)){
                                 blockResult.setUserHave(true);

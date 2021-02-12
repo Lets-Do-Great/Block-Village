@@ -3,48 +3,43 @@ import { useSelector, useDispatch } from 'react-redux';
 import MissionCreateSubmain from '../components/blockly/mission_create/mission_create_submain/mission_create_submain';
 import MissionModify from '../components/blockly/mission_modify/mission_modify';
 import * as MissionAction from '../modules/mission';
+import * as BlockAction from '../modules/block';
 
 const EditorMissionContainer = ( { type }) => {
-  const [createInfo, setCreateInfo] = useState({
-    email: '',
-    title: '',
-    content: '', 
-    image: '',
-    xmlCode: '<xml xmlns="https://developers.google.com/blockly/xml"></xml>', 
-    startPositionX: 50,
-    startPositionY: 50,
-    endPositionX: 0,
-    endPositionY: 0,
-    difficulty: 0,
-  });
-
-  const onChangeState = (e) => {
-    const newState = {
-      title: e.title,
-      content: e.content, 
-      image: '',
-      xmlCode: e.xmlCode, 
-      startPositionX: e.startPosition[0],
-      startPositionY: e.startPosition[1],
-      endPositionX: e.endPosition[0],
-      endPositionY: e.endPosition[1],
-      difficulty: e.difficulty,
-    }
-    setCreateInfo(newState);
-  };
-
-  const userInfo = useSelector(state => state.user.userInfo);
-  const selectedMission = useSelector(state => state.mission.selectedMission);
   const dispatch = useDispatch();
 
+  // const onChangeState = (e) => {
+  //   const [name, value] = e.target;
 
-  const onSetMission = async () => {
-    const newXml = createInfo.xmlCode.replace(/"/gi, '\\"')
+  //   setCreateInfo({
+  //     ...createInfo,
+  //     [name]: value,
+  //   });
+  // };
+
+
+  useEffect(() => {
+    console.log(selectedMission);
+  }, [selectedMission]);
+  
+  const userInfo = useSelector(state => state.user.userInfo);
+  const selectedMission = useSelector(state => state.mission.selectedMission);
+  
+  const onSetMission = async (e) => {
+    const newXml = e.xmlCode.replace(/"/gi, '\\"');
+
     try {
       await dispatch(MissionAction.setMission({
-        ...createInfo,
+        title: e.title,
+        content: e.content,
+        image: '',
+        startPositionX: e.startPosition[0],
+        startPositionY: e.startPosition[1],
+        endPositionX: e.endPosition[0],
+        endPositionY: e.endPosition[1],
+        difficulty: e.difficulty * 1.0,
         email: userInfo.email,
-        xmlCode: newXml
+        xmlCode: newXml,
       }))
     } catch(e) {
       console.log(e);
@@ -62,11 +57,24 @@ const EditorMissionContainer = ( { type }) => {
     }
   };
 
+  const onGetMyBlocks = async () => {
+    try {
+      await dispatch(BlockAction.getMyBlocks({
+        email: userInfo.email
+      }))
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    onGetMyBlocks();
+  }, [])
+
   return (
     <>
     { type === 'create' && 
       <MissionCreateSubmain 
-        onChangeState={onChangeState}
         onSetMission={onSetMission}
       />
     }

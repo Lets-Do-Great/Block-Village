@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ListForm from '../components/list/list_form/list_form';
 import SearchForm from '../components/list/search_form/search_form';
 import SearchType from '../components/list/search_type/search_type';
+import Nav from '../components/nav/nav';
 import * as MissionAction from '../modules/mission';
 
 const MissionContainer = () => {
@@ -54,6 +55,10 @@ const MissionContainer = () => {
         });
     }
 
+    useEffect(() => {
+        console.log(selectedMission);
+    }, [selectedMission]);
+
     /*
     api 요청 보내는 함수
     */
@@ -97,7 +102,6 @@ const MissionContainer = () => {
 
     // 미션 참여 시작 요청
     const onParticipateMission = async () => {
-        console.log(selectedMission);
         try{
             await dispatch(MissionAction.setTodoMission(
                 { email: userInfo.email, missionId:selectedMission.id, todo:'todo' }));
@@ -108,10 +112,12 @@ const MissionContainer = () => {
     }
 
     // 미션 수정 요청
-    const onModifyMission = async () => {
+    const onModifyMission = async ( modifyInput) => {
         try{
             await dispatch(MissionAction.modifyMission(
-                { email: userInfo.email, missionId:selectedMission.id }));
+                { email: userInfo.email, missionId:selectedMission.id,
+                    title: modifyInput.title, content: modifyInput.content }));
+            getMission(selectedMission.id);
         } catch(e){
             console.log(e);
         }
@@ -122,6 +128,7 @@ const MissionContainer = () => {
         try{
             await dispatch(MissionAction.deleteMission(
                 { email: userInfo.email, missionId:selectedMission.id }));
+            getMissionList();
         } catch(e){
             console.log(e);
         }
@@ -129,6 +136,7 @@ const MissionContainer = () => {
 
     return (
         <>  
+            <Nav type="mission"/>
             <SearchForm
                 onChangeSearch={onChangeSearch}
                 onChangeSearchType={onChangeSearchType}

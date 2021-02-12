@@ -8,8 +8,11 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
                             userInfo, onParticipateMission, onDelete, onModify }) => {
                          
     const history = useHistory();
-    const {email, id, nickName, title, created_at, updated_at, favorite,
+    const {email, id, nickname, title, created_at, updated_at, favorite,
         content, difficulty, likeCnt, peopleCnt, todo } = detail;
+
+    const created = created_at.split("T");
+    const updated = updated_at.split("T");
 
     const [ modifyModal, setModifyModal ] = useState(false);
 
@@ -42,44 +45,61 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
         history.push(`/main/answer/${id}`);
     }
 
+    const goToAnswer = () => {
+        history.push(`/main/mission/answer`);
+    }
+
     return (
     <div className={styles.detail_form}>
         <div 
             onClick={closeModal} 
             className={styles.close}>
                 <Icon.MdHighlightOff/></div>
-
-        <div className={styles.title}>{ title }</div>
-        <div 
-            className={styles.heart}
-            onClick={changeLike}>
-            { favorite
-                ? <Icon.MdFavorite/>
-                : <Icon.MdFavoriteBorder/> }
+        
+        <div className={styles.header}>
+            <div className={styles.title}>{ title }</div>
+            <div 
+                className={styles.heart}
+                onClick={changeLike}>
+                { favorite
+                    ? <Icon.MdFavorite/>
+                    : <Icon.MdFavoriteBorder/> }
+            </div>
         </div>
 
-        <div>
-            <Icon.MdAccountCircle/>{ nickName }
+        <div className={styles.icon_nickname}>
+            <Icon.MdAccountCircle className={styles.icon}/>
+            <div className={styles.icon_text}>{ nickname }</div>
         </div>
         <div>
-            <Icon.MdEdit/>{ created_at } / { updated_at }
+            <Icon.MdEdit className={styles.icon}/>
+            <div className={styles.icon_text}>{ created[0] } / { updated[0] }</div>
         </div>
-        <div className={styles.icon}>
-            <Icon.MdAssistantPhoto/>{ difficulty }
+        <div className={styles.icon_box}>
+            <Icon.MdAssistantPhoto className={styles.icon}/>
+            <div className={styles.icon_text}>{ difficulty }</div>
         </div>
-        <div className={styles.icon}>
-            <Icon.MdFace/>{ peopleCnt }
+        <div className={styles.icon_box}>
+            <Icon.MdFace className={styles.icon}/>
+            <div className={styles.icon_text}>{ peopleCnt }</div>
         </div>
-        <div className={styles.icon}>
-            <Icon.MdFavorite/>{ likeCnt }
+        <div className={styles.icon_box}>
+            <Icon.MdFavorite className={styles.icon}/>
+            <div className={styles.icon_text}>{ likeCnt }</div>
         </div>
+
+        
 
         <div>{ content }</div>
 
         { userInfo === email
             ? (<>
-                <button onClick={onSubmitModify}>수정하기</button>
-                <button onClick={onSubmitDelete}>삭제하기</button>
+                <button 
+                    className={styles.participated_button}
+                    onClick={onSubmitModify}>수정하기</button>
+                <button
+                    className={styles.participating_button} 
+                    onClick={onSubmitDelete}>삭제하기</button>
                 { modifyModal && 
                     <MissionModify
                         title={title}
@@ -92,7 +112,7 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
                     className={styles.participate_button}>미션 참여하기</button> }
               { todo === 'todo' &&
                 <button 
-                    className={styles.participating_button}>미션 참여중</button> }
+                    className={styles.participating_button} onClick={goToAnswer}>미션 참여중</button> }
               { todo === 'done' &&
                 <button
                     onClick={goToAnswerList}

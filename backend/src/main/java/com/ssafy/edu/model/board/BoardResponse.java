@@ -21,6 +21,7 @@ public class BoardResponse {
     Long boardId;
     String title;
     String email;
+    String nickname;
     Long views;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;

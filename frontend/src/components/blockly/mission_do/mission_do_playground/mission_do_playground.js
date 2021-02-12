@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './mission_do_playground.module.css';
+import { FaRegPlayCircle } from 'react-icons/fa';
 
 const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onChangeSuccess, onChangeFail }) => {
   var x = 0;
@@ -25,8 +26,8 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
     const timer = ms => new Promise(res => setTimeout(res, ms))
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
-        x = image_x + (move[i][0] * 40)
-        y = image_y - (move[i][1] * 40)
+        x = image_x + (move[i][0] * 60)
+        y = image_y - (move[i][1] * 60)
 
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
@@ -71,53 +72,64 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
   // 움직임 
 /////////////////////////////////////////////////////////////////
   
+  const turn_right = () => {
+    cur_angle -= 90 * Math.PI / 180;
+  };
+
+  const turn_left = () => {
+    cur_angle += 90 * Math.PI / 180;
+  };
+
+  const turn_back = () => {
+    cur_angle += 180 * Math.PI / 180;
+  };
 
   const move_x = (x_distance) => {
     x += x_distance;
     move.push([x, y]);
-  }
+  };
 
   const move_y = (y_distance) => {
     y += y_distance;
     move.push([x, y]);
-  }
+  };
 
   const point_x = (x_point) => {
     x = x_point;
     move.push([x, y]);
-  }
+  };
 
   const point_y = (y_point) => {
     y = y_point;
     move.push([x,y]);
-  }
+  };
 
   const point_x_y = (x_point, y_point) => {
     x = x_point;
     y = y_point;
     move.push([x, y]);
-  }
+  };
 
   const turn_angle = (angle) => {
     cur_angle += angle * Math.PI / 180;
-  }
+  };
 
   const set_angle = (angle) => {
     cur_angle = angle * Math.PI / 180;
-  }
+  };
 
   const set_angle_move = (angle, distance) => {
     var new_angle = angle * Math.PI / 180;
     x += distance * Math.cos(new_angle);
     y += distance * Math.sin(new_angle);
     move.push([x, y]);
-  }
+  };
 
   const move_forward = (text_distance) => {
     x += text_distance * Math.cos(cur_angle);
     y += text_distance * Math.sin(cur_angle);
     move.push([x, y]);
-  }
+  };
 
   // 판단
   /////////////////////////////////////////////////////////////////
@@ -303,11 +315,12 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
         <img ref={fieldchar}></img>
       </section>
       <footer className={styles.footer}>
-        <button 
+        <div 
           onClick={playGame}
           className={styles.game__button}
-        >시작하기
-        </button>
+        >
+          <FaRegPlayCircle size="60" color="#c30d23"/>
+        </div>
       </footer>
     </div>
   )

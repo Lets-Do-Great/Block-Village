@@ -14,11 +14,13 @@ import MissionContainer from './containers/mission_container';
 import MyPageMain from './components/my_page/my_page_main/my_page_main';
 
 import TestMypage from './components/my_page/test_mypage';
-import MissionDoSubmain from './components/blockly/mission_do/mission_do_submain/mission_do_submain';
+import EditorAnswerContainer from './containers/editor_answer_container';
 import EditorMissionContainer from './containers/editor_mission_container';
 import AnswerContainer from './containers/answer_container';
+import BoardContainer from './containers/board_container';
 
 import UserInfoFromToken from './containers/user_info_from_token';
+import client from './service/client'
 
 function App() {
   const history = useHistory();
@@ -31,7 +33,7 @@ function App() {
     if(token){
       const tokenDecode = jwt_decode(token);
       const { exp, userInfo } = tokenDecode;
-
+      client.defaults.headers.common['token'] = token;
       if( exp > new Date().getTime() / 1000 ) {
         setUserInfoFromToken(userInfo);
       } else {
@@ -45,6 +47,7 @@ function App() {
   useEffect(() => {
     setCallAction(true);
   }, [ userInfoFromToken] );
+
 
   return (
     <div className={styles.app}>
@@ -94,7 +97,7 @@ function App() {
 
         </Route>
         <Route exact path="/main/mission/answer">
-          <MissionDoSubmain />
+          <EditorAnswerContainer />
         </Route>
 
 
@@ -111,6 +114,10 @@ function App() {
 
 
         <Route exact path="/main/answer/:id" component={AnswerContainer}/>
+
+        <Route exact path="/main/board/">
+          <BoardContainer />
+        </Route>
 
       </Switch>
     </div>

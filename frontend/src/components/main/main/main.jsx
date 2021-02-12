@@ -3,12 +3,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './main.module.css'
 
 import { useHistory } from 'react-router-dom';
-import Navbar from '../navbar/navbar';
+import Nav from '../../nav/nav';
 
 import ScrollContainer from 'react-indiana-drag-scroll'
 
 import * as UserAction from '../../../modules/user';
 import { useDispatch } from 'react-redux';
+
 
 const Main = (props) => {
   const history = useHistory();
@@ -103,8 +104,7 @@ const Main = (props) => {
   }
 
 
-  // 온 클릭 def ===============================
-
+  // 온 클릭 def ==========================================
   const goChalenge = () => history.push("/main/challenge");
   const gomakeMission = () => history.push("/main/mission/create");
   const goparticipateMission = () => history.push("/main/mission");
@@ -114,17 +114,20 @@ const Main = (props) => {
     dispatch(UserAction.logOut());
     history.push('/');
   }
-  const goboard = () => history.push("/");
+  const goboard = () => history.push("/main/board");
   const goservice = () => history.push("/");
   const gostore = () => history.push("/main/block_store");
+  //=======================================================
 
-  //============================================
-
+ 
+  //main api 모음=====myblock 불러오기=======================
+  
+  //============================================================
 
   return (
     <div className={styles.body} ref={back_back} onClick={changeSize}>
 
-      <Navbar />
+      <Nav type="main" />
 
         <ScrollContainer
           className="scroll-container"

@@ -1,32 +1,85 @@
 .body {
   display: inline-block;
+  padding: 1em 1em;
 }
 
 .container {
-  width: 200px;
-  height: 200px;
-  padding: 1em 1em;
+  width: 180px;
+  height: 150px;
+  /* display: flex;
+  flex-direction: column; */
+  position: relative;
+}
+
+.small__container {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .image_box {
   flex-basis: 94%;
+  /* width: 100%;
+  height: 90%; */
 }
 
-.image {
+/* .image {
   width: 100%;
   height: 100%;
-  background: url(../../../../images/test_block_image-removebg-preview.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
+} */
 
 .price_box {
   flex-basis: 6%;
+  /* width: 100%;
+  height: 10%; */
 }
 
-h3 {
-  text-align: center;
+.tag {
   background-color: burlywood;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+}
+
+.container:hover .overlay {
+  display: block;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hide__button {
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.hide__button a {
+  width: 150px;
+  padding: 12px 20px;
+  text-align: center;
+  color: #fff;
+  background-color: #ef8ebe;
+  border: solid 2px #ef8ebe;
+  border-radius: 25px;
+  z-index: 1;
+}
+
+.container:hover .hide__button {
+  opacity: 1;
 }

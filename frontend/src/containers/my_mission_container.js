@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import MyDetailCardForm from '../components/my_page/my_list/my_detail_card_form/my_detail_card_form';
+// import MyDetailCardForm from '../components/my_page/my_list/my_detail_card_form/my_detail_card_form';
 import MyListCategory from '../components/my_page/my_list/my_list_category/my_list_category';
 import MyListForm from '../components/my_page/my_list/my_list_form/my_list_form';
 import ComponentDetailCardForm from '../components/list/component_detail_card_form/component_detail_card_form';
 import CommentContainer from '../containers/comment_container';
 import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
+import ModalDetailCardForm from '../components/list/modal_detail_card_form/modal_detail_card_form';
 
-const MyMissionContainer = () => {
+const MyMissionContainer = ({ closeModal }) => {
     const [ category, setCategory ] = useState('myMission');
     const [ detailComponent, setDetailComponent ] = useState(false);
 
@@ -36,7 +37,7 @@ const MyMissionContainer = () => {
     }, [ category ]);
 
     const onChangeCategory = (e) => {
-        setCategory(e.target.value);
+        setCategory(e.target.attributes[1].nodeValue);
     }
 
     const onOpenDetail = () => {
@@ -97,9 +98,37 @@ const MyMissionContainer = () => {
     }
 
     // 미션 수정 요청
-    const onModifyMission = async () => {
-        console.log("미션 수정 페이지 이동");
+    const onModifyMission = async ( modifyInput) => {
+        try{
+            await dispatch(MissionAction.modifyMission(
+                { email: userInfo.email, missionId:selectedMission.id,
+                    title: modifyInput.title, content: modifyInput.content }));
+            getMission(selectedMission.id);
+        } catch(e){
+            console.log(e);
+        }
     }
+
+    // 미션 좋아요 요청
+    const likeMission = async () => {
+        try{
+            await dispatch(MissionAction.setLikeMission(
+                { email: userInfo.email, missionId:selectedMission.id, favorite:true }));
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    // 미션 좋아요 취소 요청
+    const dislikeMission = async () => {
+        try{
+            await dispatch(MissionAction.setLikeMission(
+                { email: userInfo.email, missionId:selectedMission.id, favorite:false }));
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
 
     // 답안 수정 요청
     const onModifyAnswer = async () => {
@@ -158,11 +187,15 @@ const MyMissionContainer = () => {
         { detailComponent
             ? ( <>
                 { category !== 'myAnswer' && 
-                    <MyDetailCardForm
+                    <ModalDetailCardForm
                         detail={selectedMission}
+                        setLike={likeMission}
+                        setDislike={dislikeMission}
+                        userInfo={userInfo.email}
                         onModify={onModifyMission}
                         onDelete={onDeleteMission}
-                        onCloseDetail={onCloseDetail}/> }
+                        closeModal={onCloseDetail}
+                        /> }
                 { category === 'myAnswer' && <>
                     <ComponentDetailCardForm
                         detail={selectedMission}
@@ -171,8 +204,8 @@ const MyMissionContainer = () => {
                         userInfo={userInfo.email}
                         closeDetail={onCloseDetail}
 
-                        onModify={onModifyMission}
-                        onDelete={onDeleteMission}
+                        onModify={onModifyAnswer}
+                        onDelete={onDeleteAnswer}
                     /> 
                     <CommentContainer
                         userInfo={userInfo.email}
@@ -182,7 +215,9 @@ const MyMissionContainer = () => {
             </> )
             : (<> 
                 <MyListCategory
-                    onChangeCategory={onChangeCategory}/>
+                    category={category}
+                    onChangeCategory={onChangeCategory}
+                    closeModal={closeModal}/>
                 
                 { category !== 'myAnswer' &&
                     <MyListForm
