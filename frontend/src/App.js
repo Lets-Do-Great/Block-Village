@@ -11,15 +11,15 @@ import ChallengeContainer from './containers/challenge_container';
 import SubMain from './components/main/sub_main/sub_main';
 import TutorialSubmain from './components/blockly/tutorial/tutorial_submain/tutorial_submain';
 import MissionContainer from './containers/mission_container';
-import MyPageMain from './components/my_page/my_page_main/my_page_main';
 
-import TestMypage from './components/my_page/test_mypage';
 import MissionDoSubmain from './components/blockly/mission_do/mission_do_submain/mission_do_submain';
 import EditorMissionContainer from './containers/editor_mission_container';
 import AnswerContainer from './containers/answer_container';
 
 import UserInfoFromToken from './containers/user_info_from_token';
 import client from './service/client'
+import MyPageSubmain from './components/my_page/my_page_submain/my_page_submain';
+import ServiceMain from './components/service_intro/service_main/service_main';
 
 function App() {
   const history = useHistory();
@@ -61,12 +61,17 @@ function App() {
         <Route exact path="/">
           <SubMain />
         </Route>
+
         <Route exact path="/my_page">
-          {/* <TestMypage /> */}
-          <MyPageMain />
+          <MyPageSubmain />
         </Route>
+
         <Route exact path="/main">
           <Main />
+        </Route>
+
+        <Route exact path="/main/service_introduction">
+          <ServiceMain />
         </Route>
 
 

@@ -115,7 +115,7 @@ const Main = (props) => {
     history.push('/');
   }
   const goboard = () => history.push("/");
-  const goservice = () => history.push("/");
+  const goservice = () => history.push("/main/service_introduction");
   const gostore = () => history.push("/main/block_store");
   //=======================================================
 
@@ -144,7 +144,6 @@ const Main = (props) => {
               className={styles.chalenge_img} 
               ref={chalenge_img} 
               onClick={goChalenge} 
-              onDragStart={e => e.preventDefault()}
             ></div>
 
             <div 

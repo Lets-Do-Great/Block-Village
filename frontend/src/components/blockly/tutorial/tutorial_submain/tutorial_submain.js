@@ -11,7 +11,7 @@ const TutorialSubmain = (props) => {
   const userInfo = useSelector(state => state.user.userInfo)
 
   const onbuyBlocks = async () => {
-    const buyblock = [1, 2, 3, 4, 5, 12, 13, 14, 25, 38, 39, 40]
+    const buyblock = [1, 2, 3, 4, 5, 12, 13, 14, 25, 37, 38, 39]
     try {
       await dispatch(BlockAction.buyBlocks({
         email: userInfo.email, 

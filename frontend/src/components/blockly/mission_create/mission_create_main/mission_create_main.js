@@ -93,9 +93,9 @@ const MissionCreateMain = ({ formInfo, myBlocksInfo, onChangeModal, onChangeXml,
 
   const workspaceDidChange = (workspace) => {
     // save 형태
-    // console.log(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)));
+    console.log(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)));
     onChangeXml(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)))
-    // console.log(Blockly.JavaScript.workspaceToCode(workspace));
+    console.log(Blockly.JavaScript.workspaceToCode(workspace));
     setJavascript(Blockly.JavaScript.workspaceToCode(workspace))
   };
 
@@ -138,10 +138,10 @@ const MissionCreateMain = ({ formInfo, myBlocksInfo, onChangeModal, onChangeXml,
             onStart={onStart}
             onStop={onStop}
             bounds="parent"
-            >
+          >
             <div className={styles.playground}>
               <MissionCreatePlayground 
-              setMoveStep={setMoveStep}
+                setMoveStep={setMoveStep}
                 javascript_code={javascript}
                 startPosition={startPosition}
                 endPosition={endPosition}
