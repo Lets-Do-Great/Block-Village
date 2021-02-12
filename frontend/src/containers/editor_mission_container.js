@@ -17,6 +17,11 @@ const EditorMissionContainer = ( { type }) => {
   //   });
   // };
 
+
+  useEffect(() => {
+    console.log(selectedMission);
+  }, [selectedMission]);
+  
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
   
