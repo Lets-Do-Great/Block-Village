@@ -36,12 +36,12 @@ export const getMyTodoMissionList = ({ email, todo }) => {
 
 // 미션 제작
 export const setMission = (
-    { email, title, content, xmlCode, image, difficulty, 
+    { email, title, content, xmlCode, difficulty, 
         startPositionX, startPositionY, endPositionX, endPositionY }) => {
         return client({
             url: `mission/${email}`,
             method: 'post',
-            data : { email, title, content, xmlCode, image, difficulty, 
+            data : { email, title, content, xmlCode, difficulty, 
                 startPositionX, startPositionY, endPositionX, endPositionY },        
         }
     );

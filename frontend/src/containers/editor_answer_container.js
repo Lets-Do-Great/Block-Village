@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import MissionDoSubmain from '../components/blockly/mission_do/mission_do_submain/mission_do_submain';
 import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
+import * as BlockAction from '../modules/block';
 
 const EditorAnswerContainer = (props) => {
-  const dispatch = useDispatch();
   const [todo, setTodo] = useState('todo');
   const [useDifficulty, setUseDifficulty] = useState(0);
   const [useContent, setUseContent] = useState('');
@@ -68,7 +68,7 @@ const EditorAnswerContainer = (props) => {
         email: userInfo.email,
         content: useContent,
         missionId: selectedMission.id,
-        title: `${userIfno.nickname}님의 ${selectedMission.id}번 미션 답안`,
+        title: `${userInfo.nickname}님의 ${selectedMission.id}번 미션 답안`,
         javascriptCode: answerInfo.javascriptCode,
         xmlCode: newXml,
       }))
@@ -95,7 +95,7 @@ const EditorAnswerContainer = (props) => {
   return (
     <>
       <MissionDoSubmain
-        missionInfo={selectedMission}
+        selectedMission={selectedMission}
         setUseDifficulty={setUseDifficulty}
         setUseContent={setUseContent}
         onChangeTodo={onChangeTodo}

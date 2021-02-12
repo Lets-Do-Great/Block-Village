@@ -14,7 +14,7 @@ import MissionContainer from './containers/mission_container';
 import MyPageMain from './components/my_page/my_page_main/my_page_main';
 
 import TestMypage from './components/my_page/test_mypage';
-import MissionDoSubmain from './components/blockly/mission_do/mission_do_submain/mission_do_submain';
+import EditorAnswerContainer from './containers/editor_answer_container';
 import EditorMissionContainer from './containers/editor_mission_container';
 import AnswerContainer from './containers/answer_container';
 import BoardContainer from './containers/board_container';
@@ -97,7 +97,7 @@ function App() {
 
         </Route>
         <Route exact path="/main/mission/answer">
-          <MissionDoSubmain />
+          <EditorAnswerContainer />
         </Route>
 
 
