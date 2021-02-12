@@ -32,6 +32,9 @@ public class MissionSignUpRequest {
     String content;
     @ApiModelProperty(required = true)
     @NotNull
+    String image;
+    @ApiModelProperty(required = true)
+    @NotNull
     int startPositionX;
     @ApiModelProperty(required = true)
     @NotNull
