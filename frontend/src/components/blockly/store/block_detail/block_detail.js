@@ -10,17 +10,27 @@ const BlockDetail = ({ block, addBillList }) => {
   })
 
   return (
-    <div className={styles.body} onClick={() => addBillList(block)}>
+    <div className={styles.body}>
       <div className={styles.container}>
 
-        <div className={styles.image_box} ref={blockImg}>
-          <div className={styles.image}></div>
+        <div className={styles.small__container}>
+
+          <div className={styles.image_box} ref={blockImg}>
+            {/* <div className={styles.image}></div> */}
+          </div>
+
+          <div className={styles.price_box}>
+            <div className={styles.tag}>{block.price}</div>
+          </div>
+
         </div>
 
-        <div className={styles.price_box}>
-          <h3>{block.price}</h3>
+        <div class={styles.overlay}></div>
+
+        <div className={styles.hide__button} onClick={() => addBillList(block)}>
+          <a>목록에 담기</a>
         </div>
-        
+
       </div>
     </div>
   )

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './board_detail.module.css';
 import { MdArrowBack } from 'react-icons/md';
 import * as Icon from 'react-icons/md';
 
 const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, onModify, onDelete}) => {
 
-  const { nickname, title, content, createdDate, views } = detail;
+  const { nickname, title, content, createdDate, views } = selectedBoard;
   const date = createdDate.split("T");
 
   const onClick = () => {

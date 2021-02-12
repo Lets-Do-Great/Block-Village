@@ -14,7 +14,7 @@ const BoardContainer = () => {
     
     // 검색 조건 데이터
     const [search, setSearch] = useState({
-        searchType: 'createdDate,desc',
+        sortType: 'createdDate,desc',
         keyword: '',
         keywordType: 'title',
         pageNum: 0,                 // 페이징 
@@ -23,7 +23,7 @@ const BoardContainer = () => {
 
     useEffect(() => {
         getBoardList(search);
-    }, [search.searchType, search.sortType]);
+    }, [search.sortType]);
 
     const onClickEnter = (e) => {
         if(e.code === 'Enter') {
@@ -39,7 +39,7 @@ const BoardContainer = () => {
         })
     }
 
-    const onChangeSearchType = (e) => {
+    const onChangeSortType = (e) => {
         const {name, value} = e.target;
         setSearch({
             ...search,
@@ -179,7 +179,7 @@ const BoardContainer = () => {
         <Nav type="board"/>
         { detail
         ? <><BoardDetail 
-                detail={selectedBoard}
+                selectedBoard={selectedBoard}
                 userInfo={userInfo.email}
                 closeDetail={closeDetail}
                 onModify={modifyBoard}
@@ -193,10 +193,10 @@ const BoardContainer = () => {
             </>
         :  <>
                 <SearchType
-                    onChangeSearchType={onChangeSearchType}/>
+                    onChangeSortType={onChangeSortType}/>
                 <SearchForm
                     onChangeSearch={onChangeSearch}
-                    onChangeSearchType={onChangeSearchType}
+                    onChangeSortType={onChangeSortType}
                     onClickEnter={onClickEnter}
                     search={search}/> 
                 <BoardList

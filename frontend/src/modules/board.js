@@ -70,8 +70,8 @@ const initialState = {
         email: '',
         nickname: '',
         views: '', 
-        createdAt: '', 
-        updatedAt: ''
+        createdDate: '', 
+        updatedDate: ''
     },
     commentList: []
 }
