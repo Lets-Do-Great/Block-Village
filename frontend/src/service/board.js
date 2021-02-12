@@ -1,12 +1,10 @@
 import client from './client';
 
 // 공지사항 전체 목록 조회
-export const getBoardList = (search) => {
-
-    const { keywordType, keyword, pageNum, size, searchType } = search;
+export const getBoardList = ({ keywordType, keyword, pageNum, size, sortType }) => {
     return client({
-        url: `boards?keywordType=${keywordType}&keyword=${keyword}&page=${pageNum}&size=${size}&sort=${searchType}`,
-        method: 'get'
+        url: `boards?keywordType=${keywordType}&keyword=${keyword}&page=${pageNum}&size=${size}&sort=${sortType}`,
+        method: 'get',
     });
 }
     

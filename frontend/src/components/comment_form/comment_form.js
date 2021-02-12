@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import * as Icon from "react-icons/md";
+import styles from './comment_form.module.css';
 
 const CommentInputForm = ({ setComment }) => {
     const [ setInput, setSetInput ] = useState('');
@@ -12,11 +14,16 @@ const CommentInputForm = ({ setComment }) => {
         setSetInput('');
     }
 
-    return (<>
-        <input onChange={onChange} value={setInput}/>
+    return (
+    <div className={styles.input_form}>
+        <input 
+            className={styles.input} 
+            onChange={onChange} 
+            value={setInput}/>
         <button 
+            className={styles.btn_submit_input}
             onClick={onClick}>댓글 달기</button>
-    </>);
+    </div>);
 };
 
 const CommentListForm = ({ userInfo, commentList,
@@ -60,31 +67,42 @@ const CommentListLineForm = ({ id, userInfo, email, nickname, comment, date,
         deleteComment(id);
     }
 
-    return (<>
+    return (
+    <div className={styles.comment_list_form}>
         { modify
         ? <>
-            <input onChange={onChangeModifyInput} value={modifyInput}/>
-            <button onClick={onSubitComment}>수정 완료</button>
+            <input 
+                className={styles.input_modify}
+                onChange={onChangeModifyInput} value={modifyInput}/>
+            <button 
+                className={styles.btn_submit_modify}
+                onClick={onSubitComment}>수정 완료</button>
         </>
         : <>
-            [{nickname}]
-            {comment}
-            ({date})
-            { userInfo === email && <>
-                <button onClick={onChangeModify}>수정</button>
-                <button onClick={onDeleteComment}>삭제</button>
-                </>
+            { userInfo === email && 
+                <div className={styles.icon}>
+                    <Icon.MdCreate
+                        className={styles.icon_modify}
+                        onClick={onChangeModify}/>
+                    <Icon.MdDelete 
+                        className={styles.icon_delete}
+                        onClick={onDeleteComment}/>
+                </div>
             }
+            <div className={styles.nickname}>{nickname}</div>
+            <div className={styles.comment}>{comment}</div>
+            <div className={styles.date}>{date.split("T")[0]}</div>
         </>
         }
         
-    </>);
+    </div>);
 };
 
 const CommentForm = ({ userInfo, commentList,
                              setComment, modifyComment, deleteComment }) => {
 
-    return (<>
+    return (
+    <div className={styles.comment_form}>
         <CommentInputForm 
             setComment={setComment}/>
         <CommentListForm
@@ -92,7 +110,7 @@ const CommentForm = ({ userInfo, commentList,
             commentList={commentList}
             modifyComment={modifyComment}
             deleteComment={deleteComment}/>
-    </>);
+    </div>);
 };
 
 export default CommentForm;

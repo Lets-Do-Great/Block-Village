@@ -1,3 +1,9 @@
+.search_form{
+    float: right;
+    margin-right: 100px;
+    margin-top: 10px;
+}
+
 .select {
     width: 80px;
     height: 40px;
