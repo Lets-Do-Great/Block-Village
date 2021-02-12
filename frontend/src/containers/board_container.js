@@ -5,7 +5,7 @@ import BoardDetail from '../components/board/board_detail/board_detail';
 import CommentForm from '../components/comment_form/comment_form';
 import SearchForm from '../components/board/search_form/search_form';
 import SearchType from '../components/board/search_type/search_type';
-import styles from '../components/board/board_container.module.css';
+import Nav from '../components/nav/nav';
 import * as BoardAction from '../modules/board';
 
 const BoardContainer = () => {
@@ -176,54 +176,39 @@ const BoardContainer = () => {
     };
 
     return (<>
-        <div className={styles.body}>
+        <Nav type="board"/>
         { detail
         ? <><BoardDetail 
-                detail={detail}
-                selectedBoard={selectedBoard}
+                detail={selectedBoard}
                 userInfo={userInfo.email}
                 closeDetail={closeDetail}
                 onModify={modifyBoard}
-                onDelete={deleteBoard}
-            />
+                onDelete={deleteBoard}/>
             <CommentForm
                 userInfo={userInfo.email}
                 commentList={commentList}
                 setComment={registerBoardComment}
                 modifyComment={modifyBoardComment}
-                deleteComment={deleteBoardComment}
-            />
+                deleteComment={deleteBoardComment}/>
             </>
         :  <>
-            <div className={styles.container}>
-                    <SearchForm
-                        onChangeSearch={onChangeSearch}
-                        onChangeSearchType={onChangeSearchType}
-                        onClickEnter={onClickEnter}
-                        search={search}/> 
-                    <SearchType
-                        onChangeSearchType={onChangeSearchType}/>
-                    <div className={styles.lists}>
-                        <div className={styles.board_header}>
-                            <div className={styles.board_no}>글 번호</div>
-                            <div className={styles.board_title}>제목</div>
-                            <div className={styles.board_date}>작성 날짜</div>
-                            <div className={styles.board_read_cnt}>조회 수</div>
-                        </div>
-                        <BoardList
-                            onCreate={registerBoard}
-                            getDetail={getBoard}
-                            detail={detail}
-                            selectedBoard={selectedBoard}
-                            userInfo={userInfo.email}
-                            list={boardList}
-                            setOpenDetail={setDetail}
-                        />
-                    </div>
-                </div>
+                <SearchType
+                    onChangeSearchType={onChangeSearchType}/>
+                <SearchForm
+                    onChangeSearch={onChangeSearch}
+                    onChangeSearchType={onChangeSearchType}
+                    onClickEnter={onClickEnter}
+                    search={search}/> 
+                <BoardList
+                    onCreate={registerBoard}
+                    getDetail={getBoard}
+                    detail={detail}
+                    selectedBoard={selectedBoard}
+                    userInfo={userInfo.email}
+                    list={boardList}
+                    setOpenDetail={setDetail}/>
             </>
         }
-        </div>
     </>);
 }
 
