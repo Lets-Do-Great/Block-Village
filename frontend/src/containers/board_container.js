@@ -179,7 +179,7 @@ const BoardContainer = () => {
         <Nav type="board"/>
         { detail
         ? <><BoardDetail 
-                detail={selectedBoard}
+                selectedBoard={selectedBoard}
                 userInfo={userInfo.email}
                 closeDetail={closeDetail}
                 onModify={modifyBoard}
