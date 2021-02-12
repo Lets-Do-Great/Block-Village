@@ -4,7 +4,7 @@ import styles from './search_type.module.css';
 // select로 바꾸기
 const SearchType = ({ onChangeSearchType }) => {
     return (
-        <select name="keywordType" className={styles.select} onChange={onChangeSearchType}>
+        <select name="sortType" className={styles.select} onChange={onChangeSearchType}>
             <option 
                 className={styles.option}
                 value="createdDate,desc">최신순</option>
