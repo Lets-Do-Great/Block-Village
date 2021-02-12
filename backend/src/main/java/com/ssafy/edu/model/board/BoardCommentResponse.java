@@ -13,10 +13,11 @@ import java.time.LocalDateTime;
 @Builder
 public class BoardCommentResponse {
 
-    Long commentId;
-    String content;
+    Long id;
+    String comment;
     String email;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    String nickname;
+    LocalDateTime created_at;
+    LocalDateTime updated_at;
 
 }
