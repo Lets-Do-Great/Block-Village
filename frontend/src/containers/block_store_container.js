@@ -7,16 +7,6 @@ const BlockStoreContainer = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user.userInfo);
 
-  // const onGetMyBlocks = async () => {
-  //   try {
-  //      await dispatch(BlockAction.getMyBlocks({
-  //        email: userInfo.email
-  //      }));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
   const getAllBlocks = async () => {
     try {
       await dispatch(BlockAction.getAllBlocks({
@@ -28,8 +18,6 @@ const BlockStoreContainer = () => {
   }
 
   const onBuyBlocks = async (e) => {
-    // 불확실
-    dispatch(BlockAction.buyBlocks());
     try {
       await dispatch(BlockAction.buyBlocks({
         email: userInfo.email,
@@ -41,7 +29,6 @@ const BlockStoreContainer = () => {
   };
 
   useEffect(() => {
-    // onGetMyBlocks();
     getAllBlocks();
   })
 
@@ -49,6 +36,7 @@ const BlockStoreContainer = () => {
     <>
       <BlockStore 
         onBuyBlocks={onBuyBlocks}
+        usermil={userInfo.mileage}
       />
     </>
   );

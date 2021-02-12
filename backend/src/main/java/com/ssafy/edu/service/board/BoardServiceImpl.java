@@ -44,6 +44,7 @@ public class BoardServiceImpl implements BoardService{
                 br.setTitle(b.getTitle());
                 br.setEmail(b.getUser().getEmail());
                 br.setViews(b.getViews());
+                br.setNickname(b.getUser().getNickname());
                 br.setCreatedAt(b.getCreatedDate());
                 br.setUpdatedAt(b.getModifiedDate());
                 boardResponseList.add(br);
@@ -123,28 +124,16 @@ public class BoardServiceImpl implements BoardService{
             board.setViews(board.getViews()+1L);
             boardJpaRepository.save(board);
 
-            BoardOneResult boardOne = new BoardOneResult();
-            boardOne.setBoardId(board.getBoardId());
-            boardOne.setTitle(board.getTitle());
-            boardOne.setEmail(board.getUser().getEmail());
-            boardOne.setContent(board.getContent());
-            boardOne.setViews(board.getViews());
-            boardOne.setCreatedDate(board.getCreatedDate());
-            boardOne.setUpdatedDate(board.getModifiedDate());
-
-            List<BoardCommentResponse> bCommentList = new ArrayList<>();
-            for(BoardComment c : board.getBoardCommentList()){
-                BoardCommentResponse bc = BoardCommentResponse.builder()
-                        .commentId(c.getCommentId())
-                        .content(c.getContent())
-                        .email(c.getUser().getEmail())
-                        .createdAt(c.getCreatedDate())
-                        .updatedAt(c.getModifiedDate())
-                        .build();
-                bCommentList.add(bc);
-            }
-
-            boardOne.setComments(bCommentList);
+            BoardOneResult boardOne = BoardOneResult.builder()
+                    .boardId(board.getBoardId())
+                    .email(board.getUser().getEmail())
+                    .title(board.getTitle())
+                    .content(board.getContent())
+                    .views(board.getViews())
+                    .nickname(board.getUser().getNickname())
+                    .createdDate(board.getCreatedDate())
+                    .updatedDate(board.getModifiedDate())
+                    .build();
 
             result.status = true;
             result.data = boardOne;
@@ -213,6 +202,7 @@ public class BoardServiceImpl implements BoardService{
                     .title(save.getTitle())
                     .email(save.getUser().getEmail())
                     .views(save.getViews())
+                    .nickname(save.getUser().getNickname())
                     .createdAt(save.getCreatedDate())
                     .updatedAt(save.getModifiedDate())
                     .build();
@@ -233,16 +223,18 @@ public class BoardServiceImpl implements BoardService{
         BoardBasicResponse result = new BoardBasicResponse();
         Optional<Board> boardOptional = boardJpaRepository.findById(id);
 
-        boardCommentJpaRepository.deleteAllByBoard(boardOptional.get());
-        boardJpaRepository.deleteById(id);
+        if(boardOptional.isPresent()) {
+            boardCommentJpaRepository.deleteAllByBoard(boardOptional.get());
+            boardJpaRepository.deleteById(id);
 
-        if(!boardJpaRepository.findById(id).isPresent()){
-            result.status = true;
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
-            result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            if(!boardJpaRepository.findById(id).isPresent()) {
+                result.status = true;
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }
         }
+
+        result.status = false;
+        return new ResponseEntity<>(result, HttpStatus.OK);
 
     }
 

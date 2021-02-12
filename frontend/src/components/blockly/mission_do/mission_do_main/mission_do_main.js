@@ -17,10 +17,9 @@ import Blockly from 'blockly';
 import MissionOnNavbar from '../mission_do_navbar/mission_do_navbar';
 import MissionOnPlayground from '../mission_do_playground/mission_do_playground';
 
-const MissionOnMain = ({ formInfo, onChangeJavascript, onChangeXml, onChangeSuccess, onChangeFail }) => {
+const MissionOnMain = ({ formInfo, myBlocksInfo, onChangeJavascript, onChangeXml, onChangeSuccess, onChangeFail }) => {
   const { 
     initialXml, 
-    toolboxCategories,
     startPosition,
     stepPosition,
     endPosition,
@@ -28,7 +27,7 @@ const MissionOnMain = ({ formInfo, onChangeJavascript, onChangeXml, onChangeSucc
     difficulty,
     javascript,
   } = formInfo;
-  console.log(toolboxCategories);
+  const toolboxCategories = myBlocksInfo;
 
   const [activeDrags, setActiveDrags] = useState(0);
   const [modal, setModal] = useState(true);
