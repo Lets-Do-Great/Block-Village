@@ -26,8 +26,8 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
     const timer = ms => new Promise(res => setTimeout(res, ms))
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
-        x = image_x + (move[i][0] * 40)
-        y = image_y - (move[i][1] * 40)
+        x = image_x + (move[i][0] * 60)
+        y = image_y - (move[i][1] * 60)
 
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
