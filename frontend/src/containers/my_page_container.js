@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import MyInfoRead from '../components/my_page/my_info/my_info_read/my_info_read/my_info_read';
 import MyInfoModify from '../components/my_page/my_info/my_info_modify/my_info_modify/my_info_modify';
 import * as UserAction from '../modules/user';
 
 const MyPageContainer = ({ closeModal }) => {
+  const history = useHistory();
   // 정보 조회 / 수정 바꾸는 변수
   const [type, setType] = useState('read');
   
@@ -83,7 +85,7 @@ const MyPageContainer = ({ closeModal }) => {
   const deleteInfo = async () => {
     try {
       await dispatch(UserAction.deleteInfo(userInfo.email));
-      setType('');
+      history.push('/');
     } catch (e) {
       console.log(e);
     }

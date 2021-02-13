@@ -7,8 +7,7 @@ const MyInfoLeft = ({ profileImage, mileage }) => {
     <div className={styles.my_info_left}>
         <img 
             className={styles.profile_img} 
-            src={profileImage} 
-            alt="프로필 이미지" />
+            src={profileImage}/>
         <div className={styles.icons}>
             <div className={styles.icon}><GrMoney/></div>
             <div className={styles.text_mileage}>{mileage}</div>
