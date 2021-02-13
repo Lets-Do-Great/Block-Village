@@ -255,6 +255,7 @@ public class MissionServiceImpl implements MissionService {
                     .favorite(false)
                     .todo(null)
                     .build();
+
             result.status = true;
             result.data = findOneModel;
             response = new ResponseEntity<>(result, HttpStatus.OK);
@@ -534,11 +535,35 @@ public class MissionServiceImpl implements MissionService {
         if (missionOptional.isPresent()) {
 
             Mission mission = missionOptional.get();
-            mission.setMissionImg("https://" + s3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + imagePath);
+            mission.setMissionImg("https://" + s3Service.CLOUD_FRONT_DOMAIN_NAME + "/mission/" + imagePath);
 
-            missionJpaRepository.save(mission);
+            Mission missionResult = missionJpaRepository.save(mission);
+            Optional<MissionFavorite> missionFavorite = Optional.ofNullable(missionFavoriteJpaRepository.findByUserEmailAndMissionId(userEmail, missionId));
+            Optional<MissionDoUsers> missionDoUsers = Optional.ofNullable(missionTodoJpaRepository.findByUserEmailAndMissionId(userEmail, missionId));
+
+            findOneModel findOneModel = new findOneModel().builder()
+                    .id(missionResult.getId())
+                    .email(missionResult.getUser().getEmail())
+                    .nickname(missionResult.getUser().getNickname())
+                    .title(missionResult.getTitle())
+                    .created_at(missionResult.getCreatedAt())
+                    .updated_at(missionResult.getUpdatedAt())
+                    .startPositionX(missionResult.getStartPositionX())
+                    .startPositionY(missionResult.getStartPositionY())
+                    .endPositionX(missionResult.getEndPositionX())
+                    .endPositionY(missionResult.getEndPositionY())
+                    .content(missionResult.getContent())
+                    .imageUrl(missionResult.getMissionImg())
+                    .xmlCode(missionResult.getXmlCode())
+                    .difficulty(missionResult.getDifficulty())
+                    .likeCnt(missionResult.getFavorite())
+                    .peopleCnt(missionResult.getPeople())
+                    .favorite(missionFavorite.orElseGet(MissionFavorite::new).isFavorite())
+                    .todo(missionDoUsers.orElseGet(MissionDoUsers::new).getTodo())
+                    .build();
 
             result.status = true;
+            result.data = findOneModel;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
