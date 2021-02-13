@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+
 @ApiResponses(value = {@ApiResponse(code = 401, message = "Unauthorized", response = BoardResponse.class),
         @ApiResponse(code = 403, message = "Forbidden", response = BoardResponse.class),
         @ApiResponse(code = 404, message = "Not Found", response = BoardResponse.class),
@@ -28,7 +30,7 @@ public class ChallengeController {
 
     @ApiOperation(value = "전체 챌린지 목록 불러오기", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping("/{email}")
-    public ResponseEntity<ChallengeResponse> getChallengeList(@PathVariable("email")String email){
+    public ResponseEntity<ChallengeResponse> getChallengeList(@PathVariable("email")String email) throws ParseException {
         return challengeService.getChallengeList(email);
     }
 
