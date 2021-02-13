@@ -21,7 +21,6 @@ const MissionCreateNavbar = ({ modal, type, onChangeModal, statusModal }) => {
 
       <img className={styles.logo_img} src="/images/logo1.png" />
 
-
       <h1 className={styles.title}>{ type }</h1>
       <div className={styles.save_button} onClick={onChangeModal}>
         <FaRegSave size="50" color="#FFFFFF" />
@@ -33,6 +32,13 @@ const MissionCreateNavbar = ({ modal, type, onChangeModal, statusModal }) => {
       </div>
       <div className={styles.cart_button} onClick={goStore}>
         <TiShoppingCart size="50" color="#FFFFFF" />
+      </div>
+      <div>
+        <input
+          type="file" 
+          name="playgroundImage"
+          // onChange={}
+          />
       </div>
     </header>
   )

@@ -41,10 +41,14 @@ export const modifyUserInfo = ({ email, nickname, profileImage,
   formData.append('prevPassword', prevPassword);
   formData.append('newPassword', newPassword);
   formData.append('introduction', introduction);
-  if(typeof profileImage === 'object') {
+
+  if(profileImage === null) {
+    console.log("널");
+    formData.append('change', 'delete');
+  }
+  else if(typeof profileImage === 'object'){
+    console.log("오브젝트");
     formData.append('profileImage', profileImage);
-  }else {
-    formData.append('profileImage', '');
   }
 
   return client({
