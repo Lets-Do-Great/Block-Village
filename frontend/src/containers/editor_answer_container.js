@@ -5,18 +5,13 @@ import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
 import * as BlockAction from '../modules/block';
 
-const EditorAnswerContainer = (props) => {
-  const [todo, setTodo] = useState('todo');
+const EditorAnswerContainer = () => {
   const [useDifficulty, setUseDifficulty] = useState(0);
   const [useContent, setUseContent] = useState('');
   const [answerInfo, setAnswerInfo] = useState({
     javascriptCode: '',
     xmlCode: '',
   });
-
-  const onChangeTodo = () => {
-    setTodo('done')
-  };
 
   const onChangeXmlContainer = (e) => {
     setAnswerInfo({
@@ -42,7 +37,7 @@ const EditorAnswerContainer = (props) => {
       await dispatch(MissionAction.setTodoMission({
         email: userInfo.email,
         missionId: selectedMission.id,
-        todo: todo,
+        todo: "done",
       }))
     } catch(e) {
       console.log(e);
@@ -56,6 +51,7 @@ const EditorAnswerContainer = (props) => {
         missionId: selectedMission.id,
         difficulty: useDifficulty,
       }))
+      onSetTodoMission();
     } catch(e) {
       console.log(e);
     }
@@ -71,7 +67,10 @@ const EditorAnswerContainer = (props) => {
         title: `${userInfo.nickname}님의 ${selectedMission.id}번 미션 답안`,
         javascriptCode: answerInfo.javascriptCode,
         xmlCode: newXml,
-      }))
+        startPositionX: selectedMission.startPosisionX,
+        startPosisionY: selectedMission.startPosisionY,
+      }));
+      onSetDifficultyMission();
     } catch(e) {
       console.log(e);
     }
@@ -88,9 +87,8 @@ const EditorAnswerContainer = (props) => {
   }
 
   useEffect(() => {
-    // console.log(localStorage.getItem('token'));
     onGetMyBlocks();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -98,9 +96,6 @@ const EditorAnswerContainer = (props) => {
         selectedMission={selectedMission}
         setUseDifficulty={setUseDifficulty}
         setUseContent={setUseContent}
-        onChangeTodo={onChangeTodo}
-        onSetTodoMission={onSetTodoMission}
-        onSetDifficultyMission={onSetDifficultyMission}
         onSetAnswer={onSetAnswer}
         onChangeXmlContainer={onChangeXmlContainer}
         onChangeJavascriptContainer={onChangeJavascriptContainer}

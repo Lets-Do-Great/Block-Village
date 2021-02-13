@@ -4,6 +4,7 @@ import MissionCreateSubmain from '../components/blockly/mission_create/mission_c
 import MissionModify from '../components/blockly/mission_modify/mission_modify';
 import * as MissionAction from '../modules/mission';
 import * as BlockAction from '../modules/block';
+import { ContactSupportOutlined } from '@material-ui/icons';
 
 const EditorMissionContainer = ( { type }) => {
   const userInfo = useSelector(state => state.user.userInfo);
@@ -14,10 +15,10 @@ const EditorMissionContainer = ( { type }) => {
     const newXml = e.xmlCode.replace(/"/gi, '\\"');
 
     try {
+      console.log("미션 세팅 요청 시작");
       await dispatch(MissionAction.setMission({
         title: e.title,
         content: e.content,
-        image: '',
         startPositionX: e.startPosition[0],
         startPositionY: e.startPosition[1],
         endPositionX: e.endPosition[0],
@@ -25,11 +26,29 @@ const EditorMissionContainer = ( { type }) => {
         difficulty: e.difficulty * 1.0,
         email: userInfo.email,
         xmlCode: newXml,
-      }))
+      }));
     } catch(e) {
       console.log(e);
+    } finally {
+      console.log("미션 세팅 요청 끝");
+      setBackgroundImage(e);
     }
   };
+
+  const setBackgroundImage = async (e) => {
+    try {
+      console.log(selectedMission);
+      console.log("이미지 요청 시작");
+      await dispatch(MissionAction.setBackgroundImage({
+        email: userInfo.email,
+        missionId: selectedMission.id,
+        backgroundImage: e.imageUrl,
+      }));
+      console.log("이미지 요청 끝");
+    }catch(e) {
+      console.log(e);
+    }
+  }
 
   const onModifyMission = async (e) => {
     try {

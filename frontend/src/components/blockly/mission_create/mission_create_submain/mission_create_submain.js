@@ -20,11 +20,15 @@ const MissionCreateSubmain = ({ onSetMission }) => {
     title: '',
     content: '',
     difficulty: 0,
+    imageUrl: '',
   });	
 
-  // useEffect(() => {
-  //   onChangeState(formInfo);
-  // }, [formInfo])
+  const onChangeImage = (e) => {
+    setFormInfo({
+      ...formInfo,
+      imageUrl: e.target.files[0],
+    })
+  }
 
   const onChangeXml = (e) => {
     setFormInfo({
@@ -71,7 +75,6 @@ const MissionCreateSubmain = ({ onSetMission }) => {
   };
 
   const onChangeDifficulty = (event) => {
-    console.log(event);
     setFormInfo({
       ...formInfo,
       difficulty: event
@@ -97,6 +100,7 @@ const MissionCreateSubmain = ({ onSetMission }) => {
         onChangeXml={onChangeXml}
         onChangeStep={onChangeStep}
         onChangeEnd={onChangeEnd}
+        onChangeImage={onChangeImage}
       />
     </div>
   )

@@ -82,7 +82,7 @@ export const getAnswerCommentList = createAction(
 const initialState = {
     answerList: [],
     selectedAnswer: {
-        answerId: '',
+        id: '',
         email: '',
         title: '',
         missionId: '',
@@ -92,6 +92,8 @@ const initialState = {
         readCnt: '',
         likeCnt: '',
         commentCnt: '',
+        startPositionX: 0,
+        startPosisionY: 0,
     },
     pageInfo: {
         pageisFirst: null,

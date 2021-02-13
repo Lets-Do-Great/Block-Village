@@ -52,6 +52,7 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
                 key={card.id}
                 id={card.id}
                 title={card.title}
+                imageUrl={card.imageUrl}
                 difficulty={card.difficulty}
                 readCnt={card.readCnt}
                 likeCnt={card.likeCnt}

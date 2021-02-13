@@ -241,10 +241,7 @@ export default applyPenders(missionReducer, [
                 if(response.data.status){
                     return updateObject(state, {
                         ...state,
-                        selectedMission: {
-                            ...state.selectedMission,
-                            imageUrl: response.data.data,
-                        }
+                        selectedMission: response.data.data,
                     });
                 } else{
                     alert("미션을 저장하는데 문제가 발생했습니다.");

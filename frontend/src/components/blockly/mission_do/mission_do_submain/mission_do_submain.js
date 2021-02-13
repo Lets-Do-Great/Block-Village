@@ -5,7 +5,9 @@ import MissionDoModalSuccess from '../mission_do_modal/mission_do_modal_success/
 import MissionDoModalFail from '../mission_do_modal/mission_do_modal_fail/mission_do_modal_fail';
 import styles from './mission_do_submain.module.css';
 
-const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, onChangeTodo, onSetTodoMission, onSetDifficultyMission, onSetAnswer, onChangeXmlContainer, onChangeJavascriptContainer }) => {
+const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, onSetAnswer, 
+                          onChangeXmlContainer, onChangeJavascriptContainer }) => {
+                            
   const myBlocksInfo = useSelector(state => state.block.myBlocksInfo);
   const [successModal, setSuccessModal] = useState(false);
   const [failModal, setFailModal] = useState(false);
@@ -38,7 +40,6 @@ const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, on
   }
 
   const onChangeSuccess = () => {
-    onChangeTodo();
     setSuccessModal(!successModal);
   };
 
@@ -47,8 +48,6 @@ const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, on
   };
 
   const onSubmitDifficulty = () => {
-    onSetTodoMission();
-    onSetDifficultyMission();
     onSetAnswer();
   };
 
