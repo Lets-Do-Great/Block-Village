@@ -2,10 +2,12 @@ import React from 'react';
 import styles from './my_info_form.module.css';
 import { GrMoney } from "react-icons/gr";
 
-const MyInfoLeft = ({ profile, mileage }) => {
+const MyInfoLeft = ({ profileImage, mileage }) => {
     return (
     <div className={styles.my_info_left}>
-        <div className={styles.profile_img}></div>
+        <img 
+            className={styles.profile_img} 
+            src={profileImage}/>
         <div className={styles.icons}>
             <div className={styles.icon}><GrMoney/></div>
             <div className={styles.text_mileage}>{mileage}</div>
@@ -28,13 +30,13 @@ const MyInfoRight = ({ nickname, email,
 }
 
 const MyInfoForm = ({ userInfo }) => {
-    const { profile, mileage, nickname, 
+    const { profileImage, mileage, nickname, 
         email, follower, following, introduction } = userInfo;
 
     return (
     <div className={styles.my_info_form}>
         <MyInfoLeft
-            profile={profile}
+            profileImage={profileImage}
             mileage={mileage}
         />
         <MyInfoRight

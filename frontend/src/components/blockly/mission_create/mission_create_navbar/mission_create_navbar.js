@@ -5,7 +5,8 @@ import { FaRegSave } from 'react-icons/fa';
 import { TiShoppingCart } from 'react-icons/ti';
 import { useHistory } from 'react-router-dom';
 
-const MissionCreateNavbar = ({ modal, type, onChangeModal, statusModal }) => {
+const MissionCreateNavbar = ({ modal, type, onChangeModal, 
+                            statusModal, onChangeImage}) => {
   const history = useHistory();
 
   const onoffModal = () => {
@@ -21,7 +22,6 @@ const MissionCreateNavbar = ({ modal, type, onChangeModal, statusModal }) => {
 
       <img className={styles.logo_img} src="/images/logo1.png" />
 
-
       <h1 className={styles.title}>{ type }</h1>
       <div className={styles.save_button} onClick={onChangeModal}>
         <FaRegSave size="50" color="#FFFFFF" />
@@ -33,6 +33,13 @@ const MissionCreateNavbar = ({ modal, type, onChangeModal, statusModal }) => {
       </div>
       <div className={styles.cart_button} onClick={goStore}>
         <TiShoppingCart size="50" color="#FFFFFF" />
+      </div>
+      <div>
+        <input
+          type="file" 
+          name="imageUrl"
+          onChange={onChangeImage}
+          />
       </div>
     </header>
   )

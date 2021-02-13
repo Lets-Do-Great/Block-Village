@@ -55,6 +55,18 @@
   display: inline-block;
 }
 
+.disable_button {
+  width: 300px;
+  height: 45px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #cccccc;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+}
+
 .fake{
   display: inline-block;
   border: 0px;

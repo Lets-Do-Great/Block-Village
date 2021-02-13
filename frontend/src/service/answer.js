@@ -10,11 +10,13 @@ export const getMyAnswerList = ({ email }) => {
 
 // 답안 제작
 export const setAnswer = ({ email, missionId, title,
-                 content, javascriptCode, xmlCode }) => {
+                 content, javascriptCode, xmlCode, 
+                 startPositionX, startPositionY }) => {
     return client({
        url: `answer/${email}`,
        method: 'post',
-       data: { email, missionId, title, content, javascriptCode, xmlCode },
+       data: { email, missionId, title, content, javascriptCode, 
+                xmlCode, startPositionY, startPositionX },
     });
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import * as Icon from 'react-icons/md';
 import styles from './list_card_form.module.css';
 
-const ListCardForm = ({ type, id, title, difficulty, readCnt, likeCnt, peopleCnt, clickCard }) => {
+const ListCardForm = ({ type, id, imageUrl, title, difficulty, readCnt, likeCnt, peopleCnt, clickCard }) => {
     return (
     <>
         <div className={styles.card_form}>
@@ -10,7 +10,7 @@ const ListCardForm = ({ type, id, title, difficulty, readCnt, likeCnt, peopleCnt
                 id={id} 
                 onClick={clickCard}>
                     { title }</p>
-            <div className={styles.img}></div>
+            <img className={styles.img} src={imageUrl}/>
             <div className={styles.icon_box}>
                 <div className={styles.icon}>
                     <Icon.MdAssistantPhoto/> { difficulty }

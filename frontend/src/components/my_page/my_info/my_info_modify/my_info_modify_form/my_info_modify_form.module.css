@@ -77,7 +77,16 @@
     margin: 5px;
 }
 
+.edit_file{
+    margin: 0 auto;
+    font-size: 10px;
+    text-align: center;
+    padding-left: 50px;
+    color: darkgray;
+}
+
 .edit{
     margin: 10px;
     font-size: 10px;
+    color: darkgray;
 }

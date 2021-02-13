@@ -198,14 +198,13 @@ const MyMissionContainer = ({ closeModal }) => {
                         /> }
                 { category === 'myAnswer' && <>
                     <ComponentDetailCardForm
-                        detail={selectedMission}
+                        detail={selectedAnswer}
                         setLike={likeAnswer}
                         setDisLike={dislikeAnswer}
                         userInfo={userInfo.email}
-                        closeDetail={onCloseDetail}
-
                         onModify={onModifyAnswer}
                         onDelete={onDeleteAnswer}
+                        closeDetail={onCloseDetail}
                     /> 
                     <CommentContainer
                         userInfo={userInfo.email}
