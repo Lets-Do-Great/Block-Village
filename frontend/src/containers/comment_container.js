@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import CommentForm from '../components/comment_form/comment_form';
 import * as AnswerAction from '../modules/answer';
 
-const CommentContainer = ({ userInfo, type, selectedId }) => {
+const CommentContainer = ({ userInfo, selectedId }) => {
     // store에 있는 state와 dispatch 가져오는 작업
     const commentList = useSelector(state => state.answer.commentList);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(type === 'answer') getAnswerCommentList();
+        getAnswerCommentList();
     }, [selectedId]);
 
     /*
@@ -61,14 +61,12 @@ const CommentContainer = ({ userInfo, type, selectedId }) => {
     }; 
 
     return (<>
-        { type === 'answer' && 
-            <CommentForm
-                userInfo={userInfo}
-                commentList={commentList}
-                setComment={setAnswerComment}
-                modifyComment={modifyAnswerComment}
-                deleteComment={deleteAnswerComment}/>
-        }
+        <CommentForm
+            userInfo={userInfo}
+            commentList={commentList}
+            setComment={setAnswerComment}
+            modifyComment={modifyAnswerComment}
+            deleteComment={deleteAnswerComment}/>
     </>);
 }
 

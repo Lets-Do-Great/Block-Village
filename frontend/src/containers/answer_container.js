@@ -20,12 +20,6 @@ const AnswerContainer = ({ match }) => {
         getMissionAnswerList();
     }, [detail]);
 
-    useEffect(() => {
-        if(detail){
-            getAnswerCommentList();
-        }
-    }, [ selectedAnswer ]);
-
     const closeDetail = () => {
         setDetail(false);
     }
@@ -70,7 +64,6 @@ const AnswerContainer = ({ match }) => {
             await dispatch(AnswerAction.setLikeAnswer({
                 email: userInfo.email, answerId: selectedAnswer.id, favorite:true,
             }))
-            getAnswer(selectedAnswer.id);
         }catch(e) {
             console.log(e);
         }
@@ -82,56 +75,11 @@ const AnswerContainer = ({ match }) => {
             await dispatch(AnswerAction.setLikeAnswer({
                 email: userInfo.email, answerId: selectedAnswer.id, favorite:false,
             }))
-            getAnswer(selectedAnswer.id);
         }catch(e) {
             console.log(e);
         }
     };
 
-    // 현재 선택한 답안의 댓글 조회
-    const getAnswerCommentList = async () => {
-        try{
-            await dispatch(AnswerAction.getAnswerCommentList({ answerId: selectedAnswer.id }))
-        }catch(e) {
-            console.log(e);
-        }
-    };    
-
-    // 현재 선택한 답안의 댓글 제작
-    const setAnswerComment = async (comment) => {
-        try{
-            await dispatch(AnswerAction.setAnswerComment({ 
-                email: userInfo.email, answerId: selectedAnswer.id, comment,
-            }));
-            getAnswerCommentList();
-        }catch(e) {
-            console.log(e);
-        }
-    }; 
-
-    // 현재 선택한 답안의 댓글 수정
-    const modifyAnswerComment = async (id, comment) => {
-        try{
-            await dispatch(AnswerAction.modifyAnswerComment({ 
-                email: userInfo.email, commentId: id, comment,
-            }));
-            getAnswerCommentList();
-        }catch(e) {
-            console.log(e);
-        }
-    }; 
-
-    // 현재 선택한 답안의 댓글 삭제
-    const deleteAnswerComment = async (id) => {
-        try{
-            await dispatch(AnswerAction.deleteAnswerComment({ 
-                email: userInfo.email, commentId: id,
-            }));
-            getAnswerCommentList();
-        }catch(e) {
-            console.log(e);
-        }
-    }; 
 
     return (<>
         { detail

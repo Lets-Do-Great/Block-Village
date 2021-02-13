@@ -164,7 +164,6 @@ const MyMissionContainer = ({ closeModal }) => {
             await dispatch(AnswerAction.setLikeAnswer({
                 email: userInfo.email, answerId: selectedAnswer.id, favorite:true,
             }))
-            getAnswer(selectedAnswer.id);
         }catch(e) {
             console.log(e);
         }
@@ -176,7 +175,6 @@ const MyMissionContainer = ({ closeModal }) => {
             await dispatch(AnswerAction.setLikeAnswer({
                 email: userInfo.email, answerId: selectedAnswer.id, favorite:false,
             }))
-            getAnswer(selectedAnswer.id);
         }catch(e) {
             console.log(e);
         }

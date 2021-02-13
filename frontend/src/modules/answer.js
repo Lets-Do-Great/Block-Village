@@ -289,6 +289,7 @@ export default applyPenders(answerReducer, [
                 if(response.data.status) {
                     return updateObject(state, {
                         ...state,
+                        selectedAnswer: response.data.data,
                     });
                 } else {
                     alert("좋아요 설정하는데 문제가 발생했습니다.");

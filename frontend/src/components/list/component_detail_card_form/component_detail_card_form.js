@@ -13,10 +13,8 @@ import '../../blockly/all_blocks/drawing_blocks';
 import '../../blockly/all_blocks/function_blocks';
 
 
-const ComponentDetailCardForm = ({ detail, setLike, setDislike, 
+const ComponentDetailCardForm = ({ detail, setLike, setDisLike, 
                             userInfo, closeDetail, onModify, onDelete }) => {
-    
-    console.log(detail);
     const {email, nickname, title, created_at, updated_at, favorite,
         content, difficulty, likeCnt, readCnt } = detail;
 
@@ -91,7 +89,7 @@ const ComponentDetailCardForm = ({ detail, setLike, setDislike,
 
     const changeLike = () => {
         if(favorite){
-            setDislike();
+            setDisLike();
         } else {
             setLike();
         }
