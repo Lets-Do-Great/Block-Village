@@ -15,6 +15,7 @@ const EditorMissionContainer = ( { type }) => {
     const newXml = e.xmlCode.replace(/"/gi, '\\"');
 
     try {
+      console.log("미션 세팅 요청 시작");
       await dispatch(MissionAction.setMission({
         title: e.title,
         content: e.content,
@@ -29,17 +30,21 @@ const EditorMissionContainer = ( { type }) => {
     } catch(e) {
       console.log(e);
     } finally {
+      console.log("미션 세팅 요청 끝");
       setBackgroundImage(e);
     }
   };
 
   const setBackgroundImage = async (e) => {
     try {
+      console.log(selectedMission);
+      console.log("이미지 요청 시작");
       await dispatch(MissionAction.setBackgroundImage({
         email: userInfo.email,
         missionId: selectedMission.id,
         backgroundImage: e.imageUrl,
       }));
+      console.log("이미지 요청 끝");
     }catch(e) {
       console.log(e);
     }

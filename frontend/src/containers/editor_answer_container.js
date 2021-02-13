@@ -67,6 +67,8 @@ const EditorAnswerContainer = () => {
         title: `${userInfo.nickname}님의 ${selectedMission.id}번 미션 답안`,
         javascriptCode: answerInfo.javascriptCode,
         xmlCode: newXml,
+        startPositionX: selectedMission.startPosisionX,
+        startPosisionY: selectedMission.startPosisionY,
       }));
       onSetDifficultyMission();
     } catch(e) {
