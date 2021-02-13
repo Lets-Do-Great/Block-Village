@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MyInfoContainer from '../../../containers/my_info_container';
+import MyPageContainer from '../../../containers/my_page_container';
 import MyBlockContainer from '../../../containers/my_block_container';
 import styles from './my_page_main.module.css';
 import MyMissionContainer from '../../../containers/my_mission_container';
@@ -35,7 +35,7 @@ const MyPageMain = () => {
             {  modal && openType === 'info' &&
                 <div className={styles.modal_wrapper}>
                     <div className={styles.modal}>
-                        <MyInfoContainer
+                        <MyPageContainer
                             closeModal={closeModal}/>
                     </div>
                 </div>

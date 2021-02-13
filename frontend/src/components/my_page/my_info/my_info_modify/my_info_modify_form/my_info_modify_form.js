@@ -1,29 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import styles from './my_info_modify_form.module.css'
 
-const MyInfoModifyLeft = ({ modifyInput, onSubmitImage }) => {
+const MyInfoModifyLeft = ({ modifyInput, onChangeModify }) => {
   const { profileImage } = modifyInput;
   const [url, setUrl] = useState(null);
 
-  const formData = new FormData();
+  
   const onChangeProfileImage = (e) => {
-    console.log(e);
-    setUrl(e.target.value);
+    setUrl(e.target.files[0]);
   };
-  const onSubmit = () => {
-    onSubmitImage(formData);
-  };
+
   return (
     <div className={styles.my_info_left}>
       <img 
         className={styles.profile_img} 
         src={profileImage} 
         alt="프로필 이미지" />
-      {profileImage}
-      <input type="file" multiple onChange={onChangeProfileImage} />
-      <div 
-        className={styles.edit}
-        onClick={onSubmit}> 프로필 이미지 편집 </div>
+      <input 
+        className={styles.edit_file}
+        type="file" 
+        name="profileImage"
+        onChange={onChangeModify} />
     </div>
     );
 };

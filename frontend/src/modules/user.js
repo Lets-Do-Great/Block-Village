@@ -12,7 +12,7 @@ const SIGN_UP = 'user/SIGN_UP';
 const MODIFY_INFO = 'user/MODIFY_INFO';
 const DELETE_INFO = 'user/DELETE_INFO';
 const FIND_PW = 'user/FIND_PW';
-const MODIFY_PROFILE = 'user/MODIFY_PROFILE';
+// const MODIFY_PROFILE = 'user/MODIFY_PROFILE';
 
 // 액션 객체 생성함수
 export const logIn = createAction(
@@ -46,11 +46,6 @@ export const findPW = createAction(
 export const deleteInfo = createAction(
   DELETE_INFO, 
   UserAPI.deleteUserInfo
-);
-
-export const modifyImage = createAction(
-  MODIFY_PROFILE, 
-  UserAPI.modifyImage
 );
 
 // 초기 상태
@@ -207,29 +202,6 @@ export default applyPenders(userReducer, [
     },
     onFailure: (state, action) => {
       return updateObject(state, state);
-    },
-  },
-  {
-    type: MODIFY_PROFILE,
-    onSuccess: (state, action) => {
-      const response = action.payload;
-
-      if (response.status === 200) {
-        if (response.data.status) {
-          return updateObject(state, state);
-        } else {
-          alert('프로필 변경에 오류가 발생했습니다.');
-        }
-      } else {
-        // 에러 발생
-        console.log(action.payload.status);
-      }
-      return updateObject(state, state);
-    },
-    onFailure: {
-      onFailure: (state, action) => {
-        return updateObject(state, state);
-      },
     },
   },
 ]);

@@ -7,9 +7,11 @@ import * as UserAction from '../modules/user';
 const MyPageContainer = ({ closeModal }) => {
   // 정보 조회 / 수정 바꾸는 변수
   const [type, setType] = useState('read');
+  
   useEffect(() => {
     console.log(userInfo);
   }, []);
+
   // 정보 수정폼 데이터 저장하는 변수
   const [modifyInput, setModifyInput] = useState({
     profileImage: '',
@@ -45,11 +47,17 @@ const MyPageContainer = ({ closeModal }) => {
   const onChangeModify = (e) => {
     const { name, value } = e.target;
 
-    console.log(e.target);
-    setModifyInput({
-      ...modifyInput,
-      [name]: value,
-    });
+    if(name === 'profileImage'){
+      setModifyInput({
+        ...modifyInput,
+        profileImage: e.target.files[0],
+      })
+    } else { 
+      setModifyInput({
+        ...modifyInput,
+        [name]: value,
+      });
+    }
   };
 
   /* api 요청을 보낼 함수 */
@@ -73,22 +81,6 @@ const MyPageContainer = ({ closeModal }) => {
     }
   };
 
-  //이미지 수정
-  const onSubmitImage = async (file) => {
-    try {
-      //괄호안에 백에 보내야할 데이터
-      await dispatch(
-        UserAction.modifyImage({
-          email: userInfo.email,
-          file,
-        })
-      );
-
-      setType('read');
-    } catch (e) {
-      console.log(e);
-    }
-  };
   return (
     <>
       {type === 'read' && (
@@ -105,7 +97,6 @@ const MyPageContainer = ({ closeModal }) => {
           modifyInput={modifyInput}
           onChangeModify={onChangeModify}
           setType={setType}
-          onSubmitImage={onSubmitImage}
         />
       )}
     </>

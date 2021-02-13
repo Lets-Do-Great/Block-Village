@@ -4,6 +4,7 @@
         response, error문은 이 함수를 사용하는 곳에서 작성
 */
 
+import { findByPlaceholderText } from '@testing-library/react';
 import client from './client';
 
 // 로그인 정보 확인
@@ -33,18 +34,21 @@ export const getUserInfo = (email, token) => {
 };
 
 // 회원 정보 수정
-export const modifyUserInfo = ({
-  email,
-  nickname,
-  prevPassword,
-  newPassword,
-  introduction,
-}) => {
+export const modifyUserInfo = ({ email, nickname, profileImage, 
+                                prevPassword, newPassword, introduction,}) => {
+  const formData = new FormData();
+  formData.append('email', email);
+  formData.append('nickname', nickname);
+  formData.append('prevPassword', prevPassword);
+  formData.append('newPassword', newPassword);
+  formData.append('introduction', introduction);
+  formData.append('profileImage', profileImage);
+
   return client({
-    url: `users/${email}`,
+    url: `users`,
     method: 'put',
-    data: { nickname, prevPassword, newPassword, introduction },
-  });
+    data: formData,
+  })
 };
 
 // 회원 탈퇴 하기
@@ -63,15 +67,3 @@ export const findPW = (email) => {
   });
 };
 
-// 이미지 수정
-export const modifyImage = ({ email, file }) => {
-  client.defaults.headers.common['Content-Type'] = 'multipart/form-data';
-  return client({
-    url: `users/file/${email}`,
-    method: 'put',
-    data: { file },
-  })
-  .finally(() => {
-    client.defaults.headers.common['Content-Type'] = `application/json`;
-  });
-};
