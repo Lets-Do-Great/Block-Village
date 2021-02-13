@@ -8,11 +8,13 @@
 }
 
 .body {
-  width: 400px;
-  height: 300px;
-  background-color: white;
+  width: 900px;
+  height: 401px;
+  /* background-color: white;
   border-radius: 5px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.4); */
+  background: 100%/100%
+    url(../../.././../../../images/tutorial_1/tutorial_modal_1_3.png);
 
   position: absolute;
   top: 35%;

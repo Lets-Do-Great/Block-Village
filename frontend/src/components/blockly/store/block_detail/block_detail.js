@@ -25,7 +25,7 @@ const BlockDetail = ({ block, addBillList }) => {
 
         </div>
 
-        <div class={styles.overlay}></div>
+        <div className={styles.overlay}></div>
 
         <div className={styles.hide__button} onClick={() => addBillList(block)}>
           <a>목록에 담기</a>
