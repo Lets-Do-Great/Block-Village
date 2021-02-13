@@ -14,9 +14,9 @@ const BlockDetail = ({ block, addBillList }) => {
       <div className={styles.container}>
 
         <div className={styles.small__container}>
+          <div className={styles.block_img_container}>
+            <div className={styles.image_box} ref={blockImg} />
 
-          <div className={styles.image_box} ref={blockImg}>
-            {/* <div className={styles.image}></div> */}
           </div>
 
           <div className={styles.price_box}>

@@ -38,13 +38,13 @@ const Nav = ({ type }) => {
 
         <div className={styles.title}>
             { type === "challenge" && "챌린지에 도전해봐요" }
-            { type === "my_page" && "마이페이지" }
+            {/* { type === "my_page" && "마이페이지" } */}
             { type === "mission" && "미션을 정복해봐요" }
             { type === "board" && "일단 여기는 게시판" }
         </div>
 
         <div className={styles.user_icon} onClick={goMyPage}>
-            <FaUserCircle/>
+            { type === "my_page" || <FaUserCircle color="#FFF"/> }
         </div>
     </header>
     </>);

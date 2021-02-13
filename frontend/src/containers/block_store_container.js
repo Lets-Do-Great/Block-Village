@@ -6,6 +6,7 @@ import * as BlockAction from '../modules/block';
 const BlockStoreContainer = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user.userInfo);
+  const allBlcoksInfo = useSelector(state => state.block.allBlcoksInfo);
 
   const getAllBlocks = async () => {
     try {
@@ -30,11 +31,12 @@ const BlockStoreContainer = () => {
 
   useEffect(() => {
     getAllBlocks();
-  })
+  }, [allBlcoksInfo])
 
   return (
     <>
       <BlockStore 
+        allBlcoksInfo={allBlcoksInfo}
         onBuyBlocks={onBuyBlocks}
         usermil={userInfo.mileage}
       />

@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -55,18 +54,23 @@ public class UserController {
     }
 
     @ApiOperation(value = "회원정보 수정", authorizations = { @Authorization(value="jwtToken") })
-    @PutMapping("/{email}")
+    @PutMapping
     @ResponseBody
-    public ResponseEntity<UserResponse> updateUser(@PathVariable("email") String email, @RequestBody UpdateRequest updateRequest) {
-        return userService.updateUser(updateRequest, email);
-    }
+    public ResponseEntity<UserResponse> updateUser(UpdateRequest updateRequest) throws IOException {
 
-    @ApiOperation(value="프로필 이미지 저장(수정)")
-    @PutMapping("/file/{email}")
-    @ResponseBody
-    public void uploadFile(@RequestParam MultipartFile file, @PathVariable("email") String email) throws IOException {
-        String imagePath = s3Service.upload(file, "profile");
-        userService.updateFile(email, imagePath);
+        // 이미지 삭제
+        if("delete".equals(updateRequest.getChange())){
+            return userService.updateUser(updateRequest, updateRequest.getEmail(), null);
+        }
+
+        // 기존 이미지 유지
+        if(updateRequest.getProfileImage()==null){
+            return userService.updateUser(updateRequest, updateRequest.getEmail(), "");
+        }
+
+        // 이미지 새로 업로드
+        String imagePath = s3Service.upload(updateRequest.getProfileImage(), "profile");
+        return userService.updateUser(updateRequest, updateRequest.getEmail(), imagePath);
     }
 
     @ApiOperation(value = "회원 탈퇴", authorizations = { @Authorization(value="jwtToken") })

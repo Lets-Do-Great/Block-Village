@@ -9,6 +9,7 @@
   display: flex;
   flex: 1;
   padding: 0.8em;
+  max-height: 90%;
 }
 
 .bill {
@@ -23,6 +24,21 @@
 
 .bill_items {
   flex-basis: 65%;
+  max-height: 60%;
+
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+
+  /* justify-content: center;
+  align-items: center; */
+
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+
+.bill_items::-webkit-scrollbar {
+  display: none;
 }
 
 .bill_footer {
@@ -35,11 +51,11 @@
 }
 
 .cataBody {
-  flex-basis: 20%;
+  flex-basis: 15%;
 }
 
 .store_body {
-  flex-basis: 80%;
+  flex-basis: 85%;
 }
 
 .shelf {

@@ -19,6 +19,29 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1001;
+
+  animation: failMoving 0.5s linear both;
+}
+
+@keyframes failMoving {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  20% {
+    transform: translate(-52%, -48%);
+  }
+  40% {
+    transform: translate(-52%, -52%);
+  }
+  60% {
+    transform: translate(-48%, -48%);
+  }
+  80% {
+    transform: translate(-48%, -52%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
 }
 
 .container {

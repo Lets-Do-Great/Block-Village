@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+@Data
 @Valid
 @ToString
 @Getter
@@ -14,6 +15,12 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Builder // Setter 대신
 public class UpdateRequest {
+
+    @ApiModelProperty(required = false)
+    MultipartFile profileImage;
+
+    @ApiModelProperty(required = false)
+    String change;
 
     @ApiModelProperty(required = false)
     String prevPassword;
@@ -28,5 +35,9 @@ public class UpdateRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String introduction;
+
+    @ApiModelProperty(required = true)
+    @NotNull
+    String email;
 
 }
