@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styles from './my_info_modify_form.module.css'
 
-const MyInfoModifyLeft = ({ modifyInput, onChangeModify }) => {
+const MyInfoModifyLeft = ({ modifyInput, onChangeModify, onDeleteProfileImage }) => {
   const { profileImage } = modifyInput;
   const [url, setUrl] = useState(null);
-
-  
-  const onChangeProfileImage = (e) => {
-    setUrl(e.target.files[0]);
-  };
 
   return (
     <div className={styles.my_info_left}>
@@ -21,6 +16,10 @@ const MyInfoModifyLeft = ({ modifyInput, onChangeModify }) => {
         type="file" 
         name="profileImage"
         onChange={onChangeModify} />
+        <div
+            className={styles.edit_file}
+            onClick={onDeleteProfileImage}>
+                프로필 이미지 삭제</div>
     </div>
     );
 };
@@ -130,12 +129,14 @@ const MyInfoModifyRight = ({ modifyInput, onChangeModify, setPWConfirm }) => {
     );
 };
 
-const MyInfoModifyForm = ({ modifyInput, onChangeModify, setPWConfirm }) => {
+const MyInfoModifyForm = ({ modifyInput, onChangeModify, 
+                        onDeleteProfileImage, setPWConfirm }) => {
     return (
     <div className={styles.my_info_form}>
         <MyInfoModifyLeft
             modifyInput={modifyInput}
-            onChangeModify={onChangeModify}/>
+            onChangeModify={onChangeModify}
+            onDeleteProfileImage={onDeleteProfileImage}/>
         <MyInfoModifyRight
             modifyInput={modifyInput}
             onChangeModify={onChangeModify}

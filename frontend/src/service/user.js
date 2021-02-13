@@ -4,7 +4,6 @@
         response, error문은 이 함수를 사용하는 곳에서 작성
 */
 
-import { findByPlaceholderText } from '@testing-library/react';
 import client from './client';
 
 // 로그인 정보 확인
@@ -42,7 +41,11 @@ export const modifyUserInfo = ({ email, nickname, profileImage,
   formData.append('prevPassword', prevPassword);
   formData.append('newPassword', newPassword);
   formData.append('introduction', introduction);
-  formData.append('profileImage', profileImage);
+  if(typeof profileImage === 'object') {
+    formData.append('profileImage', profileImage);
+  }else {
+    formData.append('profileImage', '');
+  }
 
   return client({
     url: `users`,

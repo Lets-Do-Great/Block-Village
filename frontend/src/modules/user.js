@@ -141,11 +141,15 @@ export default applyPenders(userReducer, [
 
       if (response.status === 200) {
         if (response.data.status) {
+          localStorage.setItem('token', response.data.data.token);
+          client.defaults.headers.common['token'] = localStorage.getItem(
+            'token'
+          );
           return updateObject(state, {
             ...state,
             userInfo: {
               ...state.userInfo,
-              ...response.data.data,
+              ...response.data.data.userInfo,
             },
           });
         } else {

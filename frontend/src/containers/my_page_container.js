@@ -60,6 +60,14 @@ const MyPageContainer = ({ closeModal }) => {
     }
   };
 
+  // 이미지 삭제요청
+  const onDeleteProfileImage = () => {
+    setModifyInput({
+      ...modifyInput,
+      profileImage: null,
+    })
+  }
+
   /* api 요청을 보낼 함수 */
   // 정보수정 요청
   const modifyInfo = async () => {
@@ -96,6 +104,7 @@ const MyPageContainer = ({ closeModal }) => {
           modifyInfo={modifyInfo}
           modifyInput={modifyInput}
           onChangeModify={onChangeModify}
+          onDeleteProfileImage={onDeleteProfileImage}
           setType={setType}
         />
       )}

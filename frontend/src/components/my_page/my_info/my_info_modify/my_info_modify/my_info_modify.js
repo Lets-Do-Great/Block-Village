@@ -3,7 +3,7 @@ import MyInfoModifyForm from '../my_info_modify_form/my_info_modify_form';
 import styles from './my_info_modify.module.css';
 
 const MyInfoModify = ({ modifyInfo, modifyInput, 
-                    onChangeModify, setType}) => {
+                    onChangeModify, setType, onDeleteProfileImage}) => {
   // 비밀번호 일치하는지 확인하는 데이터
   const [PWConfirm, setPWConfirm] = useState(true);
 
@@ -23,6 +23,7 @@ const MyInfoModify = ({ modifyInfo, modifyInput,
     <MyInfoModifyForm
       modifyInput={modifyInput}
       onChangeModify={onChangeModify}
+      onDeleteProfileImage={onDeleteProfileImage}
       setPWConfirm={setPWConfirm}/>
     <div className={styles.btn_my_info_form}>
       <button
