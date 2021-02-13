@@ -5,7 +5,8 @@ import { FaRegSave } from 'react-icons/fa';
 import { TiShoppingCart } from 'react-icons/ti';
 import { useHistory } from 'react-router-dom';
 
-const MissionCreateNavbar = ({ modal, type, onChangeModal, statusModal }) => {
+const MissionCreateNavbar = ({ modal, type, onChangeModal, 
+                            statusModal, onChangeImage}) => {
   const history = useHistory();
 
   const onoffModal = () => {
@@ -36,8 +37,8 @@ const MissionCreateNavbar = ({ modal, type, onChangeModal, statusModal }) => {
       <div>
         <input
           type="file" 
-          name="playgroundImage"
-          // onChange={}
+          name="imageUrl"
+          onChange={onChangeImage}
           />
       </div>
     </header>

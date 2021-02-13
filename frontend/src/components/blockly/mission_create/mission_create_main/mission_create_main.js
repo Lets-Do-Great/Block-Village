@@ -17,7 +17,8 @@ import Blockly from 'blockly';
 import MissionCreateNavbar from '../mission_create_navbar/mission_create_navbar';
 import MissionCreatePlayground from '../mission_create_playground/mission_create_playground';
 
-const MissionCreateMain = ({ formInfo, myBlocksInfo, onChangeModal, onChangeXml, onChangeStep }) => {
+const MissionCreateMain = ({ formInfo, myBlocksInfo, onChangeModal, 
+                          onChangeXml, onChangeStep, onChangeImage }) => {
   const [moveStep, setMoveStep] = useState([]);
   const { 
     xmlCode, 
@@ -131,6 +132,7 @@ const MissionCreateMain = ({ formInfo, myBlocksInfo, onChangeModal, onChangeXml,
         type={type}
         statusModal={statusModal} 
         onChangeModal={onChangeModalMain} 
+        onChangeImage={onChangeImage}
       />
       <div className={styles.container}>
         {modal && 
