@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
         @ApiResponse(code = 404, message = "Not Found", response = AnswerResponse.class),
         @ApiResponse(code = 500, message = "Failure", response = AnswerResponse.class)})
 
-@CrossOrigin(origins = {"https://localhost:3000"})
+//@CrossOrigin(origins = {"https://localhost:3000"})
 @RestController
 @RequestMapping("/answer")
 public class AnswerController {

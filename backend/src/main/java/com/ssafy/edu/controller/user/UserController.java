@@ -21,7 +21,7 @@ import java.io.IOException;
         @ApiResponse(code = 404, message = "Not Found", response = UserResponse.class),
         @ApiResponse(code = 500, message = "Failure", response = UserResponse.class)})
 
-@CrossOrigin(origins = {"https://localhost:3000"})
+//@CrossOrigin(origins = {"https://localhost:3000"})
 @Controller
 @RequestMapping("users")
 public class UserController {
