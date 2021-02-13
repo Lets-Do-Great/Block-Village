@@ -10,13 +10,22 @@ const MyBlockCategory = ({ myBlockList, closeModal }) => {
     const [ category, setCategory ] = useState(0);
     const [ categoryBlockList, setCategoryBlockList ] = useState([]);
 
+    useEffect(() => {
+        console.log(categoryBlockList);
+    }, [categoryBlockList]);
+
     // 카테고리 이름 배열
     const categoryList = [ '판단', '움직임', '흐름', '계산', '그리기', '함수'];
 
     // 현재 보여줄 카테고리에 해당하는 리스트 업데이트 함수
     const updateList = (n) => {
-        const newList = myBlockList.filter( (myBlock) => {
-            return myBlock.category === categoryList[n];
+        const newList = [];
+        myBlockList.filter( (myBlock) => {
+            if(myBlock.name === categoryList[n]){
+                newList.push(myBlock.blocks);
+            }
+            // 승범쓰 여기 적어주세욤 ㅎㅎㅎ 어케 들어오는지 모르겟네에
+            // return myBlock.name === categoryList[n];
         });
         setCategoryBlockList(newList);
     }

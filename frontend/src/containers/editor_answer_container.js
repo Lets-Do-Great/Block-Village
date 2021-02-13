@@ -51,7 +51,6 @@ const EditorAnswerContainer = () => {
         missionId: selectedMission.id,
         difficulty: useDifficulty,
       }))
-      onSetTodoMission();
     } catch(e) {
       console.log(e);
     }
@@ -71,6 +70,7 @@ const EditorAnswerContainer = () => {
         startPosisionY: selectedMission.startPosisionY,
       }));
       onSetDifficultyMission();
+      onSetTodoMission();
     } catch(e) {
       console.log(e);
     }

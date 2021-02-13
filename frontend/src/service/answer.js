@@ -12,6 +12,7 @@ export const getMyAnswerList = ({ email }) => {
 export const setAnswer = ({ email, missionId, title,
                  content, javascriptCode, xmlCode, 
                  startPositionX, startPositionY }) => {
+                     console.log("여기 아놈?");
     return client({
        url: `answer/${email}`,
        method: 'post',
