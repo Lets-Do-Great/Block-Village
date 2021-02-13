@@ -23,7 +23,7 @@ import java.io.IOException;
         @ApiResponse(code = 404, message = "Not Found", response = ProjectResponse.class),
         @ApiResponse(code = 500, message = "Failure", response = ProjectResponse.class)})
 
-@CrossOrigin(origins = {"https://localhost:3000"})
+//@CrossOrigin(origins = {"https://localhost:3000"})
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
