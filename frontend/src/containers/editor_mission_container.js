@@ -10,12 +10,19 @@ const EditorMissionContainer = ( { type }) => {
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
   const dispatch = useDispatch();
+  const [imageUrl, setImageUrl] = useState('');
+
+  useEffect(() => {
+    setBackgroundImage();
+  }, [selectedMission.id]);
   
   const onSetMission = async (e) => {
     const newXml = e.xmlCode.replace(/"/gi, '\\"');
 
     try {
       console.log("미션 세팅 요청 시작");
+      setImageUrl(e.imageUrl);
+
       await dispatch(MissionAction.setMission({
         title: e.title,
         content: e.content,
@@ -31,18 +38,18 @@ const EditorMissionContainer = ( { type }) => {
       console.log(e);
     } finally {
       console.log("미션 세팅 요청 끝");
-      setBackgroundImage(e);
+      console.log(selectedMission);
     }
   };
 
-  const setBackgroundImage = async (e) => {
+  const setBackgroundImage = async () => {
     try {
       console.log(selectedMission);
       console.log("이미지 요청 시작");
       await dispatch(MissionAction.setBackgroundImage({
         email: userInfo.email,
         missionId: selectedMission.id,
-        backgroundImage: e.imageUrl,
+        backgroundImage: imageUrl,
       }));
       console.log("이미지 요청 끝");
     }catch(e) {

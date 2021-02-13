@@ -215,6 +215,7 @@ export default applyPenders(missionReducer, [
 
             if(response.status === 200){
                 if(response.data.status){
+                    console.log("여기는 모듈 ", response.data.data);
                     return updateObject(state, {
                         ...state,
                         selectedMission: response.data.data,
