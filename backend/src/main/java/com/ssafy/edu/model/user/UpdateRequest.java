@@ -20,6 +20,9 @@ public class UpdateRequest {
     MultipartFile profileImage;
 
     @ApiModelProperty(required = false)
+    String change;
+
+    @ApiModelProperty(required = false)
     String prevPassword;
 
     @ApiModelProperty(required = false)

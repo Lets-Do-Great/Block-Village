@@ -153,12 +153,14 @@ public class UserServiceImpl implements UserService {
             User user = userOptional.get();
             user.setNickname(updateRequest.getNickname());
             user.setIntroduction(updateRequest.getIntroduction());
-            if (!"".equals(imagePath)) {
-                user.setFileName(imagePath);
-                user.setProfileImage("https://" + s3Service.CLOUD_FRONT_DOMAIN_NAME + "/profile/" + imagePath);
-            }else {
+
+            // 기존 이미지 삭제
+            if(imagePath==null){
                 user.setFileName("");
                 user.setProfileImage("");
+            }else if(!"".equals(imagePath)){ // 새로운 이미지 업로드
+                user.setFileName(imagePath);
+                user.setProfileImage("https://" + s3Service.CLOUD_FRONT_DOMAIN_NAME + "/profile/" + imagePath);
             }
 
             if (!"".equals(updateRequest.getPrevPassword())) {
