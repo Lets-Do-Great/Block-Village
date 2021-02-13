@@ -57,8 +57,11 @@ public class UserController {
     @PutMapping
     @ResponseBody
     public ResponseEntity<UserResponse> updateUser(UpdateRequest updateRequest) throws IOException {
-        String imagePath = s3Service.upload(updateRequest.getProfileImage(), "profile");
-        return userService.updateUser(updateRequest, updateRequest.getEmail(), imagePath);
+        if(!"".equals(updateRequest.getProfileImage().getOriginalFilename())){
+            String imagePath = s3Service.upload(updateRequest.getProfileImage(), "profile");
+            return userService.updateUser(updateRequest, updateRequest.getEmail(), imagePath);
+        }
+        return userService.updateUser(updateRequest, updateRequest.getEmail(), "");
     }
 
     @ApiOperation(value = "회원 탈퇴", authorizations = { @Authorization(value="jwtToken") })
