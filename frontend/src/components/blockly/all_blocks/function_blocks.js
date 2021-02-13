@@ -16,7 +16,7 @@ Blockly.Blocks['variable'] = {
 };
 Blockly.JavaScript['variable'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = 'my_var;';
+  var code = 'my_var';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };

@@ -70,6 +70,14 @@ const MissionCreateSubmain = ({ onSetMission }) => {
     setFormInfo(event)
   };
 
+  const onChangeDifficulty = (event) => {
+    console.log(event);
+    setFormInfo({
+      ...formInfo,
+      difficulty: event
+    })
+  };
+
   return (
     <div className={styles.body}>
       {TCmodal && 
@@ -79,6 +87,7 @@ const MissionCreateSubmain = ({ onSetMission }) => {
           title={formInfo.title}
           onChangeTC={onChangeTC}
           updateState={updateState}
+          onChangeDifficulty={onChangeDifficulty}
         />
       }
       <MissionCreateMain 

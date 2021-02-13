@@ -56,7 +56,9 @@ const BlockCategory = ({ categoryStatus, onChangeSelectedCategory }) =>{
         ref={cata_judgement}
         onClick={() => onChangeSelectedCategory('판단')}
         className={styles.cata__judgement}
-      ><div>판  단</div></div>
+      >
+        <div>판  단</div>
+      </div>
 
       <div 
         ref={cata_movement}

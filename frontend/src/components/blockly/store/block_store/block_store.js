@@ -9,7 +9,7 @@ import BlockMenu from '../block_menu/block_menu';
 import StoreNavbar from '../store_navbar/store_navbar';
 import styles from './block_store.module.css'
 
-const BlockStore = ({ onBuyBlocks, usermil }) => {
+const BlockStore = ({ allBlcoksInfo, onBuyBlocks, usermil }) => {
   const [billList, setBillList] = useState([]);
   
   const buyBlocks = () => {
@@ -26,19 +26,12 @@ const BlockStore = ({ onBuyBlocks, usermil }) => {
 
     setBillList([])
   };
-    
-  //==== 아래 데이터는 allblock 불러오는 예제 데이터 나중에 바꿔야함
-  const allBlcoksInfo = useSelector(state => state.block.allBlcoksInfo);
-  useEffect(() => {
-    setSelectedCategory(allBlcoksInfo["판단"])
-  }, [])
-  //=========================================================
 
   const [categoryStatus, setCategoryStatus] = useState([
     true, false, false, false, false, false,
   ]);
 
-  const [selectedCategory, setSelectedCategory] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState(allBlcoksInfo["판단"])
 
   const onChangeSelectedCategory = (name) => {
     setSelectedCategory(allBlcoksInfo[`${name}`])

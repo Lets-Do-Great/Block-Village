@@ -20,7 +20,17 @@
   transform: translate(-50%, -50%);
   z-index: 1001;
 
+  animation: successMoving 0.5s linear both;
   /* padding: 2em 2em; */
+}
+
+@keyframes successMoving {
+  0% {
+    transform: translate(-50%, -100%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
 }
 
 .container {

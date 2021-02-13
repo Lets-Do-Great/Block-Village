@@ -7,14 +7,15 @@
 
 .dumy1 {
   width: 100%;
-  height: 15%;
+  height: 3rem;
 }
 
 .cata__judgement {
   width: 100%;
-  height: 10%;
-  /* text-align: center;
-  vertical-align: text-bottom; */
+  height: 4rem;
+  text-align: center;
+  position: relative;
+  /* vertical-align: text-bottom; */
 }
 
 .cata__judgement:hover {
@@ -23,16 +24,21 @@
 }
 
 .cata__judgement > div {
-  padding: 1em 0.5em;
+  /* padding: 1em 0.5em;
   padding-left: 3em;
   font-size: 1.1rem;
   font-weight: 550;
-  color: #fff;
+  color: #fff; */
+  text-align: center;
+  display: inline-block;
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
 }
 
 .cata__movement {
   width: 100%;
-  height: 10%;
+  height: 4rem;
 }
 
 .cata__movement:hover {
@@ -50,7 +56,7 @@
 
 .cata__flow {
   width: 100%;
-  height: 10%;
+  height: 4rem;
 }
 
 .cata__flow:hover {
@@ -68,7 +74,7 @@
 
 .cata__calculation {
   width: 100%;
-  height: 10%;
+  height: 4rem;
 }
 
 .cata__calculation:hover {
@@ -86,7 +92,7 @@
 
 .cata__drawing {
   width: 100%;
-  height: 10%;
+  height: 4rem;
 }
 
 .cata__drawing:hover {
@@ -104,7 +110,7 @@
 
 .cata__function {
   width: 100%;
-  height: 10%;
+  height: 4rem;
 }
 
 .cata__function:hover {
