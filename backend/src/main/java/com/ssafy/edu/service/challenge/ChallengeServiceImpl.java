@@ -56,8 +56,9 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .build();
                     Date todate_date = formatt.parse(todate);
                     Date end_date = formatt.parse(ch.getEndDate());
+                    Date start_date = formatt.parse(ch.getStartDate());
 
-                    if(todate_date.getTime() > end_date.getTime()){
+                    if(todate_date.getTime() > end_date.getTime() || start_date.getTime() > todate_date.getTime()){
                         tmp_form.setTodo("disable");
                     }
 
