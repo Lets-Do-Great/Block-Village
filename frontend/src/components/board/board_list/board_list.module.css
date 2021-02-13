@@ -1,0 +1,95 @@
+.board_list{
+  display: block;
+  width: 90%;
+  height: 90%;
+  margin: 0 auto;
+  clear: both;
+}
+
+.board_list_body {
+  display: inline-block;
+  width: 100%;
+  border-top: 2px solid darkgray;
+}
+
+.board_header{
+  display: block;
+  width: 100%;
+}
+  
+.board_body {
+  display: inline-block;
+  width: 100%;
+  height: 55px;
+  display: inline-block;
+  border-top: 2px solid darkgray;
+  position: static;
+}
+
+.board_header_no{
+  display: inline-block;
+  width: 10%;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  line-height: 55px;
+}
+
+.board_header_title{
+  display: inline-block;
+  width: 50%;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  line-height: 55px;
+}
+
+.board_header_date{
+  display: inline-block;
+  width: 27%;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  line-height: 55px;
+}
+
+.board_header_read_cnt{
+  display: inline-block;
+  width: 13%;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  line-height: 55px;
+}
+
+.board_no{
+  display: inline-block;
+  width: 10%;
+  font-size: 20px;
+  text-align: center;
+  line-height: 55px;
+}
+
+.board_title{
+  display: inline-block;
+  width: 50%;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.board_date{
+  display: inline-block;
+  width: 27%;
+  font-size: 20px;
+  text-align: center;
+}
+
+.board_read_cnt{
+  display: inline-block;
+  width: 13%;
+  font-size: 20px;
+  text-align: center;
+}
+
+  

@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private JwtServiceImpl jwtServiceImpl;
-    
+
     /* 로그인 - JWT 토큰 발급 */
     @Override
     public ResponseEntity<UserResponse> login(String email, String password){
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
     }
-    
+
     /* 사용자 삭제 */
     @Override
     public ResponseEntity<UserResponse> deleteUser(String email){
@@ -82,7 +82,9 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> userOptional = userJpaRepository.findByEmail(email);
         if(userOptional.isPresent()){
-            userJpaRepository.delete(userOptional.get());
+            // update로 변경
+            userOptional.get().setEmail("나무늘보");
+            userJpaRepository.save(userOptional.get());
             result.status = true;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
@@ -136,68 +138,67 @@ public class UserServiceImpl implements UserService {
         }
 
     }
-    
+
     /* 회원정보 수정 */
     @Override
-    public ResponseEntity<UserResponse> updateUser(UpdateRequest updateRequest, String email){
+    public ResponseEntity<UserResponse> updateUser(UpdateRequest updateRequest, String email, String imagePath) {
 
         ResponseEntity response;
         UserResponse result = new UserResponse();
 
         Optional<User> userOptional = userJpaRepository.findByEmail(email);
 
-        if(!userOptional.isPresent()){
-            result.status = false;
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
-        }
-
-        User user = userOptional.get();
-        user.setNickname(updateRequest.getNickname());
-        user.setIntroduction(updateRequest.getIntroduction());
-
-        if(!"".equals(updateRequest.getPrevPassword())){
-            boolean match = encryptService.isMatch(updateRequest.getPrevPassword(), userOptional.get().getPassword());
-            if(match){
-                user.setPassword(encryptService.encrypt(updateRequest.getNewPassword()));
-            }else {
-                result.status = false;
-                return new ResponseEntity<>(result, HttpStatus.OK);
-            }
-        }
-
-        User save = userJpaRepository.save(user);
-
-        if(save != null){
-            result.status = true;
-            result.data = save;
-            response = new ResponseEntity<>(result, HttpStatus.OK);
-        }else {
-            result.status = false;
-            response = new ResponseEntity<>(result, HttpStatus.OK);
-        }
-        return response;
-
-    }
-
-    public void updateFile(String email, String imagePath){
-
-        ResponseEntity response;
-        UserResponse result = new UserResponse();
-
-        Optional<User> userOptional = userJpaRepository.findByEmail(email);
-
-        if(userOptional.isPresent()){
+        if (userOptional.isPresent()) {
 
             User user = userOptional.get();
-            user.setFileName(imagePath);
-            user.setProfileImage("https://"+s3Service.CLOUD_FRONT_DOMAIN_NAME+ "/profile/" + imagePath);
+            user.setNickname(updateRequest.getNickname());
+            user.setIntroduction(updateRequest.getIntroduction());
+            if (!"".equals(imagePath)) {
+                user.setFileName(imagePath);
+                user.setProfileImage("https://" + s3Service.CLOUD_FRONT_DOMAIN_NAME + "/profile/" + imagePath);
+            }else {
+                user.setFileName("");
+                user.setProfileImage("");
+            }
 
+            if (!"".equals(updateRequest.getPrevPassword())) {
+                boolean match = encryptService.isMatch(updateRequest.getPrevPassword(), userOptional.get().getPassword());
+                if (match) {
+                    user.setPassword(encryptService.encrypt(updateRequest.getNewPassword()));
+                } else {
+                    result.status = false;
+                    return new ResponseEntity<>(result, HttpStatus.OK);
+                }
+            }
             User save = userJpaRepository.save(user);
+
+            LoginResponse loginResponse = LoginResponse.builder()
+                    .nickname(user.getNickname())
+                    .introduction(user.getIntroduction())
+                    .profileImage(user.getProfileImage())
+                    .mileage(user.getMileage())
+                    .admin(user.isAdmin())
+                    .email(user.getEmail())
+                    .build();
+
+            String token = jwtServiceImpl.createToken(loginResponse); // 수정된 정보로 새로운 토큰 발급
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("userInfo", loginResponse);
+            map.put("token", token);
+
+            result.status = true;
+            result.data = map;
+
+            return new ResponseEntity<>(result, HttpStatus.OK);
 
         }
 
+        result.status = false;
+        return new ResponseEntity<>(result, HttpStatus.OK);
+
     }
-    
+
     /* 이메일 인증 */
     @Override
     public void emailAuth(String email, String key) {
@@ -215,7 +216,7 @@ public class UserServiceImpl implements UserService {
         }
 
     }
-    
+
     /* 임시 비밀번호 발급 */
     @Override
     public ResponseEntity<UserResponse> tempPassword(String email) throws MessagingException {
@@ -243,6 +244,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /* 마일리지 획득 & 사용 */
     @Override
     public ResponseEntity<UserResponse> mileage(MileageRequest mileageRequest){
         UserResponse result= new UserResponse();
