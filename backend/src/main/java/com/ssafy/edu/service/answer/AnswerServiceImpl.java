@@ -335,27 +335,60 @@ public class AnswerServiceImpl implements AnswerService {
                     .favorite(answerFavoriteRequest.isFavorite())
                     .build();
 
-            answerFavoriteJapRepository.save(answerFavorite);
+            AnswerFavorite answerFavoriteResult =  answerFavoriteJapRepository.save(answerFavorite);
 
             List<AnswerFavorite> answerFavoriteList = answerFavoriteJapRepository.findByAnswerId(answerOptional.get().getId());
             answerOptional.get().setFavorite((int) answerFavoriteList.stream().filter(a -> a.isFavorite()).count());
 
-            answerJapRepository.save(answerOptional.get());
+            Answer answerResult = answerJapRepository.save(answerOptional.get());
+
+            findOneModelName findOneModelName  = new findOneModelName().builder()
+                    .id(answerResult.getId())
+                    .email(answerResult.getUser().getEmail())
+                    .title(answerResult.getTitle())
+                    .missionId(answerResult.getMission().getId())
+                    .nickname(answerResult.getUser().getNickname())
+                    .javascriptCode(answerResult.getJavascriptCode())
+                    .xmlCode(answerResult.getXmlCode())
+                    .content(answerResult.getContent())
+                    .readCnt(answerResult.getView())
+                    .favorite(answerFavoriteResult.isFavorite())
+                    .likeCnt(answerResult.getFavorite())
+                    .commentCnt(answerResult.getAnswerCommentList().size())
+                    .build();
 
             result.status = true;
+            result.data = findOneModelName;
             response = new ResponseEntity<>(result, HttpStatus.OK);
 
         } else if (answerFavoriteOptional.isPresent()) {
             AnswerFavorite answerFavorite = answerFavoriteOptional.get();
             answerFavorite.setFavorite(answerFavoriteRequest.isFavorite());
 
-            answerFavoriteJapRepository.save(answerFavorite);
+            AnswerFavorite answerFavoriteResult = answerFavoriteJapRepository.save(answerFavorite);
 
             List<AnswerFavorite> answerFavoriteList = answerFavoriteJapRepository.findByAnswerId(answerOptional.get().getId());
             answerOptional.get().setFavorite((int) answerFavoriteList.stream().filter(a -> a.isFavorite()).count());
 
-            answerJapRepository.save(answerOptional.get());
+            Answer answerResult = answerJapRepository.save(answerOptional.get());
+
+            findOneModelName findOneModelName  = new findOneModelName().builder()
+                    .id(answerResult.getId())
+                    .email(answerResult.getUser().getEmail())
+                    .title(answerResult.getTitle())
+                    .missionId(answerResult.getMission().getId())
+                    .nickname(answerResult.getUser().getNickname())
+                    .javascriptCode(answerResult.getJavascriptCode())
+                    .xmlCode(answerResult.getXmlCode())
+                    .content(answerResult.getContent())
+                    .readCnt(answerResult.getView())
+                    .favorite(answerFavoriteResult.isFavorite())
+                    .likeCnt(answerResult.getFavorite())
+                    .commentCnt(answerResult.getAnswerCommentList().size())
+                    .build();
+
             result.status = true;
+            result.data = findOneModelName;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
