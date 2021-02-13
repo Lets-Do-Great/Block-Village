@@ -108,11 +108,13 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
                         closeModal={closeModifyModal}/> }
             </>)
             : <>{ !todo && 
-                <button onClick={onParticipateMission} 
+                <button 
+                    onClick={onParticipateMission} 
                     className={styles.participate_button}>미션 참여하기</button> }
               { todo === 'todo' &&
                 <button 
-                    className={styles.participating_button} onClick={goToAnswer}>미션 참여중</button> }
+                    className={styles.participating_button} 
+                    onClick={goToAnswer}>미션 참여중</button> }
               { todo === 'done' &&
                 <button
                     onClick={goToAnswerList}
