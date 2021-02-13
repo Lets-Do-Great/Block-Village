@@ -11,7 +11,7 @@ import javax.mail.MessagingException;
 public interface UserService {
 
     public ResponseEntity<UserResponse> login(String email, String password);
-    public ResponseEntity<UserResponse> updateUser(UpdateRequest updateRequest, String email);
+    public ResponseEntity<UserResponse> updateUser(UpdateRequest updateRequest, String email,String imagePath);
     public ResponseEntity<UserResponse> deleteUser(String email);
     public void emailAuth(String email, String key);
     public ResponseEntity<UserResponse> tempPassword(String email) throws MessagingException;

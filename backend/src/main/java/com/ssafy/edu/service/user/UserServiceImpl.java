@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private JwtServiceImpl jwtServiceImpl;
-    
+
     /* 로그인 - JWT 토큰 발급 */
     @Override
     public ResponseEntity<UserResponse> login(String email, String password){
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
     }
-    
+
     /* 사용자 삭제 */
     @Override
     public ResponseEntity<UserResponse> deleteUser(String email){
@@ -82,7 +82,9 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> userOptional = userJpaRepository.findByEmail(email);
         if(userOptional.isPresent()){
-            userJpaRepository.delete(userOptional.get());
+            // update로 변경
+            userOptional.get().setEmail("나무늘보");
+            userJpaRepository.save(userOptional.get());
             result.status = true;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
@@ -136,10 +138,10 @@ public class UserServiceImpl implements UserService {
         }
 
     }
-    
+
     /* 회원정보 수정 */
     @Override
-    public ResponseEntity<UserResponse> updateUser(UpdateRequest updateRequest, String email){
+    public ResponseEntity<UserResponse> updateUser(UpdateRequest updateRequest, String email, String imagePath){
 
         ResponseEntity response;
         UserResponse result = new UserResponse();
@@ -154,6 +156,8 @@ public class UserServiceImpl implements UserService {
         User user = userOptional.get();
         user.setNickname(updateRequest.getNickname());
         user.setIntroduction(updateRequest.getIntroduction());
+        user.setFileName(imagePath);
+        user.setProfileImage("https://"+s3Service.CLOUD_FRONT_DOMAIN_NAME+ "/profile/" + imagePath);
 
         if(!"".equals(updateRequest.getPrevPassword())){
             boolean match = encryptService.isMatch(updateRequest.getPrevPassword(), userOptional.get().getPassword());
@@ -164,12 +168,20 @@ public class UserServiceImpl implements UserService {
                 return new ResponseEntity<>(result, HttpStatus.OK);
             }
         }
-
         User save = userJpaRepository.save(user);
+
+        LoginResponse loginResponse = LoginResponse.builder()
+                .nickname(user.getNickname())
+                .introduction(user.getIntroduction())
+                .profileImage(user.getProfileImage())
+                .mileage(user.getMileage())
+                .admin(user.isAdmin())
+                .email(user.getEmail())
+                .build();
 
         if(save != null){
             result.status = true;
-            result.data = save;
+            result.data = loginResponse;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         }else {
             result.status = false;
@@ -179,25 +191,6 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public void updateFile(String email, String imagePath){
-
-        ResponseEntity response;
-        UserResponse result = new UserResponse();
-
-        Optional<User> userOptional = userJpaRepository.findByEmail(email);
-
-        if(userOptional.isPresent()){
-
-            User user = userOptional.get();
-            user.setFileName(imagePath);
-            user.setProfileImage("https://"+s3Service.CLOUD_FRONT_DOMAIN_NAME+ "/profile/" + imagePath);
-
-            User save = userJpaRepository.save(user);
-
-        }
-
-    }
-    
     /* 이메일 인증 */
     @Override
     public void emailAuth(String email, String key) {
@@ -215,7 +208,7 @@ public class UserServiceImpl implements UserService {
         }
 
     }
-    
+
     /* 임시 비밀번호 발급 */
     @Override
     public ResponseEntity<UserResponse> tempPassword(String email) throws MessagingException {
@@ -243,6 +236,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /* 마일리지 획득 & 사용 */
     @Override
     public ResponseEntity<UserResponse> mileage(MileageRequest mileageRequest){
         UserResponse result= new UserResponse();
