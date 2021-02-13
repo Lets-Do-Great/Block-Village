@@ -25,7 +25,7 @@ export const buyBlocks = createAction(
 
 
 const initialState = {
-  allBlcoksInfo: {
+  allBlocksInfo: {
     '시작':  [],
     '판단':  [],
     '움직임':  [],
@@ -39,45 +39,27 @@ const initialState = {
     {
       name: '시작',
       colour: '#C30D23',
-      blocks: [
-        // {type: 'start_button',},
-        // {type: 'end_button',},
-      ],
+      blocks: [],
     },
     {
       name: '판단',
       colour: '#FFA31D',
-      blocks: [
-        {type: 'number'},
-        {type: 'block_judgment_equals',},
-        {type: 'block_judgment_strictinequality_left',},
-        {type: 'block_judgment_strictinequality_right',},
-      ],
+      blocks: [],
     },
     {
       name: '움직임',
       colour: '#8FC31F',
-      blocks: [
-        {type: 'move_forward_1'},
-        {type: 'turn_right'},
-        {type: 'turn_left'},
-      ],
+      blocks: [],
     },
     {
       name: '흐름',
       colour: '#55CFFF',
-      blocks: [
-        {type: 'input',},
-      ]
+      blocks: []
     },
     {
       name: '계산',
       colour: '#1060FF',
-      blocks: [
-        {type: 'number'},
-        {type: 'addition'},
-        {type: 'subtraction'},
-      ]
+      blocks: []
     },
     {
       name: '그리기',
@@ -135,7 +117,7 @@ export default applyPenders(blcokReducer, [
         if(response.data.status){
           return updateObject(state, {
             ...state,
-            allBlcoksInfo: response.data.data,
+            allBlocksInfo: response.data.data,
           });
         } else{
             alert("모든 블럭을 불러오는데 문제가 발생했습니다.");

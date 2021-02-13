@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState }  from 'react';
 import BlockDetail from '../block_detail/block_detail';
 import styles from './block_menu.module.css'
 
-const BlockMenu = ({ selectedCategory, addBillList }) => {
+const BlockMenu = ({ addBillList, allBlocksInfo, category }) => {
+  const [selectedCategory, setSelectedCategory] = useState(allBlocksInfo[`${category}`])
+  useEffect(() => { 
+    setSelectedCategory(allBlocksInfo[`${category}`])
+    console.log(allBlocksInfo);
+  }, [allBlocksInfo, category]);
+
   return (
     <div className={styles.body}>
       {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import styles from './main.module.css'
 
@@ -8,10 +8,13 @@ import Nav from '../../nav/nav';
 import ScrollContainer from 'react-indiana-drag-scroll'
 
 import * as UserAction from '../../../modules/user';
-import { useDispatch } from 'react-redux';
+import * as BlockAction from '../../../modules/block';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const Main = (props) => {
+  const userInfo = useSelector(state => state.user.userInfo);
+
   const history = useHistory();
   const dispatch = useDispatch();
   
@@ -116,7 +119,7 @@ const Main = (props) => {
   }
   const goservice = () => history.push("/main/service_introduction");
   const goboard = () => history.push("/main/board");
-  const gostore = () => history.push("/main/block_store");
+  const gostore = () => { history.push("/main/block_store"); }
   //=======================================================
 
  

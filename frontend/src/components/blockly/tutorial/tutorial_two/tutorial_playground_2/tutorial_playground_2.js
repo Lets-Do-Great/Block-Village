@@ -39,9 +39,29 @@ const TutorialPlayground2 = ({ javascript_code, onChangeModalSuccess, onChangeMo
     let x = image_x;
     let y = image_y;
 
+    let dir_x = 0;
+    let dir_y = 0;
+
     const timer = ms => new Promise(res => setTimeout(res, ms))
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
+
+        const new_dir_x = move[i][0] - dir_x;
+        const new_dir_y = move[i][1] - dir_y;
+        if (new_dir_x > 0 && new_dir_y == 0) {
+          item.setAttribute('src', `/images/character/character_right.png`)
+        } else if (new_dir_x < 0 && new_dir_y == 0) {
+          item.setAttribute('src', `/images/character/character_left.png`)
+        } else if (new_dir_x == 0 && new_dir_y > 0) {
+          item.setAttribute('src', `/images/character/character_back.png`)
+        } else {
+          item.setAttribute('src', `/images/character/character_front.png`)
+        }
+        
+        dir_x = move[i][0];
+        dir_y = move[i][1];
+        await timer(500);
+
         
         const new_move_x = Math.round(move[i][0])
         const new_move_y = Math.round(move[i][1])
@@ -79,7 +99,7 @@ const TutorialPlayground2 = ({ javascript_code, onChangeModalSuccess, onChangeMo
     const item = fieldchar.current; 
     
     item.setAttribute('className', `image`)
-    item.setAttribute('src', `/images/bug.png`)
+    item.setAttribute('src', `/images/character/character_right.png`)
     item.style.position = 'absolute';
 
     setImage_x((char_location[1]) * 70 + 35)

@@ -6,7 +6,8 @@ import * as BlockAction from '../modules/block';
 const BlockStoreContainer = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user.userInfo);
-  const allBlcoksInfo = useSelector(state => state.block.allBlcoksInfo);
+  const allBlocksInfo = useSelector(state => state.block.allBlocksInfo);
+  const [modal, setModal] = useState(false);
 
   const getAllBlocks = async () => {
     try {
@@ -18,27 +19,33 @@ const BlockStoreContainer = () => {
    }
   }
 
-  const onBuyBlocks = async (e) => {
+  const onBuyBlocks = async (buyList) => {
     try {
       await dispatch(BlockAction.buyBlocks({
         email: userInfo.email,
-        blockId: e,
+        blockId: buyList,
       }));
+      getAllBlocks();
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getAllBlocks();
-  }, [allBlcoksInfo])
+    dispatch(BlockAction.getAllBlocks({
+      email: userInfo.email
+    }))
+  }, [])
+
 
   return (
     <>
       <BlockStore 
-        allBlcoksInfo={allBlcoksInfo}
+        allBlocksInfo={allBlocksInfo}
         onBuyBlocks={onBuyBlocks}
         usermil={userInfo.mileage}
+        getAllBlocks={getAllBlocks}
+        setModal={setModal}
       />
     </>
   );

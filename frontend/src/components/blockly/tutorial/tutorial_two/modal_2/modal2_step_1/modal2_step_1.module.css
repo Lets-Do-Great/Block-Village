@@ -8,14 +8,16 @@
 }
 
 .body {
-  width: 400px;
-  height: 300px;
-  background-color: white;
+  width: 900px;
+  height: 401px;
+  /* background-color: white;
   border-radius: 5px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.4); */
+  background: 100%/100%
+    url(../../../../../../images/tutorial_2/tutorial_modal_2_2.png);
 
   position: absolute;
-  top: 60%;
+  top: 67%;
   left: 40%;
   transform: translate(-50%, -50%);
   z-index: 1001;
@@ -23,10 +25,10 @@
 
 .img {
   position: absolute;
-  left: 205px;
-  top: 215px;
-  width: 263px;
-  height: 119px;
+  left: 190px;
+  top: 200px;
+  width: 325px;
+  height: 136px;
   border-radius: 5px;
   z-index: 1001;
   border: 2px solid red;

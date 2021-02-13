@@ -1,6 +1,6 @@
 .body {
   width: 100%;
-  /* background-color: #e7f1fd; */
+  background-color: #e7f1fd;
 }
 
 .container {
@@ -20,8 +20,7 @@
 }
 
 .about_top {
-  background-color: #5096f5;
-  background-image: url(https://playentry.org/builds/43b2154150c184f4f30023a51dd8cd18.png);
+  background-image: url(../../../images/service_intro/service_main_bg.png);
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: 1920px auto;
@@ -30,7 +29,7 @@
 
 .about_inner {
   position: relative;
-  width: 972px;
+  width: 800px;
   height: 397px;
   margin: 0 auto;
   font-weight: 600;
@@ -45,6 +44,7 @@
   line-height: 37px;
   font-weight: 700;
   margin-bottom: 40px;
+  color: black;
 }
 
 .about_dsc {
@@ -53,18 +53,19 @@
   line-height: 25px;
   margin: 0;
   padding: 0;
+  color: black;
 }
 
 .about_link {
   position: absolute;
   right: 0;
   top: 52px;
-  width: 490px;
+  width: 400px;
   height: 276px;
-  box-shadow: 8px 8px 10px 0 rgb(0 0 0 / 21%);
+  /* box-shadow: 8px 8px 10px 0 rgb(0 0 0 / 21%);
   background-image: url(../../../images/service_img.png);
   background-repeat: no-repeat;
-  background-size: 490px auto;
+  background-size: 490px auto; */
   font-size: 0;
   line-height: 0;
   text-decoration: none;
@@ -92,7 +93,7 @@
   margin-top: 40px;
 }
 
-.head {
+/* .head {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAABOCAYAAABFccTjAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAwlJREFUeNrsmk1O20AUx8fWNA00pRHqosvcAPcGyQ3oomuaVZeIE6ScINl2BV13AUdob+AjsEJVhagLKaQ0xbx//AYlIST+GM/zgidZTqQo88v/fc44nirZ3n++bNKtTVdA1xZdLX49Y7qkxbHYNl07ZtGaTi7te6r+bPbzeK8tA5jFt2k9tf6crlqyMN4vM20RoA/ZsejGmkcA2b5DFwQIGKDdqCvVXPdI+nzfpQtAfKJbDwoAYN7vpYNwIB6RzwMAbKzZiS+dEQJpeETR33zd8CZZYMt0BogPdDtALGy+8FZmQSkg0xBQogzzqwCxEoRjonSIpSAmO1xArFJkkh0ITBfmP1asUCeghO+G4yEIl+0eilVNK2e2SJF+0riUU/MXdNE21HBt84r0kSVFG1ghEK4ZLQk15hXZnYxsvpIDMTMmJispM78/mTFrShxkB4OupPm87wgwbYuC8OZHJGXnQQKUct+TB9ly2VOWgbS0tBzGNdLxkWpmfQIRBalArCYgt/GTa6oJEo7+VQMkGlcgSADy/WZcEddUBeQbXlzdCIN8/fgySgI2rkT6fhFXhO/H4/+y7pmAkHtOECvDUSyuyL17xrfCIKTKId1OoqtYXBHY/nAko8oMCKsSnl3G4orA9tAEXWfQAxBSBZV2AFVcuuixeWSfGnL48yKWBeGy36VmGJ0NY1FFABMiXpBFF9fCoyJnUff8T6yGf4VnVgOD4C1TmVTD87QyZcVM6inewFDMRKeR/dTOtJ1gmA5lU3j6y66rMu9rOJs6VGcGcNWP37GyMfMW2vXyaXVPWXgAbWX7zc/9ANTCWW2jnv2RvNVzAH66sQuFzJ8U0qpUyoHE1N82+m9epXtcX+rJCAHFq0BQl9BGRE8DDATZWzEQ9C6G6KIk+FIQPI7ucZF07xoUv/OkXx0SxCB3ZS0KgUpMVfmYILqFSnxew1kQghMjKOKicK/JC8E9CVvbDo+i7kHQHDH/0st3iyBg2hGEYiVCa2NAngA1tcLqPJLD7muFmFGvOUj72TsBBgDcpCmbklFUXgAAAABJRU5ErkJggg==);
   background-repeat: no-repeat;
   width: 34px;
@@ -113,19 +114,19 @@
   border: 1px solid #5f9ef4;
   border-left: none;
   border-right: none;
-}
+} */
 
 .logo_img {
   margin-top: 5px;
 }
 
-.head_end {
+/* .head_end {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAABOCAYAAABFccTjAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAqhJREFUeNrsmk9u00AYxcfGLSFqwAtUVWzoEXKEcALaBXu66hIQ6prmBNAlK9gXRHoCfAQ4AX9WCFFkWmPSkNZ8bzxjQoiaf7afF37SKHaSpj+9731ja8bOveenifpfgYxQxnscH+62AlWwnMevomQw/PvGhWDhfCgHeB35DDBHMl4KWJg7yN7rKLnsCwDr/1YqHiQqPkvPRT0ZB3k6NRVkXJHARP1EwxmXunkAzQ1iBZAw/gdoR4A+LgriLvqHjRWlNm44eqx6qiNvfZDg75fuyLjCOHXIuLM9b6DdvMLmN5W65TvKu5K506aAQFIiDSNl8+X0rcBsUUD0DzppdtYaGuaNwNyngFjdXNMw0ItZnCkMZAJMmwZiYSQ7tkw+DQRCZqSbNgFDBUGA11sODjviykMaiG1tv6lhngjMJg3ETnpSIuTkKRXEhle0Ja50qCC4WGKgRFSQtERZcNtUEDiC8IoeUEGg69eyrPhUkOZqWiXAUEEwyRmYu1QQ7crVNLR0ENPGPrqHCuK5aYngChXEXoNEt+kgjRVtSZsOYifbCjiiKuWIqkFqkMqDmPWVd1VxJKyAI0k1HDGrlp+oIMOLbJUycCsQ1PBwt8UtTXyWrbnx2hcliQf68IgKYiCw8tijgpz80mXp2WVQlxVS07YH1CneLgyjW2ggcMO0bZd60fsWZdkIaCBYrx+e6055RLsNQDhNNrqTtlNKAcHk9fU0C+gz2o3Rlx8JSgIXtml3aAinlAW5uHQPxy0aIurrw53ROaNUkDGI3tSVgUKCeaI3HcNZIXIHQYuiO8xccWdaOQoBWXZzcWkQXDe+/8w6A7vj+4v8jrcMQJ4b0HODFLUl783SBWU8pODZxzRG/zHjsQ3v8/HEHflAlfwgS61atWrVqlW0/ggwAEUGSMor+Bz6AAAAAElFTkSuQmCC);
   background-repeat: no-repeat;
   width: 34px;
   height: 78px;
   display: inline-block;
-}
+} */
 
 .section {
   padding-top: 50px;
@@ -167,7 +168,8 @@
   display: inline-block;
   text-align: left;
   margin-top: 42px;
-  float: left;
   margin-left: 30px;
+  margin-right: 40px;
   height: 185px;
+  float: left;
 }

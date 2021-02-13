@@ -6,9 +6,7 @@ const ModalStep2 = ({ change_modal_step_2 }) => {
     <>
       <div className={styles.modal_background}/>
       <div className={styles.img} />
-      <div className={styles.body}>
-        <h1>이것은 미션이나 챌린지 이름이에요~~</h1>
-        <button onClick={change_modal_step_2}>다음</button>
+      <div className={styles.body} onClick={change_modal_step_2}>
       </div>
     </>
   )

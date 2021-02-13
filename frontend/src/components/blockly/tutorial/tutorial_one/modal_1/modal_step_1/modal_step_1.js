@@ -6,10 +6,7 @@ const ModalStep1 = ({ change_modal_step_1 }) => {
     <>
       <div className={styles.modal_background}/>
       <div className={styles.img} />
-      <div className={styles.body}>
-        <h1>여기는 튜토리얼의 현재 상황이에욤</h1>
-        <button onClick={change_modal_step_1}>다음</button>
-      </div>
+      <div className={styles.body} onClick={change_modal_step_1}></div>
     </>
   )
 };
