@@ -36,4 +36,10 @@ public class AnswerSignupRequest {
     @ApiModelProperty(required = true)
     @NotNull
     String javascriptCode;
+    @ApiModelProperty(required = true)
+    @NotNull
+    int startPositionX;
+    @ApiModelProperty(required = true)
+    @NotNull
+    int startPositionY;
 }

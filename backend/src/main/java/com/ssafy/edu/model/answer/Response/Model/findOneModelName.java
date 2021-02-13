@@ -18,6 +18,8 @@ public class findOneModelName {
     private String xmlCode;
     private String javascriptCode;
     private String content;
+    private int startPositionX;
+    private int startPositionY;
     private boolean favorite;
     private int likeCnt;
     private int readCnt;
