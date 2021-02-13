@@ -11,7 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +30,13 @@ public class ChallengeServiceImpl implements ChallengeService{
     private ChallengeUsersJpaRepository challengeUsersJpaRepository;
 
     @Override
-    public ResponseEntity<ChallengeResponse> getChallengeList(String email){
+    public ResponseEntity<ChallengeResponse> getChallengeList(String email) throws ParseException {
         ChallengeResponse result = new ChallengeResponse();
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
         List<Challenge> challengeList = challengeJpaRepository.findAllByOrderByIdDesc();
+
+        SimpleDateFormat formatt = new SimpleDateFormat("yyyy-MM-dd");
+        String todate = formatt.format(new Date());
 
         if(!challengeList.isEmpty() && userOpt.isPresent()){
             List<ChallengeForm> challengeFormList = new ArrayList<>();
@@ -48,6 +54,13 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .finish(ch.getFinish())
                             .todo(tmp_challengers.get().getDone())
                             .build();
+                    Date todate_date = formatt.parse(todate);
+                    Date end_date = formatt.parse(ch.getEndDate());
+
+                    if(todate_date.getTime() > end_date.getTime()){
+                        tmp_form.setTodo("disable");
+                    }
+
                     challengeFormList.add(tmp_form);
                 }
                 else{
