@@ -47,6 +47,18 @@ export const setMission = (
     );
 }
 
+// 미션 이미지 제작
+export const setBackgroundImage = ({ email, missionId, backgroundImage }) => {
+    const formData = new FormData();
+    formData.append('file', backgroundImage);
+
+    return client({
+        url: `mission/img/${email}/${missionId}`,
+        method: 'post',
+        data: formData,
+    });
+}
+
 // 미션 수정
 export const modifyMission = (
     { email, missionId, title, content }) => {

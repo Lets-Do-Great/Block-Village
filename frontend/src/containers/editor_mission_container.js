@@ -6,24 +6,9 @@ import * as MissionAction from '../modules/mission';
 import * as BlockAction from '../modules/block';
 
 const EditorMissionContainer = ( { type }) => {
-  const dispatch = useDispatch();
-
-  // const onChangeState = (e) => {
-  //   const [name, value] = e.target;
-
-  //   setCreateInfo({
-  //     ...createInfo,
-  //     [name]: value,
-  //   });
-  // };
-
-
-  useEffect(() => {
-    console.log(selectedMission);
-  }, [selectedMission]);
-  
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
+  const dispatch = useDispatch();
   
   const onSetMission = async (e) => {
     const newXml = e.xmlCode.replace(/"/gi, '\\"');

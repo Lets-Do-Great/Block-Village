@@ -8,55 +8,69 @@ import client from './client';
 
 // 로그인 정보 확인
 export const logIn = ({ email, password }) => {
-    return client({
-        url: `users/do/login`,
-        method: 'post',
-        data: { email, password },
-    });
-}
+  return client({
+    url: `users/do/login`,
+    method: 'post',
+    data: { email, password },
+  });
+};
 
 // 회원 가입 하기
-export const setUserInfo = (
-    { emailId, emailSite, nickname, password }) => {    
-        return client({
-            url: `users/do`,
-            method: 'post',
-            data: { emailId, emailSite, nickname, password },
-        }
-    );
-}
+export const setUserInfo = ({ emailId, emailSite, nickname, password }) => {
+  return client({
+    url: `users/do`,
+    method: 'post',
+    data: { emailId, emailSite, nickname, password },
+  });
+};
 
 // 회원 정보 조회
-export const getUserInfo = ( email, token ) => {
-    return client({
-       url: `users/${email}`,
-       method: 'get', 
-    });
-}
+export const getUserInfo = (email, token) => {
+  return client({
+    url: `users/${email}`,
+    method: 'get',
+  });
+};
 
 // 회원 정보 수정
-export const modifyUserInfo = (
-    { email, nickname, prevPassword, newPassword, introduction }) => {
-        return client({
-            url: `users/${email}`,
-            method: 'put',
-            data: { nickname, prevPassword, newPassword, introduction },
-        }
-    )
-}
+export const modifyUserInfo = ({ email, nickname, profileImage, 
+                                prevPassword, newPassword, introduction,}) => {
+  const formData = new FormData();
+  formData.append('email', email);
+  formData.append('nickname', nickname);
+  formData.append('prevPassword', prevPassword);
+  formData.append('newPassword', newPassword);
+  formData.append('introduction', introduction);
+
+  if(profileImage === null) {
+    console.log("널");
+    formData.append('change', 'delete');
+  }
+  else if(typeof profileImage === 'object'){
+    console.log("오브젝트");
+    formData.append('profileImage', profileImage);
+  }
+
+  return client({
+    url: `users`,
+    method: 'put',
+    data: formData,
+  })
+};
 
 // 회원 탈퇴 하기
-export const deleteUserInfo = ( email ) => {
-    return client({
-       url: `users/${email}`,
-       method: 'delete', 
-    });
-}
+export const deleteUserInfo = (email) => {
+  return client({
+    url: `users/${email}`,
+    method: 'delete',
+  });
+};
 
 // 비밀번호 찾기
-export const findPW = ( email ) => {
-    return client({
-        url: `users/do/${email}`,
-        method: 'post',
-    })
-}
+export const findPW = (email) => {
+  return client({
+    url: `users/do/${email}`,
+    method: 'post',
+  });
+};
+

@@ -9,6 +9,7 @@ const GET_MISSION = 'mission/GET_MISSION';
 const GET_MY_MISSION_LIST = 'mission/GET_MY_MISSION_LIST';
 const GET_MY_TODO_MISSION_LIST = 'mission/GET_MY_TODO_MISSION_LIST';
 const SET_MISSION = 'mission/SET_MISSION';
+const SET_BACKGROUND_IMAGE = 'mission/SET_BACKGROUND_IMAGE';
 const MODIFY_MISSION = 'mission/MODIFY_MISSION';
 const DELETE_MISSION = 'mission/DELETE_MISSION';
 const LIKE_MISSION = 'mission/LIKE_MISSION';
@@ -39,6 +40,11 @@ export const getMyTodoMissionList = createAction(
 export const setMission = createAction(
     SET_MISSION,
     MissionAPI.setMission
+);
+
+export const setBackgroundImage = createAction(
+    SET_BACKGROUND_IMAGE,
+    MissionAPI.setBackgroundImage
 );
 
 export const modifyMission = createAction(
@@ -212,6 +218,33 @@ export default applyPenders(missionReducer, [
                     return updateObject(state, {
                         ...state,
                         selectedMission: response.data.data,
+                    });
+                } else{
+                    alert("미션을 저장하는데 문제가 발생했습니다.");
+                }
+            } else { // 에러 발생
+                alert("미션을 저장하는데 문제가 발생했습니다.");
+                console.log(action.payload.status);
+            }
+            return updateObject(state, state);
+        },
+        onFailure: (state, action) => {
+            return updateObject(state, state);
+        }
+    },
+    {
+        type: SET_BACKGROUND_IMAGE,
+        onSuccess: (state, action) => {
+            const response = action.payload;
+
+            if(response.status === 200){
+                if(response.data.status){
+                    return updateObject(state, {
+                        ...state,
+                        selectedMission: {
+                            ...state.selectedMission,
+                            imageUrl: response.data.data,
+                        }
                     });
                 } else{
                     alert("미션을 저장하는데 문제가 발생했습니다.");
