@@ -30,7 +30,7 @@ public class ChallengeServiceImpl implements ChallengeService{
     public ResponseEntity<ChallengeResponse> getChallengeList(String email){
         ChallengeResponse result = new ChallengeResponse();
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
-        List<Challenge> challengeList = challengeJpaRepository.findAll();
+        List<Challenge> challengeList = challengeJpaRepository.findAllByOrderByIdDesc();
 
         if(!challengeList.isEmpty() && userOpt.isPresent()){
             List<ChallengeForm> challengeFormList = new ArrayList<>();
@@ -76,7 +76,7 @@ public class ChallengeServiceImpl implements ChallengeService{
     public ResponseEntity<ChallengeResponse> getUserChallengeList(String email, String todo) {
         ChallengeResponse result = new ChallengeResponse();
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
-        List<ChallengeUser> challengeList = challengeUsersJpaRepository.findByUserAndDone(userOpt.get(), todo);
+        List<ChallengeUser> challengeList = challengeUsersJpaRepository.findByUserAndDoneOrderByIdDesc(userOpt.get(), todo);
         if(!challengeList.isEmpty()){
             List<ChallengeListForm> challengeListFormList = new ArrayList<>();
             for(ChallengeUser ch: challengeList){
