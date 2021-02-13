@@ -43,6 +43,10 @@ public class ChallengeServiceImpl implements ChallengeService{
             for(Challenge ch: challengeList){
                 Optional<ChallengeUser> tmp_challengers = challengeUsersJpaRepository.findByChallengeAndUser(ch, userOpt.get());
 
+                Date todate_date = formatt.parse(todate);
+                Date end_date = formatt.parse(ch.getEndDate());
+                Date start_date = formatt.parse(ch.getStartDate());
+
                 if(tmp_challengers.isPresent()) {
                     ChallengeForm tmp_form = ChallengeForm.builder()
                             .challengeId(ch.getId())
@@ -54,9 +58,8 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .finish(ch.getFinish())
                             .todo(tmp_challengers.get().getDone())
                             .build();
-                    Date todate_date = formatt.parse(todate);
-                    Date end_date = formatt.parse(ch.getEndDate());
-                    Date start_date = formatt.parse(ch.getStartDate());
+
+
 
                     if(todate_date.getTime() > end_date.getTime() || start_date.getTime() > todate_date.getTime()){
                         tmp_form.setTodo("disable");
@@ -75,6 +78,11 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .finish(ch.getFinish())
                             .todo("")
                             .build();
+
+                    if(todate_date.getTime() > end_date.getTime() || start_date.getTime() > todate_date.getTime()){
+                        tmp_form.setTodo("disable");
+                    }
+
                     challengeFormList.add(tmp_form);
                 }
             }
