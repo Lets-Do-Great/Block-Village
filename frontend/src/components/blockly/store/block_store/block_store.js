@@ -9,7 +9,8 @@ import BlockMenu from '../block_menu/block_menu';
 import StoreNavbar from '../store_navbar/store_navbar';
 import styles from './block_store.module.css'
 
-const BlockStore = ({ allBlcoksInfo, onBuyBlocks, usermil }) => {
+const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil, getAllBlocks, setModal }) => {
+  
   const [billList, setBillList] = useState([]);
   
   const buyBlocks = () => {
@@ -17,24 +18,27 @@ const BlockStore = ({ allBlcoksInfo, onBuyBlocks, usermil }) => {
     billList.map((item) => (
       buyList.push(item.id)
     ))
+    console.log(buyList);
     onBuyBlocks(buyList)
     // 마일리지 없애기 추가
     // let sumMileage = 0;
     // billList.map((item) => (
-    //   sumMileage += item.price
-    // ))
-
+      //   sumMileage += item.price
+      // ))
+    
     setBillList([])
+    setModal(true)
   };
 
   const [categoryStatus, setCategoryStatus] = useState([
     true, false, false, false, false, false,
   ]);
+  const [category, setCategory] = useState('판단');
 
-  const [selectedCategory, setSelectedCategory] = useState(allBlcoksInfo["판단"])
-
+  
   const onChangeSelectedCategory = (name) => {
-    setSelectedCategory(allBlcoksInfo[`${name}`])
+    setCategory(name)
+    
     if (name === '판단') {
       setCategoryStatus([true, false, false, false, false, false,])
     }
@@ -54,7 +58,8 @@ const BlockStore = ({ allBlcoksInfo, onBuyBlocks, usermil }) => {
       setCategoryStatus([false, false, false, false, false, true,])
     }
   };
-
+  
+  
   //==========================================================
 
   const onDeleteBillList = (bill) => {
@@ -109,8 +114,9 @@ const BlockStore = ({ allBlcoksInfo, onBuyBlocks, usermil }) => {
           <div className={styles.store_body}>
             <div className={styles.shelf}>
               <BlockMenu 
-                selectedCategory={selectedCategory}
                 addBillList={addBillList}
+                allBlocksInfo={allBlocksInfo}
+                category={category}
               />
             </div>
           </div>

@@ -22,7 +22,7 @@ import ModalFail3 from '../modal_3/modal_fail_3/modal_fail_3';
 import Modal3Step0 from '../modal_3/modal3_step_0/modal3_step_0';
 import Modal3Step1 from '../modal_3/modal3_step_1/modal3_step_1';
 
-const TutorialMain3 = ({ info, GoMyPage }) => {
+const TutorialMain3 = ({ info, GoMain }) => {
   const { 
     id,
     title, initialXml, toolboxCategories, 
@@ -152,7 +152,7 @@ const TutorialMain3 = ({ info, GoMyPage }) => {
       {modal3_step_1 && <Modal3Step1 change_modal3_step_1={change_modal3_step_1}/>}
 
 
-      {modal_success_state && <ModalSuccess3 GoMyPage={GoMyPage}/>}
+      {modal_success_state && <ModalSuccess3 GoMain={GoMain}/>}
       {modal_fail_state && <ModalFail3 reStart={reStart}/>}
 
 

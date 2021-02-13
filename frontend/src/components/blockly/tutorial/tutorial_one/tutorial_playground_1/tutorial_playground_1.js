@@ -40,10 +40,14 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
     let x = image_x;
     let y = image_y;
 
+
+
     const timer = ms => new Promise(res => setTimeout(res, ms))
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
         
+
+
         const new_move_x = Math.round(move[i][0])
         const new_move_y = Math.round(move[i][1])
 
@@ -60,6 +64,7 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
           onChangeModalFail()
           return
         }
+        // await timer(1000);
       }
       if (
         (char_location[0] - Math.round(move[move.length - 1][1])) === answer_location[0] 
@@ -80,13 +85,13 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
     const item = fieldchar.current; 
     
     item.setAttribute('className', `image`)
-    item.setAttribute('src', `/images/bug.png`)
+    item.setAttribute('src', `/images/character/character_right.png`)
     item.style.position = 'absolute';
 
     setImage_x((char_location[1]) * 70 + 35)
     setImage_y((char_location[0]) * 70 + 35)
 
-    item.style.transform = `translate(-50%, -60%)`
+    item.style.transform = `translate(-50%, -50%)`
 
     item.style.left = `${image_x}px`;
     item.style.top = `${image_y}px`;

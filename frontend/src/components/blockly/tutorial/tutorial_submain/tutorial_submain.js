@@ -5,8 +5,10 @@ import TutorialMain2 from '../tutorial_two/tutorial_main_2/tutorial_main_2';
 import TutorialMain3 from '../tutorial_three/tutorial_main_3/tutorial_main_3';
 import * as BlockAction from '../../../../modules/block';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const TutorialSubmain = (props) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user.userInfo)
 
@@ -138,15 +140,15 @@ const TutorialSubmain = (props) => {
     setStage(3)
   }
 
-  const GoMyPage = () => {
-    console.log();
+  const GoMain = () => {
+    history.push("/main")
   }
 
   return (
     <div className={styles.body}>
       {stage === 1 && <TutorialMain1 info={tutorial_one} GoTwo={change_one_two} />}
       {stage === 2 && <TutorialMain2 info={tutorial_two} GoThree={change_two_three} />}
-      {stage === 3 && <TutorialMain3 info={tutorial_three} GoMyPage={GoMyPage}/>}
+      {stage === 3 && <TutorialMain3 info={tutorial_three} GoMain={GoMain}/>}
     </div>
   )
 };
