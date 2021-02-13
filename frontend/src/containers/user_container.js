@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import FindPW from '../components/user/find_pw/find_pw/find_pw';
 import LogIn from '../components/user/log_in/log_in/log_in';
 import SignUp from '../components/user/sign_up/sign_up/sign_up';
 import * as UserAction from '../modules/user';
+import { modifyUserInfo } from '../service/user';
 
 const UserContainer = ({ setSkip }) => {
     const history = useHistory();
@@ -28,7 +29,15 @@ const UserContainer = ({ setSkip }) => {
     const [findPWInput, setFindPWInput] = useState({ email: ''});
 
     // store에 있는 state와 dispatch 가져오는 작업
+    const userInfo = useSelector((state) => state.user.userInfo);
     const dispatch = useDispatch();
+    
+    useEffect(() => {
+        if(userInfo.logIn){
+            initialLogInInput();
+            history.push('/main');
+        }
+    }, [userInfo]);
 
     // 로그인폼 데이터 초기화
     const initialLogInInput = () => {
@@ -89,8 +98,6 @@ const UserContainer = ({ setSkip }) => {
     const logIn = async () => { 
         try{
             await dispatch(UserAction.logIn(logInInput)); 
-            initialLogInInput();
-            history.push('/main')
         } catch (e) {
             console.log(e);
         }

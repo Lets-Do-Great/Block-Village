@@ -64,13 +64,14 @@ export const findPW = (email) => {
 };
 
 // 이미지 수정
-// 요기에 이미지 수정하는 api 함수 요청 적으면 되욤 axios 함수이름 modifyImage
-
 export const modifyImage = ({ email, file }) => {
-  client.defaults.headers.common['content-type'] = 'multipart/form-data';
+  client.defaults.headers.common['Content-Type'] = 'multipart/form-data';
   return client({
     url: `users/file/${email}`,
     method: 'put',
-    data: { email, file },
+    data: { file },
+  })
+  .finally(() => {
+    client.defaults.headers.common['Content-Type'] = `application/json`;
   });
 };

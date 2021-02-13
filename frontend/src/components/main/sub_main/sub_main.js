@@ -20,26 +20,21 @@ const SubMain = () => {
 
   return (
     <>
+      <img 
+      className={styles.background_img}
+      src= "/images/subMain_img.png"
+      />
       {
-        !userInfo.logIn &&
-        (<>
-            <img 
-            className={styles.background_img}
-            src= "/images/subMain_img.png"
-            />
-            {
-              skip 
-              ? <>
-                  <div className={styles.background_black} />
-                  <div className={styles.user_container} >
-                    <UserContainer setSkip={setSkip}/> 
-                  </div>
-                </>
-              : <button 
-                className={styles.skip_button}
-                onClick={clickSkip}>건너뛰기</button>
-            }
-        </>)
+        skip 
+        ? <>
+            <div className={styles.background_black} />
+            <div className={styles.user_container} >
+              <UserContainer setSkip={setSkip}/> 
+            </div>
+          </>
+        : <button 
+          className={styles.skip_button}
+          onClick={clickSkip}>건너뛰기</button>
       }
     </>    
   );

@@ -15,21 +15,43 @@ const FIND_PW = 'user/FIND_PW';
 const MODIFY_PROFILE = 'user/MODIFY_PROFILE';
 
 // 액션 객체 생성함수
-export const logIn = createAction(LOG_IN, UserAPI.logIn);
+export const logIn = createAction(
+  LOG_IN, 
+  UserAPI.logIn
+);
 
-export const logOut = createAction(LOG_OUT);
+export const logOut = createAction(
+  LOG_OUT
+);
 
-export const getUserInfo = createAction(GET_USER_INFO);
+export const getUserInfo = createAction(
+  GET_USER_INFO
+);
 
-export const signUp = createAction(SIGN_UP, UserAPI.setUserInfo);
+export const signUp = createAction(
+  SIGN_UP,
+  UserAPI.setUserInfo
+);
 
-export const modifyInfo = createAction(MODIFY_INFO, UserAPI.modifyUserInfo);
+export const modifyInfo = createAction(
+  MODIFY_INFO, 
+  UserAPI.modifyUserInfo
+);
 
-export const findPW = createAction(FIND_PW, UserAPI.findPW);
+export const findPW = createAction(
+  FIND_PW,
+  UserAPI.findPW
+);
 
-export const deleteInfo = createAction(DELETE_INFO, UserAPI.deleteUserInfo);
+export const deleteInfo = createAction(
+  DELETE_INFO, 
+  UserAPI.deleteUserInfo
+);
 
-export const modifyImage = createAction(MODIFY_PROFILE, UserAPI.modifyImage);
+export const modifyImage = createAction(
+  MODIFY_PROFILE, 
+  UserAPI.modifyImage
+);
 
 // 초기 상태
 const initialState = {
@@ -39,8 +61,6 @@ const initialState = {
     nickname: '',
     email: '',
     mileage: '',
-    follower: '',
-    following: '',
     introduction: '',
   },
 };
@@ -196,11 +216,9 @@ export default applyPenders(userReducer, [
 
       if (response.status === 200) {
         if (response.data.status) {
-          return updateObject(state, {
-            ...state,
-          });
+          return updateObject(state, state);
         } else {
-          alert('현재 비밀번호를 확인해주세요.');
+          alert('프로필 변경에 오류가 발생했습니다.');
         }
       } else {
         // 에러 발생
