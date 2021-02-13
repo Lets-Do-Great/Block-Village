@@ -13,7 +13,7 @@ const EditorMissionContainer = ( { type }) => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
-    setBackgroundImage();
+    if(imageUrl !== '') setBackgroundImage();
   }, [selectedMission.id]);
   
   const onSetMission = async (e) => {
