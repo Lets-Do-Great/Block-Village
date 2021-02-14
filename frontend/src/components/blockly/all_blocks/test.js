@@ -57,6 +57,11 @@
       34{type: 'if_else_triple'},
       35{type: 'switch_input'},
       36{type: 'input_value'},
+
+      
+      59{type: 'if_move'},
+      60{type: 'if_else_move'},
+      61{type: 'do_done'},
     ]
   },
   {
@@ -96,7 +101,12 @@
     blocks: [
       56{type: 'variable'},
       57{type: 'set_variable'},
-      58{type: 'change_variable'},        
+      58{type: 'change_variable'}, 
+
+      62{type: 'variable1'},        
+      63{type: 'variable2'},        
+      64{type: 'variable3'},        
+      65{type: 'variable4'},        
     ]
   },
 ]

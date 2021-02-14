@@ -8,23 +8,15 @@ import * as BlockAction from '../modules/block';
 const EditorAnswerContainer = () => {
   const [useDifficulty, setUseDifficulty] = useState(0);
   const [useContent, setUseContent] = useState('');
-  const [answerInfo, setAnswerInfo] = useState({
-    javascriptCode: '',
-    xmlCode: '',
-  });
+  const [javascriptCode, setJavascriptCode] = useState('');
+  const [xmlCode, setXmlCode] = useState('');
 
   const onChangeXmlContainer = (e) => {
-    setAnswerInfo({
-      ...answerInfo,
-      xmlCode: e
-    });
+    setXmlCode(e);
   }
 
   const onChangeJavascriptContainer = (e) => {
-    setAnswerInfo({
-      ...answerInfo,
-      javascriptCode: e
-    });
+    setJavascriptCode(e);
   }
 
   // 정답에 대한 info는 pros로 가져올 것.
@@ -57,14 +49,14 @@ const EditorAnswerContainer = () => {
   };
 
   const onSetAnswer = async () => {
-    const newXml = answerInfo.xmlCode.replace(/"/gi, '\"')
+    const newXml = xmlCode.replace(/"/gi, '\"');
     try {
       await dispatch(AnswerAction.setAnswer({
         email: userInfo.email,
         content: useContent,
         missionId: selectedMission.id,
         title: `${userInfo.nickname}님의 ${selectedMission.id}번 미션 답안`,
-        javascriptCode: answerInfo.javascriptCode,
+        javascriptCode: javascriptCode,
         xmlCode: newXml,
         startPositionX: selectedMission.startPosisionX,
         startPosisionY: selectedMission.startPosisionY,
