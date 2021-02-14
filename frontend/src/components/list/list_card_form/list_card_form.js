@@ -31,7 +31,7 @@ const ListCardForm = ({ type, id, imageUrl, title, difficulty, readCnt, likeCnt,
                     </div>
                 }
                 <div className={styles.icon}>
-                    <Icon.MdFavorite/> { likeCnt } <p/>
+                    <Icon.MdFavorite/> { likeCnt }
                 </div>
             </div>
         </div>
