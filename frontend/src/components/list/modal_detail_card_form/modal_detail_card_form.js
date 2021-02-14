@@ -71,7 +71,7 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
             <Icon.MdAccountCircle className={styles.icon}/>
             <div className={styles.icon_text}>{ nickname }</div>
         </div>
-        <div>
+        <div className={styles.icon_date}>
             <Icon.MdEdit className={styles.icon}/>
             <div className={styles.icon_text}>{ created[0] } / { updated[0] }</div>
         </div>
@@ -90,7 +90,7 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
 
         
 
-        <div>{ content }</div>
+        <div className={styles.content}>{ content }</div>
 
         { userInfo === email
             ? (<>
