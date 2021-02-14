@@ -3,8 +3,8 @@
 }
 
 .close {
-    top: -4px;
-    right: 0px;
+    top: 8px;
+    right: 15px;
     position: absolute;
     font-size: 40px;
     color: darkgray;
@@ -16,9 +16,10 @@
 }
 
 .tab_menus {
-    width: 100%;
+    width: 92%;
     padding: 1em;
     padding-bottom: 0em;
+    margin: 0 auto;
 }
 
 .tabs {
