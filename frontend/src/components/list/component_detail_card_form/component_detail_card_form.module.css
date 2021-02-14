@@ -7,7 +7,7 @@
   height: 100%;
   display: table;
   margin: 0 auto;
-  padding-bottom: 40px;
+  /* padding-bottom: 40px; */
   padding-top: 40px;
 }
 
@@ -17,13 +17,14 @@
 }
 
 .header {
-  width: 900px;
+  /* width: 900px; */
   overflow: auto;
   margin: 0 auto;
   padding: 1em;
   padding-bottom: 1em;
-  border: 2px solid black;
-  border-bottom: 0;
+  /* border: 2px solid black;
+  border-bottom: 0; */
+  border: 0;
   text-align: center;
 }
 
@@ -32,11 +33,12 @@
   cursor: pointer;
   float: left;
   font-size: 18px;
+  font-weight: bold;
 }
 
 .back_btn:hover {
   transform: scale(1.1);
-  color: brown;
+  color: #a72b2b;
 }
 
 .head_title {
@@ -51,30 +53,42 @@
 }
 
 .header_btn_fix {
-  box-shadow: 1px 1px 1px 1px;
-  cursor: pointer;
-  border: 1px solid black;
+  width: 100px;
   display: inline-block;
+
+  border: 2px solid black;
+  border-radius: 10px;
   padding: 5px 5px;
   margin: 0 5px 0 5px;
-  width: 80px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  background-color: #fff788;
 }
 
 .header_btn_dele {
-  box-shadow: 1px 1px 1px 1px;
-  cursor: pointer;
-  border: 1px solid black;
+  width: 100px;
   display: inline-block;
+
+  border: 2px solid black;
+  border-radius: 10px;
   padding: 5px 5px;
   margin: 0 5px 0 5px;
-  width: 80px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  background-color: #ff8896;
 }
 
 .header_line {
   display: inline-block;
   width: 100%;
   height: 1px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid darkgray;
 }
 
 .icon {
@@ -84,30 +98,82 @@
   margin-left: 10px;
 }
 
+.section {
+  /* width: 800px; */
+  margin: auto;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}
+
 .playground {
   position: relative;
   width: 424px;
   height: 424px;
   z-index: 10;
-  border: 2px solid #e3c0ff;
-  border-radius: 5px;
+  border: 2px solid black;
+  /* border-radius: 5px; */
   background-color: #ffffff;
+  display: inline-block;
 }
 
 .workspace_cata {
-  width: 422px;
+  width: 650px;
   height: 422px;
   display: inline-block;
+  padding-left: 50px;
 }
 
 .workspace {
   width: 100%;
   height: 100%;
-  border: 1px solid #efa420;
+  border: 2px solid black;
   display: inline-block;
+}
+
+.noWorkspace {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.noWorkspace_btn {
+  position: absolute;
+  width: 40%;
+  height: 18%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #88e7ff;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .fill_height {
   width: 100%;
   height: 100%;
+}
+
+.section_line {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  border-bottom: 2px solid darkgray;
+}
+
+.content {
+  width: 95%;
+  height: 100px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.heart {
+  font-size: 20px;
+  font-weight: bold;
 }

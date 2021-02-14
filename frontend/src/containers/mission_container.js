@@ -60,11 +60,7 @@ const MissionContainer = () => {
             });
         }
     }
-
-    useEffect(() => {
-        console.log(selectedMission);
-    }, [selectedMission]);
-
+    
     /*
     api 요청 보내는 함수
     */

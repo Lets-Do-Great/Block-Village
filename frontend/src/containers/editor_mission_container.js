@@ -5,8 +5,10 @@ import MissionModify from '../components/blockly/mission_modify/mission_modify';
 import * as MissionAction from '../modules/mission';
 import * as BlockAction from '../modules/block';
 import { ContactSupportOutlined } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
 const EditorMissionContainer = ( { type }) => {
+  const history = useHistory();
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
   const dispatch = useDispatch();
@@ -18,12 +20,12 @@ const EditorMissionContainer = ( { type }) => {
   
   const onSetMission = async (e) => {
     const newXml = e.xmlCode.replace(/"/gi, '\\"');
-
+    console.log(e.startPosition);
     try {
-      console.log("미션 세팅 요청 시작");
       setImageUrl(e.imageUrl);
 
       await dispatch(MissionAction.setMission({
+        
         title: e.title,
         content: e.content,
         startPositionX: e.startPosition[0],
@@ -34,11 +36,9 @@ const EditorMissionContainer = ( { type }) => {
         email: userInfo.email,
         xmlCode: newXml,
       }));
+      history.push('/main/mission')
     } catch(e) {
       console.log(e);
-    } finally {
-      console.log("미션 세팅 요청 끝");
-      console.log(selectedMission);
     }
   };
 

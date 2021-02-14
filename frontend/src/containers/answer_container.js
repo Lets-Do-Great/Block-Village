@@ -8,6 +8,7 @@ import * as AnswerAction from '../modules/answer';
 const AnswerContainer = ({ match }) => {
     const { id } = match.params;
     const [ detail, setDetail ] = useState(false);
+    const [goModifyAnswer, setGoModifyAnswer] = useState(true);
 
     // store에 있는 state와 dispatch 가져오는 작업
     const userInfo = useSelector(state => state.user.userInfo);
@@ -15,6 +16,10 @@ const AnswerContainer = ({ match }) => {
     const selectedAnswer = useSelector(state => state.answer.selectedAnswer);
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        setDetail(false);
+    }, []);
 
     useEffect(() => {
         getMissionAnswerList();
@@ -80,16 +85,22 @@ const AnswerContainer = ({ match }) => {
         }
     };
 
+    const onModify = (e) => {
+        setGoModifyAnswer(true)
+    };
+
 
     return (<>
-        { detail
+        { detail 
         ? <><ComponentDetailCardForm
                 detail={selectedAnswer}
                 setLike={likeAnswer}
                 setDislike={dislikeAnswer}
                 userInfo={userInfo.email}
                 closeDetail={closeDetail}
-                onDelete={deleteAnswer}/>
+                onDelete={deleteAnswer}
+                onModify={onModify}
+            />
             <CommentContainer
                 userInfo={userInfo.email}
                 type="answer"
