@@ -52,11 +52,11 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
 
     // 비밀번호 입력했는지 확인하는 함수
     const validatePW = (password) => {
-        if(password !== ''){
-            return true;
-        } else {
-            alert("비밀번호를 입력하세요.");
+        if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(password)){
+            alert("비밀번호는 숫자, 영문자, 특수문자 조합으로 8자리 이상 이여야 합니다.");
             return false;
+        }else {
+            return true;
         } 
     }
 
