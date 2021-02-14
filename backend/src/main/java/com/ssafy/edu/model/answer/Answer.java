@@ -32,6 +32,8 @@ public class Answer {
     private String xmlCode;
     @Column(columnDefinition = "TEXT")
     private String javascriptCode;
+    private int startPositionX;
+    private int startPositionY;
     private int favorite;
     private int view;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
