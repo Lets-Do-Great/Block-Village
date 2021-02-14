@@ -1,3 +1,89 @@
+.body {
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: table;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding-top: 40px;
+}
+
+.pannel {
+  display: table;
+  margin: 0 auto;
+}
+
+.header {
+  width: 900px;
+  overflow: auto;
+  margin: 0 auto;
+  padding: 1em;
+  padding-bottom: 1em;
+  border: 2px solid black;
+  border-bottom: 0;
+  text-align: center;
+}
+
+.back_btn {
+  display: inline-block;
+  cursor: pointer;
+  float: left;
+  font-size: 18px;
+}
+
+.back_btn:hover {
+  transform: scale(1.1);
+  color: brown;
+}
+
+.head_title {
+  display: inline-block;
+  font-size: 23px;
+  font-weight: 550;
+}
+
+.header_btn_group {
+  display: inline-block;
+  float: right;
+}
+
+.header_btn_fix {
+  box-shadow: 1px 1px 1px 1px;
+  cursor: pointer;
+  border: 1px solid black;
+  display: inline-block;
+  padding: 5px 5px;
+  margin: 0 5px 0 5px;
+  width: 80px;
+}
+
+.header_btn_dele {
+  box-shadow: 1px 1px 1px 1px;
+  cursor: pointer;
+  border: 1px solid black;
+  display: inline-block;
+  padding: 5px 5px;
+  margin: 0 5px 0 5px;
+  width: 80px;
+}
+
+.header_line {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  border-bottom: 2px solid black;
+}
+
+.icon {
+  display: inline-block;
+  float: right;
+  margin: 5px;
+  margin-left: 10px;
+}
+
 .playground {
   position: relative;
   width: 424px;
@@ -9,18 +95,16 @@
 }
 
 .workspace_cata {
-  width: 400px;
-  height: 400px;
+  width: 422px;
+  height: 422px;
+  display: inline-block;
 }
 
 .workspace {
   width: 100%;
   height: 100%;
   border: 1px solid #efa420;
-  /* padding: 1em 1em; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: inline-block;
 }
 
 .fill_height {
