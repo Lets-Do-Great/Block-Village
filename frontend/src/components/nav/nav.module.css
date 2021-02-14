@@ -56,6 +56,15 @@
   background-color: rgb(201, 160, 99);
 }
 
+.navbar_answer {
+  width: 100%;
+  height: 70px;
+  align-items: center;
+  padding: 0.5em;
+  display: flex;
+  background-color: rgb(201, 160, 99);
+}
+
 .save_button {
   position: absolute;
 

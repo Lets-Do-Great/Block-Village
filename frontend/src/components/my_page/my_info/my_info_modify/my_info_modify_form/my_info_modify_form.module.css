@@ -14,7 +14,7 @@
     height: 100%;
     text-align: center;
     float: left;
-    padding-top: 60px;
+    padding-top: 100px;
     padding-left: 80px;
 }
 
@@ -26,7 +26,7 @@
     height: 100%;
     text-align: center;
     float: left;
-    padding-top: 80px;
+    padding-top: 120px;
     padding-right: 80px;
 }
 
@@ -81,8 +81,17 @@
     margin: 0 auto;
     font-size: 10px;
     text-align: center;
+    padding-top: 20px;
     padding-left: 50px;
     color: darkgray;
+}
+
+.delete_file{
+    margin: 0 auto;
+    font-size: 10px;
+    text-align: center;
+    padding-top: 10px;
+    color: rgb(202, 0, 0);
 }
 
 .edit{

@@ -15,7 +15,7 @@ const MyInfoModifyLeft = ({ modifyInput, onChangeModify, onDeleteProfileImage })
         name="profileImage"
         onChange={onChangeModify} />
         <div
-            className={styles.edit_file}
+            className={styles.delete_file}
             onClick={onDeleteProfileImage}>
                 프로필 이미지 삭제</div>
     </div>

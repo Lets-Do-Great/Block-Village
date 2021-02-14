@@ -143,15 +143,13 @@ const MissionContainer = () => {
     return (
         <>  
             <Nav type="mission"/>
-            <SearchForm
-                onChangeSearch={onChangeSearch}
-                onChangeSearchType={onChangeSearchType}
-                onClickEnter={onClickEnter}
-                search={search}/> 
-
+            
             <SearchType
                 searchType={search.searchType}
-                onChangeSearchType={onChangeSearchType}/>
+                onChangeSearchType={onChangeSearchType}
+                onChangeSearch={onChangeSearch}
+                onClickEnter={onClickEnter}
+                search={search}/>
 
             <ListForm
                 type="mission"

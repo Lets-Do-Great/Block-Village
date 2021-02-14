@@ -1,8 +1,10 @@
 import React from 'react';
+import SearchForm from '../search_form/search_form';
 import styles from './search_type.module.css';
 
-const SearchType = ({ searchType, onChangeSearchType }) => {
-    return (
+const SearchType = ({ searchType, onChangeSearchType, 
+                onChangeSearch, onClickEnter, search }) => {
+    return (<>
     <div className={styles.tab_menus}>
         <ul className={styles.tabs}>
             <li 
@@ -26,7 +28,15 @@ const SearchType = ({ searchType, onChangeSearchType }) => {
                 value="difficulty"
                 className={searchType === 'difficulty' ? styles.current : ''}>난이도 순</li>
         </ul>
-    </div>);
+    </div>
+    
+    <SearchForm
+        type="mission"
+        onChangeSearch={onChangeSearch}
+        onChangeSearchType={onChangeSearchType}
+        onClickEnter={onClickEnter}
+        search={search}/> 
+    </>);
 }
 
 export default SearchType;

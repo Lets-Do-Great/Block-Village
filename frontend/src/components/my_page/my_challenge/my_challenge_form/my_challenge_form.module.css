@@ -1,0 +1,17 @@
+.my_challenge_form{
+    position: relative;
+    text-align: center;
+    height: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.my_challenge_form::-webkit-scrollbar {
+    display: none;
+}
+
+.text{
+    font-size: 30px;
+    font-weight: bold;
+    padding-top: 210px;
+}
