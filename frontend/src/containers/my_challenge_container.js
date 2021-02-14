@@ -1,7 +1,8 @@
 import React from 'react';
 
-const MyChallengeContainer = () => {
+const MyChallengeContainer = ({ closeModal }) => {
     return (<>
+            
             챌린지입니다.
         </>);
 };

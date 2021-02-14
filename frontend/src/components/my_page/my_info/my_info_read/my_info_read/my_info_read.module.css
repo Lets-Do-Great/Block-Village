@@ -36,8 +36,8 @@
 }
 
 .close {
-    top: -4px;
-    right: 0px;
+    top: 5px;
+    right: 12px;
     position: absolute;
     font-size: 40px;
     color: darkgray;
