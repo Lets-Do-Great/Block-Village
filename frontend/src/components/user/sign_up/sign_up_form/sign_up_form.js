@@ -17,6 +17,12 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
         validatePWConfirm();
     }, [ PWConfirm.PW, password ]);
 
+    const onEnter = (e) => {
+        if(e.keyCode === 13){
+            onSubmitSignUp();
+        }
+    }
+
     // 회원가입 할 조건이 맞는지 확인하는 함수
     const onSubmitSignUp = () => {
         if(validateNickName(nickname)   
@@ -82,6 +88,7 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
             type="text"
             name="emailId" 
             value={emailId} 
+            onKeyUp={onEnter}
             onChange={onChangeSignUp} 
             placeholder="이메일"/>@
         <input 
@@ -89,13 +96,15 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
             type="text"
             name="emailSite" 
             value={emailSite} 
+            onKeyUp={onEnter}
             onChange={onChangeSignUp} 
             placeholder="직접입력"/><br/>
         <input
             className={styles.input} 
             type="text"
             name="nickname" 
-            value={nickname} 
+            value={nickname}
+            onKeyUp={onEnter} 
             onChange={onChangeSignUp} 
             placeholder="닉네임"/><br/>
         <input
@@ -103,6 +112,7 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
             type="password"
             name="password" 
             value={password} 
+            onKeyUp={onEnter}
             onChange={onChangeSignUp} 
             placeholder="비밀번호"/><br/>
         <input 
@@ -110,6 +120,7 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
             type="password"
             name="PWConfirm" 
             value={PWConfirm.PW}
+            onKeyUp={onEnter}
             onChange={onChange} 
             placeholder="비밀번호 확인"/>
 
