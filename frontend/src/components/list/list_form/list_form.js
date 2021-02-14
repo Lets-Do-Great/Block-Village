@@ -22,15 +22,32 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
 
     return (
     <>  
-        { type === 'mission' && 
-            <>
+        {/* { type === 'mission' && 
             <select name="sortType" className={styles.select} onChange={onChangeSearchType}>
                 <option value="decrease">높은 순</option>
                 <option value="increase">낮은 순</option>
             </select>
+        } */}
 
-            { openDetail && 
-                <div className={styles.modal_wrapper}>
+        <div className={styles.listForm}>
+            { list.map(card => (
+                <ListCardForm
+                    type={type}
+                    key={card.id}
+                    id={card.id}
+                    title={card.title}
+                    imageUrl={card.imageUrl}
+                    difficulty={card.difficulty}
+                    readCnt={card.readCnt}
+                    likeCnt={card.likeCnt}
+                    peopleCnt={card.peopleCnt}
+                    clickCard={clickCard} />
+            ))}
+        </div>
+
+        { type === 'mission' && openDetail && 
+            <div className={styles.modal_wrapper}>
+                <div className={styles.modal}>
                     <ModalDetailCardForm
                         detail={detail}
                         setLike={setLike}
@@ -40,26 +57,10 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
                         onParticipateMission={onParticipateMission}
                         onModify={onModify}
                         onDelete={onDelete}
-                    />
-                </div> }
-            </>
+                        />
+                </div>
+            </div> 
         }
-
-        <div className={styles.listForm}>
-        { list.map(card => (
-            <ListCardForm
-                type={type}
-                key={card.id}
-                id={card.id}
-                title={card.title}
-                imageUrl={card.imageUrl}
-                difficulty={card.difficulty}
-                readCnt={card.readCnt}
-                likeCnt={card.likeCnt}
-                peopleCnt={card.peopleCnt}
-                clickCard={clickCard} />
-        ))}
-        </div>
     </>
     );
 };
