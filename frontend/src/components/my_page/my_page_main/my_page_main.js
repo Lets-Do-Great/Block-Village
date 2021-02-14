@@ -3,7 +3,7 @@ import MyPageContainer from '../../../containers/my_page_container';
 import MyBlockContainer from '../../../containers/my_block_container';
 import styles from './my_page_main.module.css';
 import MyMissionContainer from '../../../containers/my_mission_container';
-import MyProjectContainer from '../../../containers/my_project_container';
+import MyChallengeContainer from '../../../containers/my_challenge_container';
 import Nav from '../../nav/nav';
 
 import ScrollContainer from 'react-indiana-drag-scroll'
@@ -34,8 +34,8 @@ const MyPageMain = ({ imageInfo, onChageBasic, onChageSea, onChageSpace }) => {
         setModal(true);
     }
 
-    const openCardProject = () => {
-        setOpenType('project');
+    const openCardChallenge = () => {
+        setOpenType('challenge');
         setModal(true);
     }
 
@@ -51,7 +51,7 @@ const MyPageMain = ({ imageInfo, onChageBasic, onChageSea, onChageSpace }) => {
     const info_img = useRef();
     const block_img = useRef();
     const mission_img = useRef();
-    const project_img = useRef();
+    const challenge_img = useRef();
 
     useEffect(() => {
         
@@ -79,9 +79,9 @@ const MyPageMain = ({ imageInfo, onChageBasic, onChageSea, onChageSpace }) => {
         mission_img.current.style.height = `${871 * y}px`;
         mission_img.current.style.background = `100%/100% url(/images/mypageImg/${imageInfo.mission}.png)`
 
-        project_img.current.style.width = `${981 * x}px`;
-        project_img.current.style.height = `${481 * y}px`;
-        project_img.current.style.background = `100%/100% url(/images/mypageImg/${imageInfo.project}.png)`
+        challenge_img.current.style.width = `${981 * x}px`;
+        challenge_img.current.style.height = `${481 * y}px`;
+        challenge_img.current.style.background = `100%/100% url(/images/mypageImg/${imageInfo.challenge}.png)`
     })
 
     // const changeSize = () => {
@@ -149,10 +149,10 @@ const MyPageMain = ({ imageInfo, onChageBasic, onChageSea, onChageSpace }) => {
                     ></div>
 
                     <div 
-                        className={styles.project_img} 
-                        ref={project_img}
-                        onClick={openCardProject}
-                        value="project"
+                        className={styles.challenge_img} 
+                        ref={challenge_img}
+                        onClick={openCardChallenge}
+                        value="challenge"
                     ></div>
 
                 </div>
@@ -185,10 +185,10 @@ const MyPageMain = ({ imageInfo, onChageBasic, onChageSea, onChageSpace }) => {
                 </div>
             }
 
-            {  modal && openType === 'project' &&
+            {  modal && openType === 'challenge' &&
                 <div className={styles.modal_wrapper}>
                     <div className={styles.modal}>
-                        <MyProjectContainer
+                        <MyChallengeContainer
                             closeModal={closeModal}/>
                     </div>
                 </div>

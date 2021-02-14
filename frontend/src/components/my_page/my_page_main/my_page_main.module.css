@@ -126,7 +126,7 @@
   cursor: pointer;
 }
 
-.project_img {
+.challenge_img {
   position: absolute;
   left: 71.5%;
   bottom: 5.5%;
@@ -140,7 +140,7 @@
   background-repeat: no-repeat; */
 }
 
-.project_img:hover {
+.challenge_img:hover {
   /* background: url(../../../images/mypageImg/my_page_basic_bed_after.png);
   background-size: 100% 100%;
   background-repeat: no-repeat; */
