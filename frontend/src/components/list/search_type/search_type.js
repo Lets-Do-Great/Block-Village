@@ -1,28 +1,31 @@
 import React from 'react';
 import styles from './search_type.module.css';
 
-const SearchType = ({ onChangeSearchType }) => {
-    return (<div className={styles.typeForm}>
-        <button 
-            className={styles.button}
-            onClick={onChangeSearchType}
-            name="searchType"
-            value="updatedAt">NEW</button>
-        <button
-            className={styles.button}
-            onClick={onChangeSearchType}
-            name="searchType"
-            value="favorite">좋아요 순</button>
-        <button 
-            className={styles.button}
-            onClick={onChangeSearchType}
-            name="searchType"
-            value="people">참여 많은 순</button>
-        <button 
-            className={styles.button}
-            onClick={onChangeSearchType}
-            name="searchType"
-            value="difficulty">난이도 순</button>
+const SearchType = ({ searchType, onChangeSearchType }) => {
+    return (
+    <div className={styles.tab_menus}>
+        <ul className={styles.tabs}>
+            <li 
+                onClick={onChangeSearchType}
+                name="searchType"
+                value="updatedAt"
+                className={searchType === 'updatedAt' ? styles.current : ''}>NEW</li>
+            <li
+                onClick={onChangeSearchType}
+                name="searchType"
+                value="favorite"
+                className={searchType === 'favorite' ? styles.current : ''}>좋아요 순</li>
+            <li 
+                onClick={onChangeSearchType}
+                name="searchType"
+                value="people"
+                className={searchType === 'people' ? styles.current : ''}>참여 많은 순</li>
+            <li 
+                onClick={onChangeSearchType}
+                name="searchType"
+                value="difficulty"
+                className={searchType === 'difficulty' ? styles.current : ''}>난이도 순</li>
+        </ul>
     </div>);
 }
 

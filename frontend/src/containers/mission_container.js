@@ -47,12 +47,18 @@ const MissionContainer = () => {
     };
 
     const onChangeSearchType = (e) => {
-        const { name, value } = e.target;
-
-        setSearch({
-            ...search,
-            [name]: value,
-        });
+        if(e.target.attributes[0].nodeValue === 'searchType') {
+            setSearch({
+                ...search,
+                searchType: e.target.attributes[1].nodeValue,
+            });
+        } else{
+            const { name, value } = e.target;
+            setSearch({
+                ...search,
+                [name]: value,
+            });
+        }
     }
 
     useEffect(() => {
@@ -144,6 +150,7 @@ const MissionContainer = () => {
                 search={search}/> 
 
             <SearchType
+                searchType={search.searchType}
                 onChangeSearchType={onChangeSearchType}/>
 
             <ListForm

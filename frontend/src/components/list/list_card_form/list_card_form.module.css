@@ -6,35 +6,39 @@
     border: 2px solid darkgray;
     border-radius: 10px;
     position: relative;
+    padding: 13px;
 }
 
 .title {
     border: 0px;
     margin: 0 auto;
-    display: inline;
+    display: inline-block;
+    width: 80%;
     position: absolute;
-    top: 40%;
-    left: 25%;
+    top: 50%;
+    left: 50%;
     font-weight: bold;
     font-size: 30px;
     color: white;
     text-align: center;
+    transform: translate(-50%, -50%);
 }
 
 .title:hover {
     color: #dd374b;
     font-size: 40px;
-    top: 35%;
-    left: 17%;
+    top: 50%;
+    left: 50%;
 }
 
 .img {
+    display: block;
     width: 270px;
     height: 340px;
     background-color: #ff8896;
-    margin: 0 auto;
-    margin-top: 13px;
     border-radius: 10px;
+    border: 0px;
+    margin: 0 auto;
 }
 
 .icon_box {
@@ -46,8 +50,8 @@
 
 .icon {
     display: inline-block;
-    width: 80px;
-    font-size: 30px;
+    width: 70px;
+    font-size: 20px;
     text-align: center;
     padding: 5px;
     color: rgb(78, 74, 74);

@@ -13,8 +13,7 @@ const MyBlockListForm = ({ categoryBlockList }) => {
                 <BlockDetail
                     key={block.id}
                     id={block.id}
-                    name={block.name}
-                    image={block.image}
+                    block={block}
                 />
             ))}
         </div>
