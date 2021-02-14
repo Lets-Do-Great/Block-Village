@@ -28,7 +28,7 @@
 
 .listForm {
 	clear: both;
-	display: inline-block;
+	display: block;
 	width: 95%;
 	height: auto;
 	margin: 0 auto;

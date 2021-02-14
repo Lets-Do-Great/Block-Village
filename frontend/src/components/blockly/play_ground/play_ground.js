@@ -11,6 +11,8 @@ const PlayGround = ({ javascript_code }) => {
     eval(javascript_code);
     console.log(move);
   };
+
+  let cur_location = [0, 0]
   
   
     // 함수
@@ -49,6 +51,21 @@ const PlayGround = ({ javascript_code }) => {
     var y = 0;
     var move = [];
     var cur_angle = 0;
+
+
+    //===new===========================================
+    var my_var1 = 0;
+    var my_var2 = 0;
+    var my_var3 = 0;
+    var my_var4 = 0;
+    
+    const move_forward = (text_distance) => {
+      x += text_distance * Math.cos(cur_angle);
+      y += text_distance * Math.sin(cur_angle);
+      cur_location = [x, y];
+      move.push([x, y]);
+    }
+ 
   
     const move_x = (x_distance) => {
       x += x_distance;
@@ -111,11 +128,7 @@ const PlayGround = ({ javascript_code }) => {
       move.push([x, y]);
     }
   
-    const move_forward = (text_distance) => {
-      x += text_distance * Math.cos(cur_angle);
-      y += text_distance * Math.sin(cur_angle);
-      move.push([x, y]);
-    }
+    
   
     // 판단
   /////////////////////////////////////////////////////////////////

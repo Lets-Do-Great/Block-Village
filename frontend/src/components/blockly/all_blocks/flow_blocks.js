@@ -374,3 +374,128 @@ Blockly.JavaScript['input_value'] = function(block) {
   var code = `case ${value_input}:${statements_actions}`;
   return code;
 };
+
+Blockly.Blocks['if_move'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["앞으로 갈 수 있다면","foward"], ["왼쪽으로 갈 수 있다면","left"], ["오른쪽으로 갈 수 있다면","right"]]), "opts");
+    this.appendStatementInput("actions")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['if_move'] = function(block) {
+  var dropdown_opts = block.getFieldValue('opts');
+  var statements_actions = Blockly.JavaScript.statementToCode(block, 'actions');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `if(${dropdown_opts} === "forward"){\n 
+    let tmp_x = x + Math.cos(cur_angle); \n
+    let tmp_y = y + Math.sin(cur_angle); \n
+    if(mission_map[tmp_x][tmp_y]){\n
+      ${statements_actions}\n
+    }\n
+    if(${dropdown_opts} === "left"){\n
+      let new_angle = cur_angle + 90 * Math.PI / 180;\n
+      let tmp_x = x + Math.cos(new_angle);\n
+      let tmp_y = y + Math.sin(new_angle);\n
+      if(mission_map[tmp_x][tmp_y]){\n
+        ${statements_actions}\n
+      }\n
+    }\n
+    if(${dropdown_opts} === "right"){\n
+      let new_angle = cur_angle - 90 * Math.PI / 180;\n
+      let tmp_x = x + Math.cos(new_angle);\n
+      let tmp_y = y + Math.sin(new_angle);\n
+      if(mission_map[tmp_x][tmp_y]){\n
+        ${statements_actions}\n
+      }\n
+    }\n
+  }\n`;
+  return code;
+};
+
+
+//만약 움직일수 있다면 그렇지 않다면
+Blockly.Blocks['if_else_move'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["앞으로 갈 수 있다면","foward"], ["왼쪽으로 갈 수 있다면","left"], ["오른쪽으로 갈 수 있다면","right"]]), "opts");
+    this.appendStatementInput("actions1")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("아니라면");
+    this.appendStatementInput("actions2")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['if_else_move'] = function(block) {
+  var dropdown_opts = block.getFieldValue('opts');
+  var statements_actions1 = Blockly.JavaScript.statementToCode(block, 'actions1');
+  var statements_actions2 = Blockly.JavaScript.statementToCode(block, 'actions2');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `if(${dropdown_opts} === "forward"){\n
+    let tmp_x = x + Math.cos(cur_angle);\n
+    let tmp_y = y + Math.sin(cur_angle);\n
+    if(mission_map[tmp_x][tmp_y]){\n
+      ${statements_actions1}\n
+    }\n
+    else{\n
+      ${statements_actions2}\n
+    }\n
+  }\n
+  if(${dropdown_opts} === "left"){\n
+    let new_angle = cur_angle + 90 * Math.PI / 180;\n
+    let tmp_x = x + Math.cos(new_angle);\n
+    let tmp_y = y + Math.sin(new_angle);\n
+    if(mission_map[tmp_x][tmp_y]){\n
+      ${statements_actions1}\n
+    }\n
+    else{\n
+      ${statements_actions2}\n
+    }\n
+  }\n
+  if(${dropdown_opts} === "right"){\n
+    let new_angle = cur_angle - 90 * Math.PI / 180;\n
+    let tmp_x = x + Math.cos(new_angle);\n
+    let tmp_y = y + Math.sin(new_angle);\n
+    if(mission_map[tmp_x][tmp_y]){\n
+      ${statements_actions1}\n
+    }\n
+    else{\n
+      ${statements_actions2}\n
+    }\n
+  }\n`;
+  return code;
+};
+
+
+// 목적지에 도달 할때 까지 반복
+Blockly.Blocks['do_done'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("도착할때까지 반복하기");
+    this.appendStatementInput("action")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setStyle('flow-blocks');
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['do_done'] = function(block) {
+  var statements_action = Blockly.JavaScript.statementToCode(block, 'action');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `while(cur_location != answer_location){\n ${statements_action}\n}`;
+  return code;
+};
