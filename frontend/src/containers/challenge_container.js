@@ -7,7 +7,6 @@ const ChallengeContainer = () => {
 
   // store에 있는 state와 dispatch 가져오는 작업
   const userInfo = useSelector(state => state.user.userInfo);
-  const allBlcoksInfo = useSelector(state => state.challenge.allBlcoksInfo);
   const challengeList = useSelector(state => state.challenge.challengeList);
   const dispatch = useDispatch();
 
@@ -22,28 +21,6 @@ const ChallengeContainer = () => {
   const getChallengeList = async () => {
     try{
       dispatch(ChallengeAction.getChallengeList({ email: userInfo.email }));
-    } catch(e) {
-      console.log(e);
-    }
-  }
-
-  // 특정 유저가 참가중인 챌린지 목록 불러오기
-  const getMyTodoChallengeList = async () => {
-    try{
-      dispatch(ChallengeAction.getMyChallengeList(
-        { email: userInfo.email, todo: 'todo'}
-      ));
-    } catch(e) {
-      console.log(e);
-    }
-  }
-
-  // 특정 유저가 참가중인 챌린지 목록 불러오기
-  const getMyDoneChallengeList = async () => {
-    try{
-      dispatch(ChallengeAction.getMyChallengeList(
-        { email: userInfo.email, todo: 'Done'}
-      ));
     } catch(e) {
       console.log(e);
     }
