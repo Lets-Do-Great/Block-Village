@@ -23,6 +23,7 @@ const AnswerModifySubmain = ({ selectedMission, setUseDifficulty, setUseContent,
     title: selectedMission.title,
     javascript: '',
     difficulty: selectedMission.difficulty,
+    imageUrl: selectedMission.imageUrl,
   });
 
   // useEffect(() => {

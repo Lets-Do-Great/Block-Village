@@ -21,6 +21,7 @@ const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, on
     title: selectedMission.title,
     javascript: '',
     difficulty: selectedMission.difficulty,
+    imageUrl: selectedMission.imageUrl
   });
 
   const onChangeXml = (e) => {

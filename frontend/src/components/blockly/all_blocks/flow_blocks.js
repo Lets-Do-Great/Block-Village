@@ -384,6 +384,7 @@ Blockly.Blocks['if_move'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(200);
+    this.setStyle('flow-blocks');
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -433,6 +434,7 @@ Blockly.Blocks['if_else_move'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(200);
+    this.setStyle('flow-blocks');
  this.setTooltip("");
  this.setHelpUrl("");
   }

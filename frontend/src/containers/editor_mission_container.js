@@ -20,7 +20,7 @@ const EditorMissionContainer = ( { type }) => {
   
   const onSetMission = async (e) => {
     const newXml = e.xmlCode.replace(/"/gi, '\\"');
-    console.log(e.startPosition);
+    console.log(e.imageUrl);
     try {
       setImageUrl(e.imageUrl);
 

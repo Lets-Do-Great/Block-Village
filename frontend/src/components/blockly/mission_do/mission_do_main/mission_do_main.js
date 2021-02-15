@@ -25,7 +25,7 @@ const MissionOnMain = ({ formInfo, myBlocksInfo, onChangeJavascript, onChangeXml
     endPosition,
     title,
     difficulty,
-    javascript,
+    javascript, imageUrl,
   } = formInfo;
   const toolboxCategories = myBlocksInfo;
 
@@ -132,6 +132,7 @@ const MissionOnMain = ({ formInfo, myBlocksInfo, onChangeJavascript, onChangeXml
                 endPosition={endPosition}
                 onChangeSuccess={onChangeSuccess}
                 onChangeFail={onChangeFail}
+                imageUrl={imageUrl}
               />
             </div>
           </Draggable>
