@@ -88,11 +88,11 @@ const Nav = ({ type }) => {
                 onClick={goToTutorial}
                 className={styles.nav_text}>튜토리얼</div>
             <div 
-                    onClick={goToBlockStore}
-                    className={styles.nav_text}>블록상점</div>
+                onClick={goToBlockStore}
+                className={styles.nav_text}>블록상점</div>
             <div 
-                    onClick={goToChallenge}
-                    className={styles.nav_text}>챌린지</div>
+                onClick={goToChallenge}
+                className={styles.nav_text}>챌린지</div>
             <div 
                 onClick={goToMakingMission}
                 className={styles.nav_text}>미션 제작</div>

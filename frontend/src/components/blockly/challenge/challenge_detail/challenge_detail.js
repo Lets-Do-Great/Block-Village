@@ -10,9 +10,9 @@ const ChallengeDetail = ({ id, img, setTodoChallenge, todo }) => {
   };
 
   const goToAnswer = () => {
-    history.push(`/main/challenge/answer`);
+    setTodoChallenge(id);
+    history.push(`/main/create/answer/challenge`);
   }
-
 
   return (
     <div className={styles.body}>
