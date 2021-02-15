@@ -1,12 +1,32 @@
-.select {
+.search_form{
+    display: inline;
+    width: auto;
+    height: auto;
+    float: right;
+    margin-right: 9%;
+}
+
+.select_sort_type {
     width: 80px;
     height: 40px;
     margin: 10px;
     border: 2px solid darkgray;
     border-radius: 10px;
+    float: left;
+    margin-left: 9%;
+}
+
+.select_search_form{
+    width: 80px;
+    height: 40px;
+    margin: 10px;
+    border: 2px solid darkgray;
+    border-radius: 10px;
+    float: left;
 }
 
 .option {
+    display: inline;
 }
 
 .input {
@@ -14,4 +34,5 @@
     height: 35px;
     border: 2px solid darkgray;
     border-radius: 10px;
+    margin: 10px;
 }

@@ -68,7 +68,7 @@ const AnswerModifySubmain = ({ selectedMission, setUseDifficulty, setUseContent,
           onSubmitDifficulty={onSubmitDifficulty}
           setUseDifficulty={setUseDifficulty}
           setUseContent={setUseContent}
-          selectedMission={selectedMission}
+          selectedAnswer={selectedAnswer}
         />
       }
       {failModal && 

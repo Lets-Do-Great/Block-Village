@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import { BsCheckCircle } from 'react-icons/bs';
 import { FaRegSmileBeam } from 'react-icons/fa';
 
-const AnswerModifySuccess = ({ onSubmitDifficulty, setUseDifficulty, setUseContent, selectedMission }) => {
+const AnswerModifySuccess = ({ onSubmitDifficulty, setUseDifficulty, setUseContent, selectedAnswer }) => {
   const formRef = useRef();
 
   const onSubmit = (event) => {
@@ -43,10 +43,10 @@ const AnswerModifySuccess = ({ onSubmitDifficulty, setUseDifficulty, setUseConte
     4.5: '4.5',
     5: '5',
   };
-  const [value, setValue] = React.useState(selectedMission.difficulty);
+  const [value, setValue] = React.useState(0);
   const [hover, setHover] = React.useState(-1);
 
-  const [content_value, setContent_value] = useState(selectedMission.content);
+  const [content_value, setContent_value] = useState(selectedAnswer.content);
   //=====================================================
   
   return (

@@ -7,7 +7,8 @@ const MyListCategory = ({ category, onChangeCategory, closeModal }) => {
     <div className={styles.my_list_category}>
         <div 
             className={styles.close}
-            onClick={closeModal}><Icon.MdHighlightOff/></div>
+            onClick={closeModal}>
+                <Icon.MdHighlightOff/></div>
         <div className={styles.tab_menus}>
             <ul className={styles.tabs}>
                 <li 

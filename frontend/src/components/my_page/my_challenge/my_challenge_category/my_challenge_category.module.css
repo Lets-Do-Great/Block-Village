@@ -1,4 +1,4 @@
-.my_list_category{
+.my_challenge_category{
     position: relative;
 }
 
@@ -14,6 +14,7 @@
 .close:hover{
     color: red;
 }
+
 
 .tab_menus {
     width: 92%;
@@ -33,7 +34,7 @@
 
 .tabs > li {
     display: block;
-    width: 30%;
+    width: 50%;
     height: 100%;
     padding: 0.5em 1em;
     margin: 0 1em;

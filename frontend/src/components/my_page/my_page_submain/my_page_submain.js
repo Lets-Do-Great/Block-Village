@@ -8,7 +8,7 @@ const MyPageSubmain = () => {
     info: 'my_page_basic_info_after',
     block: 'my_page_basic_block_after_2',
     mission: 'my_page_basic_mission_after_2',
-    project: 'my_page_basic_bed_after',
+    challenge: 'my_page_basic_bed_after',
   });
 
   const onChageBasic = () => {
@@ -18,7 +18,7 @@ const MyPageSubmain = () => {
       info: 'my_page_basic_info_after',
       block: 'my_page_basic_block_after_2',
       mission: 'my_page_basic_mission_after_2',
-      project: 'my_page_basic_bed_after',
+      challenge: 'my_page_basic_bed_after',
     })
   }
 
@@ -29,7 +29,7 @@ const MyPageSubmain = () => {
       info: 'my_page_sea_info_after',
       block: 'my_page_sea_block_after',
       mission: 'my_page_sea_mission_after',
-      project: 'my_page_sea_bed_after',
+      challenge: 'my_page_sea_bed_after',
     })
   }
 
@@ -40,7 +40,7 @@ const MyPageSubmain = () => {
       info: 'my_page_space_info_after',
       block: 'my_page_block_after',
       mission: 'my_page_space_mission_after',
-      project: 'my_page_space_bed_after',
+      challenge: 'my_page_space_bed_after',
     })
   }
 

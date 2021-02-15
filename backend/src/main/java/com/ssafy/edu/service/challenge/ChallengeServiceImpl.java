@@ -98,21 +98,23 @@ public class ChallengeServiceImpl implements ChallengeService{
     public ResponseEntity<ChallengeResponse> getUserChallengeList(String email, String todo) {
         ChallengeResponse result = new ChallengeResponse();
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
-        List<ChallengeUser> challengeList = challengeUsersJpaRepository.findByUserAndDoneOrderByIdDesc(userOpt.get(), todo);
-        if(!challengeList.isEmpty()){
+        if(userOpt.isPresent()) {
+            List<ChallengeUser> challengeList = challengeUsersJpaRepository.findByUserAndDoneOrderByIdDesc(userOpt.get(), todo);
             List<ChallengeListForm> challengeListFormList = new ArrayList<>();
-            for(ChallengeUser ch: challengeList){
-                Challenge tmpChallenge = ch.getChallenge();
-                ChallengeListForm tmpForm = ChallengeListForm.builder()
-                        .challengeId(tmpChallenge.getId())
-                        .title(tmpChallenge.getTitle())
-                        .image(tmpChallenge.getImage())
-                        .startDate(tmpChallenge.getStartDate())
-                        .endDate(tmpChallenge.getEndDate())
-                        .peopleCnt(tmpChallenge.getPeopleCnt())
-                        .finish(tmpChallenge.getFinish())
-                        .build();
-                challengeListFormList.add(tmpForm);
+            if (!challengeList.isEmpty()) {
+                for (ChallengeUser ch : challengeList) {
+                    Challenge tmpChallenge = ch.getChallenge();
+                    ChallengeListForm tmpForm = ChallengeListForm.builder()
+                            .challengeId(tmpChallenge.getId())
+                            .title(tmpChallenge.getTitle())
+                            .image(tmpChallenge.getImage())
+                            .startDate(tmpChallenge.getStartDate())
+                            .endDate(tmpChallenge.getEndDate())
+                            .peopleCnt(tmpChallenge.getPeopleCnt())
+                            .finish(tmpChallenge.getFinish())
+                            .build();
+                    challengeListFormList.add(tmpForm);
+                }
             }
             result.data = challengeListFormList;
             result.status = true;

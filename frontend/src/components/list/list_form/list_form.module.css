@@ -2,6 +2,7 @@
     width: 80px;
     height: 40px;
     margin: 10px;
+	margin-right: 9%;
     border: 2px solid darkgray;
 	border-radius: 10px;
 	display:inline;
@@ -14,11 +15,19 @@
 
 .modal_wrapper{
 	position : absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+}
+
+.modal {
+	position : absolute;
 	top: 50%;
 	left: 50%;
 	width: 50%;
 	height: 60%;
-	background: rgba(0,0,0,0.5);
 	display: inline-block;
 	align-items: center;
 	justify-content: center;

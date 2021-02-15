@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ListForm from '../components/list/list_form/list_form';
 import ComponentDetailCardForm from '../components/list/component_detail_card_form/component_detail_card_form';
 import CommentContainer from '../containers/comment_container';
+import Nav from '../components/nav/nav';
 import * as AnswerAction from '../modules/answer';
 
 const AnswerContainer = ({ match }) => {
@@ -91,7 +92,10 @@ const AnswerContainer = ({ match }) => {
 
 
     return (<>
-        { detail 
+        <Nav
+            type="answer"/>
+
+        { detail
         ? <><ComponentDetailCardForm
                 detail={selectedAnswer}
                 setLike={likeAnswer}
