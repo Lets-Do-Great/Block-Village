@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ChallengeServiceImpl implements ChallengeService{
@@ -139,12 +136,9 @@ public class ChallengeServiceImpl implements ChallengeService{
     }
 
     @Override
-    public ResponseEntity<ChallengeResponse> joinChallenge(ChallengeUserRequest challengeUserRequest, Long challengeId) {
-        SimpleDateFormat formatt = new SimpleDateFormat("yyyy-MM-dd");
-        String todate = formatt.format(new Date());
-
+    public ResponseEntity<ChallengeResponse> joinChallenge(String email, String todo, Long challengeId) throws ParseException {
         ChallengeResponse result = new ChallengeResponse();
-        Optional<User> userOpt = userJpaRepository.findByEmail(challengeUserRequest.getEmail());
+        Optional<User> userOpt = userJpaRepository.findByEmail(email);
         Optional<Challenge> challengeOpt = challengeJpaRepository.findById(challengeId);
 
         List<Challenge> AllChallengeList = challengeJpaRepository.findAllByOrderByIdDesc();
@@ -163,7 +157,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                 ChallengeUser challengeUser = ChallengeUser.builder()
                         .user(userOpt.get())
                         .challenge(challengeOpt.get())
-                        .done(challengeUserRequest.getTodo())
+                        .done(todo)
                         .build();
                 challengeUsersJpaRepository.save(challengeUser);
 
@@ -174,7 +168,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                         .startDate(challengeOpt.get().getStartDate())
                         .endDate(challengeOpt.get().getEndDate())
                         .peopleCnt(challengeOpt.get().getPeopleCnt() + 1)
-                        .todo(challengeUserRequest.getTodo())
+                        .todo(todo)
                         .finish(challengeOpt.get().getFinish())
                         .startPositionX(challengeOpt.get().getStartPositionX())
                         .startPositionY(challengeOpt.get().getStartPositionY())
@@ -192,7 +186,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                     result.status = false;
                 }
                 else{
-                    challengeUserOpt.get().setDone(challengeUserRequest.getTodo());
+                    challengeUserOpt.get().setDone(todo);
                     challengeUsersJpaRepository.save(challengeUserOpt.get());
 
                     ChallengeForm tmpForm = ChallengeForm.builder()
@@ -202,7 +196,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .startDate(challengeOpt.get().getStartDate())
                             .endDate(challengeOpt.get().getEndDate())
                             .peopleCnt(challengeOpt.get().getPeopleCnt())
-                            .todo(challengeUserRequest.getTodo())
+                            .todo(todo)
                             .finish(challengeOpt.get().getFinish())
                             .startPositionX(challengeOpt.get().getStartPositionX())
                             .startPositionY(challengeOpt.get().getStartPositionY())
@@ -212,15 +206,19 @@ public class ChallengeServiceImpl implements ChallengeService{
                     ret.setSelectedChallenge(tmpForm);
                 }
             }
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String today = format.format(Calendar.getInstance().getTime());
+
+            Date today_date = format.parse(today);
 
             // challengeList 생성
             for(Challenge ch: AllChallengeList){
                 Optional<ChallengeUser> tmp_challengeUserOpt = challengeUsersJpaRepository.findByChallengeAndUser(ch, userOpt.get());
                 ChallengeForm tmp_form;
 
-                Date todate_date = formatt.parse(todate);
-                Date end_date = formatt.parse(ch.getEndDate());
-                Date start_date = formatt.parse(ch.getStartDate());
+
+                Date end_date = format.parse(ch.getEndDate());
+                Date start_date = format.parse(ch.getStartDate());
 
                 if(tmp_challengeUserOpt.isPresent()) {
                     tmp_form = ChallengeForm.builder()
@@ -237,6 +235,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .endPositionX(ch.getEndPositionX())
                             .endPositionY(ch.getEndPositionY())
                             .build();
+
                 }
                 else{
                     tmp_form = ChallengeForm.builder()
@@ -254,7 +253,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .endPositionY(ch.getEndPositionY())
                             .build();
                 }
-                if (todate_date.getTime() > end_date.getTime() || start_date.getTime() > todate_date.getTime()) {
+                if (today_date.getTime() > end_date.getTime() || start_date.getTime() > today_date.getTime()) {
                     tmp_form.setTodo("disable");
                 }
                 challengeList.add(tmp_form);
