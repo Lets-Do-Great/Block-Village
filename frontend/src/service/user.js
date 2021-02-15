@@ -74,3 +74,12 @@ export const findPW = (email) => {
   });
 };
 
+// 마일리지 변경
+export const changeMileage = ({ email, mileage }) => {
+  return client({
+    url: `users/do/mileage`,
+    method: 'post',
+    data: { email, mileage },
+  })
+}
+

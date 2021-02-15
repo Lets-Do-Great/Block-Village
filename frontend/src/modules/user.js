@@ -12,7 +12,7 @@ const SIGN_UP = 'user/SIGN_UP';
 const MODIFY_INFO = 'user/MODIFY_INFO';
 const DELETE_INFO = 'user/DELETE_INFO';
 const FIND_PW = 'user/FIND_PW';
-// const MODIFY_PROFILE = 'user/MODIFY_PROFILE';
+const CHANGE_MILEAGE = 'user/CHANGE_MILEAGE';
 
 // 액션 객체 생성함수
 export const logIn = createAction(
@@ -47,6 +47,11 @@ export const deleteInfo = createAction(
   DELETE_INFO, 
   UserAPI.deleteUserInfo
 );
+
+export const changeMileage = createAction(
+  CHANGE_MILEAGE,
+  UserAPI.changeMileage
+)
 
 // 초기 상태
 const initialState = {
@@ -206,6 +211,40 @@ export default applyPenders(userReducer, [
     },
     onFailure: (state, action) => {
       return updateObject(state, state);
+    },
+  },
+  {
+    type: CHANGE_MILEAGE,
+    onSuccess: (state, action) => {
+      const response = action.payload;
+
+      if (response.status === 200) {
+        if (response.data.status) {
+          // 마일리지 변경 성공
+          localStorage.setItem('token', response.data.data.token);
+          client.defaults.headers.common['token'] = localStorage.getItem(
+            'token'
+          );
+          return updateObject(state, {
+            ...state,
+            userInfo: {
+              ...state.userInfo,
+              ...response.data.data,
+            },
+          });
+        } else {
+          // 마일리지 변경 실패
+          alert('마일리지 변경에 실패하였습니다.');
+        }
+      } else {
+        // 에러 발생
+        alert('마일리지 변경에 실패하였습니다.');
+        console.log(action.payload.status);
+      }
+      return updateObject(state, state);
+    },
+    onFailure: (state, action) => {
+      return updateObject(state, {});
     },
   },
 ]);

@@ -9,7 +9,7 @@ import BlockMenu from '../block_menu/block_menu';
 import StoreNavbar from '../store_navbar/store_navbar';
 import styles from './block_store.module.css'
 
-const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil, getAllBlocks, setModal }) => {
+const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil }) => {
   
   const [billList, setBillList] = useState([]);
   
@@ -18,16 +18,14 @@ const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil, getAllBlocks, setModa
     billList.map((item) => (
       buyList.push(item.id)
     ))
-    console.log(buyList);
-    onBuyBlocks(buyList)
-    // 마일리지 없애기 추가
-    // let sumMileage = 0;
-    // billList.map((item) => (
-      //   sumMileage += item.price
-      // ))
-    
-    setBillList([])
-    setModal(true)
+
+    let sumMileage = 0;
+    billList.map((item) => (
+      sumMileage += item.price
+    ))
+      
+    onBuyBlocks(buyList, sumMileage);
+    setBillList([]);
   };
 
   const [categoryStatus, setCategoryStatus] = useState([

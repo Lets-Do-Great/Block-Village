@@ -4,9 +4,9 @@ import styles from './block_menu.module.css'
 
 const BlockMenu = ({ addBillList, allBlocksInfo, category }) => {
   const [selectedCategory, setSelectedCategory] = useState(allBlocksInfo[`${category}`])
+  
   useEffect(() => { 
-    setSelectedCategory(allBlocksInfo[`${category}`])
-    console.log(allBlocksInfo);
+    setSelectedCategory(allBlocksInfo[`${category}`]);
   }, [allBlocksInfo, category]);
 
   return (

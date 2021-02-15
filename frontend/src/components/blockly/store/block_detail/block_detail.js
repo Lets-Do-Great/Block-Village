@@ -9,6 +9,10 @@ const BlockDetail = ({ block, addBillList }) => {
     item.style.background = `100%/100% no-repeat url(/images/block_dumy/${block.id}.png)`
   })
 
+  const onClick = () => {
+    addBillList(block);
+  }
+
   return (
     <div className={styles.body}>
       <div className={styles.container}>
@@ -27,7 +31,7 @@ const BlockDetail = ({ block, addBillList }) => {
 
         <div className={styles.overlay}></div>
 
-        <div className={styles.hide__button} onClick={() => addBillList(block)}>
+        <div className={styles.hide__button} onClick={onClick}>
           <a>목록에 담기</a>
         </div>
 
