@@ -25,7 +25,8 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
 
     // 회원가입 할 조건이 맞는지 확인하는 함수
     const onSubmitSignUp = () => {
-        if(validateNickName(nickname)   
+        if(validateEmail(emailId, emailSite)
+            &&validateNickName(nickname)   
             && validatePW(password) 
             && PWConfirm.check ){
                 signUp();
@@ -39,6 +40,16 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
             PW: e.target.value,
         });
     }   
+
+    // 이메일 입력했는지 확인하는 함수
+    const validateEmail = (emailId, emailSite) => {
+        if(emailId.length === 0 && emailSite.length === 0){
+            alert("이메일을 입력해주세요.");
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     // 닉네임 입력했는지 확인하는 함수
     const validateNickName = (nickName) => {
