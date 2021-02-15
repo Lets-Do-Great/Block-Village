@@ -46,7 +46,7 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
     }
 
     const goToAnswer = () => {
-        history.push(`/main/mission/answer`);
+        history.push(`/main/create/answer/mission`);
     }
 
     return (

@@ -49,13 +49,13 @@ const EditorAnswerContainer = ({ match }) => {
         missionId: selectedMission.id,
         difficulty: useDifficulty,
       }))
-      history.push(`/main/answer/${selectedMission.id}`)
+      history.push(`/main/answer/${selectedMission.id}`);
     } catch(e) {
       console.log(e);
     }
   };
 
-  const onSetAnswer = async () => {
+  const onSetMissionAnswer = async () => {
     const newXml = xmlCode.replace(/"/gi, '\"');
     try {
       await dispatch(AnswerAction.setAnswer({
@@ -70,6 +70,19 @@ const EditorAnswerContainer = ({ match }) => {
       }));
       onSetDifficultyMission();
       onSetTodoMission();
+    } catch(e) {
+      console.log(e);
+    }
+  };
+
+  const onSetChallengeAnswer = async () => {
+    try {
+      await dispatch(ChallengeAction.setTodoChallenge({
+        email: userInfo.email,
+        todo: "done",
+        challengeId: selectedChallenge.challengeId,
+      }));
+      history.push(`/main/challenge`)
     } catch(e) {
       console.log(e);
     }
@@ -91,14 +104,28 @@ const EditorAnswerContainer = ({ match }) => {
 
   return (
     <>
-      <MissionDoSubmain
-        selectedMission={selectedMission}
-        setUseDifficulty={setUseDifficulty}
-        setUseContent={setUseContent}
-        onSetAnswer={onSetAnswer}
-        onChangeXmlContainer={onChangeXmlContainer}
-        onChangeJavascriptContainer={onChangeJavascriptContainer}
-      />
+      { type === 'mission' &&
+        <MissionDoSubmain
+          type={type}
+          selectedMission={selectedMission}
+          setUseDifficulty={setUseDifficulty}
+          setUseContent={setUseContent}
+          onSetAnswer={onSetMissionAnswer}
+          onChangeXmlContainer={onChangeXmlContainer}
+          onChangeJavascriptContainer={onChangeJavascriptContainer}
+        />
+      }
+      { type === 'challenge' &&
+        <MissionDoSubmain
+          type={type}
+          selectedMission={selectedChallenge}
+          setUseDifficulty={setUseDifficulty}
+          setUseContent={setUseContent}
+          onSetAnswer={onSetChallengeAnswer}
+          onChangeXmlContainer={onChangeXmlContainer}
+          onChangeJavascriptContainer={onChangeJavascriptContainer}
+        />
+      }
     </>
   )
 }

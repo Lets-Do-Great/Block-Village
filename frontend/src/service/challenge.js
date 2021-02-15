@@ -25,8 +25,7 @@ export const getMyChallengeList = ({ email, todo }) => {
 // 현재 로그인한 유저가 챌린지 참여하기
 export const setTodoChallenge = ({ email, todo, challengeId }) => {
   return client({
-    url: `challenges/${challengeId}/joinchallenge`,
+    url: `challenges/${challengeId}/${email}/${todo}`,
     method: 'post',
-    data: { email, todo }
   });
 };
