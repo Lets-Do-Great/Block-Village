@@ -8,11 +8,39 @@ const Nav = ({ type }) => {
 
     const goToMain = () => {
         history.push('/main');
-    }
+    };
+
+    const goToBoard = () => {
+        history.push('/main/board');
+    };
+
+    const goToService = () => {
+        history.push('/main/service_introduction');
+    };
+    
+    const goToTutorial = () => {
+        history.push('/main/tutorial');
+    };
+
+    const goToMakingMission = () => {
+        history.push('/main/mission/create');
+    };
+    
+    const goToMissionList = () => {
+        history.push('/main/mission');
+    };
+    
+    const goToChallenge = () => {
+        history.push('/main/challenge');
+    };
+    
+    const goToBlockStore = () => {
+        history.push('/main/block_store');
+    };
     
     const goMyPage = () => {
-        history.push('/my_page')
-    }
+        history.push('/my_page');
+    };
 
     const nav_header = useRef();
 
@@ -39,11 +67,33 @@ const Nav = ({ type }) => {
             className={styles.logo_img} src="/images/logo1.png" />
 
         <div className={styles.title}>
-            { type === "challenge" && "챌린지에 도전해봐요" }
+            {/* { type === "challenge" && "챌린지에 도전해봐요" } */}
             {/* { type === "my_page" && "마이페이지" } */}
-            { type === "mission" && "미션을 정복해봐요" }
-            { type === "board" && "일단 여기는 게시판" }
-            { type === "answer" && "일단 여기는 답안 리스트"}
+            {/* { type === "mission" && "미션을 정복해봐요" } */}
+            {/* { type === "board" && "일단 여기는 게시판" } */}
+            {/* { type === "answer" && "일단 여기는 답안 리스트"} */}
+
+            <div 
+                onClick={goToBoard}
+                className={styles.nav_text}>공지사항</div>
+            <div 
+                onClick={goToService}
+                className={styles.nav_text}>서비스 소개</div>
+            <div 
+                onClick={goToTutorial}
+                className={styles.nav_text}>튜토리얼</div>
+            <div 
+                    onClick={goToBlockStore}
+                    className={styles.nav_text}>블록상점</div>
+            <div 
+                    onClick={goToChallenge}
+                    className={styles.nav_text}>챌린지</div>
+            <div 
+                onClick={goToMakingMission}
+                className={styles.nav_text}>미션 제작</div>
+            <div 
+                onClick={goToMissionList}
+                className={styles.nav_text}>미션 목록</div>
         </div>
 
         <div className={styles.user_icon} onClick={goMyPage}>

@@ -113,3 +113,11 @@
 .title {
   color: #fff;
 }
+
+.nav_text {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(71, 71, 71);
+  display: inline-block;
+  width: 100px;
+}
