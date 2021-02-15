@@ -104,6 +104,7 @@ public class ChallengeServiceImpl implements ChallengeService{
     public ResponseEntity<ChallengeResponse> getUserChallengeList(String email, String todo) {
         ChallengeResponse result = new ChallengeResponse();
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
+
         if(userOpt.isPresent()) {
             List<ChallengeUser> challengeList = challengeUsersJpaRepository.findByUserAndDoneOrderByIdDesc(userOpt.get(), todo);
             List<ChallengeListForm> challengeListFormList = new ArrayList<>();
@@ -111,6 +112,7 @@ public class ChallengeServiceImpl implements ChallengeService{
             if (!challengeList.isEmpty()) {
                 for (ChallengeUser ch : challengeList) {
                     Challenge tmpChallenge = ch.getChallenge();
+
                     ChallengeListForm tmpForm = ChallengeListForm.builder()
                             .challengeId(tmpChallenge.getId())
                             .title(tmpChallenge.getTitle())
@@ -124,6 +126,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .endPositionX(tmpChallenge.getEndPositionX())
                             .endPositionY(tmpChallenge.getEndPositionY())
                             .build();
+
                     challengeListFormList.add(tmpForm);
                 }
             }
@@ -137,6 +140,9 @@ public class ChallengeServiceImpl implements ChallengeService{
 
     @Override
     public ResponseEntity<ChallengeResponse> joinChallenge(ChallengeUserRequest challengeUserRequest, Long challengeId) {
+        SimpleDateFormat formatt = new SimpleDateFormat("yyyy-MM-dd");
+        String todate = formatt.format(new Date());
+
         ChallengeResponse result = new ChallengeResponse();
         Optional<User> userOpt = userJpaRepository.findByEmail(challengeUserRequest.getEmail());
         Optional<Challenge> challengeOpt = challengeJpaRepository.findById(challengeId);
@@ -150,7 +156,6 @@ public class ChallengeServiceImpl implements ChallengeService{
             if(!challengeOpt.get().getFinish()){
                 result.status = false;
             }
-
             // selectedChallenge 생성
             Optional<ChallengeUser> challengeUserOpt = challengeUsersJpaRepository.findByChallengeAndUser(challengeOpt.get(), userOpt.get());
 
@@ -212,6 +217,11 @@ public class ChallengeServiceImpl implements ChallengeService{
             for(Challenge ch: AllChallengeList){
                 Optional<ChallengeUser> tmp_challengeUserOpt = challengeUsersJpaRepository.findByChallengeAndUser(ch, userOpt.get());
                 ChallengeForm tmp_form;
+
+                Date todate_date = formatt.parse(todate);
+                Date end_date = formatt.parse(ch.getEndDate());
+                Date start_date = formatt.parse(ch.getStartDate());
+
                 if(tmp_challengeUserOpt.isPresent()) {
                     tmp_form = ChallengeForm.builder()
                             .challengeId(ch.getId())
@@ -243,6 +253,9 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .endPositionX(ch.getEndPositionX())
                             .endPositionY(ch.getEndPositionY())
                             .build();
+                }
+                if (todate_date.getTime() > end_date.getTime() || start_date.getTime() > todate_date.getTime()) {
+                    tmp_form.setTodo("disable");
                 }
                 challengeList.add(tmp_form);
             }
