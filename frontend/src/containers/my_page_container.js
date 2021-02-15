@@ -73,11 +73,15 @@ const MyPageContainer = ({ closeModal }) => {
   /* api 요청을 보낼 함수 */
   // 정보수정 요청
   const modifyInfo = async () => {
-    try {
-      await dispatch(UserAction.modifyInfo(modifyInput));
-      setType('read');
-    } catch (e) {
-      console.log(e);
+    if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(modifyInput.newPassword)){
+      alert("비밀번호는 숫자, 영문자, 특수문자 조합으로 8자리 이상 이여야 합니다.");
+    }else {
+      try {
+        await dispatch(UserAction.modifyInfo(modifyInput));
+        setType('read');
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
