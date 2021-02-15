@@ -24,7 +24,7 @@ const ComponentDetailCardForm = ({ detail, setLike, setDislike,
                             userInfo, closeDetail, onDelete, onModify }) => {
 
     const {email, nickname, title, created_at, updated_at, favorite,
-        content, difficulty, likeCnt, readCnt, xmlCode, javascriptCode } = detail;
+        content, commentCnt, likeCnt, readCnt, xmlCode, javascriptCode } = detail;
     const history = useHistory();
     const selectedAnswer = useSelector(state => state.answer.selectedAnswer);
     
@@ -150,10 +150,7 @@ const ComponentDetailCardForm = ({ detail, setLike, setDislike,
                 <Icon.MdAccountCircle/>{ nickname }
               </div>
               <div className={styles.icon}>
-                  <Icon.MdEdit/>{ created_at } / { updated_at }
-              </div>
-              <div className={styles.icon}>
-                  <Icon.MdAssistantPhoto/>{ difficulty }
+                  <Icon.MdChatBubbleOutline/>{ commentCnt }
               </div>
               <div className={styles.icon}>
                   <Icon.MdFace/>{ readCnt }
