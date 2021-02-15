@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MissionDoSubmain from '../components/blockly/mission_do/mission_do_submain/mission_do_submain';
 import * as MissionAction from '../modules/mission';
+import * as ChallengeAction from '../modules/challenge';
 import * as AnswerAction from '../modules/answer';
 import * as BlockAction from '../modules/block';
 import { useHistory } from 'react-router-dom';
 
-const EditorAnswerContainer = () => {
+const EditorAnswerContainer = ({ match }) => {
+  const { type } = match.params;
   const history = useHistory();
 
   const [useDifficulty, setUseDifficulty] = useState(0);
@@ -25,6 +27,7 @@ const EditorAnswerContainer = () => {
   // 정답에 대한 info는 pros로 가져올 것.
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
+  const selectedChallenge = useSelector(state => state.challenge.selectedChallenge);
   const dispatch = useDispatch();
 
   const onSetTodoMission = async () => {
