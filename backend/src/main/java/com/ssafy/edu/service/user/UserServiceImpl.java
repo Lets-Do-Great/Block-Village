@@ -262,8 +262,16 @@ public class UserServiceImpl implements UserService {
                     .build();
             userOpt.get().setMileage(userOpt.get().getMileage() + mileageRequest.getMileage());
             User save = userJpaRepository.save(userOpt.get());
-            result.data = loginResponse;
+
+            String token = jwtServiceImpl.createToken(loginResponse);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("userInfo", loginResponse);
+            map.put("token", token);
+
+            result.data = map;
             result.status = true;
+
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         result.status = false;
