@@ -7,12 +7,24 @@ var y = 0;
 var move = [];
 var cur_angle = 0;
 
-const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, javascript_code, onChangeStep }) => {
+const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, javascript_code, onChangeStep, onChangeImage, imageUrl }) => {
+  const inputRef = useRef();
+  const back_img_ref = useRef();
+
+  const onButtonClick = (event) => {
+    event.preventDefault();
+    inputRef.current.click();
+  }
+
   const fieldchar = useRef();
   const item = fieldchar.current;
 
-  const image_x = startPosition[0];
-  const image_y = startPosition[1];
+  // const image_x = startPosition[0];
+  // const image_y = startPosition[1];
+  const [image_x, setImage_x] = useState(startPosition[0]);
+  const [image_y, setImage_y] = useState(startPosition[1]);
+
+  
 
   // const [moveStep, setMoveStep] = useState(move);
   
@@ -24,15 +36,36 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
 
     let xx = image_x;
     let yy = image_y;
+
+    let dir_x = 0;
+    let dir_y = 0;
     
     const timer = ms => new Promise(res => setTimeout(res, ms))
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
-        
+
+        const new_dir_x = Math.round(move[i][0] - dir_x);
+        const new_dir_y = Math.round(move[i][1] - dir_y);
+        if (new_dir_x > 0 && new_dir_y == 0) {
+          item.setAttribute('src', `/images/character/character_right.png`)
+        } else if (new_dir_x < 0 && new_dir_y == 0) {
+          item.setAttribute('src', `/images/character/character_left.png`)
+        } else if (new_dir_x == 0 && new_dir_y > 0) {
+          item.setAttribute('src', `/images/character/character_back.png`)
+        } else {
+          item.setAttribute('src', `/images/character/character_front.png`)
+        }
+        console.log(dir_x, dir_y);
+        dir_x = move[i][0];
+        dir_y = move[i][1];
+        await timer(500);
+
+
+
         const new_move_x = move[i][0]
         const new_move_y = move[i][1]
-        xx = image_x + (new_move_x * 60)
-        yy = image_y - (new_move_y * 60)
+        xx = image_x + (new_move_x * 50)
+        yy = image_y - (new_move_y * 50)
         
         item.style.left = `${xx}px`;
         item.style.top = `${yy}px`;
@@ -53,29 +86,39 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
   };
   
   useEffect(() => {
+    if (imageUrl) {
+      const imgUrl = URL.createObjectURL(imageUrl)
+      back_img_ref.current.style.background = `url(${imgUrl}) center/cover`
 
+      const item = fieldchar.current; 
+      
+      item.setAttribute('className', `image`)
+      item.setAttribute('src', `/images/character/character_right.png`)
+      item.style.position = 'absolute';
+      
+      setImage_x((startPosition[0]) + 10)
+      setImage_y((startPosition[1]) + 10)
+      item.style.transform = `translate(-50%, -50%)`
+      
+      item.style.left = `${(startPosition[0]) + 10}px`;
+      item.style.top = `${(startPosition[1]) + 10}px`;
+    }
     setMoveStep(move);
-    const item = fieldchar.current; 
-    
-    item.setAttribute('className', `image`)
-    item.setAttribute('src', `/images/bug.png`)
-    
-    item.style.position = 'absolute';
-    item.style.left = `${endPosition[0]}px`;
-    item.style.top = `${endPosition[1]}px`;
-    
-    // return () => {
     move = [];
-    x = 0;
-    y = 0;
+      x = 0;
+      y = 0;
     cur_angle = 0;
-    // }
-  }, [])
+  }, [imageUrl])
   
   
     // 함수
   /////////////////////////////////////////////////////////////////
   var my_var = 0;  
+  var my_var1 = 0;
+  var my_var2 = 0;
+  var my_var3 = 0;
+  var my_var4 = 0;
+
   const set_var = (value_variable) => {
     my_var = value_variable;
   }
@@ -324,23 +367,46 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
 
   return (
     <div className={styles.body}>
-      <section className={styles.game}>
-        <img ref={fieldchar}></img>
-      </section>
-      <footer className={styles.footer}>
-        <div 
-          onClick={playGame}
-          className={styles.game__button}
-        >
-          <FaRegPlayCircle size="60" color="#c30d23"/>
-        </div>
-        <div 
-          onClick={setfirstPosition}
-          className={styles.return__button}
-        >
-          <FaRedoAlt size="55" color="#1060FF"/>
-        </div>
-      </footer>
+      {imageUrl
+        ? (
+            <>
+              <section className={styles.game} ref={back_img_ref}>
+                <img ref={fieldchar}></img>
+              </section>
+              <footer className={styles.footer}>
+                <div 
+                  onClick={playGame}
+                  className={styles.game__button}
+                >
+                  <FaRegPlayCircle size="60" color="#c30d23"/>
+                </div>
+                <div 
+                  onClick={setfirstPosition}
+                  className={styles.return__button}
+                >
+                  <FaRedoAlt size="55" color="#1060FF"/>
+                </div>
+              </footer>
+            </>
+          )
+        : (
+            <section className={styles.input_img}>
+              <input
+                ref={inputRef}
+                className={styles.input}
+                type="file"
+                name="imageUrl"
+                onChange={onChangeImage}
+              />
+              <button 
+                className={styles.button} 
+                onClick={onButtonClick}
+              >
+                {imageUrl || 'No file'}
+              </button>
+            </section>
+          )
+      }
     </div>
   )
 }

@@ -11,20 +11,27 @@
   /* -moz-border-radius: 7px;
   -khtml-border-radius: 7px;
   -webkit-border-radius: 7px; */
-  background: url(../../../../images/main/main_background_image3.png)
-    center/cover;
+  /* background: url(../../../../images/main/main_background_image3.png)
+    center/cover; */
 }
 
-/* .game__bug {
-  width: 100%;
-  height: 100%;
-} */
+.input {
+  display: none;
+}
 
-/* .footer {
+.button {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-} */
+  background-color: makerLightGrey;
+  font-weight: bold;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  font-size: 0.8rem;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
 
 .game__button {
   position: absolute;
