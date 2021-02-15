@@ -4,11 +4,13 @@ import styles from './my_info_modify_form.module.css'
 const MyInfoModifyLeft = ({ modifyInput, onChangeModify, onDeleteProfileImage }) => {
   const { profileImage } = modifyInput;
 
+  const imgUrl = URL.createObjectURL(profileImage)
+
   return (
     <div className={styles.my_info_left}>
       <img 
         className={styles.profile_img} 
-        src={profileImage}/>
+        src={imgUrl}/>
       <input 
         className={styles.edit_file}
         type="file" 
