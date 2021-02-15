@@ -1,8 +1,10 @@
 import React from 'react';
+import Nav from '../../nav/nav';
 import styles from './service_main.module.css'
 
 const ServiceMain = () => {
-  return (
+  return (<>
+    <Nav type="service" />
     <div className={styles.body}>
       <div className={styles.container}>
 
@@ -124,6 +126,7 @@ const ServiceMain = () => {
 
       </div>
     </div>
+    </>
   )
 }
 

@@ -12,6 +12,10 @@ const TutorialNavbar1 = ({ title, modal, retutorial, statusModal, icon_status })
     statusModal();
   };
 
+  const goToMain = () => {
+    history.push('/main');
+  };
+
   return (
     <header className={styles.navbar}>
 
@@ -36,7 +40,9 @@ const TutorialNavbar1 = ({ title, modal, retutorial, statusModal, icon_status })
         }
       </div>
    
-      <img className={styles.logo_img} src="/images/logo1.png" />
+      <img 
+        onClick={goToMain}
+        className={styles.logo_img} src="/images/logo1.png" />
 
       <h1 className={styles.title}>{ title }</h1>
 

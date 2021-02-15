@@ -57,6 +57,10 @@ const Nav = ({ type }) => {
             nav_header.current.className = styles.navbar_board;
         } else if(type === 'answer'){
             nav_header.current.className = styles.navbar_answer;
+        } else if(type === 'store'){
+            nav_header.current.className = styles.navbar_store;
+        } else if(type === 'service'){
+            nav_header.current.className = styles.navbar_service;
         }
     }, []);
 
@@ -72,6 +76,7 @@ const Nav = ({ type }) => {
             {/* { type === "mission" && "미션을 정복해봐요" } */}
             {/* { type === "board" && "일단 여기는 게시판" } */}
             {/* { type === "answer" && "일단 여기는 답안 리스트"} */}
+            {/* { type === "store" && "블록상점"} */}
 
             <div 
                 onClick={goToBoard}

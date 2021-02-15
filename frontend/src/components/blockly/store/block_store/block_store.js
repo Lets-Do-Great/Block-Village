@@ -6,7 +6,7 @@ import BlockBillContainer from '../block_bill_container/block_bill_container';
 import BlockBillFooter from '../block_bill_footer/block_bill_footer';
 import BlockCategory from '../block_category/block_category';
 import BlockMenu from '../block_menu/block_menu';
-import StoreNavbar from '../store_navbar/store_navbar';
+import Nav from '../../../nav/nav';
 import styles from './block_store.module.css'
 
 const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil }) => {
@@ -80,7 +80,7 @@ const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil }) => {
 
   return (
     <div className={styles.body}>
-      <StoreNavbar />
+      <Nav type="store"/>
       <div className={styles.container}>
 
 
