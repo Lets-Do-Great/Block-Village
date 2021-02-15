@@ -29,6 +29,7 @@ const MissionCreateMain = ({ formInfo, myBlocksInfo, onChangeModal,
   } = formInfo;
   const toolboxCategories = myBlocksInfo
 
+
   const [activeDrags, setActiveDrags] = useState(0);
   const [modal, setModal] = useState(true);
   const [javascript, setJavascript] = useState();
@@ -146,6 +147,8 @@ const MissionCreateMain = ({ formInfo, myBlocksInfo, onChangeModal,
                 startPosition={startPosition}
                 endPosition={endPosition}
                 onChangeStep={onChangeStep}  
+                onChangeImage={onChangeImage}
+                imageUrl={formInfo.imageUrl}
               />
             </div>
           </Draggable>

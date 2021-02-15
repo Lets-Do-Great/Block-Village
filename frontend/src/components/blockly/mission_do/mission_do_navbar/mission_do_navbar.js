@@ -23,10 +23,6 @@ const MissionDoNavbar = ({ modal, statusModal, title, difficulty }) => {
 
 
       <h1 className={styles.title}>{title}</h1>
-      {/* <h1 className={styles.title}>{difficulty}</h1> */}
-      <div className={styles.save_button}>
-        <FaRegSave size="50" color="#FFFFFF" />
-      </div>
       <div className={styles.modal_button} onClick={onoffModal}>
         {modal
           ? <BsDisplayFill size="50" color="#FFFFFF" />

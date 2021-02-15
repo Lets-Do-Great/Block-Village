@@ -2,13 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './mission_do_playground.module.css';
 import { FaRegPlayCircle } from 'react-icons/fa';
 
-const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onChangeSuccess, onChangeFail }) => {
+const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, 
+  onChangeSuccess, onChangeFail, imageUrl }) => {
   var x = 0;
   var y = 0;
   var move = [];
   var cur_angle = 0;
 
   const fieldchar = useRef();
+  const back_img_ref = useRef();
   const item = fieldchar.current;
 
   const [image_x, setImage_x] = useState(startPosition[0]);
@@ -23,11 +25,32 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
     let x = image_x;
     let y = image_y;
 
+    let dir_x = 0;
+    let dir_y = 0;
+
     const timer = ms => new Promise(res => setTimeout(res, ms))
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
-        x = image_x + (move[i][0] * 60)
-        y = image_y - (move[i][1] * 60)
+
+        const new_dir_x = move[i][0] - dir_x;
+        const new_dir_y = move[i][1] - dir_y;
+        if (new_dir_x > 0 && new_dir_y == 0) {
+          item.setAttribute('src', `/images/character/character_right.png`)
+        } else if (new_dir_x < 0 && new_dir_y == 0) {
+          item.setAttribute('src', `/images/character/character_left.png`)
+        } else if (new_dir_x == 0 && new_dir_y > 0) {
+          item.setAttribute('src', `/images/character/character_back.png`)
+        } else {
+          item.setAttribute('src', `/images/character/character_front.png`)
+        }
+        console.log(dir_x, dir_y);
+        dir_x = move[i][0];
+        dir_y = move[i][1];
+        await timer(500);
+
+
+        x = image_x + (move[i][0] * 50)
+        y = image_y - (move[i][1] * 50)
 
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
@@ -50,18 +73,32 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
   };
 
   useEffect(() => {
+    console.log(imageUrl);
+    
     const item = fieldchar.current; 
     item.setAttribute('className', `image`)
-    item.setAttribute('src', `/images/bug.png`)
+    item.setAttribute('src', `/images/character/character_right.png`)
     item.style.position = 'absolute';
     item.style.left = `${image_x}px`;
     item.style.top = `${image_y}px`;
+
+    
   })
+
+  useEffect(() => {
+    // const imgUrl = URL.createObjectURL(imageUrl)
+    back_img_ref.current.style.background = `url(${imageUrl}) center/cover`
+  }, [])
   
   
     // 함수
   /////////////////////////////////////////////////////////////////
   var my_var = 0;  
+  var my_var1 = 0;
+  var my_var2 = 0;
+  var my_var3 = 0;
+  var my_var4 = 0;
+
   const set_var = (value_variable) => {
     my_var = value_variable;
   }
@@ -311,7 +348,7 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, onCh
 
   return (
     <div className={styles.body}>
-      <section className={styles.game}r>
+      <section className={styles.game} ref={back_img_ref}>
         <img ref={fieldchar}></img>
       </section>
       <footer className={styles.footer}>
