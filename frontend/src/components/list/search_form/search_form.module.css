@@ -3,7 +3,7 @@
     width: auto;
     height: auto;
     float: right;
-    margin-right: 9%;
+    margin-right: 3%;
     line-height: 35px;
 }
 
@@ -14,7 +14,7 @@
     border: 2px solid darkgray;
     border-radius: 10px;
     float: left;
-    margin-left: 9%;
+    margin-left: 3%;
 }
 
 .select_search_form{
