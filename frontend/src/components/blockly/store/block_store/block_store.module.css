@@ -9,11 +9,13 @@
   display: flex;
   flex: 1;
   padding: 0.8em;
-  max-height: 90%;
+  max-height: 850px;
+  /* max-width: 1450px;
+  width: 1400; */
 }
 
 .bill {
-  flex-basis: 35%;
+  flex-basis: 30%;
   padding: 2em 2em;
   background: url(../../../../images/block_store/block_store_receipt.png);
   background-size: 100% 100%;
@@ -46,16 +48,16 @@
 }
 
 .blocks {
-  flex-basis: 65%;
+  flex-basis: 70%;
   display: flex;
 }
 
 .cataBody {
-  flex-basis: 15%;
+  flex-basis: 12%;
 }
 
 .store_body {
-  flex-basis: 85%;
+  flex-basis: 88%;
 }
 
 .shelf {

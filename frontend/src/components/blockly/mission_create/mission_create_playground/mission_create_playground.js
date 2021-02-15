@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './mission_create_playground.module.css';
 import { FaRegPlayCircle, FaRedoAlt } from 'react-icons/fa';
+import { ImFolderDownload } from 'react-icons/im';
+
 
 var x = 0;
 var y = 0;
@@ -402,7 +404,10 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
                 className={styles.button} 
                 onClick={onButtonClick}
               >
-                {imageUrl || 'No file'}
+                <div className={styles.download_icon}>
+                  <ImFolderDownload size="25"/>
+                </div>
+                이미지 넣기
               </button>
             </section>
           )

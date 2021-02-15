@@ -2,10 +2,10 @@ import React from 'react';
 import BlockBill from '../block_bill/block_bill';
 
 const BlockBillContainer = ({ billList, onDeleteBillList }) => {
-  // console.log(billList);
+  // console.log(billList.reverse());
   return (
     <>
-      {billList.map((blist) => (
+      {billList.reverse().map((blist) => (
         <BlockBill 
           key={blist.id}
           blist={blist}
