@@ -3,10 +3,16 @@ package com.ssafy.edu.model.challenge;
 
 import lombok.*;
 
+import javax.validation.Valid;
+
 
 @Getter
 @Setter
 @Builder
+@Valid
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChallengeForm {
     Long challengeId;
     String title;
@@ -16,4 +22,8 @@ public class ChallengeForm {
     Long peopleCnt;
     Boolean finish;
     String todo;
+    int startPositionX;
+    int startPositionY;
+    int endPositionX;
+    int endPositionY;
 }
