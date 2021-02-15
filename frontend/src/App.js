@@ -116,7 +116,7 @@ function App() {
         <Route exact path="/main/challenge">
           <ChallengeContainer />
         </Route>
-        <Route exact path="/main/challenge/answer/">
+        <Route exact path="/main/challenge/answer">
           <MissionMaze />
         </Route>
 
@@ -124,7 +124,7 @@ function App() {
 
         <Route exact path="/main/answer/:id" component={AnswerContainer}/>
 
-        <Route exact path="/main/board/">
+        <Route exact path="/main/board">
           <BoardContainer />
         </Route>
 

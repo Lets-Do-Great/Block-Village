@@ -20,8 +20,8 @@ const MyPageNavbar = ({ onChageBasic, onChageSea, onChageSpace }) => {
 
   const goToMain = () => {
     history.push('/main');
-  }
-
+  };
+  
   //==========theme======================================
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
