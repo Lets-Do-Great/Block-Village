@@ -4,8 +4,11 @@ import MissionDoSubmain from '../components/blockly/mission_do/mission_do_submai
 import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
 import * as BlockAction from '../modules/block';
+import { useHistory } from 'react-router-dom';
 
 const EditorAnswerContainer = () => {
+  const history = useHistory();
+
   const [useDifficulty, setUseDifficulty] = useState(0);
   const [useContent, setUseContent] = useState('');
   const [javascriptCode, setJavascriptCode] = useState('');
@@ -43,6 +46,7 @@ const EditorAnswerContainer = () => {
         missionId: selectedMission.id,
         difficulty: useDifficulty,
       }))
+      history.push(`/main/answer/${selectedMission.id}`)
     } catch(e) {
       console.log(e);
     }
@@ -58,8 +62,8 @@ const EditorAnswerContainer = () => {
         title: `${userInfo.nickname}님의 ${selectedMission.id}번 미션 답안`,
         javascriptCode: javascriptCode,
         xmlCode: newXml,
-        startPositionX: selectedMission.startPosisionX,
-        startPosisionY: selectedMission.startPosisionY,
+        startPositionX: selectedMission.startPositionX,
+        startPositionY: selectedMission.startPositionY,
       }));
       onSetDifficultyMission();
       onSetTodoMission();

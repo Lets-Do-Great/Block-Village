@@ -40,7 +40,7 @@ const ServiceMain = () => {
 
 
           <div className={styles.section}>
-            <img src="/images/main/main_participate_mission_image_after.png" width="317" height="219" />
+            <img src="/images/service_intro/service_main_img_4.png" width="317" height="219" />
             <div className={styles.content_1}>
               <span className={styles.content_1_title}>미션 깨기</span>
               <span className={styles.content_sub_title}>블록 코딩을 이용한 학습공간</span>
@@ -68,13 +68,13 @@ const ServiceMain = () => {
               프로그래밍의 원리를 자연스럽게 익힐 수 있습니다.<br/>
               </div>
             </div>
-            <img src="/images/main/main_make_mission_image_after.png" width="317" height="219" />
+            <img src="/images/service_intro/service_main_img_3.png" width="317" height="219" />
           </div>
 
 
 
           <div className={styles.section}>
-            <img src="https://playentry.org/img/assets/about/entry_1.png" width="317" height="219" />
+            <img src="/images/service_intro/service_main_img_5.png" width="317" height="219" />
             <div className={styles.content_1}>
               <span className={styles.content_1_title}>공유하기</span>
               <span className={styles.content_sub_title}>다양한 생각과 접근</span>
@@ -101,13 +101,13 @@ const ServiceMain = () => {
               재미를 주는 블록 마을의 가장 큰 축제가 될 것입니다.<br/>
               </div>
             </div>
-            <img src="/images/main/main_challenge_image_after.png" width="317" height="219" />
+            <img src="/images/service_intro/service_main_img_2.png" width="317" height="219" />
           </div>
 
 
 
           <div className={styles.section}>
-            <img src="/images/main/main_store_image_before.png" width="317" height="219" />
+            <img src="/images/service_intro/service_main_img_1.png" width="317" height="219" />
             <div className={styles.content_1}>
               <span className={styles.content_1_title}>블록상점</span>
               <span className={styles.content_sub_title}>동기부여와 성취감</span>
