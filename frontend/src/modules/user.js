@@ -229,7 +229,7 @@ export default applyPenders(userReducer, [
             ...state,
             userInfo: {
               ...state.userInfo,
-              ...response.data.data,
+              ...response.data.data.userInfo,
             },
           });
         } else {

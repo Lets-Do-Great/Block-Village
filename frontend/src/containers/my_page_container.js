@@ -83,11 +83,13 @@ const MyPageContainer = ({ closeModal }) => {
 
   // 탈퇴 요청
   const deleteInfo = async () => {
-    try {
-      await dispatch(UserAction.deleteInfo(userInfo.email));
-      history.push('/');
-    } catch (e) {
-      console.log(e);
+    if(window.confirm("정말 탈퇴하시겠습니까?")){
+      try {
+        await dispatch(UserAction.deleteInfo(userInfo.email));
+        history.push('/');
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
