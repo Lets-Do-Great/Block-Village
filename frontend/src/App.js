@@ -21,6 +21,7 @@ import UserInfoFromToken from './containers/user_info_from_token';
 import client from './service/client'
 import MyPageSubmain from './components/my_page/my_page_submain/my_page_submain';
 import ServiceMain from './components/service_intro/service_main/service_main';
+import ModifyAnswerContainer from './containers/modify_answer_container';
 
 function App() {
   const history = useHistory();
@@ -103,6 +104,9 @@ function App() {
         </Route>
         <Route exact path="/main/mission/answer">
           <EditorAnswerContainer />
+        </Route>
+        <Route exact path="/main/mission/answer_modify">
+          <ModifyAnswerContainer />
         </Route>
 
 

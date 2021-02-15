@@ -94,9 +94,7 @@ const MissionCreateMain = ({ formInfo, myBlocksInfo, onChangeModal,
 
   const workspaceDidChange = (workspace) => {
     // save 형태
-    console.log(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)));
     onChangeXml(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)))
-    console.log(Blockly.JavaScript.workspaceToCode(workspace));
     setJavascript(Blockly.JavaScript.workspaceToCode(workspace))
   };
 
