@@ -5,6 +5,12 @@ const FindPWForm = ({ onChangeFindFW, findPW, findPWInput }) => {
 
     const { email } = findPWInput;
 
+    const onEnter = (e) => {
+      if(e.keyCode === 13){
+        onSubmitFindPW();
+      }
+    }
+
     const onSubmitFindPW = () => {
         if(validateEmail(email)) findPW();
     }
@@ -31,6 +37,7 @@ const FindPWForm = ({ onChangeFindFW, findPW, findPWInput }) => {
         type="email"
         name="email"
         value={email}
+        onKeyUp={onEnter}
         onChange={onChangeFindFW}
         placeholder="이메일"
       /><br/>

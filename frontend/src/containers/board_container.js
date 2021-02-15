@@ -61,6 +61,8 @@ const BoardContainer = () => {
     useEffect(() => {
         if(detail){
             getBoardCommentList();
+        }else{
+            getBoardList();
         }
     }, [ selectedBoard ]);
 
@@ -72,9 +74,9 @@ const BoardContainer = () => {
     api 요청 보내는 함수
     */
    // 공지사항 전체 조회 --------------------------------------------------------
-   const getBoardList = async (search) => {
+   const getBoardList = async () => {
        try {
-           await dispatch(BoardAction.getBoardList(search))
+           await dispatch(BoardAction.getBoardList(search));
         } catch(e) {
             console.log(e);
         }
