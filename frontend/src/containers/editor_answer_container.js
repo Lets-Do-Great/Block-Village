@@ -41,7 +41,7 @@ const EditorAnswerContainer = () => {
 
   const onSetDifficultyMission = async () => {
     try {
-      await dispatch(MissionAction.setTodoMission({
+      await dispatch(MissionAction.setDifficultyMission({
         email: userInfo.email,
         missionId: selectedMission.id,
         difficulty: useDifficulty,
