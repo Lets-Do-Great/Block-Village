@@ -17,9 +17,16 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
         validatePWConfirm();
     }, [ PWConfirm.PW, password ]);
 
+    const onEnter = (e) => {
+        if(e.keyCode === 13){
+            onSubmitSignUp();
+        }
+    }
+
     // 회원가입 할 조건이 맞는지 확인하는 함수
     const onSubmitSignUp = () => {
-        if(validateNickName(nickname)   
+        if(validateEmail(emailId, emailSite)
+            &&validateNickName(nickname)   
             && validatePW(password) 
             && PWConfirm.check ){
                 signUp();
@@ -34,6 +41,16 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
         });
     }   
 
+    // 이메일 입력했는지 확인하는 함수
+    const validateEmail = (emailId, emailSite) => {
+        if(emailId.length === 0 && emailSite.length === 0){
+            alert("이메일을 입력해주세요.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     // 닉네임 입력했는지 확인하는 함수
     const validateNickName = (nickName) => {
         if(nickName.length > 0){
@@ -46,11 +63,11 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
 
     // 비밀번호 입력했는지 확인하는 함수
     const validatePW = (password) => {
-        if(password !== ''){
-            return true;
-        } else {
-            alert("비밀번호를 입력하세요.");
+        if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(password)){
+            alert("비밀번호는 숫자, 영문자, 특수문자 조합으로 8자리 이상 이여야 합니다.");
             return false;
+        }else {
+            return true;
         } 
     }
 
@@ -82,6 +99,7 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
             type="text"
             name="emailId" 
             value={emailId} 
+            onKeyUp={onEnter}
             onChange={onChangeSignUp} 
             placeholder="이메일"/>@
         <input 
@@ -89,13 +107,15 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
             type="text"
             name="emailSite" 
             value={emailSite} 
+            onKeyUp={onEnter}
             onChange={onChangeSignUp} 
             placeholder="직접입력"/><br/>
         <input
             className={styles.input} 
             type="text"
             name="nickname" 
-            value={nickname} 
+            value={nickname}
+            onKeyUp={onEnter} 
             onChange={onChangeSignUp} 
             placeholder="닉네임"/><br/>
         <input
@@ -103,6 +123,7 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
             type="password"
             name="password" 
             value={password} 
+            onKeyUp={onEnter}
             onChange={onChangeSignUp} 
             placeholder="비밀번호"/><br/>
         <input 
@@ -110,6 +131,7 @@ const SignUpForm = ({ signUp, signUpInput, onChangeSignUp }) => {
             type="password"
             name="PWConfirm" 
             value={PWConfirm.PW}
+            onKeyUp={onEnter}
             onChange={onChange} 
             placeholder="비밀번호 확인"/>
 

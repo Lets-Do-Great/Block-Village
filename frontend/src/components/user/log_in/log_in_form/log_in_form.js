@@ -5,6 +5,12 @@ const LogInForm = ({logIn, logInInput, onChangeLogIn, setType}) => {
   // 로그인폼 구성하는 속성들 비구조화 할당
   const { email, password } = logInInput;
 
+  const onEnter = (e) => {
+    if(e.keyCode === 13) {
+      onSubmitLogIn();
+    }
+  }
+
   // 로그인 할 조건이 맞는지 확인하는 함수
   const onSubmitLogIn = () => {
     if(validateEmail(email) && validatePW(password)){
@@ -39,6 +45,7 @@ const LogInForm = ({logIn, logInInput, onChangeLogIn, setType}) => {
           type="text" 
           name="email"
           value={email}
+          onKeyUp={onEnter}
           onChange={onChangeLogIn}  
           placeholder="이메일"/><br/>
         <input 
@@ -46,6 +53,7 @@ const LogInForm = ({logIn, logInInput, onChangeLogIn, setType}) => {
           type="password" 
           name="password"
           value={password}
+          onKeyUp={onEnter}
           onChange={onChangeLogIn} 
           placeholder="비밀번호"/><br/>
         <button 
