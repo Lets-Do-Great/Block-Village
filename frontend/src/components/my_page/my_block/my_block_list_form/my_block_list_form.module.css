@@ -1,31 +1,57 @@
-.box{
-    display: block;
-    position: absolute;
-    top: 51%;
-    left: 50%;
-    width: 80%;
-    height: 90%;
-    border: 3px solid darkgray;
-    border-radius: 50px;
+.box {
+  display: block;
+  position: absolute;
+  top: 51%;
+  left: 50%;
+  width: 80%;
+  height: 90%;
+  border: 3px solid darkgray;
+  border-radius: 50px;
 
-    transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
-.my_block_list_form{
-    display: inline-block;
-    width: 90%;
-    height: 90%;
-    margin: 10px;
-    text-align: center;
+.my_block_list_form {
+  display: inline-block;
+  width: 90%;
+  height: 90%;
+  margin: 10px;
+  text-align: center;
 }
 
-.text{
-    position: absolute;
-    font-size: 30px;
-    font-weight: bold;
-    display: inline-block;
-    width: 90%;
+.text {
+  position: absolute;
+  font-size: 30px;
+  font-weight: bold;
+  display: inline-block;
+  width: 90%;
 
-    top: 45%;
-    transform: translateX(-50%);
+  top: 45%;
+  transform: translateX(-50%);
+}
+
+.my_block_list_form_body {
+  /* border: 2px solid black; */
+
+  top: 4%;
+  left: 5%;
+  width: 90%;
+  height: 100%;
+  max-height: 100%;
+
+  /* padding: 1em 1em; */
+
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  align-items: center;
+
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+
+.my_block_list_form_body::-webkit-scrollbar {
+  display: none;
 }

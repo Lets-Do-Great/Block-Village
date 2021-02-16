@@ -12,39 +12,39 @@ const BlockCategory = ({ categoryStatus, onChangeSelectedCategory }) =>{
 
   useEffect(() => {
     if (categoryStatus[0]) {
-      cata_judgement.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_1_click.png)`
+      cata_judgement.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_1_click.png)`
     } else {
-      cata_judgement.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_1_default.png)`
+      cata_judgement.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_1_default.png)`
     }
 
     if (categoryStatus[1]) {
-      cata_movement.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_2_click.png)`
+      cata_movement.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_2_click.png)`
     } else {
-      cata_movement.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_2_default.png)`
+      cata_movement.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_2_default.png)`
     }
 
     if (categoryStatus[2]) {
-      cata_flow.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_3_click.png)`
+      cata_flow.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_3_click.png)`
     } else {
-      cata_flow.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_3_default.png)`
+      cata_flow.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_3_default.png)`
     }
 
     if (categoryStatus[3]) {
-      cata_calculation.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_4_click.png)`
+      cata_calculation.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_4_click.png)`
     } else {
-      cata_calculation.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_4_default.png)`
+      cata_calculation.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_4_default.png)`
     }
 
     if (categoryStatus[4]) {
-      cata_drawing.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_5_click.png)`
+      cata_drawing.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_5_click.png)`
     } else {
-      cata_drawing.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_5_default.png)`
+      cata_drawing.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_5_default.png)`
     }
 
     if (categoryStatus[5]) {
-      cata_function.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_6_click.png)`
+      cata_function.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_6_click.png)`
     } else {
-      cata_function.current.style.background = `100%/100% no-repeat url(/images/block_store/block_store_category_6_default.png)`
+      cata_function.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_6_default.png)`
     }
   }, [categoryStatus])
 

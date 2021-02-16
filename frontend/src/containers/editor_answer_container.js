@@ -5,6 +5,7 @@ import * as MissionAction from '../modules/mission';
 import * as ChallengeAction from '../modules/challenge';
 import * as AnswerAction from '../modules/answer';
 import * as BlockAction from '../modules/block';
+import * as UserAction from '../modules/user';
 import { useHistory } from 'react-router-dom';
 
 const EditorAnswerContainer = ({ match }) => {
@@ -54,8 +55,8 @@ const EditorAnswerContainer = ({ match }) => {
       console.log(e);
     }
   };
-
-  const onSetMissionAnswer = async () => {
+  
+  const onSetMissionAnswer = async (mil) => {
     const newXml = xmlCode.replace(/"/gi, '\"');
     try {
       await dispatch(AnswerAction.setAnswer({
@@ -70,6 +71,7 @@ const EditorAnswerContainer = ({ match }) => {
       }));
       onSetDifficultyMission();
       onSetTodoMission();
+      changeMileage(mil)
     } catch(e) {
       console.log(e);
     }
@@ -94,6 +96,17 @@ const EditorAnswerContainer = ({ match }) => {
         email: userInfo.email
       }))
     } catch(e) {
+      console.log(e);
+    }
+  }
+
+  const changeMileage = async (mil) => {
+    try {
+      await dispatch(UserAction.changeMileage({
+        email: userInfo.email,
+        mileage: mil * 10,
+      }));
+    } catch (e) {
       console.log(e);
     }
   }
