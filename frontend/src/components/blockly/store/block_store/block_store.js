@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-
+import React, { useState } from 'react';
+import MyBlockContainer from '../../../../containers/my_block_container';
 
 import BlockBillContainer from '../block_bill_container/block_bill_container';
 import BlockBillFooter from '../block_bill_footer/block_bill_footer';
@@ -9,25 +8,29 @@ import BlockMenu from '../block_menu/block_menu';
 import StoreNavbar from '../store_navbar/store_navbar';
 import styles from './block_store.module.css'
 
-const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil, getAllBlocks, setModal }) => {
+const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil }) => {
   
   const [billList, setBillList] = useState([]);
+  const [openMyBlock, setOpenMyBlock] = useState(false);
   
+  const chageOpenMyBlock = () => {
+    setOpenMyBlock(!openMyBlock)
+    console.log('뭐니');
+  }
+
   const buyBlocks = () => {
     const buyList = []
     billList.map((item) => (
       buyList.push(item.id)
     ))
-    console.log(buyList);
-    onBuyBlocks(buyList)
-    // 마일리지 없애기 추가
-    // let sumMileage = 0;
-    // billList.map((item) => (
-      //   sumMileage += item.price
-      // ))
-    
-    setBillList([])
-    setModal(true)
+
+    let sumMileage = 0;
+    billList.map((item) => (
+      sumMileage += item.price
+    ))
+      
+    onBuyBlocks(buyList, sumMileage);
+    setBillList([]);
   };
 
   const [categoryStatus, setCategoryStatus] = useState([
@@ -81,50 +84,62 @@ const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil, getAllBlocks, setModa
 
 
   return (
-    <div className={styles.body}>
-      <StoreNavbar />
-      <div className={styles.container}>
-
-
-        <div className={styles.bill}>
-          <div className={styles.bill_items}>
-            <BlockBillContainer 
-              billList={billList}
-              onDeleteBillList={onDeleteBillList}
-            />
+    <>
+      {openMyBlock && 
+        (
+          <div className={styles.modal_wrapper}>
+            <div className={styles.modal}>
+              <MyBlockContainer closeModal={chageOpenMyBlock}/>
+            </div>
           </div>
+        )
+      }
 
-          <div className={styles.bill_footer}>
-            <BlockBillFooter 
-              usermil={usermil}
-              billList={billList}
-              buyBlocks={buyBlocks}
-            />
-          </div>
-        </div>
+      <div className={styles.body}>
+        <StoreNavbar chageOpenMyBlock={chageOpenMyBlock}/>
+        <div className={styles.container}>
 
 
-        <div className={styles.blocks}>
-          <div className={styles.cataBody}>
-            <BlockCategory 
-              categoryStatus={categoryStatus}
-              onChangeSelectedCategory={onChangeSelectedCategory} 
-            />
-          </div>
-          <div className={styles.store_body}>
-            <div className={styles.shelf}>
-              <BlockMenu 
-                addBillList={addBillList}
-                allBlocksInfo={allBlocksInfo}
-                category={category}
+          <div className={styles.bill}>
+            <div className={styles.bill_items}>
+              <BlockBillContainer 
+                billList={billList}
+                onDeleteBillList={onDeleteBillList}
+              />
+            </div>
+
+            <div className={styles.bill_footer}>
+              <BlockBillFooter 
+                usermil={usermil}
+                billList={billList}
+                buyBlocks={buyBlocks}
               />
             </div>
           </div>
+
+
+          <div className={styles.blocks}>
+            <div className={styles.cataBody}>
+              <BlockCategory 
+                categoryStatus={categoryStatus}
+                onChangeSelectedCategory={onChangeSelectedCategory} 
+              />
+            </div>
+            <div className={styles.store_body}>
+              <div className={styles.shelf}>
+                <BlockMenu 
+                  addBillList={addBillList}
+                  allBlocksInfo={allBlocksInfo}
+                  category={category}
+                />
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>
-
-    </div>
+    </>
   )
 };
 

@@ -102,9 +102,8 @@ function App() {
         <Route exact path="/main/mission/update">
 
         </Route>
-        <Route exact path="/main/mission/answer">
-          <EditorAnswerContainer />
-        </Route>
+        <Route exact path="/main/answer/:type" component={EditorAnswerContainer}/>
+
         <Route exact path="/main/mission/answer_modify">
           <ModifyAnswerContainer />
         </Route>
@@ -116,15 +115,11 @@ function App() {
         <Route exact path="/main/challenge">
           <ChallengeContainer />
         </Route>
-        <Route exact path="/main/challenge/answer/">
-          <MissionMaze />
-        </Route>
-
-
+        <Route exact path="/main/answer/:type" component={EditorAnswerContainer}/>
 
         <Route exact path="/main/answer/:id" component={AnswerContainer}/>
 
-        <Route exact path="/main/board/">
+        <Route exact path="/main/board">
           <BoardContainer />
         </Route>
 

@@ -13,14 +13,19 @@ const MissionCreateNavbar = ({ modal, type, onChangeModal,
     statusModal();
   };
 
+  const goToMain = () => {
+    history.push('/main');
+  };
+
   const goStore = () => {
     history.push('/main/block_store')
   };
 
   return (
     <header className={styles.navbar}>
-
-      <img className={styles.logo_img} src="/images/logo1.png" />
+      <img 
+        onClick={goToMain}
+        className={styles.logo_img} src="/images/logo1.png" />
 
       <h1 className={styles.title}>{ type }</h1>
       <div className={styles.save_button} onClick={onChangeModal}>

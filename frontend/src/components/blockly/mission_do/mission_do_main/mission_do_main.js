@@ -147,7 +147,7 @@ const MissionOnMain = ({ formInfo, myBlocksInfo, onChangeJavascript, onChangeXml
                 grid: {
                   spacing: 20,
                   length: 2,
-                  colour: '#EFEFEF',
+                  colour: '#efefef',
                   snap: true,
                 },
                 move:{

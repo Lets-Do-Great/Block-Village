@@ -24,6 +24,7 @@ export const setTodoChallenge = createAction(
 
 const initialState = {
   challengeList: [],
+  selectedChallenge: {},
 };
 
 const challengeReducer = handleActions({
@@ -87,7 +88,8 @@ export default applyPenders(challengeReducer, [
         if(response.data.status){
           return updateObject(state, { 
             ...state,
-            challengeList: response.data.data,
+            challengeList: response.data.data.challengeList,
+            selectedChallenge: response.data.data.selectedChallenge,
           });
         } else{
           alert("챌린지에 참가하는데 문제가 발생했습니다.");

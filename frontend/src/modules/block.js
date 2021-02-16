@@ -136,7 +136,6 @@ export default applyPenders(blcokReducer, [
     type: BUY_BLOCKS,
     onSuccess: (state, action) => {
       const response = action.payload;
-      console.log(response);
 
       if(response.status === 200){
         if(response.data.status){
@@ -147,7 +146,7 @@ export default applyPenders(blcokReducer, [
           alert("블럭을 사는데 문제가 발생했습니다.");
         }
       } else { // 에러 발생
-        alert("ㅇ블럭을 사는데 문제가 발생했습니다.");
+        alert("블럭을 사는데 문제가 발생했습니다.");
         console.log(action.payload.status);
       }
       return updateObject(state, state);

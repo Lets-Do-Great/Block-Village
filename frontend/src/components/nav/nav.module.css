@@ -65,6 +65,24 @@
   background-color: rgb(201, 160, 99);
 }
 
+.navbar_store {
+  width: 100%;
+  height: 70px;
+  align-items: center;
+  padding: 0.5em;
+  display: flex;
+  background-color: #ef8ebe;
+}
+
+.navbar_service {
+  width: 100%;
+  height: 70px;
+  align-items: center;
+  padding: 0.5em;
+  display: flex;
+  background-color: rgb(210, 255, 255);
+}
+
 .save_button {
   position: absolute;
 
@@ -112,4 +130,12 @@
 
 .title {
   color: #fff;
+}
+
+.nav_text {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(71, 71, 71);
+  display: inline-block;
+  width: 100px;
 }

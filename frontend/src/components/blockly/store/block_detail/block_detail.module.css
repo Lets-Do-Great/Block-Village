@@ -45,17 +45,17 @@
 
 .tag {
   display: inline-block;
-  width: 70%;
-  height: 90%;
+  width: 80%;
+  height: 100%;
   background: url(../../../../images/block_store/block_store_tag.png);
   background-size: 100% 100%;
 }
 
 .tag_text {
   margin-top: 5px;
-  margin-left: 15px;
-  font-size: 23px;
-  font-weight: 600;
+  margin-left: 5px;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .overlay {

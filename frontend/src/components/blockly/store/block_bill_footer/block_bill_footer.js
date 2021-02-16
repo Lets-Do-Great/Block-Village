@@ -1,10 +1,10 @@
+import { CodeSharp } from '@material-ui/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './block_bill_footer.module.css'
 
 const BlockBillFooter = ({ usermil, billList, buyBlocks }) => {
   const [priceSum, setPriceSum] = useState(0);
   const [priceMil, setPriceMil] = useState(0);
-  // const [buyStauts, setBuyStatus] = useState(false);
   const resultMil = useRef();
 
   useEffect(() => {
@@ -16,11 +16,21 @@ const BlockBillFooter = ({ usermil, billList, buyBlocks }) => {
     setPriceMil(usermil - sum)
 
     if ((usermil - sum) < 0) {
-      resultMil.current.style.color = `#ff0000`
+      resultMil.current.style.color = `#ff0000`;
     } else {
       resultMil.current.style.color = `#0A0`
     }
   }, [usermil, billList]);
+
+  const onSubmitBuy = () => {
+    if(priceMil >= 0 && billList.length > 0) {
+      console.log("사 사 ", priceMil, billList); 
+      buyBlocks();
+    }
+    else {
+      console.log("못사 못사");
+    }
+  }
 
   return (
     <div className={styles.body}>
@@ -43,7 +53,7 @@ const BlockBillFooter = ({ usermil, billList, buyBlocks }) => {
       </div>
 
       <div className={styles.footer}>
-        <div className={styles.footerBody} onClick={buyBlocks}>
+        <div className={styles.footerBody} onClick={onSubmitBuy}>
           구매하기
         </div>
       </div>

@@ -49,7 +49,7 @@ const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, on
   };
 
   const onSubmitDifficulty = () => {
-    onSetAnswer();
+    onSetAnswer(formInfo.difficulty);
   };
 
   return (

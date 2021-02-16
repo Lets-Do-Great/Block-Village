@@ -4,6 +4,7 @@ import TutorialMain1 from '../tutorial_one/tutorial_main_1/tutorial_main_1';
 import TutorialMain2 from '../tutorial_two/tutorial_main_2/tutorial_main_2';
 import TutorialMain3 from '../tutorial_three/tutorial_main_3/tutorial_main_3';
 import * as BlockAction from '../../../../modules/block';
+import * as UserAction from '../../../../modules/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -13,13 +14,25 @@ const TutorialSubmain = (props) => {
   const userInfo = useSelector(state => state.user.userInfo)
 
   const onbuyBlocks = async () => {
-    const buyblock = [1, 2, 3, 4, 5, 12, 13, 14, 25, 37, 38, 39]
+    const buyblock = [1, 2, 3, 4, 5, 12, 13, 14, 25, 40, 41, 42]
     try {
       await dispatch(BlockAction.buyBlocks({
         email: userInfo.email, 
         blockId: buyblock
       }))
+      changeMileage();
     } catch(e) {
+      console.log(e);
+    }
+  }
+
+  const changeMileage = async () => {
+    try {
+      await dispatch(UserAction.changeMileage({
+        email: userInfo.email,
+        mileage: 500,
+      }));
+    } catch (e) {
       console.log(e);
     }
   }
