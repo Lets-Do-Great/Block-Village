@@ -6,7 +6,9 @@ const BlockMenu = ({ addBillList, allBlocksInfo, category }) => {
   const [selectedCategory, setSelectedCategory] = useState(allBlocksInfo[`${category}`])
   useEffect(() => { 
     setSelectedCategory(allBlocksInfo[`${category}`])
+    console.log(allBlocksInfo[`${category}`]);
   }, [allBlocksInfo, category]);
+  
 
   return (
     // <selectedCategory.length()>

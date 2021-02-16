@@ -3,7 +3,7 @@
   height: 100px;
   display: flex;
   text-align: center;
-  padding: 0.5em 0.5em;
+  padding-right: 0.5em;
   justify-content: center;
   align-items: center;
 }
@@ -13,24 +13,24 @@ h1 {
 }
 
 p {
-  font-size: 25px;
-  font-weight: 600;
-  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 35px;
 }
 
 .img {
-  flex-basis: 40%;
+  flex-basis: 37%;
   height: 100%;
 }
 
 .cata {
-  flex-basis: 25%;
+  flex-basis: 26%;
   height: 100%;
   text-align: center;
 }
 
 .price {
-  flex-basis: 25%;
+  flex-basis: 27%;
   height: 100%;
   text-align: center;
 }
@@ -41,5 +41,5 @@ p {
 }
 
 .btn {
-  margin-top: 25px;
+  margin-top: 35px;
 }

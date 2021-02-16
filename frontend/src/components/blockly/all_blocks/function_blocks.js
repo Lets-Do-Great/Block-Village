@@ -24,8 +24,9 @@ Blockly.JavaScript['variable'] = function(block) {
 // set_variable
 Blockly.Blocks['set_variable'] = {
   init: function() {
+    this.appendValueInput("varKind")
     this.appendDummyInput()
-        .appendField("나의 변수를");
+        .appendField("를");
     this.appendValueInput("variable")
         .setCheck("Number");
     this.appendDummyInput()
@@ -39,9 +40,10 @@ Blockly.Blocks['set_variable'] = {
   }
 };
 Blockly.JavaScript['set_variable'] = function(block) {
+  var value_varKind = Blockly.JavaScript.valueToCode(block, 'varKind', Blockly.JavaScript.ORDER_ATOMIC);
   var value_variable = Blockly.JavaScript.valueToCode(block, 'variable', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `set_var(${value_variable});\n`;
+  var code = `${value_varKind} = ${value_variable};\n`;
   // TODO: Change ORDER_NONE to the correct strength.
   return code;
 };
@@ -50,8 +52,9 @@ Blockly.JavaScript['set_variable'] = function(block) {
 //change_variable
 Blockly.Blocks['change_variable'] = {
   init: function() {
+    this.appendValueInput("varKind")
     this.appendDummyInput()
-        .appendField("나의 변수를");
+        .appendField("를");
     this.appendValueInput("variable")
         .setCheck("Number");
     this.appendDummyInput()
@@ -65,9 +68,10 @@ Blockly.Blocks['change_variable'] = {
   }
 };
 Blockly.JavaScript['change_variable'] = function(block) {
+  var value_varKind = Blockly.JavaScript.valueToCode(block, 'varKind', Blockly.JavaScript.ORDER_ATOMIC);
   var value_variable = Blockly.JavaScript.valueToCode(block, 'variable', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `change_var(${value_variable});\n`;
+  var code = `${value_varKind} += ${value_variable};\n`;
   // TODO: Change ORDER_NONE to the correct strength.
   return code;
 };
@@ -128,10 +132,10 @@ Blockly.JavaScript['variable3'] = function(block) {
 };
 
 
-Blockly.Blocks['variable4'] = {
+Blockly.Blocks['inputVar'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("변수4");
+        .appendField("입력값");
     this.setOutput(true, "Number");
     this.setColour(100);
     this.setStyle('function-blocks');
@@ -139,9 +143,26 @@ Blockly.Blocks['variable4'] = {
  this.setHelpUrl("");
   }
 };
-Blockly.JavaScript['variable4'] = function(block) {
+Blockly.JavaScript['inputVar'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = 'my_var4';
+  var code = 'inputVar';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+Blockly.Blocks['outputVar'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("출력값");
+    this.setOutput(true, "Number");
+    this.setColour(100);
+    this.setStyle('function-blocks');
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['outputVar'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'outputVar';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };

@@ -116,20 +116,15 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
   }, [imageUrl])
   
   
-    // 함수
+     // 함수
   /////////////////////////////////////////////////////////////////
   var my_var = 0;  
   var my_var1 = 0;
   var my_var2 = 0;
   var my_var3 = 0;
-  var my_var4 = 0;
+  var inputVar = 0;
+  var outputVar = 0;
 
-  const set_var = (value_variable) => {
-    my_var = value_variable;
-  }
-  const change_var = (value_variable) => {
-    my_var += value_variable;
-  }  
 
   // 움직임 
 /////////////////////////////////////////////////////////////////
@@ -192,107 +187,6 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
     move.push([x, y]);
   }
 
-  // 판단
-  /////////////////////////////////////////////////////////////////
-  const block_judgment_equals = (e1, e2) => {
-    if (e1 === e2) {
-      console.log('equlas : true');
-      return true;
-    } else {
-      console.log('equlas : false');
-      return false;
-    }
-  };
-  const block_judgment_strictinequality_left = (e1, e2) => {
-    if (e1 > e2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const block_judgment_strictinequality_right = (e1, e2) => {
-    if (e1 < e2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const block_judgment_notequal = (e1, e2) => {
-    if (e1 != e2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const block_judgment_strictinequality_leftequal = (e1, e2) => {
-    if (e1 >= e2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const block_judgment_strictinequality_rightequal = (e1, e2) => {
-    if (e1 <= e2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const block_judgment_compare_and = (b1, compare, b2) => {
-    console.log('compare : ' + compare);
-    if (compare === 1) {
-      console.log('and네요');
-      if (b1 && b2) {
-        console.log('true입니다.');
-        return true;
-      } else {
-        console.log('false입니다.');
-        return false;
-      }
-    } else if (compare === 2) {
-      console.log('or네요');
-      if (b1 || b2) {
-        console.log('true입니다.');
-        return true;
-      } else {
-        console.log('false입니다.');
-        return false;
-      }
-    }
-  };
-  
-  const block_judgment_compare_or = (b1, compare, b2) => {
-    if (compare === 2) {
-      console.log('or네요');
-      if (b1 || b2) {
-        console.log('true입니다.');
-        return true;
-      } else {
-        console.log('false입니다.');
-        return false;
-      }
-    } else if (compare === 1) {
-      console.log('and네요');
-      if (b1 && b2) {
-        console.log('true입니다.');
-        return true;
-      } else {
-        console.log('false입니다.');
-        return false;
-      }
-    }
-  };
-  const block_judgment_compare_not = (b1) => {
-    if (b1) {
-      console.log('입력값이 true네용');
-      console.log('반환값은 false입니다.');
-      return false;
-    } else {
-      console.log('입력값이 false네영');
-      console.log('반환값은 true입니다.');
-      return true;
-    }
-  };
 
   // 계산
   //////////////////////////////////////////////////////////////////////////////////////////////////////////

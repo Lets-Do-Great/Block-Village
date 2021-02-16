@@ -449,7 +449,7 @@ Blockly.Blocks['number'] = {
 Blockly.JavaScript['number'] = function(block) {
   var text_num = block.getFieldValue('num');
   // TODO: Assemble JavaScript into code variable.
-  var code = `num_js(${text_num})`;
+  var code = `${text_num}`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
