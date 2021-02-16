@@ -20,12 +20,12 @@ const ListCardForm = ({ type, id, imageUrl, title, difficulty,
 
     return (
     <>
-        <div className={styles.card_form}>
-            <p ref={title_color} className={styles.title}
-                id={id} 
-                onClick={clickCard}>
+        <div className={styles.card_form} 
+            onClick={clickCard}>
+            <img ref={card_bg} src={imageUrl}/>
+            <p ref={title_color}
+                id={id} >
                     { title }</p>
-            <img ref={card_bg} className={styles.img} src={imageUrl}/>
             <div className={styles.icon_box}>
                 { type === 'mission' && 
                 <>
