@@ -46,8 +46,8 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
         dir_y = move[i][1];
         await timer(500);
 
-        x = image_x + (move[i][0] * 50)
-        y = image_y - (move[i][1] * 50)
+        x = image_x + (move[i][0] * 50) + 10 - 25;
+        y = image_y - (move[i][1] * 50) + 10 - 25;
 
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
@@ -66,15 +66,19 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
 
   useEffect(() => {
     const item = fieldchar.current; 
+
     item.setAttribute('className', `image`)
     item.setAttribute('src', `/images/character/character_right.png`)
+
     item.style.position = 'absolute';
-    item.style.left = `${image_x}px`;
-    item.style.top = `${image_y}px`;
+    item.style.left = `${image_x + 10 - 25}px`;
+    item.style.top = `${image_y + 10 - 25}px`;
   })
 
   useEffect(() => {
     back_img_ref.current.style.background = `url(${imageUrl}) center/cover`
+
+    console.log(imageUrl);
   }, [])
   
     // 함수

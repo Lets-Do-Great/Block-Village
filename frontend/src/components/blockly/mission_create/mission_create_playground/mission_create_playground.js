@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './mission_create_playground.module.css';
 import { FaRegPlayCircle, FaRedoAlt } from 'react-icons/fa';
+import { ImFolderDownload } from 'react-icons/im';
+
 
 var x = 0;
 var y = 0;
@@ -24,13 +26,23 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
   const [image_x, setImage_x] = useState(startPosition[0]);
   const [image_y, setImage_y] = useState(startPosition[1]);
 
+  const setfirstPosition = () => {
+    move = [];
+    x = 0;
+    y = 0;
+    cur_angle = 0;
+    item.style.left = `${(startPosition[0]) + 10 - 25}px`;
+    item.style.top = `${(startPosition[1]) + 10 - 25}px`;
+  };
+  
+
   // const [moveStep, setMoveStep] = useState(move);
   
   const playGame = () => {
     eval(javascript_code);
     console.log(move);
     setMoveStep(move)
-    item.style.transition = `all .${move.length*20}s ease .5s`
+    item.style.transition = `all .${move.length*10}s ease .2s`
 
     let xx = image_x;
     let yy = image_y;
@@ -53,35 +65,29 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
         } else {
           item.setAttribute('src', `/images/character/character_front.png`)
         }
-        console.log(dir_x, dir_y);
+        // console.log(dir_x, dir_y);
         dir_x = move[i][0];
         dir_y = move[i][1];
         await timer(500);
 
 
-
+        console.log(image_x, image_y);
         const new_move_x = move[i][0]
         const new_move_y = move[i][1]
-        xx = image_x + (new_move_x * 50)
-        yy = image_y - (new_move_y * 50)
+        xx = image_x + (new_move_x * 50) + 10 - 25;
+        yy = image_y - (new_move_y * 50) + 10 - 25;
+        // console.log(xx, yy);
         
         item.style.left = `${xx}px`;
         item.style.top = `${yy}px`;
         
-        await timer(2000);
+        await timer(500);
       }
     }
     jinok()
   };
 
-  const setfirstPosition = () => {
-    move = [];
-    x = 0;
-    y = 0;
-    cur_angle = 0;
-    item.style.left = `${image_x}px`;
-    item.style.top = `${image_y}px`;
-  };
+  
   
   useEffect(() => {
     if (imageUrl) {
@@ -94,12 +100,13 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
       item.setAttribute('src', `/images/character/character_right.png`)
       item.style.position = 'absolute';
       
-      setImage_x((startPosition[0]) + 10)
-      setImage_y((startPosition[1]) + 10)
+      setImage_x(startPosition[0])
+      setImage_y(startPosition[1])
+
       item.style.transform = `translate(-50%, -50%)`
-      
-      item.style.left = `${(startPosition[0]) + 10}px`;
-      item.style.top = `${(startPosition[1]) + 10}px`;
+
+      item.style.left = `${(startPosition[0]) + 10 - 25}px`;
+      item.style.top = `${(startPosition[1]) + 10 - 25}px`;
     }
     setMoveStep(move);
     move = [];
@@ -400,7 +407,10 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
                 className={styles.button} 
                 onClick={onButtonClick}
               >
-                {imageUrl || 'No file'}
+                <div className={styles.download_icon}>
+                  <ImFolderDownload size="25"/>
+                </div>
+                이미지 넣기
               </button>
             </section>
           )

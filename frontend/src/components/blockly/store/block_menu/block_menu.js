@@ -9,19 +9,19 @@ const BlockMenu = ({ addBillList, allBlocksInfo, category }) => {
   }, [allBlocksInfo, category]);
 
   return (
-    <div className={styles.body}>
-      {
-        selectedCategory.map((block) => (
-          block.userHave ||
-          <BlockDetail 
-            key={block.id} 
-            block={block} 
-            addBillList={addBillList}
-          />
-        ))
-      }
-      
-    </div>
+    // <selectedCategory.length()>
+      <div className={styles.body}>
+        {
+          selectedCategory.map((block) => (
+            block.userHave ||
+            <BlockDetail 
+              key={block.id} 
+              block={block} 
+              addBillList={addBillList}
+            />
+          ))
+        }
+      </div>
   )
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import BlockDetail from '../../../blockly/store/block_detail/block_detail';
+import MyBlockDetail from '../my_block_detail/my_block_detail';
 import styles from './my_block_list_form.module.css';
 
 const MyBlockListForm = ({ categoryBlockList }) => {
@@ -9,13 +9,15 @@ const MyBlockListForm = ({ categoryBlockList }) => {
         { categoryBlockList.length === 0
         ? <div className={styles.text}>아직 블록이 없어요</div>
         : <div className={styles.my_block_list_form}>
-            { categoryBlockList.map(block => (
-                <BlockDetail
-                    key={block.id}
-                    id={block.id}
-                    block={block}
-                />
-            ))}
+            <div className={styles.my_block_list_form_body}>
+                { categoryBlockList.map(block => (
+                    <MyBlockDetail
+                        key={block.id}
+                        id={block.id}
+                        block={block}
+                    />
+                ))}
+            </div>
         </div>
         }
     </>

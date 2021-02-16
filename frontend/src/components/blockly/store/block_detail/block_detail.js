@@ -24,7 +24,14 @@ const BlockDetail = ({ block, addBillList }) => {
           </div>
 
           <div className={styles.price_box}>
-            <div className={styles.tag}>{block.price}</div>
+            <div className={styles.price_box_margin}></div>
+            <div className={styles.price_box_container}>
+              <div className={styles.tag}>
+                <div className={styles.tag_text}>
+                  {block.price}
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>

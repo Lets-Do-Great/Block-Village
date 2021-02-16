@@ -59,10 +59,7 @@ const MyInfoModifyRight = ({ modifyInput, onChangeModify, setPWConfirm }) => {
 
   // 비밀번호 확인이 동일한지 확인하는 함수
   const validatePWConfirm = () => {
-    if (
-      newPassword.length + PWConfirmInput.PW.length + prevPassword.length ===
-      0
-    ) {
+    if ( newPassword.length + PWConfirmInput.PW.length + prevPassword.length === 0 ) {
       setPWConfirmInput({
         ...PWConfirmInput,
         check: true,

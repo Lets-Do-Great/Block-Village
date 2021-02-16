@@ -51,7 +51,7 @@ const MissionDoSubmain = ({ type, selectedMission, setUseDifficulty,
   };
 
   const onSubmitDifficulty = () => {
-    onSetAnswer();
+    onSetAnswer(formInfo.difficulty);
   };
 
   const onGoToChallengeList = () => {

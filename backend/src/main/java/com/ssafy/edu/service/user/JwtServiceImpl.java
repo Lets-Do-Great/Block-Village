@@ -15,7 +15,7 @@ public class JwtServiceImpl implements JwtService{
     @Value("${JWT.SECRET}")
     private String SECRET;
 
-    private Long expireMin = 24L;
+    private Long expireMin = 24 * 60L;
 
     @Override
     public String createToken(LoginResponse loginResponse) {
