@@ -4,7 +4,6 @@ import MyBlockContainer from '../../../containers/my_block_container';
 import styles from './my_page_main.module.css';
 import MyMissionContainer from '../../../containers/my_mission_container';
 import MyChallengeContainer from '../../../containers/my_challenge_container';
-import Nav from '../../nav/nav';
 
 import ScrollContainer from 'react-indiana-drag-scroll'
 import MyPageNavbar from '../my_page_navbar/my_page_navbar';
