@@ -9,7 +9,7 @@
     padding: 13px;
 }
 
-.title {
+.title_mission {
     border: 0px;
     margin: 0 auto;
     display: inline-block;
@@ -19,23 +19,56 @@
     left: 50%;
     font-weight: bold;
     font-size: 30px;
-    color: white;
+    color: darkgray;
     text-align: center;
     transform: translate(-50%, -50%);
 }
 
-.title:hover {
-    color: #dd374b;
+.title_mission:hover {
+    color: #b9dd6b;
     font-size: 40px;
     top: 50%;
     left: 50%;
 }
 
-.img {
+.title_answer {
+    border: 0px;
+    margin: 0 auto;
+    display: inline-block;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-weight: bold;
+    font-size: 30px;
+    color: darkgray;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.title_answer:hover {
+    color: #92ecec;
+    font-size: 40px;
+    top: 50%;
+    left: 50%;
+}
+
+.img_mission {
     display: block;
     width: 240px;
     height: 240px;
-    background-color: #ff8896;
+    background-color: #e9ffb8;
+    border-radius: 10px;
+    border: 0px;
+    margin: 0 auto;
+    margin-bottom: 4px;
+}
+
+.img_answer {
+    display: block;
+    width: 240px;
+    height: 240px;
+    background-color: #d2ffff;
     border-radius: 10px;
     border: 0px;
     margin: 0 auto;
