@@ -3,6 +3,7 @@ import CommentForm from '../../comment_form/comment_form';
 import styles from './board_detail.module.css';
 import { MdArrowBack } from 'react-icons/md';
 import * as Icon from 'react-icons/md';
+import { CONTROLS_WHILEUNTIL_OPERATOR_UNTIL } from 'blockly/msg/en';
 
 const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, commentList, 
                       setComment, modifyComment, deleteComment}) => {
@@ -13,7 +14,7 @@ const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, commentList
   const onClick = () => {
     closeDetail();
   }
-
+  
   return (<>
     <div className={styles.back}>
       <MdArrowBack 
@@ -31,7 +32,10 @@ const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, commentList
         <Icon.MdEdit/> <div className={styles.info_text}>{date[0]} {date[1]}</div>
         <Icon.MdFace/> <div className={styles.info_text}>{views}</div>
       </div>
-      <div className={styles.content}>{content}</div>
+      <div className={styles.content}>{
+        content.split('\n').map((line) => {
+            return <span>{line}<br/></span>
+          })}</div>
     </div>
 
     <div className={styles.comment_form}>
