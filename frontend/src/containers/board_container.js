@@ -6,6 +6,7 @@ import SearchForm from '../components/board/search_form/search_form';
 import SearchType from '../components/board/search_type/search_type';
 import Nav from '../components/nav/nav';
 import * as BoardAction from '../modules/board';
+import styles from '../components/board/board_list/board_list.module.css';
 
 const BoardContainer = () => {
     
@@ -191,23 +192,26 @@ const BoardContainer = () => {
                 deleteComment={deleteBoardComment}/>
             </>
         :  <>
-                <SearchType
-                    onChangeSortType={onChangeSortType}/>
-                <SearchForm
-                    onChangeSearch={onChangeSearch}
-                    onChangeSortType={onChangeSortType}
-                    onClickEnter={onClickEnter}
-                    search={search}/> 
-                <BoardList
-                    onCreate={registerBoard}
-                    getDetail={getBoard}
-                    detail={detail}
-                    selectedBoard={selectedBoard}
-                    userInfo={userInfo.email}
-                    list={boardList}
-                    setOpenDetail={setDetail}/>
-            </>
-        }
+            <div className={styles.main_img_parent}>
+                <img className={styles.main_img} 
+                src="/images/challenge/challenge_main_image.png"/>
+            </div>
+            <SearchType
+                onChangeSortType={onChangeSortType}/>
+            <SearchForm
+                onChangeSearch={onChangeSearch}
+                onChangeSortType={onChangeSortType}
+                onClickEnter={onClickEnter}
+                search={search}/> 
+            <BoardList
+                onCreate={registerBoard}
+                getDetail={getBoard}
+                detail={detail}
+                selectedBoard={selectedBoard}
+                userInfo={userInfo.email}
+                list={boardList}
+                setOpenDetail={setDetail}/>
+        </>}
     </>);
 }
 
