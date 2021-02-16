@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ListCardForm from '../list_card_form/list_card_form';
 import ModalDetailCardForm from '../modal_detail_card_form/modal_detail_card_form';
 import styles from './list_form.module.css';
 
-// type : mission, answer, project
+// type : mission, answer
 const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike, 
-                    onModify, onDelete, onChangeSearchType, userInfo, onParticipateMission,
+                    onModify, onDelete, userInfo, onParticipateMission,
                     openDetail, setOpenDetail }) => {
 
     // 디테일 모달 열기
@@ -22,13 +22,6 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
 
     return (
     <>  
-        {/* { type === 'mission' && 
-            <select name="sortType" className={styles.select} onChange={onChangeSearchType}>
-                <option value="decrease">높은 순</option>
-                <option value="increase">낮은 순</option>
-            </select>
-        } */}
-
         <div className={styles.listForm}>
             { list.map(card => (
                 <ListCardForm
@@ -39,6 +32,7 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
                     imageUrl={card.imageUrl}
                     difficulty={card.difficulty}
                     readCnt={card.readCnt}
+                    commentCnt={card.commentCnt}
                     likeCnt={card.likeCnt}
                     peopleCnt={card.peopleCnt}
                     clickCard={clickCard} />

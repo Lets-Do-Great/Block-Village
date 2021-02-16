@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import MyDetailCardForm from '../components/my_page/my_list/my_detail_card_form/my_detail_card_form';
-import MyListCategory from '../components/my_page/my_list/my_list_category/my_list_category';
-import MyListForm from '../components/my_page/my_list/my_list_form/my_list_form';
-import ComponentDetailCardForm from '../components/list/component_detail_card_form/component_detail_card_form';
-import CommentContainer from '../containers/comment_container';
 import * as MissionAction from '../modules/mission';
 import * as AnswerAction from '../modules/answer';
+import styles from '../components/list/component_detail_card_form/component_detail_card_form.module.css';
+import MyListCategory from '../components/my_page/my_list/my_list_category/my_list_category';
+import ListForm from '../components/list/list_form/list_form';
+import ComponentDetailCardForm from '../components/list/component_detail_card_form/component_detail_card_form';
 import ModalDetailCardForm from '../components/list/modal_detail_card_form/modal_detail_card_form';
 
 const MyMissionContainer = ({ closeModal }) => {
@@ -129,12 +128,6 @@ const MyMissionContainer = ({ closeModal }) => {
         }
     }
 
-
-    // 답안 수정 요청
-    const onModifyAnswer = async () => {
-        console.log("답안 수정 페이지 이동");
-    }
-
     // 미션 삭제 요청
     const onDeleteMission = async () => {
         try{
@@ -194,44 +187,41 @@ const MyMissionContainer = ({ closeModal }) => {
                         onDelete={onDeleteMission}
                         closeModal={onCloseDetail}
                         /> }
-                { category === 'myAnswer' && <>
-                    <ComponentDetailCardForm
-                        detail={selectedAnswer}
-                        setLike={likeAnswer}
-                        setDisLike={dislikeAnswer}
-                        userInfo={userInfo.email}
-                        onModify={onModifyAnswer}
-                        onDelete={onDeleteAnswer}
-                        closeDetail={onCloseDetail}
-                    /> 
-                    <CommentContainer
-                        userInfo={userInfo.email}
-                        type="answer"
-                        selectedId={selectedAnswer.id}/>
-                </>}
+                { category === 'myAnswer' &&  
+                    <div className={styles.my_mission_modal}>
+                        <ComponentDetailCardForm
+                            detail={selectedAnswer}
+                            setLike={likeAnswer}
+                            setDisLike={dislikeAnswer}
+                            userInfo={userInfo.email}
+                            onDelete={onDeleteAnswer}
+                            closeDetail={onCloseDetail}
+                            selectedId={selectedAnswer.id}
+                    /></div>
+                }
             </> )
             : (<> 
                 <MyListCategory
                     category={category}
                     onChangeCategory={onChangeCategory}
                     closeModal={closeModal}/>
-                
+
                 { category !== 'myAnswer' &&
-                    <MyListForm
-                        type={category}
+                    <ListForm
+                        type="mission"
                         list={missionList}
                         getList={getMyMissionList}
                         getDetail={getMission}
                         onDelete={onDeleteMission}
-                        onOpenDetail={onOpenDetail}/> }
+                        setOpenDetail={onOpenDetail}/> }
                 { category === 'myAnswer' &&
-                    <MyListForm
-                        type={category}
+                    <ListForm
+                        type="answer"
                         list={answerList}
                         getList={getMyAnswerList}
                         getDetail={getAnswer}
                         onDelete={onDeleteAnswer}
-                        onOpenDetail={onOpenDetail} />
+                        setOpenDetail={onOpenDetail} />
                 }
             </>)
         }

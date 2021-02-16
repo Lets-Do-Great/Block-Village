@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import * as AnswerAction from '../modules/answer';
+import styles from '../components/list/component_detail_card_form/component_detail_card_form.module.css';
 import ListForm from '../components/list/list_form/list_form';
 import ComponentDetailCardForm from '../components/list/component_detail_card_form/component_detail_card_form';
-import CommentContainer from '../containers/comment_container';
 import Nav from '../components/nav/nav';
-import * as AnswerAction from '../modules/answer';
 
 const AnswerContainer = ({ match }) => {
     const { id } = match.params;
@@ -96,7 +96,8 @@ const AnswerContainer = ({ match }) => {
             type="answer"/>
 
         { detail
-        ? <><ComponentDetailCardForm
+        ? <div className={styles.answer_modal}>
+            <ComponentDetailCardForm
                 detail={selectedAnswer}
                 setLike={likeAnswer}
                 setDislike={dislikeAnswer}
@@ -104,12 +105,8 @@ const AnswerContainer = ({ match }) => {
                 closeDetail={closeDetail}
                 onDelete={deleteAnswer}
                 onModify={onModify}
-            />
-            <CommentContainer
-                userInfo={userInfo.email}
-                type="answer"
-                selectedId={selectedAnswer.id}/>
-            </>
+                selectedId={selectedAnswer.id}
+        /></div>
         : <ListForm
             type="answer"
             userInfo={userInfo.email}

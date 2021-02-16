@@ -42,7 +42,7 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
     eval(javascript_code);
     console.log(move);
     setMoveStep(move)
-    item.style.transition = `all .${move.length*10}s ease .5s`
+    item.style.transition = `all .${move.length*10}s ease .2s`
 
     let xx = image_x;
     let yy = image_y;
@@ -81,7 +81,7 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
         item.style.left = `${xx}px`;
         item.style.top = `${yy}px`;
         
-        await timer(1000);
+        await timer(500);
       }
     }
     jinok()

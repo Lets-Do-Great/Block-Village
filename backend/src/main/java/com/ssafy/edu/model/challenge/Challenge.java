@@ -36,6 +36,14 @@ public class Challenge{
 
     private Boolean finish;
 
+    private int startPositionX;
+
+    private int startPositionY;
+
+    private int endPositionX;
+
+    private int endPositionY;
+
     @Builder.Default
     @OneToMany(mappedBy = "challenge")
     List<ChallengeUser> challengeUsers = new ArrayList<>();

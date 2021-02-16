@@ -35,7 +35,7 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
   const playGame = () => {
     eval(javascript_code);
     console.log(move);
-    item.style.transition = `all .${move.length*10}s ease .5s`
+    item.style.transition = `all .${move.length*10}s ease .2s`
 
     let x = image_x;
     let y = image_y;
@@ -55,7 +55,7 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
         y = image_y - (new_move_y * 70)
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
-        await timer(1500);
+        await timer(1000);
         
         let check_lo_x = char_location[0] - new_move_y;
         let check_lo_y = char_location[1] + new_move_x;

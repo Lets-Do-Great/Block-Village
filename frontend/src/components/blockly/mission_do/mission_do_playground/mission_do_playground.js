@@ -3,7 +3,7 @@ import styles from './mission_do_playground.module.css';
 import { FaRegPlayCircle } from 'react-icons/fa';
 
 const MissionDoPlayground = ({ startPosition, endPosition, javascript_code, 
-  onChangeSuccess, onChangeFail, imageUrl }) => {
+                                onChangeSuccess, onChangeFail, imageUrl }) => {
   var x = 0;
   var y = 0;
   var move = [];
@@ -15,7 +15,6 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
 
   const [image_x, setImage_x] = useState(startPosition[0]);
   const [image_y, setImage_y] = useState(startPosition[1]);
-  // const [image_speed, setImage_speed] = useState(5);
 
   const playGame = () => {
     eval(javascript_code);
@@ -43,11 +42,9 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
         } else {
           item.setAttribute('src', `/images/character/character_front.png`)
         }
-        console.log(dir_x, dir_y);
         dir_x = move[i][0];
         dir_y = move[i][1];
         await timer(500);
-
 
         x = image_x + (move[i][0] * 50) + 10 - 25;
         y = image_y - (move[i][1] * 50) + 10 - 25;
@@ -56,15 +53,10 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
         item.style.top = `${y}px`;
 
         await timer(1500);
-
-        // if (tutorial_map[check_lo_x][check_lo_y] === 0) {
-        //   onChangeModalFail()
-        //   return
-        // }
       }
       if (endPosition[0] >= (x - 5) && endPosition[0] <= (x + 5) &&
           endPosition[1] >= (y - 5) && endPosition[1] <= (y + 5)) {
-        onChangeSuccess();
+            onChangeSuccess();
       } else {
         onChangeFail();
       }
@@ -79,16 +71,13 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
     item.setAttribute('src', `/images/character/character_right.png`)
 
     item.style.position = 'absolute';
-
     item.style.left = `${image_x + 10 - 25}px`;
     item.style.top = `${image_y + 10 - 25}px`;
   })
 
   useEffect(() => {
-    // const imgUrl = URL.createObjectURL(imageUrl)
     back_img_ref.current.style.background = `url(${imageUrl}) center/cover`
   }, [])
-  
   
     // 함수
   /////////////////////////////////////////////////////////////////

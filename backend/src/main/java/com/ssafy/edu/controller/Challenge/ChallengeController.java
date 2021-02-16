@@ -41,8 +41,8 @@ public class ChallengeController {
     }
 
     @ApiOperation(value = "현재 로그인한 유저가 챌린지 참여하기", authorizations = { @Authorization(value="jwtToken") })
-    @PostMapping("/{challengeId}/joinchallenge")
-    public ResponseEntity<ChallengeResponse> joinChallenge(@PathVariable("challengeId") Long challengeId, @RequestBody ChallengeUserRequest challengeUserRequest){
-        return challengeService.joinChallenge(challengeUserRequest, challengeId);
+    @PostMapping("/{challengeId}/{email}/{todo}")
+    public ResponseEntity<ChallengeResponse> joinChallenge(@PathVariable("challengeId") Long challengeId, @PathVariable("email") String email, @PathVariable("todo") String todo)throws ParseException{
+        return challengeService.joinChallenge(email, todo, challengeId);
     }
 }

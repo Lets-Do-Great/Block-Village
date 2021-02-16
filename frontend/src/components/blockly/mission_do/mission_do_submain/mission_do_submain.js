@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import MissionDoMain from '../mission_do_main/mission_do_main';
 import MissionDoModalSuccess from '../mission_do_modal/mission_do_modal_success/mission_do_modal_success';
+import ChallengeDoModalSuccess from '../../challenge/challenge_do_modal_success/challenge_do_modal_success';
 import MissionDoModalFail from '../mission_do_modal/mission_do_modal_fail/mission_do_modal_fail';
 import styles from './mission_do_submain.module.css';
 
-const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, onSetAnswer, 
-                          onChangeXmlContainer, onChangeJavascriptContainer }) => {
+const MissionDoSubmain = ({ type, selectedMission, setUseDifficulty, 
+                            setUseContent, onSetAnswer, 
+                            onChangeXmlContainer, onChangeJavascriptContainer }) => {
                             
   const myBlocksInfo = useSelector(state => state.block.myBlocksInfo);
   const [successModal, setSuccessModal] = useState(false);
@@ -52,20 +54,32 @@ const MissionDoSubmain = ({ selectedMission, setUseDifficulty, setUseContent, on
     onSetAnswer(formInfo.difficulty);
   };
 
+  const onGoToChallengeList = () => {
+    onSetAnswer();
+  }
+
   return (
     <div className={styles.body}>
-      {successModal && 
+      {type === 'mission' && successModal && 
         <MissionDoModalSuccess 
           onSubmitDifficulty={onSubmitDifficulty}
           setUseDifficulty={setUseDifficulty}
-          setUseContent={setUseContent}
-        />
+          setUseContent={setUseContent}/>
       }
-      {failModal && 
+      {type === 'mission' && failModal && 
         <MissionDoModalFail
-          onChangeFail={onChangeFail}
-        />
+        onChangeFail={onChangeFail} />
       }
+
+      {type === 'challenge' && successModal && 
+        <ChallengeDoModalSuccess 
+          onGoToChallengeList={onGoToChallengeList}/>
+      }
+      {type === 'challenge' && failModal && 
+        <MissionDoModalFail
+          onChangeFail={onChangeFail}/>
+      }
+
       <MissionDoMain 
         formInfo={formInfo}
         myBlocksInfo={myBlocksInfo}

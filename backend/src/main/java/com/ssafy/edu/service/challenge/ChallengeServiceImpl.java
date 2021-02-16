@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ChallengeServiceImpl implements ChallengeService{
@@ -38,52 +35,58 @@ public class ChallengeServiceImpl implements ChallengeService{
         SimpleDateFormat formatt = new SimpleDateFormat("yyyy-MM-dd");
         String todate = formatt.format(new Date());
 
-        if(!challengeList.isEmpty() && userOpt.isPresent()){
+        if(userOpt.isPresent()){
             List<ChallengeForm> challengeFormList = new ArrayList<>();
-            for(Challenge ch: challengeList){
-                Optional<ChallengeUser> tmp_challengers = challengeUsersJpaRepository.findByChallengeAndUser(ch, userOpt.get());
+            if(!challengeList.isEmpty()) {
+                for (Challenge ch : challengeList) {
+                    Optional<ChallengeUser> tmp_challengers = challengeUsersJpaRepository.findByChallengeAndUser(ch, userOpt.get());
 
-                Date todate_date = formatt.parse(todate);
-                Date end_date = formatt.parse(ch.getEndDate());
-                Date start_date = formatt.parse(ch.getStartDate());
+                    Date todate_date = formatt.parse(todate);
+                    Date end_date = formatt.parse(ch.getEndDate());
+                    Date start_date = formatt.parse(ch.getStartDate());
 
-                if(tmp_challengers.isPresent()) {
-                    ChallengeForm tmp_form = ChallengeForm.builder()
-                            .challengeId(ch.getId())
-                            .title(ch.getTitle())
-                            .image(ch.getImage())
-                            .startDate(ch.getStartDate())
-                            .endDate(ch.getEndDate())
-                            .peopleCnt(ch.getPeopleCnt())
-                            .finish(ch.getFinish())
-                            .todo(tmp_challengers.get().getDone())
-                            .build();
+                    if (tmp_challengers.isPresent()) {
+                        ChallengeForm tmp_form = ChallengeForm.builder()
+                                .challengeId(ch.getId())
+                                .title(ch.getTitle())
+                                .image(ch.getImage())
+                                .startDate(ch.getStartDate())
+                                .endDate(ch.getEndDate())
+                                .peopleCnt(ch.getPeopleCnt())
+                                .finish(ch.getFinish())
+                                .todo(tmp_challengers.get().getDone())
+                                .startPositionX(ch.getStartPositionX())
+                                .startPositionY(ch.getStartPositionY())
+                                .endPositionX(ch.getEndPositionX())
+                                .endPositionY(ch.getEndPositionY())
+                                .build();
 
+                        if (todate_date.getTime() > end_date.getTime() || start_date.getTime() > todate_date.getTime()) {
+                            tmp_form.setTodo("disable");
+                        }
+                        challengeFormList.add(tmp_form);
+                    } else {
+                        ChallengeForm tmp_form = ChallengeForm.builder()
+                                .challengeId(ch.getId())
+                                .title(ch.getTitle())
+                                .image(ch.getImage())
+                                .startDate(ch.getStartDate())
+                                .endDate(ch.getEndDate())
+                                .peopleCnt(ch.getPeopleCnt())
+                                .finish(ch.getFinish())
+                                .todo("")
+                                .startPositionX(ch.getStartPositionX())
+                                .startPositionY(ch.getStartPositionY())
+                                .endPositionX(ch.getEndPositionX())
+                                .endPositionY(ch.getEndPositionY())
+                                .build();
 
+                        if (todate_date.getTime() > end_date.getTime() || start_date.getTime() > todate_date.getTime()) {
+                            tmp_form.setTodo("disable");
+                        }
 
-                    if(todate_date.getTime() > end_date.getTime() || start_date.getTime() > todate_date.getTime()){
-                        tmp_form.setTodo("disable");
+                        challengeFormList.add(tmp_form);
                     }
-
-                    challengeFormList.add(tmp_form);
-                }
-                else{
-                    ChallengeForm tmp_form = ChallengeForm.builder()
-                            .challengeId(ch.getId())
-                            .title(ch.getTitle())
-                            .image(ch.getImage())
-                            .startDate(ch.getStartDate())
-                            .endDate(ch.getEndDate())
-                            .peopleCnt(ch.getPeopleCnt())
-                            .finish(ch.getFinish())
-                            .todo("")
-                            .build();
-
-                    if(todate_date.getTime() > end_date.getTime() || start_date.getTime() > todate_date.getTime()){
-                        tmp_form.setTodo("disable");
-                    }
-
-                    challengeFormList.add(tmp_form);
                 }
             }
             result.data = challengeFormList;
@@ -98,12 +101,15 @@ public class ChallengeServiceImpl implements ChallengeService{
     public ResponseEntity<ChallengeResponse> getUserChallengeList(String email, String todo) {
         ChallengeResponse result = new ChallengeResponse();
         Optional<User> userOpt = userJpaRepository.findByEmail(email);
+
         if(userOpt.isPresent()) {
             List<ChallengeUser> challengeList = challengeUsersJpaRepository.findByUserAndDoneOrderByIdDesc(userOpt.get(), todo);
             List<ChallengeListForm> challengeListFormList = new ArrayList<>();
+
             if (!challengeList.isEmpty()) {
                 for (ChallengeUser ch : challengeList) {
                     Challenge tmpChallenge = ch.getChallenge();
+
                     ChallengeListForm tmpForm = ChallengeListForm.builder()
                             .challengeId(tmpChallenge.getId())
                             .title(tmpChallenge.getTitle())
@@ -112,7 +118,12 @@ public class ChallengeServiceImpl implements ChallengeService{
                             .endDate(tmpChallenge.getEndDate())
                             .peopleCnt(tmpChallenge.getPeopleCnt())
                             .finish(tmpChallenge.getFinish())
+                            .startPositionX(tmpChallenge.getStartPositionX())
+                            .startPositionY(tmpChallenge.getStartPositionY())
+                            .endPositionX(tmpChallenge.getEndPositionX())
+                            .endPositionY(tmpChallenge.getEndPositionY())
                             .build();
+
                     challengeListFormList.add(tmpForm);
                 }
             }
@@ -125,62 +136,131 @@ public class ChallengeServiceImpl implements ChallengeService{
     }
 
     @Override
-    public ResponseEntity<ChallengeResponse> joinChallenge(ChallengeUserRequest challengeUserRequest, Long challengeId) {
+    public ResponseEntity<ChallengeResponse> joinChallenge(String email, String todo, Long challengeId) throws ParseException {
         ChallengeResponse result = new ChallengeResponse();
-        Optional<User> userOpt = userJpaRepository.findByEmail(challengeUserRequest.getEmail());
+        Optional<User> userOpt = userJpaRepository.findByEmail(email);
         Optional<Challenge> challengeOpt = challengeJpaRepository.findById(challengeId);
 
+        List<Challenge> AllChallengeList = challengeJpaRepository.findAllByOrderByIdDesc();
+
+        List<ChallengeForm> challengeList = new ArrayList<>();
+        ChallengeJoinForm ret = new ChallengeJoinForm();
 
         if(userOpt.isPresent() && challengeOpt.isPresent()){
-            Optional<ChallengeUser> challengeUserOpt = challengeUsersJpaRepository.findByChallengeAndUser(challengeOpt.get(), userOpt.get());
             if(!challengeOpt.get().getFinish()){
                 result.status = false;
             }
+            // selectedChallenge 생성
+            Optional<ChallengeUser> challengeUserOpt = challengeUsersJpaRepository.findByChallengeAndUser(challengeOpt.get(), userOpt.get());
+
             if(challengeUserOpt.isEmpty()) {
                 ChallengeUser challengeUser = ChallengeUser.builder()
                         .user(userOpt.get())
                         .challenge(challengeOpt.get())
-                        .done(challengeUserRequest.getTodo())
+                        .done(todo)
                         .build();
-                ChallengeUser save = challengeUsersJpaRepository.save(challengeUser);
+                challengeUsersJpaRepository.save(challengeUser);
 
-                ChallengeListForm tmpForm = ChallengeListForm.builder()
+                ChallengeForm tmpForm = ChallengeForm.builder()
                         .challengeId(challengeOpt.get().getId())
                         .title(challengeOpt.get().getTitle())
                         .image(challengeOpt.get().getImage())
                         .startDate(challengeOpt.get().getStartDate())
                         .endDate(challengeOpt.get().getEndDate())
                         .peopleCnt(challengeOpt.get().getPeopleCnt() + 1)
+                        .todo(todo)
                         .finish(challengeOpt.get().getFinish())
+                        .startPositionX(challengeOpt.get().getStartPositionX())
+                        .startPositionY(challengeOpt.get().getStartPositionY())
+                        .endPositionX(challengeOpt.get().getEndPositionX())
+                        .endPositionY(challengeOpt.get().getEndPositionY())
                         .build();
 
                 challengeOpt.get().setPeopleCnt(tmpForm.getPeopleCnt());
                 challengeJpaRepository.save(challengeOpt.get());
 
-
-                result.data = tmpForm;
-                result.status = true;
+                ret.setSelectedChallenge(tmpForm);
             }
             else{
                 if(challengeUserOpt.get().getDone().equals("done")){
                     result.status = false;
                 }
                 else{
-                    challengeUserOpt.get().setDone(challengeUserRequest.getTodo());
-                    ChallengeUser save = challengeUsersJpaRepository.save(challengeUserOpt.get());
+                    challengeUserOpt.get().setDone(todo);
+                    challengeUsersJpaRepository.save(challengeUserOpt.get());
 
-                    result.data = ChallengeListForm.builder()
+                    ChallengeForm tmpForm = ChallengeForm.builder()
                             .challengeId(challengeOpt.get().getId())
                             .title(challengeOpt.get().getTitle())
                             .image(challengeOpt.get().getImage())
                             .startDate(challengeOpt.get().getStartDate())
                             .endDate(challengeOpt.get().getEndDate())
                             .peopleCnt(challengeOpt.get().getPeopleCnt())
+                            .todo(todo)
                             .finish(challengeOpt.get().getFinish())
+                            .startPositionX(challengeOpt.get().getStartPositionX())
+                            .startPositionY(challengeOpt.get().getStartPositionY())
+                            .endPositionX(challengeOpt.get().getEndPositionX())
+                            .endPositionY(challengeOpt.get().getEndPositionY())
                             .build();
-                    result.status = true;
+                    ret.setSelectedChallenge(tmpForm);
                 }
             }
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String today = format.format(Calendar.getInstance().getTime());
+
+            Date today_date = format.parse(today);
+
+            // challengeList 생성
+            for(Challenge ch: AllChallengeList){
+                Optional<ChallengeUser> tmp_challengeUserOpt = challengeUsersJpaRepository.findByChallengeAndUser(ch, userOpt.get());
+                ChallengeForm tmp_form;
+
+
+                Date end_date = format.parse(ch.getEndDate());
+                Date start_date = format.parse(ch.getStartDate());
+
+                if(tmp_challengeUserOpt.isPresent()) {
+                    tmp_form = ChallengeForm.builder()
+                            .challengeId(ch.getId())
+                            .title(ch.getTitle())
+                            .image(ch.getImage())
+                            .startDate(ch.getStartDate())
+                            .endDate(ch.getEndDate())
+                            .peopleCnt(ch.getPeopleCnt())
+                            .finish(ch.getFinish())
+                            .todo(tmp_challengeUserOpt.get().getDone())
+                            .startPositionX(ch.getStartPositionX())
+                            .startPositionY(ch.getStartPositionY())
+                            .endPositionX(ch.getEndPositionX())
+                            .endPositionY(ch.getEndPositionY())
+                            .build();
+
+                }
+                else{
+                    tmp_form = ChallengeForm.builder()
+                            .challengeId(ch.getId())
+                            .title(ch.getTitle())
+                            .image(ch.getImage())
+                            .startDate(ch.getStartDate())
+                            .endDate(ch.getEndDate())
+                            .peopleCnt(ch.getPeopleCnt())
+                            .finish(ch.getFinish())
+                            .todo("")
+                            .startPositionX(ch.getStartPositionX())
+                            .startPositionY(ch.getStartPositionY())
+                            .endPositionX(ch.getEndPositionX())
+                            .endPositionY(ch.getEndPositionY())
+                            .build();
+                }
+                if (today_date.getTime() > end_date.getTime() || start_date.getTime() > today_date.getTime()) {
+                    tmp_form.setTodo("disable");
+                }
+                challengeList.add(tmp_form);
+            }
+            ret.setChallengeList(challengeList);
+            result.data = ret;
+            result.status = true;
         }else {
             result.status = false;
         }
