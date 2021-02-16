@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+import CommentForm from '../../comment_form/comment_form';
 import styles from './board_detail.module.css';
 import { MdArrowBack } from 'react-icons/md';
 import * as Icon from 'react-icons/md';
 
-const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, onModify, onDelete}) => {
+const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, commentList, 
+                      setComment, modifyComment, deleteComment}) => {
 
   const { nickname, title, content, createdDate, views } = selectedBoard;
   const date = createdDate.split("T");
@@ -30,6 +32,15 @@ const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, onModify, o
         <Icon.MdFace/> <div className={styles.info_text}>{views}</div>
       </div>
       <div className={styles.content}>{content}</div>
+    </div>
+
+    <div className={styles.comment_form}>
+      <CommentForm
+        userInfo={userInfo.email}
+        commentList={commentList}
+        setComment={setComment}
+        modifyComment={modifyComment}
+        deleteComment={deleteComment}/>
     </div>
   </>)
 };

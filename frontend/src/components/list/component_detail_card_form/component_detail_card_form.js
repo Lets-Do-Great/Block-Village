@@ -11,26 +11,19 @@ import '../../blockly/all_blocks/drawing_blocks';
 import '../../blockly/all_blocks/function_blocks';
 
 import { IoMdArrowRoundBack } from 'react-icons/io';
-import { useSelector } from 'react-redux';
 import WorkspaceContainer from '../workspace_container/workspace_container';
+import CommentContainer from '../../../containers/comment_container';
 import { useHistory } from 'react-router-dom';
 
-// const useForceUpdate = () => {
-//   const [value, setValue] = useState(0); // integer state
-//   return () => setValue(value => value + 1); // update the state to force render
-// }
 
 const ComponentDetailCardForm = ({ detail, setLike, setDislike, 
-                            userInfo, closeDetail, onDelete, onModify }) => {
+                            userInfo, closeDetail, onDelete, selectedId }) => {
 
-    const {email, nickname, title, created_at, updated_at, favorite,
-        content, difficulty, likeCnt, readCnt, xmlCode, javascriptCode } = detail;
+    const {email, nickname, title, favorite, content, 
+            commentCnt, likeCnt, readCnt, xmlCode, javascriptCode } = detail;
     const history = useHistory();
-    const selectedAnswer = useSelector(state => state.answer.selectedAnswer);
     
-    // const forceUpdate = useForceUpdate();
-      const [ boolean, setBoolean ] = useState(false);
-
+    const [ boolean, setBoolean ] = useState(false);
 
     //======props로 받아야 하는 data
     const startPosition = [50, 50]
@@ -150,10 +143,7 @@ const ComponentDetailCardForm = ({ detail, setLike, setDislike,
                 <Icon.MdAccountCircle/>{ nickname }
               </div>
               <div className={styles.icon}>
-                  <Icon.MdEdit/>{ created_at } / { updated_at }
-              </div>
-              <div className={styles.icon}>
-                  <Icon.MdAssistantPhoto/>{ difficulty }
+                  <Icon.MdChatBubbleOutline/>{ commentCnt }
               </div>
               <div className={styles.icon}>
                   <Icon.MdFace/>{ readCnt }
@@ -208,6 +198,11 @@ const ComponentDetailCardForm = ({ detail, setLike, setDislike,
 
           </div>
         </div>
+
+        <CommentContainer
+          userInfo={userInfo}
+          type="answer"
+          selectedId={selectedId}/>
       </div>
     );
 }

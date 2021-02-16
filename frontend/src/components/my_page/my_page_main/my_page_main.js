@@ -14,11 +14,6 @@ const MyPageMain = ({ imageInfo, onChageBasic, onChageSea, onChageSpace }) => {
     const [ modal, setModal ] = useState(false);
 
     // 모달 열기
-    const openCard = (e) => {
-        setOpenType(e.target.value);
-        setModal(true);
-    }
-
     const openCardInfo = () => {
         setOpenType('info');
         setModal(true);
@@ -108,9 +103,7 @@ const MyPageMain = ({ imageInfo, onChageBasic, onChageSea, onChageSpace }) => {
     // };
 
     return (
-        <div className={styles.body} ref={back_back} 
-        // onClick={changeSize}
-        >
+        <div className={styles.body} ref={back_back} >
             <MyPageNavbar 
                 onChageBasic={onChageBasic}
                 onChageSea={onChageSea}

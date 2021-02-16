@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import BoardList from '../components/board/board_list/board_list';
 import BoardDetail from '../components/board/board_detail/board_detail';
-import CommentForm from '../components/comment_form/comment_form';
 import SearchForm from '../components/board/search_form/search_form';
 import SearchType from '../components/board/search_type/search_type';
 import Nav from '../components/nav/nav';
@@ -185,9 +184,7 @@ const BoardContainer = () => {
                 userInfo={userInfo.email}
                 closeDetail={closeDetail}
                 onModify={modifyBoard}
-                onDelete={deleteBoard}/>
-            <CommentForm
-                userInfo={userInfo.email}
+                onDelete={deleteBoard}
                 commentList={commentList}
                 setComment={registerBoardComment}
                 modifyComment={modifyBoardComment}

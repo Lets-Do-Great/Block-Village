@@ -177,6 +177,7 @@ export default applyPenders(userReducer, [
 
       if (response.status === 200) {
         if (response.data.status) {
+          localStorage.removeItem('token');
           return updateObject(state, {
             ...initialState,
           });

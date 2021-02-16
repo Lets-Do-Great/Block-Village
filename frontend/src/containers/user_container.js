@@ -5,7 +5,6 @@ import FindPW from '../components/user/find_pw/find_pw/find_pw';
 import LogIn from '../components/user/log_in/log_in/log_in';
 import SignUp from '../components/user/sign_up/sign_up/sign_up';
 import * as UserAction from '../modules/user';
-import { modifyUserInfo } from '../service/user';
 
 const UserContainer = ({ setSkip }) => {
     const history = useHistory();
@@ -64,6 +63,17 @@ const UserContainer = ({ setSkip }) => {
         });
     }
 
+    // type 바뀔 때 마다 폼 초기화
+    useEffect(() => {
+        if(type === 'logIn'){
+            setLogInInput(initialLogInInput);
+        } else if(type === 'signUp'){
+            setSignUpInput(initialSignUpInput);
+        } else if(type === 'findPW'){
+            setFindPWInput(initialFindPW);
+        }
+    }, [type]);
+
     // 로그인폼 데이터 변경 처리 함수
     const onChangeLogIn = (e) => {
         const {name, value} = e.target;
@@ -98,6 +108,9 @@ const UserContainer = ({ setSkip }) => {
     const logIn = async () => { 
         try{
             await dispatch(UserAction.logIn(logInInput)); 
+            if(!userInfo.logIn){
+                setLogInInput(initialLogInInput);
+            }
         } catch (e) {
             console.log(e);
         }
