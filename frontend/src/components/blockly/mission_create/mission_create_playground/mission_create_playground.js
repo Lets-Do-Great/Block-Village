@@ -24,8 +24,6 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
   const [image_x, setImage_x] = useState(startPosition[0]);
   const [image_y, setImage_y] = useState(startPosition[1]);
 
-  
-
   // const [moveStep, setMoveStep] = useState(move);
   
   const playGame = () => {
