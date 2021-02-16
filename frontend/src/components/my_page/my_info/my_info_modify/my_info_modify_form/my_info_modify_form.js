@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './my_info_modify_form.module.css'
 
 const MyInfoModifyLeft = ({ modifyInput, onChangeModify, onDeleteProfileImage }) => {
   const { profileImage } = modifyInput;
   const [ imageUrl, setImageUrl ] = useState('');
+
+  const inputRef = useRef();
 
   useEffect(() => {
     if(profileImage && typeof profileImage !== 'string') {
@@ -11,20 +13,29 @@ const MyInfoModifyLeft = ({ modifyInput, onChangeModify, onDeleteProfileImage })
     }
   }, [profileImage]);
 
+  const onClickChangeProfile = () => {
+    inputRef.current.click();
+  };
+
   return (
     <div className={styles.my_info_left}>
       <img 
         className={styles.profile_img} 
         src={imageUrl || profileImage}/>
       <input 
+        ref={inputRef}
         className={styles.edit_file}
         type="file" 
         name="profileImage"
         onChange={onChangeModify} />
-        <div
-            className={styles.delete_file}
-            onClick={onDeleteProfileImage}>
-                프로필 이미지 삭제</div>
+      <button className={styles.change_profile}
+        onClick={onClickChangeProfile}>
+          프로필 변경
+      </button>
+      <div
+          className={styles.delete_file}
+          onClick={onDeleteProfileImage}>
+              프로필 삭제</div>
     </div>
     );
 };
@@ -59,10 +70,7 @@ const MyInfoModifyRight = ({ modifyInput, onChangeModify, setPWConfirm }) => {
 
   // 비밀번호 확인이 동일한지 확인하는 함수
   const validatePWConfirm = () => {
-    if (
-      newPassword.length + PWConfirmInput.PW.length + prevPassword.length ===
-      0
-    ) {
+    if ( newPassword.length + PWConfirmInput.PW.length + prevPassword.length === 0 ) {
       setPWConfirmInput({
         ...PWConfirmInput,
         check: true,

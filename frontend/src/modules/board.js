@@ -70,6 +70,7 @@ const initialState = {
         email: '',
         nickname: '',
         views: '', 
+        content: '',
         createdDate: '', 
         updatedDate: ''
     },

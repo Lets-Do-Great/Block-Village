@@ -26,7 +26,7 @@
     padding: 0;
     margin: 0;
     display: flex;
-    border-bottom: 2px solid #ff8896;
+    border-bottom: 2px solid #b9dd6b;
     text-align: center;
 }
 
@@ -44,8 +44,8 @@
 .tabs > .current {
     display: border;
     background: white;
-    color: #ff8896;
-    border: 2px solid #ff8896;
+    color: #b9dd6b;
+    border: 2px solid #b9dd6b;
     border-bottom: 0;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;

@@ -77,6 +77,8 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
 
   useEffect(() => {
     back_img_ref.current.style.background = `url(${imageUrl}) center/cover`
+
+    console.log(imageUrl);
   }, [])
   
     // 함수
