@@ -9,8 +9,9 @@ import { useHistory } from 'react-router-dom';
 
 Modal.setAppElement('#root')
 // type : mission, answer
-const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike, 
-                    onModify, onDelete, userInfo, onParticipateMission,
+const ListForm = ({ type, list, detail, getDetail, getMissionDetail, getList, 
+                    setLike, setDislike, onModify, onDelete, 
+                    userInfo, onParticipateMission,
                     openDetail, selectedMission }) => {
 
     const history = useHistory();
@@ -64,19 +65,35 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
         }
 
         <div className={styles.listForm}>
-            { list.map(card => (
-                <ListCardForm
-                    type={type}
-                    key={card.id}
-                    id={card.id}
-                    title={card.title}
-                    imageUrl={card.imageUrl}
-                    difficulty={card.difficulty}
-                    readCnt={card.readCnt}
-                    commentCnt={card.commentCnt}
-                    likeCnt={card.likeCnt}
-                    peopleCnt={card.peopleCnt}
-                    clickCard={clickCard} />
+            { type === 'mission' &&
+                list.map(card => (
+                    <ListCardForm
+                        type={type}
+                        key={card.id}
+                        id={card.id}
+                        title={card.title}
+                        imageUrl={card.imageUrl}
+                        difficulty={card.difficulty}
+                        readCnt={card.readCnt}
+                        commentCnt={card.commentCnt}
+                        likeCnt={card.likeCnt}
+                        peopleCnt={card.peopleCnt}
+                        clickCard={clickCard} />
+            ))}
+            { type !== 'mission' &&
+                list.map(card => (
+                    <ListCardForm
+                        type={type}
+                        key={card.id}
+                        id={card.id}
+                        title={card.title}
+                        imageUrl={card.imageUrl}
+                        difficulty={card.difficulty}
+                        readCnt={card.readCnt}
+                        commentCnt={card.commentCnt}
+                        likeCnt={card.likeCnt}
+                        peopleCnt={card.peopleCnt}
+                        clickCard={clickCard} />
             ))}
         </div>
 

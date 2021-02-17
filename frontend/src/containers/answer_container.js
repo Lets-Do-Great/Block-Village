@@ -94,15 +94,15 @@ const AnswerContainer = ({ match }) => {
         { detail
         ? <div className={styles.answer_modal}>
             <ComponentDetailCardForm
+                type="answer"
                 detail={selectedAnswer}
+                imageUrl={selectedMission.imageUrl}
                 setLike={likeAnswer}
                 setDislike={dislikeAnswer}
                 userInfo={userInfo.email}
                 closeDetail={closeDetail}
                 onDelete={deleteAnswer}
                 onModify={onModify}
-                selectedId={selectedAnswer.id}
-                imageUrl={selectedMission.imageUrl}
         /></div>
         : <ListForm
             type="answer"

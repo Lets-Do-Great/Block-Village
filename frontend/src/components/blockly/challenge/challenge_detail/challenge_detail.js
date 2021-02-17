@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './challenge_detail.module.css';
 
-const ChallengeDetail = ({ id, img, setTodoChallenge, todo }) => {
+const ChallengeDetail = ({ id, image, setTodoChallenge, todo }) => {
   const history = useHistory();
 
   const onSetTodoChallenge = () => {
@@ -16,7 +16,7 @@ const ChallengeDetail = ({ id, img, setTodoChallenge, todo }) => {
 
   return (
     <div className={styles.body}>
-      <img className={styles.img} src={img}/><br/>
+      <img className={styles.img} src={image}/><br/>
       <div>
         { !todo && 
           <button 

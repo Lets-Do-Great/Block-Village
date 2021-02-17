@@ -3,7 +3,6 @@ import styles from './answer_playground.module.css';
 import { FaRegPlayCircle, FaRedoAlt } from 'react-icons/fa';
 
 const AnswerPlayground = ({ imageUrl, startPosition, javascript_code }) => {
-  console.log(imageUrl);
   var x = 0;
   var y = 0;
   var move = [];
@@ -70,6 +69,8 @@ const AnswerPlayground = ({ imageUrl, startPosition, javascript_code }) => {
   };
   
   useEffect(() => {
+    back_img_ref.current.style.background = `url(${imageUrl}) center/cover`
+
     const item = fieldchar.current; 
     
     item.setAttribute('className', `image`)
