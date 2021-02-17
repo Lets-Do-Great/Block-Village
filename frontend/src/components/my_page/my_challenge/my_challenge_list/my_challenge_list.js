@@ -5,7 +5,7 @@ import styles from './my_challenge_list.module.css'
 const MyChallengeList = ({ category, challenge }) => {  
     const history = useHistory();
     const list = useRef();
-    const { title, image } = challenge;
+    const { title, image, finish } = challenge;
 
     useEffect(() => {
         if(category === 'todo'){
@@ -13,10 +13,11 @@ const MyChallengeList = ({ category, challenge }) => {
         }else{
             list.current.className=styles.list_done;
         }
+        console.log(challenge);
     }, []);
 
     const goToAnswer = () => {
-        if(category === 'todo'){
+        if(category === 'todo' && !finish){
             history.push(`/main/create/answer/challenge_test`);
         }
     }
