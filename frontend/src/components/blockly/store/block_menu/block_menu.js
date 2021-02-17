@@ -3,10 +3,16 @@ import BlockDetail from '../block_detail/block_detail';
 import styles from './block_menu.module.css'
 
 const BlockMenu = ({ addBillList, allBlocksInfo, category }) => {
-  const [selectedCategory, setSelectedCategory] = useState(allBlocksInfo[`${category}`])
+  const [selectedCategory, setSelectedCategory] = useState([])
+  let newSelectedCategory = []
   useEffect(() => { 
-    setSelectedCategory(allBlocksInfo[`${category}`])
-    console.log(allBlocksInfo[`${category}`]);
+    allBlocksInfo[`${category}`].forEach(block => {
+      if (!block.userHave) {
+        newSelectedCategory.push(block)
+      }
+    });
+    console.log(newSelectedCategory.length);
+    setSelectedCategory(newSelectedCategory)
   }, [allBlocksInfo, category]);
   
 
@@ -14,14 +20,23 @@ const BlockMenu = ({ addBillList, allBlocksInfo, category }) => {
     // <selectedCategory.length()>
       <div className={styles.body}>
         {
-          selectedCategory.map((block) => (
-            block.userHave ||
-            <BlockDetail 
-              key={block.id} 
-              block={block} 
-              addBillList={addBillList}
-            />
-          ))
+          selectedCategory.length
+          ? (
+              selectedCategory.map((block) => (
+                block.userHave ||
+                <BlockDetail 
+                  key={block.id} 
+                  block={block} 
+                  addBillList={addBillList}
+                />
+              ))
+            )
+          : 
+            (
+              <div className={styles.nothing_body}>
+                <div className={styles.nothing_container}></div>
+              </div>
+            )
         }
       </div>
   )

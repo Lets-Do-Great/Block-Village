@@ -7,6 +7,7 @@ import * as AnswerAction from '../modules/answer';
 import * as BlockAction from '../modules/block';
 import * as UserAction from '../modules/user';
 import { useHistory } from 'react-router-dom';
+import ChallengeSpecialSubmain from '../components/blockly/challenge/challenge_special/challenge_special_submain/challenge_special_submain';
 
 const EditorAnswerContainer = ({ match }) => {
   const { type } = match.params;
@@ -130,6 +131,17 @@ const EditorAnswerContainer = ({ match }) => {
       }
       { type === 'challenge' &&
         <MissionDoSubmain
+          type={type}
+          selectedMission={selectedChallenge}
+          setUseDifficulty={setUseDifficulty}
+          setUseContent={setUseContent}
+          onSetAnswer={onSetChallengeAnswer}
+          onChangeXmlContainer={onChangeXmlContainer}
+          onChangeJavascriptContainer={onChangeJavascriptContainer}
+        />
+      }
+      { type === 'challenge_test' &&
+        <ChallengeSpecialSubmain 
           type={type}
           selectedMission={selectedChallenge}
           setUseDifficulty={setUseDifficulty}

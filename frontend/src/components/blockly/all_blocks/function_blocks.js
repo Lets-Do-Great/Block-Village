@@ -58,7 +58,7 @@ Blockly.Blocks['change_variable'] = {
     this.appendValueInput("variable")
         .setCheck("Number");
     this.appendDummyInput()
-        .appendField("만큼 바꾸기");
+        .appendField("만큼 증가시키기");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(100);

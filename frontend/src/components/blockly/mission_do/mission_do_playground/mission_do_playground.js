@@ -71,6 +71,7 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
     item.setAttribute('src', `/images/character/character_right.png`)
 
     item.style.position = 'absolute';
+    item.style.transform = `translate(-50%, -50%)`
     item.style.left = `${image_x + 10 - 25}px`;
     item.style.top = `${image_y + 10 - 25}px`;
   })

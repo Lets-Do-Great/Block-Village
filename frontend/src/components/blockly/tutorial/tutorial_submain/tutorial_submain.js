@@ -10,8 +10,8 @@ import { useHistory } from 'react-router-dom';
 
 const TutorialSubmain = (props) => {
   const history = useHistory();
-  const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user.userInfo)
+  const dispatch = useDispatch();
 
   const onbuyBlocks = async () => {
     const buyblock = [1, 2, 3, 4, 5, 12, 13, 14, 25, 40, 41, 42]
@@ -30,17 +30,12 @@ const TutorialSubmain = (props) => {
     try {
       await dispatch(UserAction.changeMileage({
         email: userInfo.email,
-        mileage: 500,
+        mileage: 50,
       }));
     } catch (e) {
       console.log(e);
     }
   }
-
-  useEffect(() => {
-    onbuyBlocks();
-  }, [])
-
 
   // state
   const [stage, setStage] = useState(1);
@@ -154,6 +149,7 @@ const TutorialSubmain = (props) => {
   }
 
   const GoMain = () => {
+    onbuyBlocks();
     history.push("/main")
   }
 
