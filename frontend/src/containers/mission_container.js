@@ -67,6 +67,7 @@ const MissionContainer = () => {
     const getMissionList = async () => {
         try{
             await dispatch(MissionAction.getMissionList(search));
+            setModal(false);
         } catch(e) {
             console.log(e);
         }
@@ -76,6 +77,7 @@ const MissionContainer = () => {
     const getMission = async (id) => {
         try{
             await dispatch(MissionAction.getMission({ missionId: id, email: userInfo.email }));
+            setModal(true);
         } catch(e) {
             console.log(e);
         }
@@ -160,7 +162,6 @@ const MissionContainer = () => {
                 onDelete={onDeleteMission}
                 onParticipateMission={onParticipateMission}
                 openDetail={modal}
-                setOpenDetail={setModal}
             />
         </>
     );
