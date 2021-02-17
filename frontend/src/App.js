@@ -37,6 +37,7 @@ function App() {
       client.defaults.headers.common['token'] = token;
       if( exp > new Date().getTime() / 1000 ) {
         setUserInfoFromToken(userInfo);
+        history.push('/main');
       } else {
         history.push('/');
       }

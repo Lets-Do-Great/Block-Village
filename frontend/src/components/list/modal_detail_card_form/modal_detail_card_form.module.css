@@ -115,6 +115,42 @@
     text-align: center;
 }
 
+.answer_button{
+    margin: 1%;
+    width: 300px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #88e7ff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modify_button{
+    margin: 1%;
+    width: 150px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #fff788;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.delete_button{
+    margin: 1%;
+    width: 150px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #ff8896;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .close {
     top: -4px;
     right: 0px;
