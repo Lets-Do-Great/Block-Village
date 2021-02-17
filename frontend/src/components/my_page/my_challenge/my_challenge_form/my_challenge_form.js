@@ -2,7 +2,7 @@ import React from 'react';
 import MyChallengeList from '../my_challenge_list/my_challenge_list';
 import styles from './my_challenge_form.module.css';
 
-const MyChallengeForm = ({ challengeList }) => {
+const MyChallengeForm = ({ category, challengeList }) => {
     return (
         <div className={styles.my_challenge_form}>
             { challengeList.length === 0 
@@ -11,6 +11,7 @@ const MyChallengeForm = ({ challengeList }) => {
                 { challengeList.map(challenge => (
                     <MyChallengeList 
                         key={challenge.challengeId}
+                        category={category}
                         challenge={challenge} />
                 ))}
             </div>
