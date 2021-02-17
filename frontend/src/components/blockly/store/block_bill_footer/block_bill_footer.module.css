@@ -1,7 +1,7 @@
 .body {
   width: 100%;
   height: 100%;
-  padding: 1em 1em;
+  padding: 0.5em 0.5em;
   border-top: 2px solid black;
   display: flex;
   flex-direction: column;
@@ -18,12 +18,12 @@
 }
 
 .SumName {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 }
 
 .SumPrice {
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .beforeMilMy {
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -62,12 +62,13 @@
 }
 
 .afterMilMy {
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 600;
 }
 
 .footer {
   flex-basis: 10%;
+  cursor: pointer;
 }
 
 .footerBody {
@@ -79,6 +80,6 @@
   background: #ef8ebe;
   color: #fff;
 
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
 }

@@ -21,6 +21,7 @@
   border: 2px solid #fea420;
   border-radius: 5px;
   background-color: #ffffff;
+  cursor: move;
 }
 
 .workspace_cata {

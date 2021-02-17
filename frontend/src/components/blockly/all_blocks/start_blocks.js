@@ -40,3 +40,21 @@ Blockly.JavaScript['end_button'] = function(block) {
   return code;
 };
 
+// 챌린지용 종료 버튼
+Blockly.Blocks['challenge_end_button'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("종료");
+    this.setPreviousStatement(true, null);
+    this.setColour(0);
+    this.setStyle('start-blocks');
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.JavaScript['challenge_end_button'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'challenge_end()';
+  return code;
+};

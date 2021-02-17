@@ -7,7 +7,7 @@ const BlockBill = ({ blist, onDeleteBillList }) => {
 
   useEffect(() => {
     const item = img_ref.current;
-    item.style.background = `100%/100% no-repeat url(/images/blcoks/${blist.id}.png)`
+    item.style.background = `0% 0%/100% 100% no-repeat url(/images/blocks/block-${blist.id}.png)`
   })
 
   return (

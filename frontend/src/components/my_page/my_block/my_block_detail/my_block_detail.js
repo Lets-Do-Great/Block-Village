@@ -6,7 +6,7 @@ const MyBlockDetail = ({ block }) => {
 
   useEffect(() => {
     const item = blockImg.current;
-    item.style.background = `0% 0%/100% 100% no-repeat url(/images/blocks/${block.id}.png)`
+    item.style.background = `0% 0%/100% 100% no-repeat url(/images/blocks/block-${block.id}.png)`
   })
 
   return (
