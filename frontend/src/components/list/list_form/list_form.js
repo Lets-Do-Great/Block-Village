@@ -2,16 +2,32 @@ import React from 'react';
 import ListCardForm from '../list_card_form/list_card_form';
 import ModalDetailCardForm from '../modal_detail_card_form/modal_detail_card_form';
 import styles from './list_form.module.css';
+import Modal from 'react-modal';
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
 
+Modal.setAppElement('#root')
 // type : mission, answer
 const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike, 
                     onModify, onDelete, userInfo, onParticipateMission,
                     openDetail, setOpenDetail, selectedMission }) => {
 
     const history = useHistory();
+
+    const customStyles = {
+        content : {
+            width                 : '100%',
+	        height                : '100%',
+            background            : 'rgba(0,0,0,0.6)',
+            top                   : '50%',
+            left                  : '50%',
+            right                 : 'auto',
+            bottom                : 'auto',
+            marginRight           : '-50%',
+            transform             : 'translate(-50%, -50%)'
+        }
+      };
 
     // 디테일 모달 열기
     const clickCard = (e) => {
@@ -65,20 +81,40 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
         </div>
 
         { type === 'mission' && openDetail && 
-            <div className={styles.modal_wrapper}>
-                <div className={styles.modal}>
-                    <ModalDetailCardForm
-                        detail={detail}
-                        setLike={setLike}
-                        setDislike={setDislike}
-                        closeModal={closeModal}
-                        userInfo={userInfo}
-                        onParticipateMission={onParticipateMission}
-                        onModify={onModify}
-                        onDelete={onDelete}
+                <Modal
+                    isOpen={openDetail}
+                    // onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <div className={styles.modal}>
+                        <ModalDetailCardForm
+                            detail={detail}
+                            setLike={setLike}
+                            setDislike={setDislike}
+                            closeModal={closeModal}
+                            userInfo={userInfo}
+                            onParticipateMission={onParticipateMission}
+                            onModify={onModify}
+                            onDelete={onDelete}
                         />
-                </div>
-            </div> 
+                    </div>
+                </Modal>
+            // <div className={styles.modal_wrapper}>
+                // <div className={styles.modal}>
+                //     <ModalDetailCardForm
+                //         detail={detail}
+                //         setLike={setLike}
+                //         setDislike={setDislike}
+                //         closeModal={closeModal}
+                //         userInfo={userInfo}
+                //         onParticipateMission={onParticipateMission}
+                //         onModify={onModify}
+                //         onDelete={onDelete}
+                //         />
+                // </div>
+            // </div> 
         }
     </>
     );

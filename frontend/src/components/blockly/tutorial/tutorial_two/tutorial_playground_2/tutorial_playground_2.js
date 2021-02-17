@@ -46,8 +46,8 @@ const TutorialPlayground2 = ({ javascript_code, onChangeModalSuccess, onChangeMo
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
 
-        const new_dir_x = move[i][0] - dir_x;
-        const new_dir_y = move[i][1] - dir_y;
+        const new_dir_x = Math.round(move[i][0] - dir_x);
+        const new_dir_y = Math.round(move[i][1] - dir_y);
         if (new_dir_x > 0 && new_dir_y == 0) {
           item.setAttribute('src', `/images/character/character_right.png`)
         } else if (new_dir_x < 0 && new_dir_y == 0) {

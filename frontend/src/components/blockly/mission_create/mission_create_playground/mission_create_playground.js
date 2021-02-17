@@ -31,6 +31,7 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
     x = 0;
     y = 0;
     cur_angle = 0;
+    item.setAttribute('src', `/images/character/character_right.png`)
     item.style.left = `${(startPosition[0]) + 10 - 25}px`;
     item.style.top = `${(startPosition[1]) + 10 - 25}px`;
   };
