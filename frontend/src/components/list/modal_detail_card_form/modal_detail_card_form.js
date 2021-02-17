@@ -95,10 +95,13 @@ const ModalDetailCardForm = ({ detail, setLike, setDislike, closeModal,
         { userInfo === email
             ? (<>
                 <button 
-                    className={styles.participated_button}
+                    className={styles.answer_button}
+                    onClick={goToAnswerList}>참여 현황 보러 가기</button>
+                <button 
+                    className={styles.modify_button}
                     onClick={onSubmitModify}>수정하기</button>
                 <button
-                    className={styles.participating_button} 
+                    className={styles.delete_button} 
                     onClick={onSubmitDelete}>삭제하기</button>
                 { modifyModal && 
                     <MissionModify
