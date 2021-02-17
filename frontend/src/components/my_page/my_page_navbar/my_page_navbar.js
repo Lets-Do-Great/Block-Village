@@ -76,10 +76,9 @@ const MyPageNavbar = ({ onChageBasic, onChageSea, onChageSpace }) => {
 
         <Grid container direction="column" alignItems="center">
           <Grid item xs={12}>
-            <ButtonGroup variant="contained" color="primary" ref={anchorRef} aria-label="split button">
+            <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
               <Button onClick={handleClick}>{options[selectedIndex]}</Button>
               <Button
-                color="primary"
                 size="small"
                 aria-controls={open ? 'split-button-menu' : undefined}
                 aria-expanded={open ? 'true' : undefined}

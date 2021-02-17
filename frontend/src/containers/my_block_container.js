@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import MyBlockCategory from '../components/my_page/my_block/my_block_category/my_block_category';
 
 const MyBlockContainer = ({ closeModal }) => {

@@ -44,7 +44,7 @@
   align-items: center;
   padding: 0.5em;
   display: flex;
-  background-color: rgb(159, 160, 160);
+  background-color: #b9dd6b;
 }
 
 .navbar_board {
@@ -62,7 +62,7 @@
   align-items: center;
   padding: 0.5em;
   display: flex;
-  background-color: rgb(201, 160, 99);
+  background-color: #92ecec;
 }
 
 .navbar_store {

@@ -15,6 +15,7 @@ const AnswerContainer = ({ match }) => {
     const userInfo = useSelector(state => state.user.userInfo);
     const answerList = useSelector(state => state.answer.answerList);
     const selectedAnswer = useSelector(state => state.answer.selectedAnswer);
+    const selectedMission = useSelector(state => state.mission.selectedMission);
 
     const dispatch = useDispatch();
 
@@ -114,7 +115,8 @@ const AnswerContainer = ({ match }) => {
             detail={selectedAnswer}
             getList={getMissionAnswerList}
             getDetail={getAnswer}
-            setOpenDetail={setDetail}/>
+            setOpenDetail={setDetail}
+            selectedMission={selectedMission}/>
         }
     </>);
 }

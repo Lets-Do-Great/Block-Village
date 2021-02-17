@@ -44,3 +44,40 @@
 	text-align: center;
 	margin-bottom: 50px;
 }
+
+.answer_list_title{
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 20px 0px;
+}
+
+.quote{    
+	display: inline-block;
+	width: 15px;
+	height: auto;
+	font-size: 8px;
+	text-align: center;
+	margin: 5px;
+  }
+
+.back_btn {
+	display: inline;
+	margin-left: 10%;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: bold;
+	float: left;
+}
+
+.back_btn:hover {
+	transform: scale(1.1);
+	color: #92ecec;
+}
+
+.text_title{
+	text-align: center;
+	display: block;
+	width: fit-content;
+	margin: 0 auto;
+}

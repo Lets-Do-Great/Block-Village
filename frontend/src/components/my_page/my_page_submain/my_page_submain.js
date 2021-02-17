@@ -1,8 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import * as BlockAction from '../../../modules/block';
 import MyPageMain from '../my_page_main/my_page_main';
-import styles from './my_page_submain.module.css';
 
 const MyPageSubmain = () => {
+  const userInfo = useSelector(state => state.user.userInfo);
+  const dispatch = useDispatch();
+  
+  const getAllBlocks = async () => {
+    try{
+        await dispatch(BlockAction.getAllBlocks({ email: userInfo.email }));
+    } catch(e) {
+        console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    getAllBlocks();
+    console.log("헤2");
+  }, []);
+
+
   const [imageInfo, setImageInfo] = useState({
     background: 'my_page_basic_bg',
     info: 'my_page_basic_info_after',

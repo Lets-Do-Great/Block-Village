@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as Icon from 'react-icons/md';
 import styles from './list_card_form.module.css';
 
 const ListCardForm = ({ type, id, imageUrl, title, difficulty, 
     commentCnt, readCnt, likeCnt, peopleCnt, clickCard }) => {
+
+    const card_bg = useRef();
+    const title_color = useRef();
+
+    useEffect(() => {
+        if(type === 'mission'){
+            card_bg.current.className = styles.img_mission;
+            title_color.current.className = styles.title_mission;
+        } else if(type === 'answer'){
+            card_bg.current.className = styles.img_answer;
+            title_color.current.className = styles.title_answer;
+        }
+    }, []);
+
     return (
     <>
-        <div className={styles.card_form}>
-            <p className={styles.title}
-                id={id} 
-                onClick={clickCard}>
+        <div className={styles.card_form} 
+            onClick={clickCard}>
+            <img ref={card_bg} src={imageUrl}/>
+            <p ref={title_color}
+                id={id} >
                     { title }</p>
-            <img className={styles.img} src={imageUrl}/>
             <div className={styles.icon_box}>
                 { type === 'mission' && 
                 <>
