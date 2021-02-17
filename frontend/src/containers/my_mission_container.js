@@ -50,6 +50,7 @@ const MyMissionContainer = ({ closeModal }) => {
     const getMyMissionList = async () => {
         try{
             await dispatch(MissionAction.getMyMissionList({ email: userInfo.email }));
+            setDetailComponent(false);
         } catch(e) {
             console.log(e);
         }
@@ -59,6 +60,7 @@ const MyMissionContainer = ({ closeModal }) => {
     const getMyAnswerList = async () => {
         try{
             await dispatch(AnswerAction.getMyAnswerList({ email: userInfo.email }));
+            setDetailComponent(false);
         } catch(e) {
             console.log(e);
         }
@@ -68,6 +70,7 @@ const MyMissionContainer = ({ closeModal }) => {
     const getMission = async (id) => {
         try{
             await dispatch(MissionAction.getMission({ missionId: id, email: userInfo.email }));
+            setDetailComponent(true);
         } catch(e) {
             console.log(e);
         }
@@ -77,6 +80,7 @@ const MyMissionContainer = ({ closeModal }) => {
     const getAnswer = async (id) => {
         try{
             await dispatch(AnswerAction.getAnswer({ email: userInfo.email, answerId: id }));
+            setDetailComponent(true);
         }catch (e) {
             console.log(e);
         }

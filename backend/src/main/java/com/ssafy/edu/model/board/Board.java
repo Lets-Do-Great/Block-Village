@@ -40,7 +40,6 @@ public class Board extends BaseTimeEntity {
     @Lob
     private String content;
 
-    @Lob
     private Long views;
 
     @ManyToOne(targetEntity = User.class)

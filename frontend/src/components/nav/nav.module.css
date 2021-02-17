@@ -138,4 +138,5 @@
   color: rgb(71, 71, 71);
   display: inline-block;
   width: 100px;
+  cursor: pointer;
 }

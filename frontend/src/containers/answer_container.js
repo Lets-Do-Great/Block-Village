@@ -20,10 +20,6 @@ const AnswerContainer = ({ match }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setDetail(false);
-    }, []);
-
-    useEffect(() => {
         getMissionAnswerList();
     }, [detail]);
 
@@ -47,6 +43,7 @@ const AnswerContainer = ({ match }) => {
     const getAnswer = async (answerId) => {
         try {
             await dispatch(AnswerAction.getAnswer({ email: userInfo.email, answerId }));
+            setDetail(true);
         } catch(e) {
             console.log(e);
         }
@@ -90,7 +87,6 @@ const AnswerContainer = ({ match }) => {
     const onModify = (e) => {
         setGoModifyAnswer(true)
     };
-
 
     return (<>
         <Nav

@@ -31,13 +31,14 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
 
-        const new_dir_x = move[i][0] - dir_x;
-        const new_dir_y = move[i][1] - dir_y;
-        if (new_dir_x > 0 && new_dir_y == 0) {
+        const new_dir_x = Math.round(move[i][0] - dir_x);
+        const new_dir_y = Math.round(move[i][1] - dir_y);
+        console.log(new_dir_x, new_dir_y);
+        if (new_dir_x > 0 && new_dir_y === 0) {
           item.setAttribute('src', `/images/character/character_right.png`)
-        } else if (new_dir_x < 0 && new_dir_y == 0) {
+        } else if (new_dir_x < 0 && new_dir_y === 0) {
           item.setAttribute('src', `/images/character/character_left.png`)
-        } else if (new_dir_x == 0 && new_dir_y > 0) {
+        } else if (new_dir_x === 0 && new_dir_y > 0) {
           item.setAttribute('src', `/images/character/character_back.png`)
         } else {
           item.setAttribute('src', `/images/character/character_front.png`)
@@ -52,7 +53,7 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
 
-        await timer(1500);
+        await timer(500);
       }
       if (endPosition[0] >= (x - 5) && endPosition[0] <= (x + 5) &&
           endPosition[1] >= (y - 5) && endPosition[1] <= (y + 5)) {

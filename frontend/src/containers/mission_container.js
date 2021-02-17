@@ -162,7 +162,6 @@ const MissionContainer = () => {
                 onDelete={onDeleteMission}
                 onParticipateMission={onParticipateMission}
                 openDetail={modal}
-                setOpenDetail={setModal}
             />
         </>
     );
