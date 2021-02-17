@@ -139,7 +139,7 @@ const TutorialMain2 = ({ info, GoThree }) => {
   const [modal2_step_1, setModal2_step_1] = useState(false)
 
   const retutorial = () => {
-    setModal2_step_0(true)
+    setModal2_step_1(true)
     setGoToMainButton(true);
   };
 

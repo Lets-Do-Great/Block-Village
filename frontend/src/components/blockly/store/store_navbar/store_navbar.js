@@ -12,7 +12,7 @@ const StoreNavbar = ({ chageOpenMyBlock }) => {
       <h1 className={styles.title}>블록 상점</h1>
 
       <div className={styles.go_my_block} onClick={() => chageOpenMyBlock()}>
-        <FaFortAwesomeAlt size="50" color="#FFFFFF"/>
+        <img src="/images/block_store/block_store_my_block.png"/>
       </div>
 
     </header>
