@@ -29,11 +29,9 @@ const TutorialPlayground2 = ({ javascript_code, onChangeModalSuccess, onChangeMo
 
   const [image_x, setImage_x] = useState(0);
   const [image_y, setImage_y] = useState(0);
-  // const [image_speed, setImage_speed] = useState(5);
 
   const playGame = () => {
     eval(javascript_code);
-    console.log(move);
     item.style.transition = `all .${move.length*10}s ease .2s`
 
     let x = image_x;

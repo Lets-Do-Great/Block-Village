@@ -65,7 +65,6 @@ const MissionCreateSubmain = ({ onSetMission }) => {
     setTCmodal(!TCmodal)
   };
 
-  // 여기가 마지막에 미션제작 버튼 누르면 들어오는 함수임.
   const onChangeTC = () => {
     onSetMission(formInfo);
     setTCmodal(!TCmodal)

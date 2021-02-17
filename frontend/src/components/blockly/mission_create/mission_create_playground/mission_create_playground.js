@@ -21,8 +21,6 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
   const fieldchar = useRef();
   const item = fieldchar.current;
 
-  // const image_x = startPosition[0];
-  // const image_y = startPosition[1];
   const [image_x, setImage_x] = useState(startPosition[0]);
   const [image_y, setImage_y] = useState(startPosition[1]);
 
@@ -36,12 +34,8 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
     item.style.top = `${(startPosition[1]) + 10 - 25}px`;
   };
   
-
-  // const [moveStep, setMoveStep] = useState(move);
-  
   const playGame = () => {
     eval(javascript_code);
-    console.log(move);
     setMoveStep(move)
     item.style.transition = `all .${move.length*10}s ease .2s`
 
@@ -66,18 +60,15 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
         } else {
           item.setAttribute('src', `/images/character/character_front.png`)
         }
-        // console.log(dir_x, dir_y);
+
         dir_x = move[i][0];
         dir_y = move[i][1];
         await timer(500);
 
-
-        console.log(image_x, image_y);
         const new_move_x = move[i][0]
         const new_move_y = move[i][1]
         xx = image_x + (new_move_x * 50) + 10 - 25;
         yy = image_y - (new_move_y * 50) + 10 - 25;
-        // console.log(xx, yy);
         
         item.style.left = `${xx}px`;
         item.style.top = `${yy}px`;
@@ -116,8 +107,8 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
     cur_angle = 0;
   }, [imageUrl])
   
-  
-     // 함수
+
+       // 함수
   /////////////////////////////////////////////////////////////////
   var my_var = 0;  
   var my_var1 = 0;
@@ -233,36 +224,6 @@ const MissionCreatePlayground = ({ setMoveStep, startPosition, endPosition, java
   const abs_val_js = (value_num) => {
     return Math.abs(value_num);
   };
-
-  // 그리기
-  var pen_pos = true; // true이면 내려가 있는 상태, false이면 올라가 있는 상태
-  var pen_angle = 0;
-  var pen_x = 0;
-  var pen_y = 0;
-  const lines = [];
-  var cur_colour = 0;
-  const change_colour = (colour_colour) => {
-    cur_colour = colour_colour;
-  }
-  const pen_down = () => {
-    pen_pos = true;
-  };
-  const pen_up = () => {
-    pen_pos = false;
-  };
-  const draw_line = (text_length) => {
-    var tmp_x = pen_x;
-    var tmp_y = pen_y;
-    pen_x += Math.cos(pen_angle) * text_length;
-    pen_y += Math.sin(pen_angle) * text_length;
-    if(pen_pos){
-      lines.push([[tmp_x, tmp_y], [pen_x, pen_y]]); // 펜이 내려와 있는 상태라면 선분의 양 끝점을 저장
-    }
-  };
-  const rotate_pen = (angle_angle) => {
-    pen_angle += angle_angle * Math.PI / 180;
-  }
-
   
 
   return (

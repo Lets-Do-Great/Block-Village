@@ -12,7 +12,6 @@ export const getMyAnswerList = ({ email }) => {
 export const setAnswer = ({ email, missionId, title,
                  content, javascriptCode, xmlCode, 
                  startPositionX, startPositionY }) => {
-    console.log("여기 아놈?", startPositionX, startPositionY, xmlCode );
     return client({
        url: `answer/${email}`,
        method: 'post',
@@ -57,8 +56,7 @@ export const getAnswer = ({ email, answerId }) => {
 }
 
 // 전체 미션 답안 목록 조회
-export const getAnswerList = ({ keyword, keywordType, 
-                                searchType, sortType, pageNum }) => {
+export const getAnswerList = ({ keyword, keywordType, searchType, sortType, pageNum }) => {
     return client({
         url: `answer`,
         method: 'post',

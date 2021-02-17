@@ -91,7 +91,6 @@ export default applyPenders(userReducer, [
 
       if (response.status === 200) {
         if (response.data.status) {
-          // 로그인 성공
           localStorage.setItem('token', response.data.data.token);
           client.defaults.headers.common['token'] = localStorage.getItem(
             'token'
@@ -104,11 +103,9 @@ export default applyPenders(userReducer, [
             },
           });
         } else {
-          // 로그인 실패
           alert('로그인에 실패하였습니다.');
         }
       } else {
-        // 에러 발생
         alert('없는 회원 정보 입니다.');
         console.log(action.payload.status);
       }

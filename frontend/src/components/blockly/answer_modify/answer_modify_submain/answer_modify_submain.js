@@ -26,14 +26,6 @@ const AnswerModifySubmain = ({ selectedMission, setUseDifficulty, setUseContent,
     imageUrl: selectedMission.imageUrl,
   });
 
-  // useEffect(() => {
-  //   setFormInfo({
-  //     ...formInfo,
-  //     initialXml: selectedAnswer.xmlCode,
-  //     javascript: selectedAnswer.javascriptCode,
-  //   })
-  // }, [])
-
   const onChangeXml = (e) => {
     setFormInfo({
       ...formInfo,

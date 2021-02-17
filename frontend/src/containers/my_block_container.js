@@ -6,12 +6,12 @@ const MyBlockContainer = ({ closeModal }) => {
     const allBlocksInfo = useSelector(state => state.block.allBlocksInfo);
 
     return (
-    <>
-        <MyBlockCategory
-            closeModal={closeModal}
-            allBlocksInfo={allBlocksInfo}
-        /> 
-    </>
+        <>
+            <MyBlockCategory
+                closeModal={closeModal}
+                allBlocksInfo={allBlocksInfo}
+            /> 
+        </>
     );
 }
 

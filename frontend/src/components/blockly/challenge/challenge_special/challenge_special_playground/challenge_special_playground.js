@@ -4,7 +4,6 @@ import { FaRegPlayCircle } from 'react-icons/fa';
 
 const ChallengeSpecialPlayground = ({ javascript_code, onChangeSuccess, onChangeFail}) => {
   
-
   const back_img_ref = useRef();
 
   const answer_0 = useRef();
@@ -20,7 +19,6 @@ const ChallengeSpecialPlayground = ({ javascript_code, onChangeSuccess, onChange
   const question_4 = useRef();
 
   const Answer = [2, 6, 120, 40320, 3628800];
-  // const Answer = [3, 3, 3, 3, 3];
 
   const playGame = () => {
     const timer = ms => new Promise(res => setTimeout(res, ms))

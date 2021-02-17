@@ -34,7 +34,6 @@ const TutorialPlayground3 = ({ javascript_code, onChangeModalSuccess, onChangeMo
 
   const playGame = () => {
     eval(javascript_code);
-    console.log(move);
     item.style.transition = `all .${move.length*10}s ease .2s`
 
     let x = image_x;
@@ -58,7 +57,6 @@ const TutorialPlayground3 = ({ javascript_code, onChangeModalSuccess, onChangeMo
         } else {
           item.setAttribute('src', `/images/character/character_front.png`)
         }
-        console.log(dir_x, dir_y);
         dir_x = move[i][0];
         dir_y = move[i][1];
         await timer(500);

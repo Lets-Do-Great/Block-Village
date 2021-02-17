@@ -2,7 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import * as BoardAPI from '../service/board';
 import { applyPenders } from 'redux-pender';
 import { updateObject } from '../service/common';
-import { createElement } from 'react';
 
 // board 관련 요청 액션 타입
 const GET_BOARD_LIST = 'board/GET_BOARD_LIST';
@@ -235,7 +234,6 @@ export default applyPenders(boardReducer, [
                 }
             } else {
                 alert("댓글 수정에 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -258,7 +256,6 @@ export default applyPenders(boardReducer, [
                 }
             } else {
                 alert("댓글 삭제에 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -270,7 +267,7 @@ export default applyPenders(boardReducer, [
         type: GET_BOARD_COMMENT_LIST,
         onSuccess: (state, action) => {
             const response = action.payload;
-
+            
             if(response.status === 200) {
                 if(response.data.status) {
                     return updateObject(state, {
@@ -282,7 +279,6 @@ export default applyPenders(boardReducer, [
                 }
             } else {
                 alert("댓글을 조회하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },

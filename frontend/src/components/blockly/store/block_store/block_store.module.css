@@ -9,10 +9,7 @@
   display: flex;
   flex: 1;
   padding: 0.8em;
-  /* max-height: 850px; */
   max-height: 90%;
-  /* max-width: 1450px;
-  width: 1400; */
 }
 
 .bill {
@@ -32,11 +29,6 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-
-  /* padding-bottom: 0.5em; */
-
-  /* justify-content: center;
-  align-items: center; */
 
   overflow-y: scroll;
   -ms-overflow-style: none;

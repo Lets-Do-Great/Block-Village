@@ -83,7 +83,6 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
         { type === 'mission' && openDetail && 
             <Modal
                 isOpen={openDetail}
-                // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"

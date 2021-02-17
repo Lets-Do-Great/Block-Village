@@ -19,6 +19,7 @@ Blockly.Blocks['repeat_times'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['repeat_times'] = function(block) {
   var value_times = Blockly.JavaScript.valueToCode(block, 'times', Blockly.JavaScript.ORDER_ATOMIC);
   var statements_repeat_times = Blockly.JavaScript.statementToCode(block, 'repeat_times');
@@ -28,6 +29,7 @@ Blockly.JavaScript['repeat_times'] = function(block) {
   var code = `for(var ${loopVar}=0; ${loopVar}<${value_times}; ${loopVar}++){\n ${statements_repeat_times};}\n`
   return code;
 };
+
 Blockly.Python['repeat_times'] = function(block) {
   var value_times = Blockly.Python.valueToCode(block, 'times', Blockly.Python.ORDER_ATOMIC);
   var statements_repeat_times = Blockly.Python.statementToCode(block, 'repeat_times');

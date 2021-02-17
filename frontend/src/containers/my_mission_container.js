@@ -141,7 +141,6 @@ const MyMissionContainer = ({ closeModal }) => {
 
     // 답안 삭제 요청
     const onDeleteAnswer = async () => {
-        console.log(selectedAnswer);
         try{
             await dispatch(AnswerAction.deleteAnswer(
                 { email: userInfo.email, answerId:selectedAnswer.id }));
@@ -173,59 +172,60 @@ const MyMissionContainer = ({ closeModal }) => {
         }
     };
     
-    return (<>
-            
-        { detailComponent
-            ? ( <>
-                { category !== 'myAnswer' && 
-                    <ModalDetailCardForm
-                        detail={selectedMission}
-                        setLike={likeMission}
-                        setDislike={dislikeMission}
-                        userInfo={userInfo.email}
-                        onModify={onModifyMission}
-                        onDelete={onDeleteMission}
-                        closeModal={onCloseDetail}
-                        /> }
-                { category === 'myAnswer' &&  
-                    <div className={styles.my_mission_modal}>
-                        <ComponentDetailCardForm
-                            detail={selectedAnswer}
-                            setLike={likeAnswer}
-                            setDisLike={dislikeAnswer}
+    return (
+        <>   
+            { detailComponent
+                ? ( <>
+                    { category !== 'myAnswer' && 
+                        <ModalDetailCardForm
+                            detail={selectedMission}
+                            setLike={likeMission}
+                            setDislike={dislikeMission}
                             userInfo={userInfo.email}
-                            onDelete={onDeleteAnswer}
-                            closeDetail={onCloseDetail}
-                            selectedId={selectedAnswer.id}
-                    /></div>
-                }
-            </> )
-            : (<> 
-                <MyListCategory
-                    category={category}
-                    onChangeCategory={onChangeCategory}
-                    closeModal={closeModal}/>
+                            onModify={onModifyMission}
+                            onDelete={onDeleteMission}
+                            closeModal={onCloseDetail}
+                            /> }
+                    { category === 'myAnswer' &&  
+                        <div className={styles.my_mission_modal}>
+                            <ComponentDetailCardForm
+                                detail={selectedAnswer}
+                                setLike={likeAnswer}
+                                setDisLike={dislikeAnswer}
+                                userInfo={userInfo.email}
+                                onDelete={onDeleteAnswer}
+                                closeDetail={onCloseDetail}
+                                selectedId={selectedAnswer.id}
+                        /></div>
+                    }
+                </> )
+                : (<> 
+                    <MyListCategory
+                        category={category}
+                        onChangeCategory={onChangeCategory}
+                        closeModal={closeModal}/>
 
-                { category !== 'myAnswer' &&
-                    <ListForm
-                        type="mission"
-                        list={missionList}
-                        getList={getMyMissionList}
-                        getDetail={getMission}
-                        onDelete={onDeleteMission}
-                        setOpenDetail={onOpenDetail}/> }
-                { category === 'myAnswer' &&
-                    <ListForm
-                        type={category}
-                        list={answerList}
-                        getList={getMyAnswerList}
-                        getDetail={getAnswer}
-                        onDelete={onDeleteAnswer}
-                        setOpenDetail={onOpenDetail} />
-                }
-            </>)
-        }
-    </>);
+                    { category !== 'myAnswer' &&
+                        <ListForm
+                            type="mission"
+                            list={missionList}
+                            getList={getMyMissionList}
+                            getDetail={getMission}
+                            onDelete={onDeleteMission}
+                            setOpenDetail={onOpenDetail}/> }
+                    { category === 'myAnswer' &&
+                        <ListForm
+                            type={category}
+                            list={answerList}
+                            getList={getMyAnswerList}
+                            getDetail={getAnswer}
+                            onDelete={onDeleteAnswer}
+                            setOpenDetail={onOpenDetail} />
+                    }
+                </>)
+            }
+        </>
+    );
 }
 
 export default MyMissionContainer;

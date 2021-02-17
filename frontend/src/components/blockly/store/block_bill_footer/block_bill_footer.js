@@ -24,11 +24,7 @@ const BlockBillFooter = ({ usermil, billList, buyBlocks }) => {
 
   const onSubmitBuy = () => {
     if(priceMil >= 0 && billList.length > 0) {
-      console.log("사 사 ", priceMil, billList); 
       buyBlocks();
-    }
-    else {
-      console.log("못사 못사");
     }
   }
 
