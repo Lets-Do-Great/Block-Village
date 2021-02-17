@@ -15,7 +15,6 @@ const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil }) => {
   
   const chageOpenMyBlock = () => {
     setOpenMyBlock(!openMyBlock)
-    console.log('뭐니');
   }
 
   const buyBlocks = () => {
@@ -33,9 +32,7 @@ const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil }) => {
     setBillList([]);
   };
 
-  const [categoryStatus, setCategoryStatus] = useState([
-    true, false, false, false, false, false,
-  ]);
+  const [categoryStatus, setCategoryStatus] = useState([true, false, false, false, false]);
   const [category, setCategory] = useState('판단');
 
   
@@ -43,22 +40,19 @@ const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil }) => {
     setCategory(name)
     
     if (name === '판단') {
-      setCategoryStatus([true, false, false, false, false, false,])
+      setCategoryStatus([true, false, false, false, false])
     }
     if (name === '움직임') {
-      setCategoryStatus([false, true, false, false, false, false,])
+      setCategoryStatus([false, true, false, false, false])
     }
     if (name === '흐름') {
-      setCategoryStatus([false, false, true, false, false, false,])
+      setCategoryStatus([false, false, true, false, false])
     }
     if (name === '계산') {
-      setCategoryStatus([false, false, false, true, false, false,])
-    }
-    if (name === '그리기') {
-      setCategoryStatus([false, false, false, false, true, false,])
+      setCategoryStatus([false, false, false, true, false])
     }
     if (name === '함수') {
-      setCategoryStatus([false, false, false, false, false, true,])
+      setCategoryStatus([false, false, false, false, true])
     }
   };
   

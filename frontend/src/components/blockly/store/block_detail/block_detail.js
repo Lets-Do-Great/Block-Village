@@ -6,7 +6,7 @@ const BlockDetail = ({ block, addBillList }) => {
 
   useEffect(() => {
     const item = blockImg.current;
-    item.style.background = `100%/100% no-repeat url(/images/block_dumy/${block.id}.png)`
+    item.style.background = `0% 0%/100% 100% no-repeat url(/images/blocks/block-${block.id}.png)`
   })
 
   const onClick = () => {

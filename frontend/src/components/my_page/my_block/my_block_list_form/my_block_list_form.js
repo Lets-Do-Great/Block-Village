@@ -7,7 +7,7 @@ const MyBlockListForm = ({ categoryBlockList }) => {
     <>
         <div className={styles.box}/>
         { categoryBlockList.length === 0
-        ? <div className={styles.text}>아직 블록이 없어요</div>
+        ? <div className={styles.noBlock}></div>
         : <div className={styles.my_block_list_form}>
             <div className={styles.my_block_list_form_body}>
                 { categoryBlockList.map(block => (

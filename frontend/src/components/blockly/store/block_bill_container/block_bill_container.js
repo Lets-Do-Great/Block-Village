@@ -4,7 +4,7 @@ import BlockBill from '../block_bill/block_bill';
 const BlockBillContainer = ({ billList, onDeleteBillList }) => {
   return (
     <>
-      {billList.reverse().map((blist) => (
+      {billList.map((blist) => (
         <BlockBill 
           key={blist.id}
           blist={blist}

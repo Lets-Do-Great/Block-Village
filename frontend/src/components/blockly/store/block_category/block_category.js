@@ -7,7 +7,6 @@ const BlockCategory = ({ categoryStatus, onChangeSelectedCategory }) =>{
   const cata_movement = useRef();
   const cata_flow = useRef();
   const cata_calculation = useRef();
-  const cata_drawing = useRef();
   const cata_function = useRef();
 
   useEffect(() => {
@@ -36,12 +35,6 @@ const BlockCategory = ({ categoryStatus, onChangeSelectedCategory }) =>{
     }
 
     if (categoryStatus[4]) {
-      cata_drawing.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_5_click.png)`
-    } else {
-      cata_drawing.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_5_default.png)`
-    }
-
-    if (categoryStatus[5]) {
       cata_function.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_6_click.png)`
     } else {
       cata_function.current.style.background = `0% 0%/100% 100% no-repeat url(/images/block_store/block_store_category_6_default.png)`
@@ -75,12 +68,6 @@ const BlockCategory = ({ categoryStatus, onChangeSelectedCategory }) =>{
         ref={cata_calculation}
         onClick={() => onChangeSelectedCategory('계산')}
         className={styles.cata__calculation}
-      ></div>
-
-      <div 
-        ref={cata_drawing}
-        onClick={() => onChangeSelectedCategory('그리기')}
-        className={styles.cata__drawing}
       ></div>
 
       <div 

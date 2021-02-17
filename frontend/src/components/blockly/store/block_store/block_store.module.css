@@ -9,7 +9,8 @@
   display: flex;
   flex: 1;
   padding: 0.8em;
-  max-height: 850px;
+  /* max-height: 850px; */
+  max-height: 90%;
   /* max-width: 1450px;
   width: 1400; */
 }
@@ -25,12 +26,14 @@
 }
 
 .bill_items {
-  flex-basis: 65%;
-  max-height: 60%;
+  flex-basis: 70%;
+  max-height: 70%;
 
   position: relative;
   display: flex;
   flex-wrap: wrap;
+
+  /* padding-bottom: 0.5em; */
 
   /* justify-content: center;
   align-items: center; */
@@ -44,7 +47,7 @@
 }
 
 .bill_footer {
-  flex-basis: 35%;
+  flex-basis: 30%;
 }
 
 .blocks {

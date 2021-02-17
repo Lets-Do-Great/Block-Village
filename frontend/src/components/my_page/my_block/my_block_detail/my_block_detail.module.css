@@ -1,13 +1,14 @@
 .body {
   display: inline-block;
-  padding: 1em 1em;
-  border: 2px solid black;
+  /* padding: 1em 1em; */
+  /* border: 2px solid black; */
 }
 
 .container {
   width: 250px;
-  height: 150px;
+  height: 200px;
   position: relative;
+  /* background-color: lightgray; */
 }
 
 .image_box {
