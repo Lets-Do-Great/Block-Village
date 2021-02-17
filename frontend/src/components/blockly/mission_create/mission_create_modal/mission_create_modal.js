@@ -64,6 +64,7 @@ const MissionCreateModal = ({ formInfo, onChangeModal, updateState, title, onCha
             type="text" 
             ref={titleRef} 
             name="title"
+            maxlength="12"
             className={styles.titleInput}
             onChange={onChange} 
           />

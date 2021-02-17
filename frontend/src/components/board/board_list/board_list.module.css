@@ -1,4 +1,4 @@
-.board_list{
+.board_list {
   display: block;
   width: 90%;
   height: 90%;
@@ -13,12 +13,12 @@
   border-top: 2px solid darkgray;
 }
 
-.board_header{
+.board_header {
   display: block;
   width: 90%;
   margin: 0 auto;
 }
-  
+
 .board_body {
   display: inline-block;
   width: 100%;
@@ -28,7 +28,7 @@
   position: static;
 }
 
-.board_header_no{
+.board_header_no {
   display: inline-block;
   width: 10%;
   font-weight: bold;
@@ -37,7 +37,7 @@
   line-height: 55px;
 }
 
-.board_header_title{
+.board_header_title {
   display: inline-block;
   width: 60%;
   font-weight: bold;
@@ -46,7 +46,7 @@
   line-height: 55px;
 }
 
-.board_header_date{
+.board_header_date {
   display: inline-block;
   width: 17%;
   font-weight: bold;
@@ -55,7 +55,7 @@
   line-height: 55px;
 }
 
-.board_header_read_cnt{
+.board_header_read_cnt {
   display: inline-block;
   width: 13%;
   font-weight: bold;
@@ -64,7 +64,7 @@
   line-height: 55px;
 }
 
-.board_no{
+.board_no {
   display: inline-block;
   width: 10%;
   font-size: 18px;
@@ -72,34 +72,34 @@
   line-height: 55px;
 }
 
-.board_title{
+.board_title {
   display: inline-block;
   width: 60%;
   font-weight: 600;
   font-size: 18px;
-  /* text-align: center; */
+  cursor: pointer;
 }
 
-.board_date{
+.board_date {
   display: inline-block;
   width: 17%;
   font-size: 18px;
   text-align: center;
 }
 
-.board_read_cnt{
+.board_read_cnt {
   display: inline-block;
   width: 13%;
   font-size: 18px;
   text-align: center;
 }
 
-.main_img_parent{
+.main_img_parent {
   display: block;
   background-color: #ddbd97;
 }
 
-.main_img{
+.main_img {
   display: block;
   width: auto;
   height: 300px;

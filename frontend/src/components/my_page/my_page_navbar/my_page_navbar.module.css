@@ -31,3 +31,7 @@
 .theme__btn {
   z-index: 1005;
 }
+
+#split-button-menu {
+  z-index: 1005;
+}

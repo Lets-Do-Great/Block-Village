@@ -7,7 +7,7 @@
   position: static;
 }
 
-.challenge_no{
+.challenge_no {
   display: inline-block;
   width: 10%;
   font-weight: bold;
@@ -16,7 +16,7 @@
   line-height: 55px;
 }
 
-.challenge_name{
+.challenge_name {
   display: inline-block;
   width: 50%;
   font-weight: bold;
@@ -24,7 +24,11 @@
   text-align: center;
 }
 
-.challenge_date{
+.challenge_name:hover {
+  cursor: pointer;
+}
+
+.challenge_date {
   display: inline-block;
   width: 27%;
   font-weight: bold;
@@ -32,7 +36,7 @@
   text-align: center;
 }
 
-.challenge_people_cnt{
+.challenge_people_cnt {
   display: inline-block;
   width: 13%;
   font-weight: bold;
