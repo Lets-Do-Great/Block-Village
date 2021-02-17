@@ -25,7 +25,7 @@ const SubMain = () => {
           </>
         : <button 
           className={styles.skip_button}
-          onClick={clickSkip}>건너뛰기</button>
+          onClick={clickSkip}>로그인 하러 가기</button>
       }
     </>    
   );
