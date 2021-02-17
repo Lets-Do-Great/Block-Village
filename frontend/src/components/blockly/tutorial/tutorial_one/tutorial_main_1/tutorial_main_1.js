@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './tutorial_main_1.module.css'
 
 import Draggable from 'react-draggable';
@@ -39,10 +40,11 @@ const TutorialMain1 = ({ info, GoTwo }) => {
   const [activeDrags, setActiveDrags] = useState(0);
   const [modal, setModal] = useState(true);
   const [javascript, setJavascript] = useState();
+  const [goToMainButton, setGoToMainButton] = useState(true);
+  const history = useHistory();
 
   const [modal_success_state, setModal_success_state] = useState(false);
   const [modal_fail_state, setModal_fail_state] = useState(false);
-
 
   const theme = {
     'blockStyles' : {
@@ -145,6 +147,7 @@ const TutorialMain1 = ({ info, GoTwo }) => {
 
   const retutorial = () => {
     setModal_step_1(true)
+    setGoToMainButton(true);
   };
 
   const change_modal_step_0 = () => {
@@ -184,6 +187,11 @@ const TutorialMain1 = ({ info, GoTwo }) => {
 
   const change_modal_step_7 = () => {
     setModal_step_7(false)
+    setGoToMainButton(false)
+  };
+
+  const goToMain = () => {
+    history.push('/main');
   };
   
   //########################################
@@ -205,7 +213,6 @@ const TutorialMain1 = ({ info, GoTwo }) => {
 
       {modal_success_state && <ModalSuccess1 GoTwo={GoTwo}/>}
       {modal_fail_state && <ModalFail1 reStart={reStart}/>}
-
 
       <TutorialNavbar 
         title={title}
@@ -267,8 +274,8 @@ const TutorialMain1 = ({ info, GoTwo }) => {
             />
           </div>
         </div>
-
       </div>
+      {goToMainButton && <button className={styles.go_my_page} onClick={goToMain}>메인으로</button>}
     </div>
   )
 };

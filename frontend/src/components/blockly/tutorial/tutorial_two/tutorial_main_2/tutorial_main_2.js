@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './tutorial_main_2.module.css'
 
 import Draggable from 'react-draggable';
@@ -32,6 +33,8 @@ const TutorialMain2 = ({ info, GoThree }) => {
 
   const [modal_success_state, setModal_success_state] = useState(false);
   const [modal_fail_state, setModal_fail_state] = useState(false);
+  const [goToMainButton, setGoToMainButton] = useState(true);
+  const history = useHistory();
 
   const [activeDrags, setActiveDrags] = useState(0);
   const [modal, setModal] = useState(true);
@@ -126,6 +129,10 @@ const TutorialMain2 = ({ info, GoThree }) => {
     setModal(!modal)
   };
 
+  const goToMain = () => {
+    history.push('/main');
+  };
+
 
   //==========================================
   const [modal2_step_0, setModal2_step_0] = useState(true)
@@ -133,6 +140,7 @@ const TutorialMain2 = ({ info, GoThree }) => {
 
   const retutorial = () => {
     setModal2_step_1(true)
+    setGoToMainButton(true);
   };
 
   const change_modal2_step_0 = () => {
@@ -142,6 +150,7 @@ const TutorialMain2 = ({ info, GoThree }) => {
 
   const change_modal2_step_1 = () => {
     setModal2_step_1(false)
+    setGoToMainButton(false)
   };
   //########################################
 
@@ -216,8 +225,11 @@ const TutorialMain2 = ({ info, GoThree }) => {
             />
           </div>
         </div>
-
       </div>
+      {goToMainButton && 
+        <button 
+          className={styles.go_my_page} 
+          onClick={goToMain}>메인으로</button>}
     </div>
   )
 };

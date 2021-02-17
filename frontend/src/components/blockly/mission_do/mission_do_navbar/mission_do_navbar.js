@@ -8,6 +8,10 @@ import { useHistory } from 'react-router-dom';
 const MissionDoNavbar = ({ modal, statusModal, title, difficulty }) => {
   const history = useHistory();
 
+  const goToMain = () => {
+    history.push('/main');
+  };
+
   const onoffModal = () => {
     statusModal();
   };
@@ -19,8 +23,9 @@ const MissionDoNavbar = ({ modal, statusModal, title, difficulty }) => {
   return (
     <header className={styles.navbar}>
 
-      <img className={styles.logo_img} src="/images/logo1.png" />
-
+      <img 
+        onClick={goToMain}
+        className={styles.logo_img} src="/images/logo1.png" />
 
       <h1 className={styles.title}>{title}</h1>
       <div className={styles.modal_button} onClick={onoffModal}>
