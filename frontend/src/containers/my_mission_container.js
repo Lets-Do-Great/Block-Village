@@ -191,12 +191,13 @@ const MyMissionContainer = ({ closeModal }) => {
                     <div className={styles.my_mission_modal}>
                         <ComponentDetailCardForm
                             detail={selectedAnswer}
+                            imageUrl={selectedMission.imageUrl}
                             setLike={likeAnswer}
                             setDisLike={dislikeAnswer}
                             userInfo={userInfo.email}
                             onDelete={onDeleteAnswer}
                             closeDetail={onCloseDetail}
-                            selectedId={selectedAnswer.id}
+                            getDetail={getMission}
                     /></div>
                 }
             </> )
@@ -220,6 +221,7 @@ const MyMissionContainer = ({ closeModal }) => {
                         list={answerList}
                         getList={getMyAnswerList}
                         getDetail={getAnswer}
+                        getMissionDetail={getMission}
                         onDelete={onDeleteAnswer}
                         setOpenDetail={onOpenDetail} />
                 }

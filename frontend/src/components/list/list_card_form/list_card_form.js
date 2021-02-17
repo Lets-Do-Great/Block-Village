@@ -2,8 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import * as Icon from 'react-icons/md';
 import styles from './list_card_form.module.css';
 
-const ListCardForm = ({ type, id, imageUrl, title, difficulty, 
-    commentCnt, readCnt, likeCnt, peopleCnt, clickCard }) => {
+const ListCardForm = ({ type, id, imageUrl, title, 
+                    difficulty, commentCnt, readCnt, 
+                    likeCnt, peopleCnt, clickCard }) => {
 
     const card_bg = useRef();
     const title_color = useRef();

@@ -2,13 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import styles from './answer_playground.module.css';
 import { FaRegPlayCircle, FaRedoAlt } from 'react-icons/fa';
 
-const AnswerPlayground = ({ startPosition, javascript_code }) => {
+const AnswerPlayground = ({ imageUrl, startPosition, javascript_code }) => {
   var x = 0;
   var y = 0;
   var move = [];
   var cur_angle = 0;
 
   const fieldchar = useRef();
+  const back_img_ref = useRef();
   const item = fieldchar.current;
 
   const image_x = startPosition[0];
@@ -51,6 +52,8 @@ const AnswerPlayground = ({ startPosition, javascript_code }) => {
   };
   
   useEffect(() => {
+    back_img_ref.current.style.background = `url(${imageUrl}) center/cover`
+
     const item = fieldchar.current; 
     
     item.setAttribute('className', `image`)
@@ -315,7 +318,7 @@ const AnswerPlayground = ({ startPosition, javascript_code }) => {
 
   return (
     <div className={styles.body}>
-      <section className={styles.game}>
+      <section ref={back_img_ref} className={styles.game}>
         <img ref={fieldchar}></img>
       </section>
       <footer className={styles.footer}>
