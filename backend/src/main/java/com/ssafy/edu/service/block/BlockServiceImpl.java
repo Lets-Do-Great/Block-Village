@@ -39,7 +39,6 @@ public class BlockServiceImpl implements BlockService {
         if (!blockList.isEmpty()) {
 
             List<BlockResult> calculationList = new ArrayList<>();
-            List<BlockResult> drawingList = new ArrayList<>();
             List<BlockResult> flowList = new ArrayList<>();
             List<BlockResult> functionList = new ArrayList<>();
             List<BlockResult> judgementList = new ArrayList<>();
@@ -63,18 +62,6 @@ public class BlockServiceImpl implements BlockService {
                             }
                         }
                         calculationList.add(blockResult);
-                        break;
-                    case "drawing":
-                        blockResult.setId(b.getId());
-                        blockResult.setPrice(b.getPrice());
-                        blockResult.setUserHave(false);
-                        blockResult.setCategory("그리기");
-                        for(BlockUsers blockUsers : blockUsersList){
-                            if (blockUsers.getBlock().equals(b)){
-                                blockResult.setUserHave(true);
-                            }
-                        }
-                        drawingList.add(blockResult);
                         break;
                     case "flow":
                         blockResult.setId(b.getId());
@@ -139,7 +126,6 @@ public class BlockServiceImpl implements BlockService {
                 }
             }
             resultList.set계산(calculationList);
-            resultList.set그리기(drawingList);
             resultList.set흐름(flowList);
             resultList.set함수(functionList);
             resultList.set판단(judgementList);
@@ -174,7 +160,6 @@ public class BlockServiceImpl implements BlockService {
             BlockMyResponse movement = new BlockMyResponse();
             BlockMyResponse flow = new BlockMyResponse();
             BlockMyResponse calculation = new BlockMyResponse();
-            BlockMyResponse drawing = new BlockMyResponse();
             BlockMyResponse function = new BlockMyResponse();
 
             start.setName("시작");
@@ -187,8 +172,6 @@ public class BlockServiceImpl implements BlockService {
             flow.setColour("#55CFFF");
             calculation.setName("계산");
             calculation.setColour("#1060FF");
-            drawing.setName("그리기");
-            drawing.setColour("#7D10C4");
             function.setName("함수");
             function.setColour("#CC6666");
 
@@ -197,7 +180,6 @@ public class BlockServiceImpl implements BlockService {
             List<BlockType> moveblock = new ArrayList<>();
             List<BlockType> flowblock = new ArrayList<>();
             List<BlockType> calculblock = new ArrayList<>();
-            List<BlockType> drawblock = new ArrayList<>();
             List<BlockType> funcblock = new ArrayList<>();
 
             if (!blockUsersList.isEmpty()) {
@@ -228,11 +210,6 @@ public class BlockServiceImpl implements BlockService {
                             tmp5.setType(blockUsers.getBlock().getName());
                             calculblock.add(tmp5);
                             break;
-                        case "drawing":
-                            BlockType tmp6 = new BlockType();
-                            tmp6.setType(blockUsers.getBlock().getName());
-                            drawblock.add(tmp6);
-                            break;
                         case "function":
                             BlockType tmp7 = new BlockType();
                             tmp7.setType(blockUsers.getBlock().getName());
@@ -247,7 +224,6 @@ public class BlockServiceImpl implements BlockService {
             movement.setBlocks(moveblock);
             flow.setBlocks(flowblock);
             calculation.setBlocks(calculblock);
-            drawing.setBlocks(drawblock);
             function.setBlocks(funcblock);
 
             blockMyResult.setStart(start);
@@ -255,7 +231,6 @@ public class BlockServiceImpl implements BlockService {
             blockMyResult.setMovement(movement);
             blockMyResult.setFlow(flow);
             blockMyResult.setCalculation(calculation);
-            blockMyResult.setDrawing(drawing);
             blockMyResult.setFunction(function);
 
             result.status = true;

@@ -13,6 +13,5 @@ public class BlockCategoryResult {
     List<BlockResult> 움직임;
     List<BlockResult> 흐름;
     List<BlockResult> 계산;
-    List<BlockResult> 그리기;
     List<BlockResult> 함수;
 }
