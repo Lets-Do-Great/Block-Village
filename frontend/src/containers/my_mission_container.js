@@ -141,7 +141,6 @@ const MyMissionContainer = ({ closeModal }) => {
 
     // 답안 삭제 요청
     const onDeleteAnswer = async () => {
-        console.log(selectedAnswer);
         try{
             await dispatch(AnswerAction.deleteAnswer(
                 { email: userInfo.email, answerId:selectedAnswer.id }));
@@ -188,15 +187,15 @@ const MyMissionContainer = ({ closeModal }) => {
                         closeModal={onCloseDetail}
                         /> }
                 { category === 'myAnswer' &&  
-                    <div className={styles.my_mission_modal}>
-                        <ComponentDetailCardForm
-                            detail={selectedAnswer}
-                            imageUrl={selectedMission.imageUrl}
-                            setLike={likeAnswer}
-                            setDisLike={dislikeAnswer}
-                            userInfo={userInfo.email}
-                            onDelete={onDeleteAnswer}
-                            closeDetail={onCloseDetail}
+                        <div className={styles.my_mission_modal}>
+                            <ComponentDetailCardForm
+                                detail={selectedAnswer}
+                           imageUrl={selectedMission.imageUrl}
+                                setLike={likeAnswer}
+                                setDisLike={dislikeAnswer}
+                                userInfo={userInfo.email}
+                                onDelete={onDeleteAnswer}
+                                closeDetail={onCloseDetail}
                             getDetail={getMission}
                     /></div>
                 }

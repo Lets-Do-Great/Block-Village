@@ -31,7 +31,6 @@ const initialState = {
     '움직임':  [],
     '흐름':  [],
     '계산':  [],
-    '그리기':  [],
     '함수':  [],
   },
 
@@ -59,11 +58,6 @@ const initialState = {
     {
       name: '계산',
       colour: '#1060FF',
-      blocks: []
-    },
-    {
-      name: '그리기',
-      colour: '#7D10C4',
       blocks: []
     },
     {
@@ -97,9 +91,8 @@ export default applyPenders(blcokReducer, [
         } else{
           alert("내 블럭을 불러오는데 문제가 발생했습니다.");
         }
-      } else { // 에러 발생
+      } else {
         alert("블럭을 불러오는데 불러오는데 문제가 발생했습니다.");
-        console.log(action.payload.status);
       }
       return updateObject(state, state);
     },
@@ -111,8 +104,6 @@ export default applyPenders(blcokReducer, [
     type: GET_ALL_BLOCKS,
     onSuccess: (state, action) => {
       const response = action.payload;
-      // console.log(response);
-
       if(response.status === 200){
         if(response.data.status){
           return updateObject(state, {
@@ -122,9 +113,8 @@ export default applyPenders(blcokReducer, [
         } else{
             alert("모든 블럭을 불러오는데 문제가 발생했습니다.");
         }
-      } else { // 에러 발생
+      } else {
           alert("모 불러오는데 불러오는데 문제가 발생했습니다.");
-          console.log(action.payload.status);
       }
       return updateObject(state, state);
     },
@@ -147,7 +137,6 @@ export default applyPenders(blcokReducer, [
         }
       } else { // 에러 발생
         alert("블럭을 사는데 문제가 발생했습니다.");
-        console.log(action.payload.status);
       }
       return updateObject(state, state);
     },

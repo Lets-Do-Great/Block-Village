@@ -18,7 +18,6 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
 
   const playGame = () => {
     eval(javascript_code);
-    console.log(move);
     item.style.transition = `all .${move.length*10}s ease .5s`
 
     let x = image_x;
@@ -53,7 +52,7 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
 
-        await timer(500);
+        await timer(1000);
       }
       if (endPosition[0] >= (x - 5) && endPosition[0] <= (x + 5) &&
           endPosition[1] >= (y - 5) && endPosition[1] <= (y + 5)) {
@@ -79,11 +78,9 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
 
   useEffect(() => {
     back_img_ref.current.style.background = `url(${imageUrl}) center/cover`
-
-    console.log(imageUrl);
   }, [])
   
-     // 함수
+       // 함수
   /////////////////////////////////////////////////////////////////
   var my_var = 0;  
   var my_var1 = 0;
@@ -199,36 +196,6 @@ const MissionDoPlayground = ({ startPosition, endPosition, javascript_code,
   const abs_val_js = (value_num) => {
     return Math.abs(value_num);
   };
-
-  // 그리기
-  var pen_pos = true; // true이면 내려가 있는 상태, false이면 올라가 있는 상태
-  var pen_angle = 0;
-  var pen_x = 0;
-  var pen_y = 0;
-  const lines = [];
-  var cur_colour = 0;
-  const change_colour = (colour_colour) => {
-    cur_colour = colour_colour;
-  }
-  const pen_down = () => {
-    pen_pos = true;
-  };
-  const pen_up = () => {
-    pen_pos = false;
-  };
-  const draw_line = (text_length) => {
-    var tmp_x = pen_x;
-    var tmp_y = pen_y;
-    pen_x += Math.cos(pen_angle) * text_length;
-    pen_y += Math.sin(pen_angle) * text_length;
-    if(pen_pos){
-      lines.push([[tmp_x, tmp_y], [pen_x, pen_y]]); // 펜이 내려와 있는 상태라면 선분의 양 끝점을 저장
-    }
-  };
-  const rotate_pen = (angle_angle) => {
-    pen_angle += angle_angle * Math.PI / 180;
-  }
-
   
 
   return (

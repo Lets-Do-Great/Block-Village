@@ -32,7 +32,7 @@ const ComponentDetailCardForm = ({ type, detail, imageUrl, setLike, setDislike,
     },[]);
 
     //======props로 받아야 하는 data
-    const startPosition = [50, 50]
+    const startPosition = [detail.startPositionX, detail.startPositionY]
 
     const onBoolean = () => {
       setBoolean(true);
@@ -163,6 +163,7 @@ const ComponentDetailCardForm = ({ type, detail, imageUrl, setLike, setDislike,
             <div className={styles.section}>
               <div className={styles.playground}>
                 <AnswerPlayground 
+                  imageUrl={imageUrl}
                   startPosition={startPosition}
                   javascript_code={javascriptCode}
                   imageUrl={imageUrl}

@@ -15,6 +15,7 @@ const ListForm = ({ type, list, detail, getDetail, getMissionDetail, getList,
                     openDetail, selectedMission }) => {
 
     const history = useHistory();
+    
 
     const customStyles = {
         content : {
@@ -99,7 +100,6 @@ const ListForm = ({ type, list, detail, getDetail, getMissionDetail, getList,
         { type === 'mission' && openDetail && 
             <Modal
                 isOpen={openDetail}
-                // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"

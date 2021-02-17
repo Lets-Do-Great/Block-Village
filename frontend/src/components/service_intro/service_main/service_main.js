@@ -25,18 +25,11 @@ const ServiceMain = () => {
         </div>
 
 
-
-
         <div className={styles.pannel}>
 
 
           <div className={styles.title}>
-            {/* <span className={styles.head}></span> */}
-            {/* <span className={styles.head_binding}> */}
               <img className={styles.logo_img} src="/images/service_intro/service_intro.png" width="300" height="100"/>
-               {/* 에서는
-            </span> */}
-            {/* <span className={styles.head_end}></span> */}
           </div>
 
 

@@ -38,7 +38,6 @@ const MissionContainer = () => {
     // 검색 조건 데이터 변경 처리 함수
     const onChangeSearch = (e) => {
         const {name, value} = e.target;
-
         setSearch({
             ...search,
             [name]: value,

@@ -71,13 +71,6 @@ const Nav = ({ type }) => {
             className={styles.logo_img} src="/images/logo1.png" />
 
         <div className={styles.title}>
-            {/* { type === "challenge" && "챌린지에 도전해봐요" } */}
-            {/* { type === "my_page" && "마이페이지" } */}
-            {/* { type === "mission" && "미션을 정복해봐요" } */}
-            {/* { type === "board" && "일단 여기는 게시판" } */}
-            {/* { type === "answer" && "일단 여기는 답안 리스트"} */}
-            {/* { type === "store" && "블록상점"} */}
-
             <div 
                 onClick={goToBoard}
                 className={styles.nav_text}>공지사항</div>

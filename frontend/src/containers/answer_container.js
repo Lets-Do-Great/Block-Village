@@ -11,7 +11,6 @@ const AnswerContainer = ({ match }) => {
     const [ detail, setDetail ] = useState(false);
     const [goModifyAnswer, setGoModifyAnswer] = useState(true);
 
-    // store에 있는 state와 dispatch 가져오는 작업
     const userInfo = useSelector(state => state.user.userInfo);
     const answerList = useSelector(state => state.answer.answerList);
     const selectedAnswer = useSelector(state => state.answer.selectedAnswer);

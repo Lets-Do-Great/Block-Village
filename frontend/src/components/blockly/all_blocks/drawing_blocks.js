@@ -15,12 +15,12 @@ Blockly.Blocks['pen_down'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['pen_down'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = 'pen_down();\n';
   return code;
 };
-
 
 // 펜 올리기
 Blockly.Blocks['pen_up'] = {
@@ -35,12 +35,12 @@ Blockly.Blocks['pen_up'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['pen_up'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = 'pen_up();\n';
   return code;
 };
-
 
 // 선 그리기
 Blockly.Blocks['draw_line'] = {
@@ -56,13 +56,13 @@ Blockly.Blocks['draw_line'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['draw_line'] = function(block) {
   var text_length = block.getFieldValue('length');
   // TODO: Assemble JavaScript into code variable.
   var code = `draw_line(${text_length});\n`;
   return code;
 };
-
 
 // 펜 회전
 Blockly.Blocks['rotate_pen'] = {
@@ -78,6 +78,7 @@ Blockly.Blocks['rotate_pen'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['rotate_pen'] = function(block) {
   var angle_angle = block.getFieldValue('angle');
   // TODO: Assemble JavaScript into code variable.
@@ -100,6 +101,7 @@ Blockly.Blocks['change_colour'] = {
   this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['change_colour'] = function(block) {
   var colour_colour = block.getFieldValue('colour');
   // TODO: Assemble JavaScript into code variable.

@@ -34,19 +34,14 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
 
   const playGame = () => {
     eval(javascript_code);
-    console.log(move);
     item.style.transition = `all .${move.length*10}s ease .2s`
 
     let x = image_x;
     let y = image_y;
 
-
-
     const timer = ms => new Promise(res => setTimeout(res, ms))
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
-        
-
 
         const new_move_x = Math.round(move[i][0])
         const new_move_y = Math.round(move[i][1])
@@ -64,7 +59,6 @@ const TutorialPlayground1 = ({ javascript_code, onChangeModalSuccess, onChangeMo
           onChangeModalFail()
           return
         }
-        // await timer(1000);
       }
       if (
         (char_location[0] - Math.round(move[move.length - 1][1])) === answer_location[0] 

@@ -52,12 +52,12 @@ const MissionCreateSubmain = ({ onSetMission }) => {
     for (let i = 0; i < move.length; i++) {
       const new_move_x = move[i][0]
       const new_move_y = move[i][1]
-      xx = formInfo.startPosition[0] + (new_move_x * 60)
-      yy = formInfo.startPosition[1] - (new_move_y * 60)
+      xx = formInfo.startPosition[0] + (new_move_x * 50)
+      yy = formInfo.startPosition[1] - (new_move_y * 50)
     }
     setFormInfo({
       ...formInfo,
-      endPosition: [xx, yy],
+      endPosition: [xx - 15 , yy - 15],
     })
   }
 
@@ -65,7 +65,6 @@ const MissionCreateSubmain = ({ onSetMission }) => {
     setTCmodal(!TCmodal)
   };
 
-  // 여기가 마지막에 미션제작 버튼 누르면 들어오는 함수임.
   const onChangeTC = () => {
     onSetMission(formInfo);
     setTCmodal(!TCmodal)

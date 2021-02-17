@@ -35,7 +35,8 @@ const MyChallengeContainer = ({ closeModal }) => {
             <MyChallengeCategory
                 category={category}
                 closeModal={closeModal}
-                onChangeCategory={onChangeCategory}/>
+                onChangeCategory={onChangeCategory}
+            />
             <MyChallengeForm 
                 category={category}
                 challengeList={challengeList}/>

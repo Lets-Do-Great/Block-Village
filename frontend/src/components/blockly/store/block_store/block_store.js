@@ -76,7 +76,6 @@ const BlockStore = ({ allBlocksInfo, onBuyBlocks, usermil }) => {
   }
 
 
-
   return (
     <>
       {openMyBlock && 

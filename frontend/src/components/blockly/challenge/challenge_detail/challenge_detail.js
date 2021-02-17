@@ -11,7 +11,6 @@ const ChallengeDetail = ({ id, image, setTodoChallenge, todo }) => {
 
   const goToAnswer = () => {
     setTodoChallenge(id);
-    // history.push(`/main/create/answer/challenge`);
     history.push(`/main/create/answer/challenge_test`);
   }
 

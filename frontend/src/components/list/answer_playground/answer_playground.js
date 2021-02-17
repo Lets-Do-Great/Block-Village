@@ -17,26 +17,42 @@ const AnswerPlayground = ({ imageUrl, startPosition, javascript_code }) => {
   
   const playGame = () => {
     eval(javascript_code);
-    console.log(move);
-        
-    item.style.transition = `all .${move.length*20}s ease .5s`
 
-    let xx = image_x;
-    let yy = image_y;
+    item.style.transition = `all .${move.length*10}s ease .5s`
+
+    let x = image_x;
+    let y = image_y;
+
+    let dir_x = 0;
+    let dir_y = 0;
     
     const timer = ms => new Promise(res => setTimeout(res, ms))
     async function jinok() {
       for (let i = 0; i < move.length; i++) {
         
-        const new_move_x = move[i][0]
-        const new_move_y = move[i][1]
-        xx = image_x + (new_move_x * 60)
-        yy = image_y - (new_move_y * 60)
-        
-        item.style.left = `${xx}px`;
-        item.style.top = `${yy}px`;
-        
-        await timer(2000);
+        const new_dir_x = Math.round(move[i][0] - dir_x);
+        const new_dir_y = Math.round(move[i][1] - dir_y);
+
+        if (new_dir_x > 0 && new_dir_y === 0) {
+          item.setAttribute('src', `/images/character/character_right.png`)
+        } else if (new_dir_x < 0 && new_dir_y === 0) {
+          item.setAttribute('src', `/images/character/character_left.png`)
+        } else if (new_dir_x === 0 && new_dir_y > 0) {
+          item.setAttribute('src', `/images/character/character_back.png`)
+        } else {
+          item.setAttribute('src', `/images/character/character_front.png`)
+        }
+        dir_x = move[i][0];
+        dir_y = move[i][1];
+        await timer(500);
+
+        x = image_x + (move[i][0] * 50) + 10 - 25;
+        y = image_y - (move[i][1] * 50) + 10 - 25;
+
+        item.style.left = `${x}px`;
+        item.style.top = `${y}px`;
+
+        await timer(500);
       }
     }
     jinok()
@@ -47,8 +63,9 @@ const AnswerPlayground = ({ imageUrl, startPosition, javascript_code }) => {
     x = 0;
     y = 0;
     cur_angle = 0;
-    item.style.left = `${image_x}px`;
-    item.style.top = `${image_y}px`;
+    item.setAttribute('src', `/images/character/character_right.png`)
+    item.style.left = `${image_x + 10 - 25}px`;
+    item.style.top = `${image_y + 10 - 25}px`;
   };
   
   useEffect(() => {
@@ -57,25 +74,28 @@ const AnswerPlayground = ({ imageUrl, startPosition, javascript_code }) => {
     const item = fieldchar.current; 
     
     item.setAttribute('className', `image`)
-    item.setAttribute('src', `/images/bug.png`)
+    item.setAttribute('src', `/images/character/character_right.png`)
     item.style.position = 'absolute';
 
-    item.style.transform = `translate(-50%, -60%)`
+    item.style.transform = `translate(-50%, -50%)`
 
-    item.style.left = `${image_x}px`;
-    item.style.top = `${image_y}px`;
+    item.style.left = `${image_x + 10 - 25}px`;
+    item.style.top = `${image_y + 10 - 25}px`;
+  })
+  useEffect(() => {
+    back_img_ref.current.style.background = `url(${imageUrl}) center/cover`
   }, [])
   
   
-    // 함수
+       // 함수
   /////////////////////////////////////////////////////////////////
   var my_var = 0;  
-  const set_var = (value_variable) => {
-    my_var = value_variable;
-  }
-  const change_var = (value_variable) => {
-    my_var += value_variable;
-  }  
+  var my_var1 = 0;
+  var my_var2 = 0;
+  var my_var3 = 0;
+  var inputVar = 0;
+  var outputVar = 0;
+
 
   // 움직임 
 /////////////////////////////////////////////////////////////////
@@ -138,107 +158,6 @@ const AnswerPlayground = ({ imageUrl, startPosition, javascript_code }) => {
     move.push([x, y]);
   }
 
-  // 판단
-  /////////////////////////////////////////////////////////////////
-  const block_judgment_equals = (e1, e2) => {
-    if (e1 === e2) {
-      console.log('equlas : true');
-      return true;
-    } else {
-      console.log('equlas : false');
-      return false;
-    }
-  };
-  const block_judgment_strictinequality_left = (e1, e2) => {
-    if (e1 > e2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const block_judgment_strictinequality_right = (e1, e2) => {
-    if (e1 < e2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const block_judgment_notequal = (e1, e2) => {
-    if (e1 != e2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const block_judgment_strictinequality_leftequal = (e1, e2) => {
-    if (e1 >= e2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const block_judgment_strictinequality_rightequal = (e1, e2) => {
-    if (e1 <= e2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const block_judgment_compare_and = (b1, compare, b2) => {
-    console.log('compare : ' + compare);
-    if (compare === 1) {
-      console.log('and네요');
-      if (b1 && b2) {
-        console.log('true입니다.');
-        return true;
-      } else {
-        console.log('false입니다.');
-        return false;
-      }
-    } else if (compare === 2) {
-      console.log('or네요');
-      if (b1 || b2) {
-        console.log('true입니다.');
-        return true;
-      } else {
-        console.log('false입니다.');
-        return false;
-      }
-    }
-  };
-  
-  const block_judgment_compare_or = (b1, compare, b2) => {
-    if (compare === 2) {
-      console.log('or네요');
-      if (b1 || b2) {
-        console.log('true입니다.');
-        return true;
-      } else {
-        console.log('false입니다.');
-        return false;
-      }
-    } else if (compare === 1) {
-      console.log('and네요');
-      if (b1 && b2) {
-        console.log('true입니다.');
-        return true;
-      } else {
-        console.log('false입니다.');
-        return false;
-      }
-    }
-  };
-  const block_judgment_compare_not = (b1) => {
-    if (b1) {
-      console.log('입력값이 true네용');
-      console.log('반환값은 false입니다.');
-      return false;
-    } else {
-      console.log('입력값이 false네영');
-      console.log('반환값은 true입니다.');
-      return true;
-    }
-  };
 
   // 계산
   //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,41 +203,11 @@ const AnswerPlayground = ({ imageUrl, startPosition, javascript_code }) => {
   const abs_val_js = (value_num) => {
     return Math.abs(value_num);
   };
-
-  // 그리기
-  var pen_pos = true; // true이면 내려가 있는 상태, false이면 올라가 있는 상태
-  var pen_angle = 0;
-  var pen_x = 0;
-  var pen_y = 0;
-  const lines = [];
-  var cur_colour = 0;
-  const change_colour = (colour_colour) => {
-    cur_colour = colour_colour;
-  }
-  const pen_down = () => {
-    pen_pos = true;
-  };
-  const pen_up = () => {
-    pen_pos = false;
-  };
-  const draw_line = (text_length) => {
-    var tmp_x = pen_x;
-    var tmp_y = pen_y;
-    pen_x += Math.cos(pen_angle) * text_length;
-    pen_y += Math.sin(pen_angle) * text_length;
-    if(pen_pos){
-      lines.push([[tmp_x, tmp_y], [pen_x, pen_y]]); // 펜이 내려와 있는 상태라면 선분의 양 끝점을 저장
-    }
-  };
-  const rotate_pen = (angle_angle) => {
-    pen_angle += angle_angle * Math.PI / 180;
-  }
-
   
 
   return (
     <div className={styles.body}>
-      <section ref={back_img_ref} className={styles.game}>
+      <section className={styles.game} ref={back_img_ref}>
         <img ref={fieldchar}></img>
       </section>
       <footer className={styles.footer}>

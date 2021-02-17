@@ -65,9 +65,7 @@ const MyPageNavbar = ({ onChageBasic, onChageSea, onChageSpace }) => {
         src="/images/logo1.png" 
       />
 
-      <div className={styles.title}>
-        {/* 마이페이지 */}
-      </div>
+      <div className={styles.title}></div>
 
       <div className={styles.user_icon}>
       </div>

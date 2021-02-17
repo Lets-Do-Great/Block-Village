@@ -78,29 +78,6 @@ const MyPageMain = ({ imageInfo, onChageBasic, onChageSea, onChageSpace }) => {
         challenge_img.current.style.background = `100%/100% url(/images/mypageImg/${imageInfo.challenge}.png)`
     })
 
-    // const changeSize = () => {
-    //     const item = my_page_ref.current;
-    //     item.style.width = `${3565*(back_back.current.clientHeight/1081)}px`;
-    //     my_page_ref.current.style.background = "100%/100% url(/images/mypageImg/my_page_basic_bg.png)"
-
-    //     const x = (3565*(back_back.current.clientHeight/1081))/3565;
-    //     const y = back_back.current.clientHeight/1081;
-        
-    //     item.style.background = `url(/images/mypageImg/my_page_basic_bg.png)`
-
-    //     info_img.current.style.width = `${1101 * x}px`;
-    //     info_img.current.style.height = `${651 * y}px`;
-
-    //     block_img.current.style.width = `${501 * x}px`;
-    //     block_img.current.style.height = `${871 * y}px`;
-
-    //     mission_img.current.style.width = `${641 * x}px`;
-    //     mission_img.current.style.height = `${871 * y}px`;
-
-    //     project_img.current.style.width = `${981 * x}px`;
-    //     project_img.current.style.height = `${481 * y}px`;
-    // };
-
     return (
         <div className={styles.body} ref={back_back} >
             <MyPageNavbar 
