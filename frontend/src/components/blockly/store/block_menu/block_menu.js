@@ -9,7 +9,6 @@ const BlockMenu = ({ addBillList, allBlocksInfo, category }) => {
   }, [allBlocksInfo, category]);
 
   return (
-    // <selectedCategory.length()>
       <div className={styles.body}>
         {
           selectedCategory.map((block) => (
