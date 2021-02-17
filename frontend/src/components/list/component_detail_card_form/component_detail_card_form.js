@@ -16,8 +16,8 @@ import CommentContainer from '../../../containers/comment_container';
 import { useHistory } from 'react-router-dom';
 
 
-const ComponentDetailCardForm = ({ detail, setLike, setDislike, 
-                            userInfo, closeDetail, onDelete, selectedId }) => {
+const ComponentDetailCardForm = ({ detail, setLike, setDislike, userInfo, closeDetail, onDelete, selectedId, imageUrl }) => {
+
 
     const {email, nickname, title, favorite, content, 
             commentCnt, likeCnt, readCnt, xmlCode, javascriptCode } = detail;
@@ -26,7 +26,7 @@ const ComponentDetailCardForm = ({ detail, setLike, setDislike,
     const [ boolean, setBoolean ] = useState(false);
 
     //======props로 받아야 하는 data
-    const startPosition = [50, 50]
+    const startPosition = [detail.startPositionX, detail.startPositionY]
 
     const onBoolean = () => {
       setBoolean(true);
@@ -157,6 +157,7 @@ const ComponentDetailCardForm = ({ detail, setLike, setDislike,
             <div className={styles.section}>
               <div className={styles.playground}>
                 <AnswerPlayground 
+                  imageUrl={imageUrl}
                   startPosition={startPosition}
                   javascript_code={javascriptCode}
                 />

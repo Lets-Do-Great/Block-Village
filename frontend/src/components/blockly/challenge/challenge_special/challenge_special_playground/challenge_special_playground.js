@@ -19,7 +19,7 @@ const ChallengeSpecialPlayground = ({ javascript_code, onChangeSuccess, onChange
   const question_3 = useRef();
   const question_4 = useRef();
 
-  const Answer = [1, 6, 120, 40320, 3628800];
+  const Answer = [2, 6, 120, 40320, 3628800];
   // const Answer = [3, 3, 3, 3, 3];
 
   const playGame = () => {

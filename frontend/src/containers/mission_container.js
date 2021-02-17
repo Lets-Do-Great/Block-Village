@@ -21,6 +21,7 @@ const MissionContainer = () => {
     // 검색 조건에 따라 미션 리스트 가져오기
     useEffect(() => {
         getMissionList(search);
+        console.log(selectedMission);
     }, [ search.searchType, search.sortType ]);
 
     const onClickEnter = (e) => {

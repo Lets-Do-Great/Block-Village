@@ -2,6 +2,7 @@ import client from './client';
 
 // 전체 미션 목록 조회 ( 검색 조건에 따라 )
 export const getMissionList = ({ searchType, sortType, keyword, keywordType, pageNum }) => {
+
     return client({
         url: 'mission',
         method: 'post',
