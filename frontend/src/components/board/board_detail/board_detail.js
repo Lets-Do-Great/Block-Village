@@ -3,9 +3,8 @@ import CommentForm from '../../comment_form/comment_form';
 import styles from './board_detail.module.css';
 import { MdArrowBack } from 'react-icons/md';
 import * as Icon from 'react-icons/md';
-import { CONTROLS_WHILEUNTIL_OPERATOR_UNTIL } from 'blockly/msg/en';
 
-const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, commentList, 
+const BoardDetail = ({ selectedBoard, userInfo, closeDetail, commentList, 
                       setComment, modifyComment, deleteComment}) => {
 
   const { nickname, title, content, createdDate, views } = selectedBoard;

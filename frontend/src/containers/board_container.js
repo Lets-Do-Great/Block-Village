@@ -9,7 +9,6 @@ import * as BoardAction from '../modules/board';
 import styles from '../components/board/board_list/board_list.module.css';
 
 const BoardContainer = () => {
-    
     const [ detail, setDetail ] = useState(false);
     
     // 검색 조건 데이터
@@ -57,7 +56,7 @@ const BoardContainer = () => {
     useEffect(() => {
         getBoardList();
     }, [detail]);
-    
+
     useEffect(() => {
         if(detail){
             getBoardCommentList();
@@ -110,7 +109,6 @@ const BoardContainer = () => {
             await dispatch(BoardAction.modifyBoard({
                 boardId: selectedBoard.boardId, email: userInfo.email, title, content
             }));
-            // 수정 후 처리?
         } catch(e) {
             console.log(e);
         }
@@ -182,7 +180,7 @@ const BoardContainer = () => {
         { detail
         ? <><BoardDetail 
                 selectedBoard={selectedBoard}
-                userInfo={userInfo.email}
+                userInfo={userInfo}
                 closeDetail={closeDetail}
                 onModify={modifyBoard}
                 onDelete={deleteBoard}
