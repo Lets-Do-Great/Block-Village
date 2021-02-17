@@ -7,14 +7,16 @@
 }
 
 .board_list_body {
-  display: inline-block;
-  width: 100%;
+  display: block;
+  width: 90%;
+  margin: 0 auto;
   border-top: 2px solid darkgray;
 }
 
 .board_header{
   display: block;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 }
   
 .board_body {
@@ -37,7 +39,7 @@
 
 .board_header_title{
   display: inline-block;
-  width: 50%;
+  width: 60%;
   font-weight: bold;
   font-size: 14px;
   text-align: center;
@@ -46,7 +48,7 @@
 
 .board_header_date{
   display: inline-block;
-  width: 27%;
+  width: 17%;
   font-weight: bold;
   font-size: 14px;
   text-align: center;
@@ -65,31 +67,41 @@
 .board_no{
   display: inline-block;
   width: 10%;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   line-height: 55px;
 }
 
 .board_title{
   display: inline-block;
-  width: 50%;
-  font-weight: bold;
-  font-size: 20px;
-  text-align: center;
+  width: 60%;
+  font-weight: 600;
+  font-size: 18px;
+  /* text-align: center; */
 }
 
 .board_date{
   display: inline-block;
-  width: 27%;
-  font-size: 20px;
+  width: 17%;
+  font-size: 18px;
   text-align: center;
 }
 
 .board_read_cnt{
   display: inline-block;
   width: 13%;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 }
 
-  
+.main_img_parent{
+  display: block;
+  background-color: #ddbd97;
+}
+
+.main_img{
+  display: block;
+  width: auto;
+  height: 300px;
+  margin: 0 auto;
+}

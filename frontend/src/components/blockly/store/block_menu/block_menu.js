@@ -17,7 +17,6 @@ const BlockMenu = ({ addBillList, allBlocksInfo, category }) => {
   
 
   return (
-    // <selectedCategory.length()>
       <div className={styles.body}>
         {
           selectedCategory.length

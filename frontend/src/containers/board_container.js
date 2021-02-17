@@ -6,9 +6,9 @@ import SearchForm from '../components/board/search_form/search_form';
 import SearchType from '../components/board/search_type/search_type';
 import Nav from '../components/nav/nav';
 import * as BoardAction from '../modules/board';
+import styles from '../components/board/board_list/board_list.module.css';
 
 const BoardContainer = () => {
-    
     const [ detail, setDetail ] = useState(false);
     
     // 검색 조건 데이터
@@ -56,7 +56,7 @@ const BoardContainer = () => {
     useEffect(() => {
         getBoardList();
     }, [detail]);
-    
+
     useEffect(() => {
         if(detail){
             getBoardCommentList();
@@ -109,7 +109,6 @@ const BoardContainer = () => {
             await dispatch(BoardAction.modifyBoard({
                 boardId: selectedBoard.boardId, email: userInfo.email, title, content
             }));
-            // 수정 후 처리?
         } catch(e) {
             console.log(e);
         }
@@ -181,7 +180,7 @@ const BoardContainer = () => {
         { detail
         ? <><BoardDetail 
                 selectedBoard={selectedBoard}
-                userInfo={userInfo.email}
+                userInfo={userInfo}
                 closeDetail={closeDetail}
                 onModify={modifyBoard}
                 onDelete={deleteBoard}
@@ -191,23 +190,26 @@ const BoardContainer = () => {
                 deleteComment={deleteBoardComment}/>
             </>
         :  <>
-                <SearchType
-                    onChangeSortType={onChangeSortType}/>
-                <SearchForm
-                    onChangeSearch={onChangeSearch}
-                    onChangeSortType={onChangeSortType}
-                    onClickEnter={onClickEnter}
-                    search={search}/> 
-                <BoardList
-                    onCreate={registerBoard}
-                    getDetail={getBoard}
-                    detail={detail}
-                    selectedBoard={selectedBoard}
-                    userInfo={userInfo.email}
-                    list={boardList}
-                    setOpenDetail={setDetail}/>
-            </>
-        }
+            <div className={styles.main_img_parent}>
+                <img className={styles.main_img} 
+                src="/images/board/board_main_image.png"/>
+            </div>
+            <SearchType
+                onChangeSortType={onChangeSortType}/>
+            <SearchForm
+                onChangeSearch={onChangeSearch}
+                onChangeSortType={onChangeSortType}
+                onClickEnter={onClickEnter}
+                search={search}/> 
+            <BoardList
+                onCreate={registerBoard}
+                getDetail={getBoard}
+                detail={detail}
+                selectedBoard={selectedBoard}
+                userInfo={userInfo.email}
+                list={boardList}
+                setOpenDetail={setDetail}/>
+        </>}
     </>);
 }
 

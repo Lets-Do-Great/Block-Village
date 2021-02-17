@@ -9,6 +9,12 @@ const CommentInputForm = ({ setComment }) => {
         setSetInput(e.target.value);
     }
 
+    const onEnter = (e) => {
+        if(e.keyCode === 13) {
+            onClick();
+          }
+    }
+
     const onClick = () => {
         setComment(setInput);
         setSetInput('');
@@ -18,7 +24,8 @@ const CommentInputForm = ({ setComment }) => {
     <div className={styles.input_form}>
         <input 
             className={styles.input} 
-            onChange={onChange} 
+            onChange={onChange}
+            onKeyUp={onEnter} 
             value={setInput}/>
         <button 
             className={styles.btn_submit_input}
@@ -99,8 +106,7 @@ const CommentListLineForm = ({ id, userInfo, email, nickname, comment, date,
 };
 
 const CommentForm = ({ userInfo, commentList,
-                             setComment, modifyComment, deleteComment }) => {
-
+                    setComment, modifyComment, deleteComment }) => {
     return (
     <div className={styles.comment_form}>
         <CommentInputForm 

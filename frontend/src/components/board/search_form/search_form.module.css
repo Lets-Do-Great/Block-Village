@@ -1,6 +1,6 @@
 .search_form{
     float: right;
-    margin-right: 100px;
+    margin-right: 180px;
     margin-top: 10px;
 }
 
@@ -10,9 +10,6 @@
     margin: 10px;
     border: 2px solid darkgray;
     border-radius: 10px;
-}
-
-.option {
 }
 
 .input {

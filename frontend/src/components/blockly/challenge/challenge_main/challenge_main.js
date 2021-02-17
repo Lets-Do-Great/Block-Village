@@ -7,6 +7,10 @@ const ChallengeMain = ({ challengeList, setTodoChallenge }) => {
   return (
     <div className={styles.body}>
       <Nav type="challenge"/>
+      <div className={styles.main_img_parent}>
+        <img className={styles.main_img} 
+          src="/images/challenge/challenge_main_image.png"/>
+      </div>
       <div className={styles.container}>
         <div className={styles.lists}>
           <div className={styles.challenge_header}>

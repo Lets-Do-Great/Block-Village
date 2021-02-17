@@ -15,8 +15,8 @@ const MyBlockCategory = ({ closeModal, allBlocksInfo }) => {
         console.log(categoryBlockList);
     }, [categoryBlockList]);
 
-    const categoryList = ['시작', '판단', '움직임', '흐름', '계산', '그리기', '함수'];
-    const categoryColors = ['#C30D23', '#FFA31D', '#8FC31F', '#55CFFF', '#1060FF', '#7D10C4', '#CC6666']
+    const categoryList = ['시작', '판단', '움직임', '흐름', '계산', '함수'];
+    const categoryColors = ['#C30D23', '#FFA31D', '#8FC31F', '#55CFFF', '#1060FF', '#CC6666']
 
     const updateList = (n) => {
         const newList = [];
@@ -37,16 +37,16 @@ const MyBlockCategory = ({ closeModal, allBlocksInfo }) => {
 
     // 이전 카테고리로 이동
     const onChangeCategoryPrev = () => {
-        updateList((category + 6) % 7);
-        setCategory((category + 6) % 7);
-        myblock_name.current.style.background = `${categoryColors[(category + 6) % 7]}`
+        updateList((category + 5) % 6);
+        setCategory((category + 5) % 6);
+        myblock_name.current.style.background = `${categoryColors[(category + 5) % 6]}`
     };
 
     // 다음 카테고리로 이동
     const onChangeCategoryNext = () => {
-        updateList((category + 1) % 7);
-        setCategory((category + 1) % 7);
-        myblock_name.current.style.background = `${categoryColors[(category + 1) % 7]}`
+        updateList((category + 1) % 6);
+        setCategory((category + 1) % 6);
+        myblock_name.current.style.background = `${categoryColors[(category + 1) % 6]}`
     };
     
     return (
