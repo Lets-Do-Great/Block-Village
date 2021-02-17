@@ -20,8 +20,9 @@
 
 .body {
     display: block;
-    width: 90%;
+    width: 70%;
     margin: 0 auto;
+    margin-top: 30px;
     border-bottom: 3px solid darkgray;
 }
 
@@ -33,12 +34,13 @@
     font-size: 30px;
     font-weight: bold;
     border-bottom: 3px solid darkgray;
+    padding-bottom: 30px;
 }
 
 .info{
     float: right;
-    margin: 10px;
-    margin-right: 10px;
+    margin: 20px;
+    margin-right: 0px;
     font-size: 18px;
     font-weight: bold;
 }
@@ -52,18 +54,18 @@
 .content{
     clear: both;
     display: block;
-    width: 90%;
+    width: 100%;
     min-height: 300px;
     border: 2px solid darkgray;
     border-radius: 20px;
     margin: 0 auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 60px;
+    margin-bottom: 50px;
     padding: 20px;
 }
 
 .comment_form{
     display: block;
-    width: 88%;
+    width: 75%;
     margin: 0 auto;
 }

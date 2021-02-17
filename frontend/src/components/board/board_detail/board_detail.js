@@ -16,16 +16,16 @@ const BoardDetail = ({ detail, selectedBoard, userInfo, closeDetail, commentList
   }
   
   return (<>
-    <div className={styles.back}>
-      <MdArrowBack 
-          className={styles.back_icon}
-          onClick={onClick}/>
-      <button
-          className={styles.button_back} 
-          onClick={onClick}>목록으로</button>
-    </div>
-
     <div className={styles.body}>
+      <div className={styles.back}>
+        <MdArrowBack 
+            className={styles.back_icon}
+            onClick={onClick}/>
+        <button
+            className={styles.button_back} 
+            onClick={onClick}>목록으로</button>
+      </div>
+
       <div className={styles.title}>{title}</div>
       <div className={styles.info}>
         <Icon.MdAccountCircle/> <div className={styles.info_text}>{nickname}</div>

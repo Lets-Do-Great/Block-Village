@@ -67,7 +67,7 @@
 .board_no{
   display: inline-block;
   width: 10%;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   line-height: 55px;
 }
@@ -75,22 +75,22 @@
 .board_title{
   display: inline-block;
   width: 60%;
-  font-weight: bold;
-  font-size: 20px;
+  font-weight: 600;
+  font-size: 18px;
   /* text-align: center; */
 }
 
 .board_date{
   display: inline-block;
   width: 17%;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 }
 
 .board_read_cnt{
   display: inline-block;
   width: 13%;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 }
 
