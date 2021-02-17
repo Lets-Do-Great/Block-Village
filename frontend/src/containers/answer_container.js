@@ -107,6 +107,7 @@ const AnswerContainer = ({ match }) => {
                 onDelete={deleteAnswer}
                 onModify={onModify}
                 selectedId={selectedAnswer.id}
+                imageUrl={selectedMission.imageUrl}
         /></div>
         : <ListForm
             type="answer"

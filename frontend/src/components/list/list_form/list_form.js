@@ -14,6 +14,7 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
                     openDetail, setOpenDetail, selectedMission }) => {
 
     const history = useHistory();
+    
 
     const customStyles = {
         content : {
