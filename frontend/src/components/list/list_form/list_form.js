@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ListCardForm from '../list_card_form/list_card_form';
 import ModalDetailCardForm from '../modal_detail_card_form/modal_detail_card_form';
 import styles from './list_form.module.css';
@@ -15,14 +15,15 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
 
     // 디테일 모달 열기
     const clickCard = (e) => {
+        console.log(e);
         getDetail(e.target.id);
-        setOpenDetail(true);
+        // setOpenDetail(true);
     }
 
     // 디테일 모달 닫기
     const closeModal = () => {
-        setOpenDetail(false);
         getList();
+        // setOpenDetail(false);
     }
 
     const goBack = () => {

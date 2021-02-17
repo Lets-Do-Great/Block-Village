@@ -20,10 +20,6 @@ const MyMissionContainer = ({ closeModal }) => {
     const selectedAnswer = useSelector(state => state.answer.selectedAnswer);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        getMyMissionList();
-    }, []);
-
     // 카테고리 변경시 새로 요청 보내기 처리
     useEffect(() => {
         if(category === 'myMission') {
@@ -216,7 +212,7 @@ const MyMissionContainer = ({ closeModal }) => {
                         setOpenDetail={onOpenDetail}/> }
                 { category === 'myAnswer' &&
                     <ListForm
-                        type="answer"
+                        type={category}
                         list={answerList}
                         getList={getMyAnswerList}
                         getDetail={getAnswer}

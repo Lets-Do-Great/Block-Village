@@ -8,11 +8,16 @@ const ListCardForm = ({ type, id, imageUrl, title, difficulty,
     const card_bg = useRef();
     const title_color = useRef();
 
+    const onDivClick = (event) => {
+        event.preventDefault();
+        title_color.current.click();
+    }
+
     useEffect(() => {
         if(type === 'mission'){
             card_bg.current.className = styles.img_mission;
             title_color.current.className = styles.title_mission;
-        } else if(type === 'answer'){
+        } else {
             card_bg.current.className = styles.img_answer;
             title_color.current.className = styles.title_answer;
         }
@@ -21,10 +26,10 @@ const ListCardForm = ({ type, id, imageUrl, title, difficulty,
     return (
     <>
         <div className={styles.card_form} 
-            onClick={clickCard}>
+            id={id}
+            onClick={onDivClick}>
             <img ref={card_bg} src={imageUrl}/>
-            <p ref={title_color}
-                id={id} >
+            <p ref={title_color} id={id} onClick={clickCard}>
                     { title }</p>
             <div className={styles.icon_box}>
                 { type === 'mission' && 
@@ -37,7 +42,7 @@ const ListCardForm = ({ type, id, imageUrl, title, difficulty,
                     </div>
                 </>
                 }
-                { type === 'answer' && 
+                { type !== 'mission' && 
                 <>
                     <div className={styles.icon}>
                         <Icon.MdChatBubbleOutline/> { commentCnt }
@@ -46,11 +51,6 @@ const ListCardForm = ({ type, id, imageUrl, title, difficulty,
                         <Icon.MdFace/> { readCnt }
                     </div>
                 </>
-                }
-                { type === 'project' && 
-                    <div className={styles.icon}>
-                        <Icon.MdFace/> { readCnt }
-                    </div>
                 }
                 <div className={styles.icon}>
                     <Icon.MdFavorite/> { likeCnt }
