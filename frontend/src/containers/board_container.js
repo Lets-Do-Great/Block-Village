@@ -194,7 +194,7 @@ const BoardContainer = () => {
         :  <>
             <div className={styles.main_img_parent}>
                 <img className={styles.main_img} 
-                src="/images/challenge/challenge_main_image.png"/>
+                src="/images/board/board_main_image.png"/>
             </div>
             <SearchType
                 onChangeSortType={onChangeSortType}/>
