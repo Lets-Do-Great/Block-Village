@@ -11,6 +11,5 @@ public class BlockMyResult {
     BlockMyResponse movement;
     BlockMyResponse flow;
     BlockMyResponse calculation;
-    BlockMyResponse drawing;
     BlockMyResponse function;
 }

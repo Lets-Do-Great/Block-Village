@@ -11,7 +11,7 @@ Modal.setAppElement('#root')
 // type : mission, answer
 const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike, 
                     onModify, onDelete, userInfo, onParticipateMission,
-                    openDetail, setOpenDetail, selectedMission }) => {
+                    openDetail, selectedMission }) => {
 
     const history = useHistory();
     
@@ -19,7 +19,7 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
     const customStyles = {
         content : {
             width                 : '100%',
-	        height                : '100%',
+            height                : '100%',
             background            : 'rgba(0,0,0,0.6)',
             top                   : '50%',
             left                  : '50%',
@@ -32,13 +32,12 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
 
     // 디테일 모달 열기
     const clickCard = (e) => {
+        console.log(getDetail);
         getDetail(e.target.id);
-        setOpenDetail(true);
     }
 
     // 디테일 모달 닫기
     const closeModal = () => {
-        setOpenDetail(false);
         getList();
     }
 
@@ -82,40 +81,26 @@ const ListForm = ({ type, list, detail, getDetail, getList, setLike, setDislike,
         </div>
 
         { type === 'mission' && openDetail && 
-                <Modal
-                    isOpen={openDetail}
-                    // onAfterOpen={afterOpenModal}
-                    onRequestClose={closeModal}
-                    style={customStyles}
-                    contentLabel="Example Modal"
-                >
-                    <div className={styles.modal}>
-                        <ModalDetailCardForm
-                            detail={detail}
-                            setLike={setLike}
-                            setDislike={setDislike}
-                            closeModal={closeModal}
-                            userInfo={userInfo}
-                            onParticipateMission={onParticipateMission}
-                            onModify={onModify}
-                            onDelete={onDelete}
-                        />
-                    </div>
-                </Modal>
-            // <div className={styles.modal_wrapper}>
-                // <div className={styles.modal}>
-                //     <ModalDetailCardForm
-                //         detail={detail}
-                //         setLike={setLike}
-                //         setDislike={setDislike}
-                //         closeModal={closeModal}
-                //         userInfo={userInfo}
-                //         onParticipateMission={onParticipateMission}
-                //         onModify={onModify}
-                //         onDelete={onDelete}
-                //         />
-                // </div>
-            // </div> 
+            <Modal
+                isOpen={openDetail}
+                // onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+                <div className={styles.modal}>
+                    <ModalDetailCardForm
+                        detail={detail}
+                        setLike={setLike}
+                        setDislike={setDislike}
+                        closeModal={closeModal}
+                        userInfo={userInfo}
+                        onParticipateMission={onParticipateMission}
+                        onModify={onModify}
+                        onDelete={onDelete}
+                    />
+                </div>
+            </Modal>
         }
     </>
     );
