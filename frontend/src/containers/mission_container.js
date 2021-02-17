@@ -21,7 +21,6 @@ const MissionContainer = () => {
     // 검색 조건에 따라 미션 리스트 가져오기
     useEffect(() => {
         getMissionList(search);
-        console.log(selectedMission);
     }, [ search.searchType, search.sortType ]);
 
     const onClickEnter = (e) => {
@@ -39,7 +38,6 @@ const MissionContainer = () => {
     // 검색 조건 데이터 변경 처리 함수
     const onChangeSearch = (e) => {
         const {name, value} = e.target;
-
         setSearch({
             ...search,
             [name]: value,

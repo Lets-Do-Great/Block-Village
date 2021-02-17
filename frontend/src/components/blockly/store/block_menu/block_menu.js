@@ -11,7 +11,6 @@ const BlockMenu = ({ addBillList, allBlocksInfo, category }) => {
         newSelectedCategory.push(block)
       }
     });
-    console.log(newSelectedCategory.length);
     setSelectedCategory(newSelectedCategory)
   }, [allBlocksInfo, category]);
   

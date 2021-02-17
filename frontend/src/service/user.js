@@ -33,8 +33,7 @@ export const getUserInfo = (email, token) => {
 };
 
 // 회원 정보 수정
-export const modifyUserInfo = ({ email, nickname, profileImage, 
-                                prevPassword, newPassword, introduction,}) => {
+export const modifyUserInfo = ({ email, nickname, profileImage, prevPassword, newPassword, introduction,}) => {
   const formData = new FormData();
   formData.append('email', email);
   formData.append('nickname', nickname);
@@ -43,11 +42,9 @@ export const modifyUserInfo = ({ email, nickname, profileImage,
   formData.append('introduction', introduction);
 
   if(profileImage === null) {
-    console.log("널");
     formData.append('change', 'delete');
   }
   else if(typeof profileImage === 'object'){
-    console.log("오브젝트");
     formData.append('profileImage', profileImage);
   }
 

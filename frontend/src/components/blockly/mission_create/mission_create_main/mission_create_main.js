@@ -109,7 +109,6 @@ const MissionCreateMain = ({ formInfo, myBlocksInfo, onChangeModal,
 
   const statusModal = () => {
     setModal(!modal)
-    // onChangeStep()
   };
 
   const onChangeModalMain = () => {

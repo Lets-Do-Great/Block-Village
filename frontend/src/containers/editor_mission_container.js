@@ -44,14 +44,11 @@ const EditorMissionContainer = ( { type }) => {
 
   const setBackgroundImage = async () => {
     try {
-      console.log(selectedMission);
-      console.log("이미지 요청 시작");
       await dispatch(MissionAction.setBackgroundImage({
         email: userInfo.email,
         missionId: selectedMission.id,
         backgroundImage: imageUrl,
       }));
-      console.log("이미지 요청 끝");
     }catch(e) {
       console.log(e);
     }

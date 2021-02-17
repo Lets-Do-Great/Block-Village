@@ -25,9 +25,11 @@ const ListCardForm = ({ type, id, imageUrl, title, difficulty,
 
     return (
     <>
-        <div className={styles.card_form} 
+        <div 
+            className={styles.card_form} 
             id={id}
-            onClick={onDivClick}>
+            onClick={onDivClick}
+        >
             <img ref={card_bg} src={imageUrl}/>
             <p ref={title_color} id={id} onClick={clickCard}>
                     { title }</p>

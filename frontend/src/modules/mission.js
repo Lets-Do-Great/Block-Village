@@ -126,9 +126,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("리스트를 불러오는데 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("리스트를 불러오는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -150,9 +149,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("미션을 불러오는데 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("미션을 불러오는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -174,9 +172,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("리스트를 불러오는데 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("리스트를 불러오는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -198,9 +195,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("리스트를 불러오는데 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("리스트를 불러오는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -223,9 +219,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("미션을 저장하는데 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("미션을 저장하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -247,9 +242,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("미션을 저장하는데 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("미션을 저장하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -271,9 +265,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("미션을 수정하는데 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("미션을 수정하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -295,9 +288,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("미션을 삭제하는데 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("미션을 삭제하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -320,9 +312,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("좋아요 설정 기능에 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("좋아요 설정 기능에 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -343,9 +334,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("난이도를 설정하는데 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("난이도를 설정하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -366,9 +356,8 @@ export default applyPenders(missionReducer, [
                 } else{
                     alert("미션에 참여하는데 문제가 발생했습니다.");
                 }
-            } else { // 에러 발생
+            } else { 
                 alert("미션에 참여하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },

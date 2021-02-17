@@ -34,7 +34,9 @@ function App() {
     if(token){
       const tokenDecode = jwt_decode(token);
       const { exp, userInfo } = tokenDecode;
+
       client.defaults.headers.common['token'] = token;
+
       if( exp > new Date().getTime() / 1000 ) {
         setUserInfoFromToken(userInfo);
         history.push('/main');
@@ -54,9 +56,10 @@ function App() {
   return (
     <div className={styles.app}>
       { callAction && 
-          <UserInfoFromToken 
-                userInfo={userInfoFromToken}
-                setCallAction={setCallAction}/> 
+        <UserInfoFromToken 
+          userInfo={userInfoFromToken}
+          setCallAction={setCallAction}
+        /> 
       }
 
       <Switch>
@@ -77,54 +80,35 @@ function App() {
           <ServiceMain />
         </Route>
 
-
-
-
-
         <Route exact path="/main/block_store">
           <BlockStoreContainer />
         </Route>
-
 
         <Route exact path="/main/tutorial">
           <TutorialSubmain />
         </Route>
         
-
-
-
-
         <Route exact path="/main/mission">
           <MissionContainer />
         </Route>
+
         <Route exact path="/main/mission/create">
           <EditorMissionContainer type="create" />
-        </Route>
-        <Route exact path="/main/mission/update">
-
         </Route>
 
         <Route exact path="/main/mission/answer_modify">
           <ModifyAnswerContainer />
         </Route>
 
-
-
-
-
         <Route exact path="/main/challenge">
           <ChallengeContainer />
         </Route>
-        {/* <Route exact path="/main/create/answer/:type" component={EditorAnswerContainer}/> */}
 
         <Route exact path="/main/answer/:id" component={AnswerContainer}/>
 
         <Route exact path="/main/board">
           <BoardContainer />
         </Route>
-
-
-
 
         <Route exact path="/main/create/answer/:type" component={EditorAnswerContainer} />
 

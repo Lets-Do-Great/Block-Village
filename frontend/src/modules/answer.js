@@ -128,7 +128,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("리스트를 불러오는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -152,7 +151,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("미션을 만드는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -176,7 +174,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("미션을 수정하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -200,7 +197,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("미션을 삭제하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -224,7 +220,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("리스트를 조회하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -248,7 +243,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("답안을 조회하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -272,7 +266,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("리스트를 조회하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -296,7 +289,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("좋아요 설정하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -319,7 +311,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("댓글 작성에 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -342,7 +333,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("댓글 수정에 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -365,7 +355,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("댓글 삭제에 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },
@@ -389,7 +378,6 @@ export default applyPenders(answerReducer, [
                 }
             } else {
                 alert("댓글 조회하는데 문제가 발생했습니다.");
-                console.log(action.payload.status);
             }
             return updateObject(state, state);
         },

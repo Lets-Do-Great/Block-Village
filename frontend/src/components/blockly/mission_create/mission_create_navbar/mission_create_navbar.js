@@ -39,13 +39,6 @@ const MissionCreateNavbar = ({ modal, type, onChangeModal,
       <div className={styles.cart_button} onClick={goStore}>
         <TiShoppingCart size="50" color="#FFFFFF" />
       </div>
-      {/* <div>
-        <input
-          type="file" 
-          name="imageUrl"
-          onChange={onChangeImage}
-        />
-      </div> */}
     </header>
   )
 }

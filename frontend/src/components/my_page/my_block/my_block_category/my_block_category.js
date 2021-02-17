@@ -11,10 +11,6 @@ const MyBlockCategory = ({ closeModal, allBlocksInfo }) => {
     const [ category, setCategory ] = useState(0);
     const [ categoryBlockList, setCategoryBlockList ] = useState([]);
 
-    useEffect(() => {
-        console.log(categoryBlockList);
-    }, [categoryBlockList]);
-
     const categoryList = ['시작', '판단', '움직임', '흐름', '계산', '함수'];
     const categoryColors = ['#C30D23', '#FFA31D', '#8FC31F', '#55CFFF', '#1060FF', '#CC6666']
 
@@ -26,7 +22,6 @@ const MyBlockCategory = ({ closeModal, allBlocksInfo }) => {
             }
         });
         setCategoryBlockList(newList);
-        console.log(newList);
     }
 
     // 렌더와 동시에 현재 리스트 애들 불러오기

@@ -17,7 +17,6 @@ const MyPageSubmain = () => {
 
   useEffect(() => {
     getAllBlocks();
-    console.log("헤2");
   }, []);
 
 

@@ -45,9 +45,8 @@ export default applyPenders(challengeReducer, [
         } else{
           alert("리스트를 불러오는데 문제가 발생했습니다.");
         }
-      }else{ // 에러 발생
+      }else{ 
         alert("리스트를 불러오는데 문제가 발생했습니다.");
-        console.log(action.payload.status);
       }
       return updateObject(state, state);
     },
@@ -71,7 +70,6 @@ export default applyPenders(challengeReducer, [
         }
       }else{ // 에러 발생
         alert("리스트를 불러오는데 문제가 발생했습니다.");
-        console.log(action.payload.status);
       }
       return updateObject(state, state);
     },
@@ -94,9 +92,8 @@ export default applyPenders(challengeReducer, [
         } else{
           alert("챌린지에 참가하는데 문제가 발생했습니다.");
         }
-      }else{ // 에러 발생
+      }else{ 
         alert("챌린지에 참가하는데 문제가 발생했습니다.");
-        console.log(action.payload.status);
       }
       return updateObject(state, state);
     },

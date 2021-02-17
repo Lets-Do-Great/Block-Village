@@ -19,6 +19,7 @@ Blockly.Blocks['addition'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['addition'] = function(block) {
   var value_num1 = Blockly.JavaScript.valueToCode(block, 'num1', Blockly.JavaScript.ORDER_ATOMIC);
   var value_num2 = Blockly.JavaScript.valueToCode(block, 'num2', Blockly.JavaScript.ORDER_ATOMIC);
@@ -27,6 +28,7 @@ Blockly.JavaScript['addition'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['addition'] = function(block) {
   var value_num1 = Blockly.Python.valueToCode(block, 'num1', Blockly.Python.ORDER_ATOMIC);
   var value_num2 = Blockly.Python.valueToCode(block, 'num2', Blockly.Python.ORDER_ATOMIC);
@@ -35,7 +37,6 @@ Blockly.Python['addition'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 // 뺄셈
 Blockly.Blocks['subtraction'] = {
@@ -54,6 +55,7 @@ Blockly.Blocks['subtraction'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['subtraction'] = function(block) {
   var value_num1 = Blockly.JavaScript.valueToCode(block, 'num1', Blockly.JavaScript.ORDER_ATOMIC);
   var value_num2 = Blockly.JavaScript.valueToCode(block, 'num2', Blockly.JavaScript.ORDER_ATOMIC);
@@ -62,6 +64,7 @@ Blockly.JavaScript['subtraction'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['subtraction'] = function(block) {
   var value_num1 = Blockly.Python.valueToCode(block, 'num1', Blockly.Python.ORDER_ATOMIC);
   var value_num2 = Blockly.Python.valueToCode(block, 'num2', Blockly.Python.ORDER_ATOMIC);
@@ -70,8 +73,6 @@ Blockly.Python['subtraction'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
-
 
 // 곱셈
 Blockly.Blocks['multiplication'] = {
@@ -90,6 +91,7 @@ Blockly.Blocks['multiplication'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['multiplication'] = function(block) {
   var value_num1 = Blockly.JavaScript.valueToCode(block, 'num1', Blockly.JavaScript.ORDER_ATOMIC);
   var value_num2 = Blockly.JavaScript.valueToCode(block, 'num2', Blockly.JavaScript.ORDER_ATOMIC);
@@ -98,6 +100,7 @@ Blockly.JavaScript['multiplication'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['multiplication'] = function(block) {
   var value_num1 = Blockly.Python.valueToCode(block, 'num1', Blockly.Python.ORDER_ATOMIC);
   var value_num2 = Blockly.Python.valueToCode(block, 'num2', Blockly.Python.ORDER_ATOMIC);
@@ -106,8 +109,6 @@ Blockly.Python['multiplication'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
-
 
 // 나눗셈
 Blockly.Blocks['division'] = {
@@ -126,6 +127,7 @@ Blockly.Blocks['division'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['division'] = function(block) {
   var value_num1 = Blockly.JavaScript.valueToCode(block, 'num1', Blockly.JavaScript.ORDER_ATOMIC);
   var value_num2 = Blockly.JavaScript.valueToCode(block, 'num2', Blockly.JavaScript.ORDER_ATOMIC);
@@ -134,6 +136,7 @@ Blockly.JavaScript['division'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['division'] = function(block) {
   var value_num1 = Blockly.Python.valueToCode(block, 'num1', Blockly.Python.ORDER_ATOMIC);
   var value_num2 = Blockly.Python.valueToCode(block, 'num2', Blockly.Python.ORDER_ATOMIC);
@@ -142,7 +145,6 @@ Blockly.Python['division'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 // 랜덤 숫자
 Blockly.Blocks['random_num'] = {
@@ -163,6 +165,7 @@ Blockly.Blocks['random_num'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['random_num'] = function(block) {
   var value_num1 = Blockly.JavaScript.valueToCode(block, 'num1', Blockly.JavaScript.ORDER_ATOMIC);
   var value_num2 = Blockly.JavaScript.valueToCode(block, 'num2', Blockly.JavaScript.ORDER_ATOMIC);
@@ -171,6 +174,7 @@ Blockly.JavaScript['random_num'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['random_num'] = function(block) {
   var value_num1 = Blockly.Python.valueToCode(block, 'num1', Blockly.Python.ORDER_ATOMIC);
   var value_num2 = Blockly.Python.valueToCode(block, 'num2', Blockly.Python.ORDER_ATOMIC);
@@ -179,7 +183,6 @@ Blockly.Python['random_num'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 // 몫
 Blockly.Blocks['quotient'] = {
@@ -200,6 +203,7 @@ Blockly.Blocks['quotient'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['quotient'] = function(block) {
   var value_num1 = Blockly.JavaScript.valueToCode(block, 'num1', Blockly.JavaScript.ORDER_ATOMIC);
   var value_num2 = Blockly.JavaScript.valueToCode(block, 'num2', Blockly.JavaScript.ORDER_ATOMIC);
@@ -208,6 +212,7 @@ Blockly.JavaScript['quotient'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['quotient'] = function(block) {
   var value_num1 = Blockly.Python.valueToCode(block, 'num1', Blockly.Python.ORDER_ATOMIC);
   var value_num2 = Blockly.Python.valueToCode(block, 'num2', Blockly.Python.ORDER_ATOMIC);
@@ -216,7 +221,6 @@ Blockly.Python['quotient'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 //나머지
 Blockly.Blocks['remainder'] = {
@@ -237,6 +241,7 @@ Blockly.Blocks['remainder'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['remainder'] = function(block) {
   var value_num1 = Blockly.JavaScript.valueToCode(block, 'num1', Blockly.JavaScript.ORDER_ATOMIC);
   var value_num2 = Blockly.JavaScript.valueToCode(block, 'num2', Blockly.JavaScript.ORDER_ATOMIC);
@@ -245,6 +250,7 @@ Blockly.JavaScript['remainder'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['remainder'] = function(block) {
   var value_num1 = Blockly.Python.valueToCode(block, 'num1', Blockly.Python.ORDER_ATOMIC);
   var value_num2 = Blockly.Python.valueToCode(block, 'num2', Blockly.Python.ORDER_ATOMIC);
@@ -253,7 +259,6 @@ Blockly.Python['remainder'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 // 제곱
 Blockly.Blocks['square'] = {
@@ -269,6 +274,7 @@ Blockly.Blocks['square'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['square'] = function(block) {
   var value_num = Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
@@ -276,6 +282,7 @@ Blockly.JavaScript['square'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['square'] = function(block) {
   var value_num = Blockly.Python.valueToCode(block, 'num', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
@@ -298,6 +305,7 @@ Blockly.Blocks['sqrt'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['sqrt'] = function(block) {
   var value_num = Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
@@ -305,6 +313,7 @@ Blockly.JavaScript['sqrt'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['sqrt'] = function(block) {
   var value_num = Blockly.Python.valueToCode(block, 'num', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
@@ -312,7 +321,6 @@ Blockly.Python['sqrt'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 // int
 Blockly.Blocks['integer'] = {
@@ -328,6 +336,7 @@ Blockly.Blocks['integer'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['integer'] = function(block) {
   var value_num = Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
@@ -335,6 +344,7 @@ Blockly.JavaScript['integer'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['integer'] = function(block) {
   var value_num = Blockly.Python.valueToCode(block, 'num', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
@@ -357,6 +367,7 @@ Blockly.Blocks['roundup'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['roundup'] = function(block) {
   var value_num = Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
@@ -364,6 +375,7 @@ Blockly.JavaScript['roundup'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['roundup'] = function(block) {
   var value_num = Blockly.Python.valueToCode(block, 'num', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
@@ -371,7 +383,6 @@ Blockly.Python['roundup'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 //round
 Blockly.Blocks['round'] = {
@@ -387,6 +398,7 @@ Blockly.Blocks['round'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['round'] = function(block) {
   var value_num = Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
@@ -394,6 +406,7 @@ Blockly.JavaScript['round'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['round'] = function(block) {
   var value_num = Blockly.Python.valueToCode(block, 'num', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
@@ -401,7 +414,6 @@ Blockly.Python['round'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 // abs
 Blockly.Blocks['abs_val'] = {
@@ -417,6 +429,7 @@ Blockly.Blocks['abs_val'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['abs_val'] = function(block) {
   var value_num = Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
@@ -424,6 +437,7 @@ Blockly.JavaScript['abs_val'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['abs_val'] = function(block) {
   var value_num = Blockly.Python.valueToCode(block, 'num', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
@@ -431,8 +445,6 @@ Blockly.Python['abs_val'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
-
-
 
 // num
 Blockly.Blocks['number'] = {
@@ -446,6 +458,7 @@ Blockly.Blocks['number'] = {
  this.setHelpUrl("");
   }
 };
+
 Blockly.JavaScript['number'] = function(block) {
   var text_num = block.getFieldValue('num');
   // TODO: Assemble JavaScript into code variable.
@@ -453,6 +466,7 @@ Blockly.JavaScript['number'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
 Blockly.Python['number'] = function(block) {
   var text_num = block.getFieldValue('num');
   // TODO: Assemble Python into code variable.

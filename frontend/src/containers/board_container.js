@@ -16,7 +16,7 @@ const BoardContainer = () => {
         sortType: 'createdDate,desc',
         keyword: '',
         keywordType: 'title',
-        pageNum: 0,                 // 페이징 
+        pageNum: 0, 
         size: 10
     })
 

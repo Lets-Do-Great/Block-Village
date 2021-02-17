@@ -9,10 +9,6 @@ const MyPageContainer = ({ closeModal }) => {
   const history = useHistory();
   // 정보 조회 / 수정 바꾸는 변수
   const [type, setType] = useState('read');
-  
-  useEffect(() => {
-    console.log(userInfo);
-  }, []);
 
   // 정보 수정폼 데이터 저장하는 변수
   const [modifyInput, setModifyInput] = useState({

@@ -4,7 +4,6 @@ import Blockly from 'blockly';
 import styles from './workspace_container.module.css';
 
 const WorkspaceContainer = ({ xmlCode }) => {
-  console.log('여기가 잘와야행', xmlCode);
   const toolboxCategories = [];
   const theme = {
     'blockStyles' : {
