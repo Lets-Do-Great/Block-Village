@@ -13,8 +13,6 @@ const EditorMissionContainer = ({ type }) => {
   const dispatch = useDispatch();
   const [imageUrl, setImageUrl] = useState('');
 
-  const ml = useSelector(state => state.mission.missionList);
-
   useEffect(() => {
     if(imageUrl !== '') setBackgroundImage();
   }, [selectedMission.id]);
