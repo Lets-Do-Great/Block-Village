@@ -16,13 +16,13 @@ const CommentContainer = ({ userInfo, selectedId }) => {
     api 요청 보내는 함수
     */
     // 현재 선택한 답안 조회
-    const getAnswer = async (selectedId) => {
-        try {
-            await dispatch(AnswerAction.getAnswer({ email: userInfo, answerId:selectedId }));
-        } catch(e) {
-            console.log(e);
-        }
-    };
+    // const getAnswer = async () => {
+    //     try {
+    //         await dispatch(AnswerAction.getAnswer({ email: userInfo, answerId:selectedId }));
+    //     } catch(e) {
+    //         console.log(e);
+    //     }
+    // };
 
     // 현재 선택한 답안의 댓글 조회
     const getAnswerCommentList = async () => {
@@ -40,7 +40,7 @@ const CommentContainer = ({ userInfo, selectedId }) => {
                 email: userInfo, answerId: selectedId, comment,
             }));
             getAnswerCommentList();
-            getAnswer();
+            // getAnswer();
         }catch(e) {
             console.log(e);
         }
@@ -65,6 +65,7 @@ const CommentContainer = ({ userInfo, selectedId }) => {
                 email: userInfo, commentId: id,
             }));
             getAnswerCommentList();
+            // getAnswer();
         }catch(e) {
             console.log(e);
         }

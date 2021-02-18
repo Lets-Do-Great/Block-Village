@@ -117,7 +117,7 @@ export default applyPenders(missionReducer, [
             const response = action.payload;
 
             if(response.status === 200){
-                if(response.data.status){
+                if(response.data.status) {
                     return updateObject(state, {
                         ...state,
                         missionList: response.data.data[0],
@@ -211,7 +211,6 @@ export default applyPenders(missionReducer, [
 
             if(response.status === 200){
                 if(response.data.status){
-                    console.log("여기는 모듈 ", response.data.data);
                     return updateObject(state, {
                         ...state,
                         selectedMission: response.data.data,

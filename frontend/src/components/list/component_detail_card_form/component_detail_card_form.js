@@ -16,8 +16,8 @@ import CommentContainer from '../../../containers/comment_container';
 import { useHistory } from 'react-router-dom';
 
 
-const ComponentDetailCardForm = ({ type, detail, imageUrl, setLike, setDislike, 
-                            userInfo, closeDetail, onDelete, getDetail }) => {
+const ComponentDetailCardForm = ({ type, detail, getDetail, imageUrl, setLike, setDislike, 
+                            userInfo, closeDetail, onDelete, getMissionDetail }) => {
 
     const {email, nickname, title, favorite, content, 
             commentCnt, likeCnt, readCnt, xmlCode, javascriptCode } = detail;
@@ -27,7 +27,7 @@ const ComponentDetailCardForm = ({ type, detail, imageUrl, setLike, setDislike,
 
     useEffect(() => {
       if(type !== 'answer') {
-        getDetail(detail.missionId);
+        getMissionDetail(detail.missionId);
       }
     },[]);
 
@@ -209,7 +209,8 @@ const ComponentDetailCardForm = ({ type, detail, imageUrl, setLike, setDislike,
 
         <CommentContainer
           userInfo={userInfo}
-          type="answer"
+          // type="answer"
+          getDetail={getDetail}
           selectedId={detail.id}/>
       </div>
     );

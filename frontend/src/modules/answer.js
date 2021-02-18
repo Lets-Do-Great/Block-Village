@@ -305,6 +305,7 @@ export default applyPenders(answerReducer, [
                 if(response.data.status) {
                     return updateObject(state, {
                         ...state,
+                        selectedAnswer: response.data.data,
                     });
                 } else {
                     alert("댓글 작성에 문제가 발생했습니다.");
@@ -349,6 +350,7 @@ export default applyPenders(answerReducer, [
                 if(response.data.status) {
                     return updateObject(state, {
                         ...state,
+                        selectedAnswer: response.data.data,
                     });
                 } else {
                     alert("댓글 삭제에 문제가 발생했습니다.");

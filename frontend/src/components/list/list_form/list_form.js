@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ListCardForm from '../list_card_form/list_card_form';
 import ModalDetailCardForm from '../modal_detail_card_form/modal_detail_card_form';
 import styles from './list_form.module.css';
@@ -15,7 +15,6 @@ const ListForm = ({ type, list, detail, getDetail, getMissionDetail, getList,
                     openDetail, selectedMission }) => {
 
     const history = useHistory();
-    
 
     const customStyles = {
         content : {
@@ -33,7 +32,6 @@ const ListForm = ({ type, list, detail, getDetail, getMissionDetail, getList,
 
     // 디테일 모달 열기
     const clickCard = (e) => {
-        console.log(getDetail);
         getDetail(e.target.id);
     }
 

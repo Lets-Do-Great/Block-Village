@@ -255,6 +255,6 @@ Blockly.Blocks['input'] = {
 };
 Blockly.JavaScript['input'] = function(block) {
   var text_input = block.getFieldValue('input');
-  var code = `${text_input};\n`;
+  var code = `${text_input}`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };

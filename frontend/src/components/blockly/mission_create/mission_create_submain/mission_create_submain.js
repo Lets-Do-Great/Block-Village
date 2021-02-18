@@ -24,7 +24,6 @@ const MissionCreateSubmain = ({ onSetMission }) => {
   });	
 
   const onChangeImage = (e) => {
-    console.log(e);
     setFormInfo({
       ...formInfo,
       imageUrl: e.target.files[0],

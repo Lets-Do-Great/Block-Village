@@ -41,6 +41,13 @@ const MyMissionContainer = ({ closeModal }) => {
 
     const onCloseDetail = () => {
         setDetailComponent(false);
+        if(category === 'myMission') {
+            getMyMissionList();
+        } else if(category === 'makingAnswer') {
+            getMakingMissionList();
+        } else if(category === 'myAnswer') {
+            getMyAnswerList();
+        }
     }
 
     /*
@@ -190,13 +197,14 @@ const MyMissionContainer = ({ closeModal }) => {
                         <div className={styles.my_mission_modal}>
                             <ComponentDetailCardForm
                                 detail={selectedAnswer}
-                           imageUrl={selectedMission.imageUrl}
+                                getDetail={getAnswer}
+                                imageUrl={selectedMission.imageUrl}
                                 setLike={likeAnswer}
                                 setDisLike={dislikeAnswer}
                                 userInfo={userInfo.email}
                                 onDelete={onDeleteAnswer}
                                 closeDetail={onCloseDetail}
-                            getDetail={getMission}
+                                getMissionDetail={getMission}
                     /></div>
                 }
             </> )
