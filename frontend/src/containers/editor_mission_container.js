@@ -4,28 +4,43 @@ import MissionCreateSubmain from '../components/blockly/mission_create/mission_c
 import MissionModify from '../components/blockly/mission_modify/mission_modify';
 import * as MissionAction from '../modules/mission';
 import * as BlockAction from '../modules/block';
-import { ContactSupportOutlined } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
-const EditorMissionContainer = ( { type }) => {
+const EditorMissionContainer = ({ type }) => {
   const history = useHistory();
   const userInfo = useSelector(state => state.user.userInfo);
   const selectedMission = useSelector(state => state.mission.selectedMission);
   const dispatch = useDispatch();
   const [imageUrl, setImageUrl] = useState('');
 
+  const ml = useSelector(state => state.mission.missionList);
+
   useEffect(() => {
     if(imageUrl !== '') setBackgroundImage();
   }, [selectedMission.id]);
+
+  const getMissionList = async () => {
+    try{
+        await dispatch(MissionAction.getMissionList({
+          searchType: 'updatedAt',
+          sortType: 'decrease',
+          keyword: '',
+          keywordType: 'title',
+          pageNum: 0,
+        }));
+      } catch(e) {
+        console.log(e);
+      } finally {
+      history.push('/main/mission');
+    }
+  }
   
   const onSetMission = async (e) => {
     const newXml = e.xmlCode.replace(/"/gi, '\\"');
-    console.log(e.imageUrl);
     try {
       setImageUrl(e.imageUrl);
 
       await dispatch(MissionAction.setMission({
-        
         title: e.title,
         content: e.content,
         startPositionX: e.startPosition[0],
@@ -36,10 +51,9 @@ const EditorMissionContainer = ( { type }) => {
         email: userInfo.email,
         xmlCode: newXml,
       }));
-      history.push('/main/mission')
     } catch(e) {
       console.log(e);
-    }
+    } 
   };
 
   const setBackgroundImage = async () => {
@@ -51,6 +65,8 @@ const EditorMissionContainer = ( { type }) => {
       }));
     }catch(e) {
       console.log(e);
+    } finally {
+      getMissionList();
     }
   }
 

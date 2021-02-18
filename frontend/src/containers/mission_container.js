@@ -18,6 +18,16 @@ const MissionContainer = () => {
     // 모달 상태 저장
     const [ modal, setModal ] = useState(false);
 
+    // useEffect(() => {
+    //     getMissionList({
+    //         searchType: 'updatedAt',
+    //         sortType: 'decrease',
+    //         keyword: '',
+    //         keywordType: 'title',
+    //         pageNum: 0,
+    //     });
+    // }, []);
+
     // 검색 조건에 따라 미션 리스트 가져오기
     useEffect(() => {
         getMissionList(search);
