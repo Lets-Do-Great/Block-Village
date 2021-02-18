@@ -200,7 +200,7 @@ const MyMissionContainer = ({ closeModal }) => {
                                 getDetail={getAnswer}
                                 imageUrl={selectedMission.imageUrl}
                                 setLike={likeAnswer}
-                                setDisLike={dislikeAnswer}
+                                setDislike={dislikeAnswer}
                                 userInfo={userInfo.email}
                                 onDelete={onDeleteAnswer}
                                 closeDetail={onCloseDetail}

@@ -26,7 +26,6 @@ const BlockStoreContainer = () => {
   }
 
   const onBuyBlocks = async (buyList, mileage) => {
-    console.log(buyList, mileage);
     try {
       await dispatch(BlockAction.buyBlocks({
         email: userInfo.email,
