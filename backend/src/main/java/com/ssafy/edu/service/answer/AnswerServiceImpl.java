@@ -456,7 +456,27 @@ public class AnswerServiceImpl implements AnswerService {
 
             answerCommentJpaRepository.save(answerComment);
 
+            Optional<AnswerFavorite> answerFavorite = Optional.ofNullable(answerFavoriteJapRepository.findByUserEmailAndAnswerId(userOptional.get().getEmail(),answerOptional.get().getId()));
+
+            findOneModelName findOneModelName  = new findOneModelName().builder()
+                    .id(answerOptional.get().getId())
+                    .email(answerOptional.get().getUser().getEmail())
+                    .title(answerOptional.get().getTitle())
+                    .missionId(answerOptional.get().getMission().getId())
+                    .nickname(answerOptional.get().getUser().getNickname())
+                    .javascriptCode(answerOptional.get().getJavascriptCode())
+                    .startPositionX(answerOptional.get().getStartPositionX())
+                    .startPositionY(answerOptional.get().getStartPositionY())
+                    .xmlCode(answerOptional.get().getXmlCode())
+                    .content(answerOptional.get().getContent())
+                    .readCnt(answerOptional.get().getView())
+                    .favorite((answerFavorite.orElseGet(AnswerFavorite::new).isFavorite()))
+                    .likeCnt(answerOptional.get().getFavorite())
+                    .commentCnt(answerOptional.get().getAnswerCommentList().size())
+                    .build();
+
             result.status = true;
+            result.data = findOneModelName;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -484,8 +504,28 @@ public class AnswerServiceImpl implements AnswerService {
                     .build();
 
             answerCommentJpaRepository.save(answerComment);
+            Optional<Answer> answerOptional = answerJapRepository.findById(answerComment.getAnswer().getId());
+            Optional<AnswerFavorite> answerFavorite = Optional.ofNullable(answerFavoriteJapRepository.findByUserEmailAndAnswerId(answerCommentOptional.get().getUser().getEmail(),answerOptional.get().getId()));
+
+            findOneModelName findOneModelName  = new findOneModelName().builder()
+                    .id(answerOptional.get().getId())
+                    .email(answerOptional.get().getUser().getEmail())
+                    .title(answerOptional.get().getTitle())
+                    .missionId(answerOptional.get().getMission().getId())
+                    .nickname(answerOptional.get().getUser().getNickname())
+                    .javascriptCode(answerOptional.get().getJavascriptCode())
+                    .startPositionX(answerOptional.get().getStartPositionX())
+                    .startPositionY(answerOptional.get().getStartPositionY())
+                    .xmlCode(answerOptional.get().getXmlCode())
+                    .content(answerOptional.get().getContent())
+                    .readCnt(answerOptional.get().getView())
+                    .favorite((answerFavorite.orElseGet(AnswerFavorite::new).isFavorite()))
+                    .likeCnt(answerOptional.get().getFavorite())
+                    .commentCnt(answerOptional.get().getAnswerCommentList().size())
+                    .build();
 
             result.status = true;
+            result.data = findOneModelName;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
@@ -503,7 +543,28 @@ public class AnswerServiceImpl implements AnswerService {
 
         if (answerCommentOptional.isPresent()) {
             answerCommentJpaRepository.delete(answerCommentOptional.get());
+            Optional<Answer> answerOptional = answerJapRepository.findById(answerCommentOptional.get().getAnswer().getId());
+            Optional<AnswerFavorite> answerFavorite = Optional.ofNullable(answerFavoriteJapRepository.findByUserEmailAndAnswerId(answerCommentDeleteRequest.getEmail(),answerOptional.get().getId()));
+
+            findOneModelName findOneModelName  = new findOneModelName().builder()
+                    .id(answerOptional.get().getId())
+                    .email(answerOptional.get().getUser().getEmail())
+                    .title(answerOptional.get().getTitle())
+                    .missionId(answerOptional.get().getMission().getId())
+                    .nickname(answerOptional.get().getUser().getNickname())
+                    .javascriptCode(answerOptional.get().getJavascriptCode())
+                    .startPositionX(answerOptional.get().getStartPositionX())
+                    .startPositionY(answerOptional.get().getStartPositionY())
+                    .xmlCode(answerOptional.get().getXmlCode())
+                    .content(answerOptional.get().getContent())
+                    .readCnt(answerOptional.get().getView())
+                    .favorite((answerFavorite.orElseGet(AnswerFavorite::new).isFavorite()))
+                    .likeCnt(answerOptional.get().getFavorite())
+                    .commentCnt(answerOptional.get().getAnswerCommentList().size())
+                    .build();
+
             result.status = true;
+            result.data = findOneModelName;
             response = new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             result.status = false;
