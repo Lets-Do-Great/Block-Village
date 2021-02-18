@@ -13,7 +13,6 @@ const MyChallengeList = ({ category, challenge }) => {
         }else{
             list.current.className=styles.list_done;
         }
-        console.log(challenge);
     }, []);
 
     const goToAnswer = () => {
