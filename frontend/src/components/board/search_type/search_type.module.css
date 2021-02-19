@@ -1,0 +1,8 @@
+.select {
+    width: 80px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 190px;
+    border: 2px solid darkgray;
+    border-radius: 10px;
+}

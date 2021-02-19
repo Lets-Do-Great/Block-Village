@@ -1,0 +1,36 @@
+.modal_background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1001;
+}
+
+.body {
+  width: 900px;
+  height: 401px;
+  /* background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.4); */
+  background: 100%/100%
+    url(../../.././../../../images/tutorial_1/tutorial_modal_1_5.png);
+
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+}
+
+.img {
+  position: absolute;
+  left: 5px;
+  top: 75px;
+  width: 88px;
+  height: 91%;
+  border-radius: 5px;
+  z-index: 1001;
+  border: 2px solid red;
+  background: url(../../../../../../images/tutorial_1/step4.png);
+}

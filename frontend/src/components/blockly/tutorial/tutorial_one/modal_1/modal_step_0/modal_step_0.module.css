@@ -1,0 +1,25 @@
+.modal_background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1001;
+}
+
+.body {
+  width: 900px;
+  height: 401px;
+  /* background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.4); */
+  background: url(../../../../../../images/tutorial_1/tutorial_modal_1_1.png);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+}

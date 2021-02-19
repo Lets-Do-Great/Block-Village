@@ -1,0 +1,20 @@
+.search_form{
+    float: right;
+    margin-right: 180px;
+    margin-top: 10px;
+}
+
+.select {
+    width: 80px;
+    height: 40px;
+    margin: 10px;
+    border: 2px solid darkgray;
+    border-radius: 10px;
+}
+
+.input {
+    width: 300px;
+    height: 35px;
+    border: 2px solid darkgray;
+    border-radius: 10px;
+}

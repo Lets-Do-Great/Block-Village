@@ -1,0 +1,71 @@
+.back {
+	margin-top: 10px;
+	margin-left: 10px;
+	justify-content: center;
+	display: inline-block;
+    position: absolute;
+}
+
+.back_icon {
+	width: 20px;
+	height: 20px;
+}
+
+.button_back {
+	border: 0px;
+	background-color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.body {
+    display: block;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-bottom: 3px solid darkgray;
+}
+
+.title{
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 60px;
+    font-size: 30px;
+    font-weight: bold;
+    border-bottom: 3px solid darkgray;
+    padding-bottom: 30px;
+}
+
+.info{
+    float: right;
+    margin: 20px;
+    margin-right: 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.info_text {
+    display: inline;
+    margin-left: 5px;
+    margin-right: 15px;
+}
+
+.content{
+    clear: both;
+    display: block;
+    width: 100%;
+    min-height: 300px;
+    border: 2px solid darkgray;
+    border-radius: 20px;
+    margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+.comment_form{
+    display: block;
+    width: 75%;
+    margin: 0 auto;
+}

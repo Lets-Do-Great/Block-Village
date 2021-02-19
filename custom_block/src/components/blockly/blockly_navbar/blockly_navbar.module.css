@@ -1,0 +1,28 @@
+.navbar {
+  width: 100%;
+  text-align: center;
+  padding: 0.5em;
+  background-color: cornflowerblue;
+  position: relative;
+}
+
+.title {
+  margin: 0;
+  color: white;
+}
+
+.save_button {
+  position: absolute;
+  right: 3em;
+  top: 0.5em;
+  padding: 0.8em;
+  border-radius: 20%;
+  background-color: cadetblue;
+  color: white;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.save_button:hover {
+}

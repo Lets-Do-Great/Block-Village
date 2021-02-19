@@ -1,0 +1,56 @@
+.typeForm {
+  float: left;
+}
+
+.button {
+  width: 100px;
+  height: 40px;
+  background-color: white;
+  border: 0px;
+  font-size: 15px;
+  font-weight: bold;
+  display: block;
+  float: left;
+}
+
+.tab_menus {
+  display: block;
+  margin: 0 auto;
+  width: 95%;
+  padding: 1em;
+  padding-bottom: 0em;
+}
+
+.tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  border-bottom: 2px solid #b9dd6b;
+  text-align: center;
+}
+
+.tabs > li {
+  display: block;
+  width: 30%;
+  height: 100%;
+  padding: 0.5em 1em;
+  margin: 0 1em;
+  font-weight: bold;
+  font-size: 15px;
+  color: darkgray;
+  cursor: pointer;
+}
+
+.tabs > .current {
+  display: border;
+  background: white;
+  color: #b9dd6b;
+  border: 2px solid #b9dd6b;
+  border-bottom: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  position: relative;
+  top: 2px;
+  cursor: pointer;
+}

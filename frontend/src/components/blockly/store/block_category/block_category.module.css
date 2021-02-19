@@ -1,0 +1,79 @@
+.body {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding-left: 0.5em;
+}
+
+.dumy1 {
+  width: 100%;
+  height: 3rem;
+}
+
+.cata__judgement {
+  width: 100%;
+  height: 4rem;
+  text-align: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.cata__judgement:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__movement {
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 10px;
+}
+
+.cata__movement:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__flow {
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 10px;
+}
+
+.cata__flow:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__calculation {
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 10px;
+}
+
+.cata__calculation:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__drawing {
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 10px;
+}
+
+.cata__drawing:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cata__function {
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 10px;
+}
+
+.cata__function:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}

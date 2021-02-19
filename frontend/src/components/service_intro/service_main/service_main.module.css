@@ -1,0 +1,154 @@
+.body {
+  width: 100%;
+  background-color: #faffee;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: table;
+  margin: 0 auto;
+  padding-bottom: 90px;
+}
+
+.base {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  font-family: NanumGothic;
+}
+
+.about_top {
+  background-image: url(../../../images/service_intro/service_main_bg.png);
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 1920px auto;
+  height: 397px;
+}
+
+.about_inner {
+  position: relative;
+  width: 800px;
+  height: 397px;
+  margin: 0 auto;
+  font-weight: 600;
+  color: #fff;
+  text-align: left;
+}
+
+.about_title {
+  display: block;
+  padding-top: 100px;
+  font-size: 34px;
+  line-height: 37px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.about_dsc {
+  padding-top: 19px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 25px;
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+.about_link {
+  position: absolute;
+  right: 0;
+  top: 52px;
+  width: 400px;
+  height: 276px;
+  font-size: 0;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.end_about {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 16px;
+  background-image: url(../../../images/service_intro/wave.png);
+}
+
+.pannel {
+  display: table;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: left;
+  margin: 0 auto;
+  width: 980px;
+  padding-left: 8px;
+  margin-top: 40px;
+}
+
+.head_binding {
+  font-family: NanumGothic;
+  font-size: 25px;
+  color: #fff;
+  background-color: #75adf4;
+  display: inline-block;
+  vertical-align: top;
+  height: 66px;
+  margin: 0 -5px;
+  line-height: 67px;
+  border: 1px solid #5f9ef4;
+  border-left: none;
+  border-right: none;
+}
+
+.logo_img {
+  margin-top: 5px;
+}
+
+.section {
+  padding-top: 50px;
+  overflow: auto;
+  margin: 0 auto;
+  padding-left: 36px;
+}
+
+.content_1 {
+  display: inline-block;
+  text-align: left;
+  margin-top: 42px;
+  margin-left: 42px;
+}
+
+.content_1_title {
+  font-family: nanumBarunBold;
+  font-size: 25px;
+  color: #3f3f3f;
+  font-weight: bold;
+}
+
+.content_sub_title {
+  font-family: NanumGothic;
+  font-size: 17px;
+  color: #3f3f3f;
+  padding-left: 10px;
+}
+
+.content_detail {
+  font-family: NanumGothic;
+  font-size: 15px;
+  color: #3f3f3f;
+  line-height: 24px;
+  margin-top: 20px;
+}
+
+.content_box {
+  display: inline-block;
+  text-align: left;
+  margin-top: 42px;
+  margin-left: 30px;
+  margin-right: 40px;
+  height: 185px;
+  float: left;
+}

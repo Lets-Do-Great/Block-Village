@@ -1,0 +1,43 @@
+.back {
+	margin-top: 10px;
+	margin-left: 10px;
+	justify-content: center;
+	display: inline-block;
+}
+
+.back_icon {
+	width: 20px;
+	height: 20px;
+}
+
+.button_back {
+	border: 0px;
+	background-color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.log_in_form {
+	display: block;
+	width: 400px;
+	height: 200px;
+	margin: 0 auto;
+	margin-top: 70px;
+	text-align: center;
+}
+
+.comment_sign_up {
+	font-size: 10px;
+	display: inline;
+	float: left;
+	margin-left: 60px;
+}
+
+.button_sign_up {
+	border: 0px;
+	color: #ff8896;
+	background-color: white;
+    font-size: 10px;
+    font-weight: bold;
+	float: left;
+}

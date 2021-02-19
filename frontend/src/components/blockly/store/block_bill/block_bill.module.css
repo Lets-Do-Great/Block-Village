@@ -1,0 +1,45 @@
+.body {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  text-align: center;
+  padding-right: 0.5em;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  padding: 0;
+}
+
+p {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 35px;
+}
+
+.img {
+  flex-basis: 37%;
+  height: 100%;
+}
+
+.cata {
+  flex-basis: 26%;
+  height: 100%;
+  text-align: center;
+}
+
+.price {
+  flex-basis: 27%;
+  height: 100%;
+  text-align: center;
+}
+
+.delete__btn {
+  flex-basis: 10%;
+  height: 100%;
+}
+
+.btn {
+  margin-top: 35px;
+}

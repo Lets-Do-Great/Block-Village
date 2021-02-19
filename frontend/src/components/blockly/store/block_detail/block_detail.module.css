@@ -1,0 +1,100 @@
+.body {
+  display: inline-block;
+  padding: 0.5em 0.5em;
+}
+
+.container {
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+
+.small__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.block_img_container {
+  flex-basis: 80%;
+  background: url(../../../../images/block_store/block_store_gift_box.png);
+  background-size: 100% 100%;
+}
+
+.image_box {
+  width: 100%;
+  height: 80%;
+}
+
+.price_box {
+  flex-basis: 20%;
+}
+
+.price_box_margin {
+  height: 10%;
+}
+
+.price_box_container {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.tag {
+  display: inline-block;
+  width: 80%;
+  height: 100%;
+  background: url(../../../../images/block_store/block_store_tag.png);
+  background-size: 100% 100%;
+}
+
+.tag_text {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+}
+
+.container:hover .overlay {
+  display: block;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hide__button {
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.hide__button a {
+  width: 150px;
+  padding: 12px 20px;
+  text-align: center;
+  color: #fff;
+  background-color: #ef8ebe;
+  border: solid 2px #ef8ebe;
+  border-radius: 25px;
+  z-index: 1;
+}
+
+.container:hover .hide__button {
+  opacity: 1;
+  cursor: pointer;
+}

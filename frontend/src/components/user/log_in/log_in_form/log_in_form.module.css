@@ -1,0 +1,34 @@
+.input{
+    margin-top: 10px;
+    padding: 10px;
+    width: 300px;
+    height: 30px;
+    border: 0px;
+    border-bottom: 2px solid black;
+    background-color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.button_login{
+    margin: 15px;
+    width: 300px;
+    height: 45px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #ff8896;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.button_find_PW {
+	border: 0px;
+	color: #ff8896;
+	background-color: white;
+    font-size: 10px;
+    font-weight: bold;
+    float: right;
+    margin-top: 5px;
+    margin-right: 45px;
+}
