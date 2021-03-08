@@ -123,7 +123,9 @@
 
 ### Backend
 
-- Spring Data JPA, Spring Boot, MySQL
+- Spring boot, Spring data JPA, MYSQL
+- JWT
+- Docker, jenkins, aws
 
 ### Frontend
 
@@ -131,6 +133,12 @@
 - React.js
 - Redux
 - Redux-middleware (redux-actions, redux-pender)
+
+### 협업 툴
+
+- JIRA
+- GitLab
+- Swagger2
 
 ## Code Style ( Google Convention )
 
