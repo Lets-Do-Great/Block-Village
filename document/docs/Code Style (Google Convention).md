@@ -1,7 +1,4 @@
 # Code Style (Google Convention)
-
-[TOC]
-
 ## 🤙 Java
 
 - Naming
@@ -216,8 +213,6 @@
   영어로 작성
   현재 커밋을 한 이유에 대해 설명
   ```
-
-  ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f9611637-174c-4588-830b-bffa7781d208/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f9611637-174c-4588-830b-bffa7781d208/Untitled.png)
 
 - **Branch**
 

@@ -1,44 +1,14 @@
 ## 열말잘팀 ( B205 )
 
-#### 팀장 : 황호연
+## 1. 팀원 소개
 
-#### 팀원 : 구진범, 김다윤, 박승범, 성진옥
-
-## 1. 역할
-
-**황호연** (**Team Leader** & **Developer**)
-
-- 서버 개발
-- UCC 제작
-- QA
-
-**구진범** (**Developer**)
-
-- 서버 개발
-- 블록 동작 코드
-- QA
-
-**김다윤** (**Tech Leader** & **Developer**)
-
-- 팀 내 기술적인 방향을 정하는 역할
-- 서버 개발
-- 배포
-- CI 구축
-- QA
-
-**박승범** (**Developer**)
-
-- UI/UX 개발
-- 디자인
-- blockly
-
-**성진옥** (**PM** & **Developer**)
-
-- 서비스의 목적 및 방향을 설계
-- Axios 통신 구축
-- UI/UX 개발
-- 디자인
-- 이미지 제작
+| 이름 | 직책 | 역할 |
+|---|:---:|---:|
+| 황호연 | 팀장 & backend |  서버 개발, UCC 제작, QA |
+| 구진범 | 팀원 & backend | 서버 개발, 블록 동작 코드, QA |
+| 김다윤 | 팀원 & Tech Leader & backend | 서버 개발, 배포, CI 구축, QA |
+| 박승범 | 팀원 & frontend | UI/UX 개발, 디자인, blockly |
+| 성진옥 | 팀원 & PM & frontend | Axios 통신 구축, UI/UX 개발, 디자인, 이미지 제작 |
 
 ## 2. 주제
 
@@ -157,33 +127,16 @@
 
 ## 3. 기술 스택
 
-### Backend
-
-- Spring boot, Spring data JPA, MYSQL
-- JWT
-- Docker, jenkins, aws
-
-### Frontend
-
-- html5, postCss, JavaScript
-- React.js
-- Redux
-- Redux-middleware (redux-actions, redux-pender)
-
-### 협업 툴
-
-- JIRA
-- GitLab
-- Swagger2
+| 파트 | 사용 기술 |
+|---|:---:|
+| Backend | Spring boot, Spring data JPA, MYSQL, JWT, Docker, jenkins, aws |
+| Frontend | React.js, Redux, redux-actions, redux-pender, html5, postCss, JavaScript |
+| 협업 툴 | GitLab, Swagger2, JIRA, Webex, Mattermost |
 
 ## 4. Code Style (Google Convention)
 
-[Code Style (Google Convention)](./document/docs/Code Style (Google Convention).md)
+[Code Style (Google Convention)](https://github.com/wlsdhr0831/Block-Village/blob/master/document/docs/Code%20Style%20(Google%20Convention).md)
 
-## 5. 블록마을 서비스 소개 영상
-
-https://youtu.be/Qh5PvmY4yfQ
-
-## 6. 블록마을 서비스 시연 영상
-
-https://youtu.be/hLIwbMk0OIE
+## 5. 서비스 영상
+[블록마을 서비스 소개 영상] (https://youtu.be/Qh5PvmY4yfQ)
+[블록마을 서비스 시연 영상] (https://youtu.be/hLIwbMk0OIE)
