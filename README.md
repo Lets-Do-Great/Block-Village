@@ -138,5 +138,5 @@
 [Code Style (Google Convention)](https://github.com/wlsdhr0831/Block-Village/blob/master/document/docs/Code%20Style%20(Google%20Convention).md)
 
 ## 5. 서비스 영상
-[블록마을 서비스 소개 영상] (https://youtu.be/Qh5PvmY4yfQ)
-[블록마을 서비스 시연 영상] (https://youtu.be/hLIwbMk0OIE)
+[블록마을 서비스 소개 영상](https://youtu.be/Qh5PvmY4yfQ)
+[블록마을 서비스 시연 영상](https://youtu.be/hLIwbMk0OIE)
