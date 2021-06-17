@@ -122,6 +122,9 @@
 
 ## 4. 기술 스택
 
+![flow](/document/readme_img/flow.png)
+![flow](/document/readme_img/flow2.PNG)
+
 | 파트 | 사용 기술 |
 |:---:|:---:|
 | Backend | Spring boot, Spring data JPA, MYSQL, JWT, Docker, jenkins, aws |
